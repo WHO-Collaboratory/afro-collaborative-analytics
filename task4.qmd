@@ -1,0 +1,31 @@
+---
+title: "Task 4: Visualising transmission chains"
+---
+
+## Overview
+
+This task covers visualizing transmission chains using epicontacts. You will learn how to analyze and visualize contact networks and transmission pathways.
+
+## Learning Objectives
+
+- Work with contact network data
+- Visualize transmission chains using epicontacts
+- Analyze contact patterns
+- Identify transmission clusters
+
+## Additional Resources
+
+::: {.panel-tabset}
+
+### R Handbook
+Relevant chapters from the Epidemiologist R Handbook.
+
+### Package Documentation
+Package vignettes and documentation for epicontacts and related packages.
+
+:::
+
+## External Links
+
+*This page will eventually link to external resources and detailed guides.*
+

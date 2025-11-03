@@ -1,0 +1,49 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  navbar:
+    search: true
+    logo: assets/img/who_logo.png
+    left:
+      - href: index.qmd
+        text: Home
+      - href: setup.qmd
+        text: Setup
+      - href: data.qmd
+        text: Data
+      - text: Tasks
+        menu:
+          - href: task1.qmd
+            text: "1. Reading, cleaning and validating epidemiological data"
+          - href: task2.qmd
+            text: "2. Generating automated situation reports"
+          - href: task3.qmd
+            text: "3. Making an interactive epi dashboard"
+          - href: task4.qmd
+            text: "4. Visualising transmission chains"
+          - href: task5.qmd
+            text: "5. Getting epidemiological parameters"
+          - href: task6.qmd
+            text: "6. Estimating reproduction numbers"
+          - href: task7.qmd
+            text: "7. Nowcasting epidemiological data"
+          - href: task8.qmd
+            text: "8. Forecasting cases and deaths"
+          - href: task9.qmd
+            text: "9. Estimating disease severity"
+          - href: task10.qmd
+            text: "10. Modelling intervention impact"
+    right:
+      - href: https://collaboratory.who.int/forum/
+        text: '<img src="/assets/img/collaboratory_logo.png" height="24px" style="vertical-align: middle; margin-right: 0.25em;">'
+
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    css: styles.css
+    download-links: true
+

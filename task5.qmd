@@ -1,0 +1,31 @@
+---
+title: "Task 5: Getting epidemiological parameters"
+---
+
+## Overview
+
+This task focuses on obtaining epidemiological parameters from your data or the literature. You will learn how to extract, estimate, and use key epidemiological parameters in your analyses.
+
+## Learning Objectives
+
+- Extract epidemiological parameters from data
+- Search and retrieve parameters from literature
+- Estimate parameters using available data
+- Incorporate parameters into analytical models
+
+## Task Tutorial
+
+[Access the task tutorial here](https://epiverse-trace.github.io/tutorials-middle/delays-access.html)
+
+## Additional Resources
+
+::: {.panel-tabset}
+
+### R Handbook
+Relevant chapters from the Epidemiologist R Handbook.
+
+### Package Documentation
+Package vignettes and documentation for relevant R packages.
+
+:::
+

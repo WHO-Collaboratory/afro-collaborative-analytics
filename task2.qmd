@@ -1,0 +1,254 @@
+---
+title: "Task 2: Generating automated situation reports"
+---
+
+## Overview
+
+This task covers generating automated situation reports with dynamic figures and tables. You will learn how to create reproducible reports that can be easily updated as new data becomes available.
+
+## Learning Objectives
+
+- Create automated report generation workflows
+- Incorporate dynamic figures and tables
+- Use Quarto for report generation
+- Build a basic epidemiological report with incidence curves and summary statistics
+
+## Step-by-Step Instructions: Creating a Basic Epidemiological Report in Quarto
+
+This tutorial will guide you through creating a basic epidemiological report using Quarto. You'll generate an HTML report with an incidence curve, case fatality ratio (CFR), and an interactive summary table.
+
+### Step 1: Set Up Your Project Folder Structure
+
+Before starting, it's important to organize your files properly. Let's create a clear folder structure:
+
+1. **Create a project folder** on your computer called `situation_report`.
+
+2. **Within that folder, create the following subfolders**:
+   - `data/` - for storing your datasets
+   - `scripts/` - for storing R scripts (optional)
+   - `outputs/` - for storing generated reports and figures
+
+### Step 2: Download the Linelist Dataset
+
+1. Navigate to the [Data](data.qmd) page on this website.
+2. Click the download button for **linelist.csv**.
+3. **Save the file to your `data/` folder** that you created in Step 1.
+4. The file path should be: `data/linelist.csv` (relative to where your Quarto document is saved).
+
+### Step 3: Create a New Quarto Document
+
+1. Open RStudio.
+2. Go to **File → New File → Quarto Document**.
+3. Choose **HTML** as the output format.
+4. Give your document a title (e.g., "Epidemiological Situation Report").
+5. Click **Create**.
+6. **Save the document in your project folder** (e.g., `situation_report.qmd`).
+
+### Step 4: Set Up the YAML Header
+
+At the top of your Quarto document, ensure your YAML header looks like this:
+
+```yaml
+---
+title: "Epidemiological Situation Report"
+format: html
+editor: visual
+---
+```
+
+### Step 5: Install and Load Required Packages
+
+In the first code chunk of your document, install and load the required packages:
+
+```{r}
+#| echo: true
+#| eval: true
+
+# Install pacman if needed
+if (!require("pacman")) install.packages("pacman")
+
+# Load required packages
+pacman::p_load(
+  rio,        # For importing data
+  tidyverse,  # For data manipulation and visualization
+  DT,         # For interactive tables
+  lubridate   # For date handling
+)
+```
+
+### Step 6: Import the Data
+
+Create a new code chunk to import the linelist data. Since you've saved it in the `data/` folder, we use a relative path:
+
+```{r}
+#| echo: true
+#| eval: false
+
+# Import the linelist data from your local data folder
+linelist <- rio::import("data/linelist.csv")
+
+# View the first few rows
+head(linelist)
+```
+
+```{r}
+#| echo: false
+#| eval: true
+
+# For rendering purposes, if file doesn't exist locally, read from URL
+# This is only for website rendering - participants should have the file locally
+linelist <- read.csv("https://epiverse-trace.github.io/tutorials/data/linelist.csv")
+
+# View the first few rows
+
+DT::datatable(
+  head(linelist),
+  options = list(
+    pageLength = -1,
+    scrollX = TRUE,
+    dom = 'rt',
+    searching = FALSE,
+    paging = FALSE,
+    info = FALSE,
+    ordering = FALSE
+  )
+)
+```
+
+### Step 7: Clean and Prepare the Data
+
+Before creating visualizations, we need to ensure the date column is in the correct format:
+
+```{r}
+#| echo: true
+#| eval: true
+
+# Convert date_of_onset to date format
+linelist <- linelist |>
+  mutate(date_of_onset = as.Date(date_of_onset))
+```
+
+### Step 8: Create an Incidence Curve
+
+Create a new section in your document and add a code chunk to create an incidence curve (epidemic curve) using `date_of_onset`:
+
+```{r}
+#| echo: true
+#| eval: true
+#| fig-cap: "Incidence Curve by Date of Onset"
+
+# Create incidence curve
+incidence_curve <- linelist |>
+  ggplot(aes(x = date_of_onset)) +
+  geom_histogram(binwidth = 7, fill = "steelblue", color = "white") +
+  labs(
+    title = "Incidence Curve by Date of Onset",
+    x = "Date of Onset",
+    y = "Number of Cases"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(face = "bold", size = 14))
+
+# Display the plot
+print(incidence_curve)
+```
+
+### Step 9: Calculate Case Fatality Ratio (CFR)
+
+Create a new section and calculate the CFR, making sure to exclude NA outcomes:
+
+```{r}
+#| echo: true
+#| eval: true
+
+# Calculate CFR (excluding NA outcomes)
+cfr_data <- linelist |>
+  filter(!is.na(outcome)) |>
+  summarise(
+    total_cases = n(),
+    deaths = sum(outcome == "Death", na.rm = TRUE),
+    recovered = sum(outcome == "Recover", na.rm = TRUE),
+    cfr = round((deaths / total_cases) * 100, 2)
+  )
+```
+
+The estimated Case Fatality Ratio is `r cfr_data$cfr`%.
+
+### Step 10: Create an Interactive Summary Table by Hospital
+
+Create a new section and generate an interactive summary table grouped by hospital using `DT::datatable()`:
+
+```{r}
+#| echo: true
+#| eval: true
+
+# Create summary table by hospital
+# Group NA and "other" together
+hospital_summary <- linelist |>
+  mutate(
+    hospital_grouped = case_when(
+      is.na(hospital) | hospital == "other" ~ "Other/Unknown",
+      TRUE ~ hospital
+    )
+  ) |>
+  group_by(hospital_grouped) |>
+  summarise(
+    total_cases = n(),
+    deaths = sum(outcome == "Death", na.rm = TRUE),
+    recovered = sum(outcome == "Recover", na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  rename(hospital = hospital_grouped) |>
+  mutate(
+    cfr = round((deaths / (deaths + recovered)) * 100, 2),
+    cfr = ifelse(is.na(cfr), 0, cfr)
+  )
+
+# Create interactive table
+DT::datatable(
+  hospital_summary,
+  options = list(
+    pageLength = -1,
+    scrollX = TRUE,
+    dom = 'rt',
+    searching = FALSE,
+    paging = FALSE,
+    info = FALSE,
+    ordering = FALSE
+  ),
+  caption = "Summary Statistics by Hospital",
+  colnames = c(
+    "Hospital" = "hospital",
+    "Total Cases" = "total_cases",
+    "Deaths" = "deaths",
+    "Recovered" = "recovered",
+    "CFR (%)" = "cfr"
+  )
+)
+```
+
+### Step 11: Render Your Report
+
+1. Click the **Render** button in RStudio (or press `Ctrl+Shift+K` / `Cmd+Shift+K`).
+2. Quarto will process your document and generate an HTML file.
+3. The HTML report will open automatically in your browser.
+
+**Note:** The rendered HTML file will be saved in the same folder as your Quarto document, or you can specify a different output location in your YAML header.
+
+## Additional Resources
+
+::: {.panel-tabset}
+
+### Quarto Documentation
+- [Quarto Documentation](https://quarto.org/)
+- [Quarto for R](https://quarto.org/docs/get-started/hello/rstudio.html)
+
+### R Handbook
+- [Epidemiologist R Handbook - Reports](https://www.epirhandbook.com/en/new_pages/reports.html)
+- [Epidemiologist R Handbook - Epidemic Curves](https://www.epirhandbook.com/en/new_pages/epidemic-curves.html)
+
+### Package Documentation
+- [ggplot2 Documentation](https://ggplot2.tidyverse.org/)
+- [DT (DataTables) Package](https://rstudio.github.io/DT/)
+
+:::

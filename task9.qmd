@@ -1,0 +1,31 @@
+---
+title: "Task 9: Estimating disease severity"
+---
+
+## Overview
+
+This task focuses on estimating disease severity. You will learn how to calculate and interpret key severity metrics such as case fatality ratio and infection fatality ratio.
+
+## Learning Objectives
+
+- Calculate case fatality ratio (CFR)
+- Estimate infection fatality ratio (IFR)
+- Adjust for time-to-death and censoring
+- Compare severity across populations and time periods
+
+## Task Tutorial
+
+[Access the task tutorial here](https://epiverse-trace.github.io/tutorials-middle/severity-static.html)
+
+## Additional Resources
+
+::: {.panel-tabset}
+
+### R Handbook
+Relevant chapters from the Epidemiologist R Handbook.
+
+### Package Documentation
+Package vignettes and documentation for relevant R packages.
+
+:::
+

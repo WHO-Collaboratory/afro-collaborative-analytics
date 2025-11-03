@@ -1,0 +1,46 @@
+---
+title: "Analytics Workshop Hackathon"
+---
+
+## Aim
+
+There are two core aims of the hackathon we would like you to achieve:
+
+1. **Explore different tools and resources** for conducting a range of common analytical tasks.
+
+2. **Write a functional script** that applies one or more analyses to their own data and generates a report or dashboard to visualise the outputs.
+
+## Structure
+
+You will be grouped by the analytical tasks you are interested in and work through them together with support from the facilitators. During these sessions, you will apply the analyses to your own data and incorporate the analysis into your final report/dashboard script. Depending on your technical level, you may complete multiple tasks over different sessions and therefore change groups.
+
+## Tasks
+
+The analytical tasks you can choose from are:
+
+1. Reading, cleaning and validating epidemiological data
+2. Generating automated situation reports with dynamic figures and tables
+3. Making an interactive epi dashboard using epishiny
+4. Visualising transmission chains using epicontacts
+5. Getting epidemiological parameters from your data or the literature
+6. Estimating the basic & effective reproduction number
+7. Nowcasting epidemiological data
+8. Forecasting cases and deaths
+9. Estimating disease severity
+10. Modelling the impact of interventions
+
+Each task has its own dedicated page with resources and guidance. Navigate to the **Tasks** menu to explore each one.
+
+## Getting Started
+
+1. **Install R and RStudio**: Visit the [Setup & Installation](setup.qmd) page for installation instructions and required packages.
+
+2. **Download example datasets**: Visit the [Data](data.qmd) section to download the datasets you'll need.
+
+3. **Explore tasks**: Navigate to the **Tasks** menu to find the analytical task(s) you're interested in.
+
+4. **Join your group**: Work through the materials with support from facilitators.
+
+## Additional Resources
+
+- **Recommended refresher** on basic R literacy by [AppliedEpi](https://appliedepi.org/resources/tutorials.html)

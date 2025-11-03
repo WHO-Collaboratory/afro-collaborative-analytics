@@ -1,0 +1,31 @@
+---
+title: "Task 1: Reading, cleaning and validating epidemiological data"
+---
+
+## Overview
+
+This task covers the basics of reading, cleaning, validating and shaping basic epidemiological data. You will learn how to import data from various sources, clean messy datasets, validate data quality, and prepare data for epidemiological analysis.
+
+## Learning Objectives
+
+- Import epidemiological data from various file formats
+- Clean and standardize data structures
+- Validate data quality and completeness
+- Handle missing values and data inconsistencies
+
+## Task Tutorial
+
+[Access the task tutorial here](https://epiverse-trace.github.io/tutorials-early/read-cases.html)
+
+## Additional Resources
+
+::: {.panel-tabset}
+
+### R Handbook
+Relevant chapters from the Epidemiologist R Handbook.
+
+### Package Documentation
+Package vignettes and documentation for relevant R packages.
+
+:::
+

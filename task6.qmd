@@ -1,0 +1,31 @@
+---
+title: "Task 6: Estimating reproduction numbers"
+---
+
+## Overview
+
+This task covers estimating the basic and effective reproduction number (R0 and Re). You will learn methods for calculating these key epidemiological metrics from outbreak data.
+
+## Learning Objectives
+
+- Understand the difference between R0 and Re
+- Estimate reproduction numbers from case data
+- Use appropriate methods for different data types
+- Visualize and interpret reproduction number estimates
+
+## Task Tutorial
+
+[Access the task tutorial here](https://epiverse-trace.github.io/tutorials-middle/quantify-transmissibility.html)
+
+## Additional Resources
+
+::: {.panel-tabset}
+
+### R Handbook
+Relevant chapters from the Epidemiologist R Handbook.
+
+### Package Documentation
+Package vignettes and documentation for relevant R packages.
+
+:::
+

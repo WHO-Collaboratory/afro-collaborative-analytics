@@ -1,0 +1,31 @@
+---
+title: "Task 3: Making an interactive epi dashboard"
+---
+
+## Overview
+
+This task focuses on creating interactive epidemiological dashboards using epishiny. You will learn how to build user-friendly dashboards for exploring epidemiological data.
+
+## Learning Objectives
+
+- Build interactive dashboards using epishiny
+- Create reactive visualizations
+- Design user-friendly dashboard interfaces
+- Deploy dashboards for sharing
+
+## Additional Resources
+
+::: {.panel-tabset}
+
+### R Handbook
+Relevant chapters from the Epidemiologist R Handbook.
+
+### Package Documentation
+Package vignettes and documentation for relevant R packages.
+
+:::
+
+## External Links
+
+*This page will eventually link to external resources and detailed guides.*
+

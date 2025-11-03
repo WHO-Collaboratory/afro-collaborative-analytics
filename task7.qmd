@@ -1,0 +1,31 @@
+---
+title: "Task 7: Nowcasting epidemiological data"
+---
+
+## Overview
+
+This task focuses on nowcasting epidemiological data. You will learn how to adjust for reporting delays and estimate current case counts from incomplete data.
+
+## Learning Objectives
+
+- Understand reporting delays and their impact
+- Apply nowcasting methods to epidemiological data
+- Adjust for underreporting and delays
+- Generate real-time estimates of current incidence
+
+## Task Tutorial
+
+[Access the task tutorial here](https://epiverse-trace.github.io/tutorials-middle/delays-functions.html)
+
+## Additional Resources
+
+::: {.panel-tabset}
+
+### R Handbook
+Relevant chapters from the Epidemiologist R Handbook.
+
+### Package Documentation
+Package vignettes and documentation for relevant R packages.
+
+:::
+

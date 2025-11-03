@@ -1,0 +1,75 @@
+---
+title: "Setup & Installation"
+---
+
+## R and RStudio Installation
+
+For detailed installation instructions for R and RStudio, please refer to the [Epiverse-TRACE Software Setup guide](https://epiverse-trace.github.io/tutorials-early/index.html#software-setup).
+
+## Quarto Installation
+
+Quarto is a scientific and technical publishing system built on Pandoc. It allows you to create dynamic documents, reports, and dashboards with R, Python, and other languages.
+
+### Installation
+
+Quarto can be installed in several ways:
+
+1. **Install via RStudio**: If you're using RStudio 2022.07 or later, Quarto is included automatically. Simply install or update RStudio to get Quarto.
+
+2. **Standalone Installation**: Download and install Quarto from the [Quarto website](https://quarto.org/docs/get-started/).
+
+3. **Via Package Manager**: Follow the [Quarto installation guide](https://quarto.org/docs/get-started/) for your operating system.
+
+### Verify Installation
+
+After installation, verify Quarto is working by opening a terminal/command prompt and running:
+
+```bash
+quarto --version
+```
+
+If Quarto is installed correctly, you should see the version number displayed.
+
+### Resources for Learning Quarto
+
+- **Quarto Documentation**: Comprehensive guide at [quarto.org](https://quarto.org/)
+- **Quarto Getting Started Guide**: Step-by-step tutorial at [Quarto Getting Started](https://quarto.org/docs/get-started/)
+- **Quarto for R Users**: Specifically for R users at [Quarto for R](https://quarto.org/docs/get-started/hello/rstudio.html)
+- **Epidemiologist R Handbook - Reports**: Learn about creating reports with R Markdown and Quarto in the [Reports section](https://www.epirhandbook.com/en/new_pages/reports.html)
+
+## Required R Packages
+
+Install the required R packages using the following code in your R console:
+
+```r
+# Install packages using pacman
+if (!require("pacman")) install.packages("pacman")
+
+pacman::p_load(
+  # Add required package names here
+  # This section should be populated with the actual required packages
+)
+```
+
+### About pacman
+
+The `pacman` package simplifies package management in R by combining the functionality of `install.packages()` and `library()` into a single function. If a package is not installed, it will install it automatically, then load it.
+
+## Getting Help with R Basics
+
+If you're new to R or need a refresher, here are some recommended resources:
+
+- **Epidemiologist R Handbook - R Basics**: Comprehensive guide to R fundamentals for epidemiologists. Start with the [R Basics chapter](https://www.epirhandbook.com/en/new_pages/basics.html).
+
+- **AppliedEpi Tutorials**: Recommended refresher on basic R literacy: [AppliedEpi Tutorials](https://appliedepi.org/resources/tutorials.html)
+
+- **Epiverse Tutorials**: Beginner, intermediate, and advanced tutorials for epidemiological analysis with R.
+
+## Next Steps
+
+Once you have R and RStudio installed:
+
+1. Visit the [Data](data.qmd) section to download example datasets.
+2. Explore the [Tasks](task1.qmd) menu to find the analytical task(s) you're interested in.
+3. Join your assigned group and start working through the materials with facilitator support.
+

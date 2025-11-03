@@ -1,0 +1,41 @@
+---
+title: "Data"
+---
+
+## Example Datasets
+
+Download the example datasets below to get started with the hackathon tasks. These datasets are provided by the Epiverse tutorials and can be used for practice and testing your analytical scripts.
+
+## Dataset Downloads
+
+Click the download buttons below to download each dataset:
+
+### 1. Linelist Dataset
+A standard epidemiological linelist dataset for general analysis tasks.
+
+[Download linelist.csv](https://epiverse-trace.github.io/tutorials/data/linelist.csv){.btn .btn-primary target="_blank"}
+
+### 2. Marburg Dataset
+Zipped archive containing Marburg virus data for epidemiological analysis.
+
+[Download Marburg.zip](https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip){.btn .btn-primary target="_blank"}
+
+### 3. Simulated Ebola Dataset
+A simulated Ebola dataset for training and testing analytical methods.
+
+[Download simulated_ebola_2.csv](https://epiverse-trace.github.io/tutorials-early/data/simulated_ebola_2.csv){.btn .btn-primary target="_blank"}
+
+### 4. Linelist with Date of Birth
+Extended linelist dataset including date of birth information.
+
+[Download linelist-date_of_birth.csv](https://epiverse-trace.github.io/tutorials-early/data/linelist-date_of_birth.csv){.btn .btn-primary target="_blank"}
+
+### 5. Ebola Cases Dataset
+Ebola cases data for epidemiological analysis and visualization.
+
+[Download ebola_cases_2.csv](https://epiverse-trace.github.io/tutorials-early/data/ebola_cases_2.csv){.btn .btn-primary target="_blank"}
+
+## Data Usage
+
+These datasets are provided for educational and training purposes as part of the Analytics Workshop Hackathon. Please refer to the original Epiverse tutorials for more information about the data sources and structure.
+

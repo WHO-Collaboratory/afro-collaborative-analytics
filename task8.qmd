@@ -1,0 +1,31 @@
+---
+title: "Task 8: Forecasting cases and deaths"
+---
+
+## Overview
+
+This task covers forecasting cases and deaths. You will learn how to build forecasting models and generate predictions of future disease incidence.
+
+## Learning Objectives
+
+- Build forecasting models for epidemiological data
+- Generate short-term and long-term forecasts
+- Quantify forecast uncertainty
+- Evaluate forecast performance
+
+## Task Tutorial
+
+[Access the task tutorial here](https://epiverse-trace.github.io/tutorials-middle/create-forecast.html)
+
+## Additional Resources
+
+::: {.panel-tabset}
+
+### R Handbook
+Relevant chapters from the Epidemiologist R Handbook.
+
+### Package Documentation
+Package vignettes and documentation for relevant R packages.
+
+:::
+
