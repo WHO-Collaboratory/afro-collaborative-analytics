@@ -3,3 +3,5 @@
 docs/rsconnect/
 *.html
 task*.html
+deploy.R
+assets/keys/
