@@ -7,7 +7,6 @@ This is a Quarto website for the Analytics Workshop Hackathon.
 Website files are located in the `qmd/` directory:
 
 - `qmd/index.qmd` - Landing page introducing the hackathon
-- `qmd/data.qmd` - Data section with download links for example datasets
 - `qmd/task1.qmd` through `qmd/task10.qmd` - Individual pages for each analytical task
 - `qmd/_quarto.yml` - Quarto website configuration
 - `qmd/styles.css` - Custom CSS for styling
