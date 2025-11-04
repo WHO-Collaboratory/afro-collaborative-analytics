@@ -33,13 +33,6 @@ The website will be built to the `docs/` directory at the project root.
 
 To preview the website locally:
 
-```bash
-cd qmd
-quarto preview
-```
-
-Or from R (in the qmd directory):
-
 ```r
 quarto::quarto_preview()
 ```
@@ -55,4 +48,3 @@ source("deploy.R")
 See [`deploy.R`](deploy.R) for deployment instructions. The script uses encrypted credentials for secure deployment.
 
 For information about the encryption setup and how to request access to use encrypted data, see [ENCRYPTION.md](ENCRYPTION.md).
-
