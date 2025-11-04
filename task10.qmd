@@ -1,17 +1,21 @@
 ---
-title: "Task 10: Modelling intervention impact"
+title: "Task 10: Simulating disease transmission"
 ---
 
 ## Overview
 
-This task covers modelling the impact of interventions. You will learn how to estimate and compare the effects of different public health interventions on disease transmission.
+This task covers simulating disease spread using mathematical models. You will learn how to generate disease trajectories, set up model parameters, and account for uncertainty in model simulations.
 
 ## Learning Objectives
 
-- Model intervention effects on transmission
-- Compare different intervention strategies
-- Quantify intervention effectiveness
-- Design optimal intervention strategies
+- Load and use model structures from the epidemics package
+- Load social contact matrices with socialmixr
+- Generate disease spread model simulations
+- Generate multiple model simulations and visualize uncertainty
+
+## Tutorial
+
+[Access the tutorial here](https://epiverse-trace.github.io/tutorials-late/simulating-transmission.html)
 
 ## Additional Resources
 
@@ -24,8 +28,4 @@ Relevant chapters from the Epidemiologist R Handbook.
 Package vignettes and documentation for relevant R packages.
 
 :::
-
-## External Links
-
-*This page will eventually link to external resources and detailed guides.*
 

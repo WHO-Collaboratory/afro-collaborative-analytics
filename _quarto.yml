@@ -34,7 +34,7 @@ website:
           - href: task9.qmd
             text: "9. Estimating disease severity"
           - href: task10.qmd
-            text: "10. Modelling intervention impact"
+            text: "10. Simulating disease transmission"
     right:
       - href: https://collaboratory.who.int/forum/
         text: '<img src="/assets/img/collaboratory_logo.png" height="24px" style="vertical-align: middle; margin-right: 0.25em;">'

@@ -13,9 +13,9 @@ This task focuses on nowcasting epidemiological data. You will learn how to adju
 - Adjust for underreporting and delays
 - Generate real-time estimates of current incidence
 
-## Task Tutorial
+## Tutorial
 
-[Access the task tutorial here](https://epiverse-trace.github.io/tutorials-middle/delays-functions.html)
+[Access the tutorial here](https://epiverse-trace.github.io/tutorials-middle/delays-functions.html)
 
 ## Additional Resources
 

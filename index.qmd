@@ -18,18 +18,18 @@ You will be grouped by the analytical tasks you are interested in and work throu
 
 The analytical tasks you can choose from are:
 
-1. Reading, cleaning and validating epidemiological data
-2. Generating automated situation reports with dynamic figures and tables
-3. Making an interactive epi dashboard using epishiny
-4. Visualising transmission chains using epicontacts
-5. Getting epidemiological parameters from your data or the literature
-6. Estimating the basic & effective reproduction number
-7. Nowcasting epidemiological data
-8. Forecasting cases and deaths
-9. Estimating disease severity
-10. Modelling the impact of interventions
+1. [Reading, cleaning and validating epidemiological data](task1.qmd)
+2. [Generating automated situation reports with dynamic figures and tables](task2.qmd)
+3. [Making an interactive epi dashboard using epishiny](task3.qmd)
+4. [Visualising transmission chains using epicontacts](task4.qmd)
+5. [Getting epidemiological parameters from your data or the literature](task5.qmd)
+6. [Estimating the basic & effective reproduction number](task6.qmd)
+7. [Nowcasting epidemiological data](task7.qmd)
+8. [Forecasting cases and deaths](task8.qmd)
+9. [Estimating disease severity](task9.qmd)
+10. [Simulating disease transmission](task10.qmd)
 
-Each task has its own dedicated page with resources and guidance. Navigate to the **Tasks** menu to explore each one.
+Each task has its own dedicated page with resources and guidance. Click on any task above to explore it.
 
 ## Getting Started
 

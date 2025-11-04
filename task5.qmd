@@ -13,9 +13,9 @@ This task focuses on obtaining epidemiological parameters from your data or the 
 - Estimate parameters using available data
 - Incorporate parameters into analytical models
 
-## Task Tutorial
+## Tutorial
 
-[Access the task tutorial here](https://epiverse-trace.github.io/tutorials-middle/delays-access.html)
+[Access the tutorial here](https://epiverse-trace.github.io/tutorials-middle/delays-access.html)
 
 ## Additional Resources
 

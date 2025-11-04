@@ -1,0 +1,5 @@
+/.quarto/
+.cyphr/
+docs/rsconnect/
+*.html
+task*.html

@@ -13,6 +13,10 @@ This task covers visualizing transmission chains using epicontacts. You will lea
 - Analyze contact patterns
 - Identify transmission clusters
 
+## Tutorial
+
+[Access the tutorial here](https://www.epirhandbook.com/en/new_pages/transmission_chains.html)
+
 ## Additional Resources
 
 ::: {.panel-tabset}
@@ -24,8 +28,4 @@ Relevant chapters from the Epidemiologist R Handbook.
 Package vignettes and documentation for epicontacts and related packages.
 
 :::
-
-## External Links
-
-*This page will eventually link to external resources and detailed guides.*
 

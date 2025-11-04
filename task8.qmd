@@ -13,9 +13,9 @@ This task covers forecasting cases and deaths. You will learn how to build forec
 - Quantify forecast uncertainty
 - Evaluate forecast performance
 
-## Task Tutorial
+## Tutorial
 
-[Access the task tutorial here](https://epiverse-trace.github.io/tutorials-middle/create-forecast.html)
+[Access the tutorial here](https://epiverse-trace.github.io/tutorials-middle/create-forecast.html)
 
 ## Additional Resources
 

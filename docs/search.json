@@ -1,178 +1,80 @@
 [
   {
-    "objectID": "task9.html",
-    "href": "task9.html",
-    "title": "Task 9: Estimating disease severity",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Analytics Workshop Hackathon",
     "section": "",
-    "text": "This task focuses on estimating disease severity. You will learn how to calculate and interpret key severity metrics such as case fatality ratio and infection fatality ratio."
+    "text": "There are two core aims of the hackathon we would like you to achieve:\n\nExplore different tools and resources for conducting a range of common analytical tasks.\nWrite a functional script that applies one or more analyses to their own data and generates a report or dashboard to visualise the outputs."
   },
   {
-    "objectID": "task9.html#overview",
-    "href": "task9.html#overview",
-    "title": "Task 9: Estimating disease severity",
+    "objectID": "index.html#aim",
+    "href": "index.html#aim",
+    "title": "Analytics Workshop Hackathon",
     "section": "",
-    "text": "This task focuses on estimating disease severity. You will learn how to calculate and interpret key severity metrics such as case fatality ratio and infection fatality ratio."
+    "text": "There are two core aims of the hackathon we would like you to achieve:\n\nExplore different tools and resources for conducting a range of common analytical tasks.\nWrite a functional script that applies one or more analyses to their own data and generates a report or dashboard to visualise the outputs."
   },
   {
-    "objectID": "task9.html#learning-objectives",
-    "href": "task9.html#learning-objectives",
-    "title": "Task 9: Estimating disease severity",
+    "objectID": "index.html#structure",
+    "href": "index.html#structure",
+    "title": "Analytics Workshop Hackathon",
+    "section": "Structure",
+    "text": "Structure\nYou will be grouped by the analytical tasks you are interested in and work through them together with support from the facilitators. During these sessions, you will apply the analyses to your own data and incorporate the analysis into your final report/dashboard script. Depending on your technical level, you may complete multiple tasks over different sessions and therefore change groups."
+  },
+  {
+    "objectID": "index.html#tasks",
+    "href": "index.html#tasks",
+    "title": "Analytics Workshop Hackathon",
+    "section": "Tasks",
+    "text": "Tasks\nThe analytical tasks you can choose from are:\n\nReading, cleaning and validating epidemiological data\nGenerating automated situation reports with dynamic figures and tables\nMaking an interactive epi dashboard using epishiny\nVisualising transmission chains using epicontacts\nGetting epidemiological parameters from your data or the literature\nEstimating the basic & effective reproduction number\nNowcasting epidemiological data\nForecasting cases and deaths\nEstimating disease severity\nSimulating disease transmission\n\nEach task has its own dedicated page with resources and guidance. Click on any task above to explore it."
+  },
+  {
+    "objectID": "index.html#getting-started",
+    "href": "index.html#getting-started",
+    "title": "Analytics Workshop Hackathon",
+    "section": "Getting Started",
+    "text": "Getting Started\n\nInstall R and RStudio: Visit the Setup & Installation page for installation instructions and required packages.\nDownload example datasets: Visit the Data section to download the datasets you’ll need.\nExplore tasks: Navigate to the Tasks menu to find the analytical task(s) you’re interested in.\nJoin your group: Work through the materials with support from facilitators."
+  },
+  {
+    "objectID": "index.html#additional-resources",
+    "href": "index.html#additional-resources",
+    "title": "Analytics Workshop Hackathon",
+    "section": "Additional Resources",
+    "text": "Additional Resources\n\nRecommended refresher on basic R literacy by AppliedEpi"
+  },
+  {
+    "objectID": "task1.html",
+    "href": "task1.html",
+    "title": "Task 1: Reading, cleaning and validating epidemiological data",
+    "section": "",
+    "text": "This task covers the basics of reading, cleaning, validating and shaping basic epidemiological data. You will learn how to import data from various sources, clean messy datasets, validate data quality, and prepare data for epidemiological analysis."
+  },
+  {
+    "objectID": "task1.html#overview",
+    "href": "task1.html#overview",
+    "title": "Task 1: Reading, cleaning and validating epidemiological data",
+    "section": "",
+    "text": "This task covers the basics of reading, cleaning, validating and shaping basic epidemiological data. You will learn how to import data from various sources, clean messy datasets, validate data quality, and prepare data for epidemiological analysis."
+  },
+  {
+    "objectID": "task1.html#learning-objectives",
+    "href": "task1.html#learning-objectives",
+    "title": "Task 1: Reading, cleaning and validating epidemiological data",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nCalculate case fatality ratio (CFR)\nEstimate infection fatality ratio (IFR)\nAdjust for time-to-death and censoring\nCompare severity across populations and time periods"
+    "text": "Learning Objectives\n\nImport epidemiological data from various file formats\nClean and standardize data structures\nValidate data quality and completeness\nHandle missing values and data inconsistencies"
   },
   {
-    "objectID": "task9.html#task-tutorial",
-    "href": "task9.html#task-tutorial",
-    "title": "Task 9: Estimating disease severity",
-    "section": "Task Tutorial",
-    "text": "Task Tutorial\nAccess the task tutorial here"
+    "objectID": "task1.html#tutorial",
+    "href": "task1.html#tutorial",
+    "title": "Task 1: Reading, cleaning and validating epidemiological data",
+    "section": "Tutorial",
+    "text": "Tutorial\nAccess the tutorial here"
   },
   {
-    "objectID": "task9.html#additional-resources",
-    "href": "task9.html#additional-resources",
-    "title": "Task 9: Estimating disease severity",
+    "objectID": "task1.html#additional-resources",
+    "href": "task1.html#additional-resources",
+    "title": "Task 1: Reading, cleaning and validating epidemiological data",
     "section": "Additional Resources",
     "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
-  },
-  {
-    "objectID": "task7.html",
-    "href": "task7.html",
-    "title": "Task 7: Nowcasting epidemiological data",
-    "section": "",
-    "text": "This task focuses on nowcasting epidemiological data. You will learn how to adjust for reporting delays and estimate current case counts from incomplete data."
-  },
-  {
-    "objectID": "task7.html#overview",
-    "href": "task7.html#overview",
-    "title": "Task 7: Nowcasting epidemiological data",
-    "section": "",
-    "text": "This task focuses on nowcasting epidemiological data. You will learn how to adjust for reporting delays and estimate current case counts from incomplete data."
-  },
-  {
-    "objectID": "task7.html#learning-objectives",
-    "href": "task7.html#learning-objectives",
-    "title": "Task 7: Nowcasting epidemiological data",
-    "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nUnderstand reporting delays and their impact\nApply nowcasting methods to epidemiological data\nAdjust for underreporting and delays\nGenerate real-time estimates of current incidence"
-  },
-  {
-    "objectID": "task7.html#task-tutorial",
-    "href": "task7.html#task-tutorial",
-    "title": "Task 7: Nowcasting epidemiological data",
-    "section": "Task Tutorial",
-    "text": "Task Tutorial\nAccess the task tutorial here"
-  },
-  {
-    "objectID": "task7.html#additional-resources",
-    "href": "task7.html#additional-resources",
-    "title": "Task 7: Nowcasting epidemiological data",
-    "section": "Additional Resources",
-    "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
-  },
-  {
-    "objectID": "task5.html",
-    "href": "task5.html",
-    "title": "Task 5: Getting epidemiological parameters",
-    "section": "",
-    "text": "This task focuses on obtaining epidemiological parameters from your data or the literature. You will learn how to extract, estimate, and use key epidemiological parameters in your analyses."
-  },
-  {
-    "objectID": "task5.html#overview",
-    "href": "task5.html#overview",
-    "title": "Task 5: Getting epidemiological parameters",
-    "section": "",
-    "text": "This task focuses on obtaining epidemiological parameters from your data or the literature. You will learn how to extract, estimate, and use key epidemiological parameters in your analyses."
-  },
-  {
-    "objectID": "task5.html#learning-objectives",
-    "href": "task5.html#learning-objectives",
-    "title": "Task 5: Getting epidemiological parameters",
-    "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nExtract epidemiological parameters from data\nSearch and retrieve parameters from literature\nEstimate parameters using available data\nIncorporate parameters into analytical models"
-  },
-  {
-    "objectID": "task5.html#task-tutorial",
-    "href": "task5.html#task-tutorial",
-    "title": "Task 5: Getting epidemiological parameters",
-    "section": "Task Tutorial",
-    "text": "Task Tutorial\nAccess the task tutorial here"
-  },
-  {
-    "objectID": "task5.html#additional-resources",
-    "href": "task5.html#additional-resources",
-    "title": "Task 5: Getting epidemiological parameters",
-    "section": "Additional Resources",
-    "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
-  },
-  {
-    "objectID": "task3.html",
-    "href": "task3.html",
-    "title": "Task 3: Making an interactive epi dashboard",
-    "section": "",
-    "text": "This task focuses on creating interactive epidemiological dashboards using epishiny. You will learn how to build user-friendly dashboards for exploring epidemiological data."
-  },
-  {
-    "objectID": "task3.html#overview",
-    "href": "task3.html#overview",
-    "title": "Task 3: Making an interactive epi dashboard",
-    "section": "",
-    "text": "This task focuses on creating interactive epidemiological dashboards using epishiny. You will learn how to build user-friendly dashboards for exploring epidemiological data."
-  },
-  {
-    "objectID": "task3.html#learning-objectives",
-    "href": "task3.html#learning-objectives",
-    "title": "Task 3: Making an interactive epi dashboard",
-    "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nBuild interactive dashboards using epishiny\nCreate reactive visualizations\nDesign user-friendly dashboard interfaces\nDeploy dashboards for sharing"
-  },
-  {
-    "objectID": "task3.html#additional-resources",
-    "href": "task3.html#additional-resources",
-    "title": "Task 3: Making an interactive epi dashboard",
-    "section": "Additional Resources",
-    "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
-  },
-  {
-    "objectID": "task3.html#external-links",
-    "href": "task3.html#external-links",
-    "title": "Task 3: Making an interactive epi dashboard",
-    "section": "External Links",
-    "text": "External Links\nThis page will eventually link to external resources and detailed guides."
-  },
-  {
-    "objectID": "task10.html",
-    "href": "task10.html",
-    "title": "Task 10: Modelling intervention impact",
-    "section": "",
-    "text": "This task covers modelling the impact of interventions. You will learn how to estimate and compare the effects of different public health interventions on disease transmission."
-  },
-  {
-    "objectID": "task10.html#overview",
-    "href": "task10.html#overview",
-    "title": "Task 10: Modelling intervention impact",
-    "section": "",
-    "text": "This task covers modelling the impact of interventions. You will learn how to estimate and compare the effects of different public health interventions on disease transmission."
-  },
-  {
-    "objectID": "task10.html#learning-objectives",
-    "href": "task10.html#learning-objectives",
-    "title": "Task 10: Modelling intervention impact",
-    "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nModel intervention effects on transmission\nCompare different intervention strategies\nQuantify intervention effectiveness\nDesign optimal intervention strategies"
-  },
-  {
-    "objectID": "task10.html#additional-resources",
-    "href": "task10.html#additional-resources",
-    "title": "Task 10: Modelling intervention impact",
-    "section": "Additional Resources",
-    "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
-  },
-  {
-    "objectID": "task10.html#external-links",
-    "href": "task10.html#external-links",
-    "title": "Task 10: Modelling intervention impact",
-    "section": "External Links",
-    "text": "External Links\nThis page will eventually link to external resources and detailed guides."
   },
   {
     "objectID": "setup.html",
@@ -217,107 +119,37 @@
     "text": "Next Steps\nOnce you have R and RStudio installed:\n\nVisit the Data section to download example datasets.\nExplore the Tasks menu to find the analytical task(s) you’re interested in.\nJoin your assigned group and start working through the materials with facilitator support."
   },
   {
-    "objectID": "data.html",
-    "href": "data.html",
-    "title": "Data",
+    "objectID": "task10.html",
+    "href": "task10.html",
+    "title": "Task 10: Simulating disease transmission",
     "section": "",
-    "text": "Download the example datasets below to get started with the hackathon tasks. These datasets are provided by the Epiverse tutorials and can be used for practice and testing your analytical scripts."
+    "text": "This task covers simulating disease spread using mathematical models. You will learn how to generate disease trajectories, set up model parameters, and account for uncertainty in model simulations."
   },
   {
-    "objectID": "data.html#example-datasets",
-    "href": "data.html#example-datasets",
-    "title": "Data",
+    "objectID": "task10.html#overview",
+    "href": "task10.html#overview",
+    "title": "Task 10: Simulating disease transmission",
     "section": "",
-    "text": "Download the example datasets below to get started with the hackathon tasks. These datasets are provided by the Epiverse tutorials and can be used for practice and testing your analytical scripts."
+    "text": "This task covers simulating disease spread using mathematical models. You will learn how to generate disease trajectories, set up model parameters, and account for uncertainty in model simulations."
   },
   {
-    "objectID": "data.html#dataset-downloads",
-    "href": "data.html#dataset-downloads",
-    "title": "Data",
-    "section": "Dataset Downloads",
-    "text": "Dataset Downloads\nClick the download buttons below to download each dataset:\n\n1. Linelist Dataset\nA standard epidemiological linelist dataset for general analysis tasks.\nDownload linelist.csv\n\n\n2. Marburg Dataset\nZipped archive containing Marburg virus data for epidemiological analysis.\nDownload Marburg.zip\n\n\n3. Simulated Ebola Dataset\nA simulated Ebola dataset for training and testing analytical methods.\nDownload simulated_ebola_2.csv\n\n\n4. Linelist with Date of Birth\nExtended linelist dataset including date of birth information.\nDownload linelist-date_of_birth.csv\n\n\n5. Ebola Cases Dataset\nEbola cases data for epidemiological analysis and visualization.\nDownload ebola_cases_2.csv"
-  },
-  {
-    "objectID": "data.html#data-usage",
-    "href": "data.html#data-usage",
-    "title": "Data",
-    "section": "Data Usage",
-    "text": "Data Usage\nThese datasets are provided for educational and training purposes as part of the Analytics Workshop Hackathon. Please refer to the original Epiverse tutorials for more information about the data sources and structure."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Analytics Workshop Hackathon",
-    "section": "",
-    "text": "There are two core aims of the hackathon we would like you to achieve:\n\nExplore different tools and resources for conducting a range of common analytical tasks.\nWrite a functional script that applies one or more analyses to their own data and generates a report or dashboard to visualise the outputs."
-  },
-  {
-    "objectID": "index.html#aim",
-    "href": "index.html#aim",
-    "title": "Analytics Workshop Hackathon",
-    "section": "",
-    "text": "There are two core aims of the hackathon we would like you to achieve:\n\nExplore different tools and resources for conducting a range of common analytical tasks.\nWrite a functional script that applies one or more analyses to their own data and generates a report or dashboard to visualise the outputs."
-  },
-  {
-    "objectID": "index.html#structure",
-    "href": "index.html#structure",
-    "title": "Analytics Workshop Hackathon",
-    "section": "Structure",
-    "text": "Structure\nYou will be grouped by the analytical tasks you are interested in and work through them together with support from the facilitators. During these sessions, you will apply the analyses to your own data and incorporate the analysis into your final report/dashboard script. Depending on your technical level, you may complete multiple tasks over different sessions and therefore change groups."
-  },
-  {
-    "objectID": "index.html#tasks",
-    "href": "index.html#tasks",
-    "title": "Analytics Workshop Hackathon",
-    "section": "Tasks",
-    "text": "Tasks\nThe analytical tasks you can choose from are:\n\nReading, cleaning and validating epidemiological data\nGenerating automated situation reports with dynamic figures and tables\nMaking an interactive epi dashboard using epishiny\nVisualising transmission chains using epicontacts\nGetting epidemiological parameters from your data or the literature\nEstimating the basic & effective reproduction number\nNowcasting epidemiological data\nForecasting cases and deaths\nEstimating disease severity\nModelling the impact of interventions\n\nEach task has its own dedicated page with resources and guidance. Navigate to the Tasks menu to explore each one."
-  },
-  {
-    "objectID": "index.html#getting-started",
-    "href": "index.html#getting-started",
-    "title": "Analytics Workshop Hackathon",
-    "section": "Getting Started",
-    "text": "Getting Started\n\nInstall R and RStudio: Visit the Setup & Installation page for installation instructions and required packages.\nDownload example datasets: Visit the Data section to download the datasets you’ll need.\nExplore tasks: Navigate to the Tasks menu to find the analytical task(s) you’re interested in.\nJoin your group: Work through the materials with support from facilitators."
-  },
-  {
-    "objectID": "index.html#additional-resources",
-    "href": "index.html#additional-resources",
-    "title": "Analytics Workshop Hackathon",
-    "section": "Additional Resources",
-    "text": "Additional Resources\n\nRecommended refresher on basic R literacy by AppliedEpi"
-  },
-  {
-    "objectID": "task1.html",
-    "href": "task1.html",
-    "title": "Task 1: Reading, cleaning and validating epidemiological data",
-    "section": "",
-    "text": "This task covers the basics of reading, cleaning, validating and shaping basic epidemiological data. You will learn how to import data from various sources, clean messy datasets, validate data quality, and prepare data for epidemiological analysis."
-  },
-  {
-    "objectID": "task1.html#overview",
-    "href": "task1.html#overview",
-    "title": "Task 1: Reading, cleaning and validating epidemiological data",
-    "section": "",
-    "text": "This task covers the basics of reading, cleaning, validating and shaping basic epidemiological data. You will learn how to import data from various sources, clean messy datasets, validate data quality, and prepare data for epidemiological analysis."
-  },
-  {
-    "objectID": "task1.html#learning-objectives",
-    "href": "task1.html#learning-objectives",
-    "title": "Task 1: Reading, cleaning and validating epidemiological data",
+    "objectID": "task10.html#learning-objectives",
+    "href": "task10.html#learning-objectives",
+    "title": "Task 10: Simulating disease transmission",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nImport epidemiological data from various file formats\nClean and standardize data structures\nValidate data quality and completeness\nHandle missing values and data inconsistencies"
+    "text": "Learning Objectives\n\nLoad and use model structures from the epidemics package\nLoad social contact matrices with socialmixr\nGenerate disease spread model simulations\nGenerate multiple model simulations and visualize uncertainty"
   },
   {
-    "objectID": "task1.html#task-tutorial",
-    "href": "task1.html#task-tutorial",
-    "title": "Task 1: Reading, cleaning and validating epidemiological data",
-    "section": "Task Tutorial",
-    "text": "Task Tutorial\nAccess the task tutorial here"
+    "objectID": "task10.html#tutorial",
+    "href": "task10.html#tutorial",
+    "title": "Task 10: Simulating disease transmission",
+    "section": "Tutorial",
+    "text": "Tutorial\nAccess the tutorial here"
   },
   {
-    "objectID": "task1.html#additional-resources",
-    "href": "task1.html#additional-resources",
-    "title": "Task 1: Reading, cleaning and validating epidemiological data",
+    "objectID": "task10.html#additional-resources",
+    "href": "task10.html#additional-resources",
+    "title": "Task 10: Simulating disease transmission",
     "section": "Additional Resources",
     "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
   },
@@ -355,110 +187,5 @@
     "title": "Task 2: Generating automated situation reports",
     "section": "Additional Resources",
     "text": "Additional Resources\n\nQuarto DocumentationR HandbookPackage Documentation\n\n\n\nQuarto Documentation\nQuarto for R\n\n\n\n\nEpidemiologist R Handbook - Reports\nEpidemiologist R Handbook - Epidemic Curves\n\n\n\n\nggplot2 Documentation\nDT (DataTables) Package"
-  },
-  {
-    "objectID": "task4.html",
-    "href": "task4.html",
-    "title": "Task 4: Visualising transmission chains",
-    "section": "",
-    "text": "This task covers visualizing transmission chains using epicontacts. You will learn how to analyze and visualize contact networks and transmission pathways."
-  },
-  {
-    "objectID": "task4.html#overview",
-    "href": "task4.html#overview",
-    "title": "Task 4: Visualising transmission chains",
-    "section": "",
-    "text": "This task covers visualizing transmission chains using epicontacts. You will learn how to analyze and visualize contact networks and transmission pathways."
-  },
-  {
-    "objectID": "task4.html#learning-objectives",
-    "href": "task4.html#learning-objectives",
-    "title": "Task 4: Visualising transmission chains",
-    "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nWork with contact network data\nVisualize transmission chains using epicontacts\nAnalyze contact patterns\nIdentify transmission clusters"
-  },
-  {
-    "objectID": "task4.html#additional-resources",
-    "href": "task4.html#additional-resources",
-    "title": "Task 4: Visualising transmission chains",
-    "section": "Additional Resources",
-    "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for epicontacts and related packages."
-  },
-  {
-    "objectID": "task4.html#external-links",
-    "href": "task4.html#external-links",
-    "title": "Task 4: Visualising transmission chains",
-    "section": "External Links",
-    "text": "External Links\nThis page will eventually link to external resources and detailed guides."
-  },
-  {
-    "objectID": "task6.html",
-    "href": "task6.html",
-    "title": "Task 6: Estimating reproduction numbers",
-    "section": "",
-    "text": "This task covers estimating the basic and effective reproduction number (R0 and Re). You will learn methods for calculating these key epidemiological metrics from outbreak data."
-  },
-  {
-    "objectID": "task6.html#overview",
-    "href": "task6.html#overview",
-    "title": "Task 6: Estimating reproduction numbers",
-    "section": "",
-    "text": "This task covers estimating the basic and effective reproduction number (R0 and Re). You will learn methods for calculating these key epidemiological metrics from outbreak data."
-  },
-  {
-    "objectID": "task6.html#learning-objectives",
-    "href": "task6.html#learning-objectives",
-    "title": "Task 6: Estimating reproduction numbers",
-    "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nUnderstand the difference between R0 and Re\nEstimate reproduction numbers from case data\nUse appropriate methods for different data types\nVisualize and interpret reproduction number estimates"
-  },
-  {
-    "objectID": "task6.html#task-tutorial",
-    "href": "task6.html#task-tutorial",
-    "title": "Task 6: Estimating reproduction numbers",
-    "section": "Task Tutorial",
-    "text": "Task Tutorial\nAccess the task tutorial here"
-  },
-  {
-    "objectID": "task6.html#additional-resources",
-    "href": "task6.html#additional-resources",
-    "title": "Task 6: Estimating reproduction numbers",
-    "section": "Additional Resources",
-    "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
-  },
-  {
-    "objectID": "task8.html",
-    "href": "task8.html",
-    "title": "Task 8: Forecasting cases and deaths",
-    "section": "",
-    "text": "This task covers forecasting cases and deaths. You will learn how to build forecasting models and generate predictions of future disease incidence."
-  },
-  {
-    "objectID": "task8.html#overview",
-    "href": "task8.html#overview",
-    "title": "Task 8: Forecasting cases and deaths",
-    "section": "",
-    "text": "This task covers forecasting cases and deaths. You will learn how to build forecasting models and generate predictions of future disease incidence."
-  },
-  {
-    "objectID": "task8.html#learning-objectives",
-    "href": "task8.html#learning-objectives",
-    "title": "Task 8: Forecasting cases and deaths",
-    "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nBuild forecasting models for epidemiological data\nGenerate short-term and long-term forecasts\nQuantify forecast uncertainty\nEvaluate forecast performance"
-  },
-  {
-    "objectID": "task8.html#task-tutorial",
-    "href": "task8.html#task-tutorial",
-    "title": "Task 8: Forecasting cases and deaths",
-    "section": "Task Tutorial",
-    "text": "Task Tutorial\nAccess the task tutorial here"
-  },
-  {
-    "objectID": "task8.html#additional-resources",
-    "href": "task8.html#additional-resources",
-    "title": "Task 8: Forecasting cases and deaths",
-    "section": "Additional Resources",
-    "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
   }
 ]

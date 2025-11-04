@@ -13,9 +13,9 @@ This task covers estimating the basic and effective reproduction number (R0 and 
 - Use appropriate methods for different data types
 - Visualize and interpret reproduction number estimates
 
-## Task Tutorial
+## Tutorial
 
-[Access the task tutorial here](https://epiverse-trace.github.io/tutorials-middle/quantify-transmissibility.html)
+[Access the tutorial here](https://epiverse-trace.github.io/tutorials-middle/quantify-transmissibility.html)
 
 ## Additional Resources
 

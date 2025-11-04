@@ -13,6 +13,10 @@ This task focuses on creating interactive epidemiological dashboards using epish
 - Design user-friendly dashboard interfaces
 - Deploy dashboards for sharing
 
+## Tutorial
+
+[Access the tutorial here](https://epicentre-msf.github.io/epishiny/articles/epishiny.html)
+
 ## Additional Resources
 
 ::: {.panel-tabset}
@@ -24,8 +28,4 @@ Relevant chapters from the Epidemiologist R Handbook.
 Package vignettes and documentation for relevant R packages.
 
 :::
-
-## External Links
-
-*This page will eventually link to external resources and detailed guides.*
 
