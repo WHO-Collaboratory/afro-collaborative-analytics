@@ -54,3 +54,5 @@ source("deploy.R")
 
 See [`deploy.R`](deploy.R) for deployment instructions. The script uses encrypted credentials for secure deployment.
 
+For information about the encryption setup and how to request access to use encrypted data, see [ENCRYPTION.md](ENCRYPTION.md).
+
