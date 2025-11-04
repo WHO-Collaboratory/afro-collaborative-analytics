@@ -44,3 +44,13 @@ Or from R (in the qmd directory):
 quarto::quarto_preview()
 ```
 
+## Deployment
+
+To deploy the website to Posit Connect, use the deployment script:
+
+```r
+source("deploy.R")
+```
+
+See [`deploy.R`](deploy.R) for deployment instructions. The script uses encrypted credentials for secure deployment.
+
