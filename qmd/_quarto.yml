@@ -1,11 +1,11 @@
 project:
   type: website
-  output-dir: docs
+  output-dir: ../docs
 
 website:
   navbar:
     search: true
-    logo: assets/img/who_logo.png
+    logo: ../assets/img/who_logo.png
     left:
       - href: index.qmd
         text: Home
