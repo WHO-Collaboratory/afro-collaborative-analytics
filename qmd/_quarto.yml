@@ -46,4 +46,7 @@ format:
     toc: true
     css: styles.css
     download-links: true
+    execute:
+      warning: false
+      message: false
 

@@ -169,16 +169,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#example-datasets" id="toc-example-datasets" class="nav-link active" data-scroll-target="#example-datasets">Example Datasets</a></li>
-  <li><a href="#dataset-downloads" id="toc-dataset-downloads" class="nav-link" data-scroll-target="#dataset-downloads">Dataset Downloads</a>
-  <ul class="collapse">
-  <li><a href="#linelist-dataset" id="toc-linelist-dataset" class="nav-link" data-scroll-target="#linelist-dataset">1. Linelist Dataset</a></li>
-  <li><a href="#marburg-dataset" id="toc-marburg-dataset" class="nav-link" data-scroll-target="#marburg-dataset">2. Marburg Dataset</a></li>
-  <li><a href="#simulated-ebola-dataset" id="toc-simulated-ebola-dataset" class="nav-link" data-scroll-target="#simulated-ebola-dataset">3. Simulated Ebola Dataset</a></li>
-  <li><a href="#linelist-with-date-of-birth" id="toc-linelist-with-date-of-birth" class="nav-link" data-scroll-target="#linelist-with-date-of-birth">4. Linelist with Date of Birth</a></li>
-  <li><a href="#ebola-cases-dataset" id="toc-ebola-cases-dataset" class="nav-link" data-scroll-target="#ebola-cases-dataset">5. Ebola Cases Dataset</a></li>
-  </ul></li>
-  <li><a href="#data-usage" id="toc-data-usage" class="nav-link" data-scroll-target="#data-usage">Data Usage</a></li>
+  <li><a href="#raw-case-linelist" id="toc-raw-case-linelist" class="nav-link active" data-scroll-target="#raw-case-linelist">Raw case linelist</a></li>
+  <li><a href="#clean-case-linelist" id="toc-clean-case-linelist" class="nav-link" data-scroll-target="#clean-case-linelist">Clean case linelist</a></li>
   </ul>
 </nav>
     </div>
@@ -204,42 +196,16 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="example-datasets" class="level2">
-<h2 class="anchored" data-anchor-id="example-datasets">Example Datasets</h2>
-<p>Download the example datasets below to get started with the hackathon tasks. These datasets are provided by the Epiverse tutorials and can be used for practice and testing your analytical scripts.</p>
+<p>Download the example datasets below to get started with the hackathon tasks. These datasets are from the <a href="https://www.epirhandbook.com/">Applied Epi R Handbook</a> and can be used for practice and testing your analytical scripts. They resemble a fictional Ebola outbreak.</p>
+<section id="raw-case-linelist" class="level2">
+<h2 class="anchored" data-anchor-id="raw-case-linelist">Raw case linelist</h2>
+<p>The “raw” case linelist is an Excel spreadsheet with messy data. Use this when tackling <a href="./task1.html">Task 1</a>, which goes over the basics of cleaning data.</p>
+<p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_raw.xlsx" class="btn btn-primary" target="_blank">Click to download the “raw” linelist (.xlsx)</a></p>
 </section>
-<section id="dataset-downloads" class="level2">
-<h2 class="anchored" data-anchor-id="dataset-downloads">Dataset Downloads</h2>
-<p>Click the download buttons below to download each dataset:</p>
-<section id="linelist-dataset" class="level3">
-<h3 class="anchored" data-anchor-id="linelist-dataset">1. Linelist Dataset</h3>
-<p>A standard epidemiological linelist dataset for general analysis tasks.</p>
-<p><a href="https://epiverse-trace.github.io/tutorials/data/linelist.csv" class="btn btn-primary" target="_blank">Download linelist.csv</a></p>
-</section>
-<section id="marburg-dataset" class="level3">
-<h3 class="anchored" data-anchor-id="marburg-dataset">2. Marburg Dataset</h3>
-<p>Zipped archive containing Marburg virus data for epidemiological analysis.</p>
-<p><a href="https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip" class="btn btn-primary" target="_blank">Download Marburg.zip</a></p>
-</section>
-<section id="simulated-ebola-dataset" class="level3">
-<h3 class="anchored" data-anchor-id="simulated-ebola-dataset">3. Simulated Ebola Dataset</h3>
-<p>A simulated Ebola dataset for training and testing analytical methods.</p>
-<p><a href="https://epiverse-trace.github.io/tutorials-early/data/simulated_ebola_2.csv" class="btn btn-primary" target="_blank">Download simulated_ebola_2.csv</a></p>
-</section>
-<section id="linelist-with-date-of-birth" class="level3">
-<h3 class="anchored" data-anchor-id="linelist-with-date-of-birth">4. Linelist with Date of Birth</h3>
-<p>Extended linelist dataset including date of birth information.</p>
-<p><a href="https://epiverse-trace.github.io/tutorials-early/data/linelist-date_of_birth.csv" class="btn btn-primary" target="_blank">Download linelist-date_of_birth.csv</a></p>
-</section>
-<section id="ebola-cases-dataset" class="level3">
-<h3 class="anchored" data-anchor-id="ebola-cases-dataset">5. Ebola Cases Dataset</h3>
-<p>Ebola cases data for epidemiological analysis and visualization.</p>
-<p><a href="https://epiverse-trace.github.io/tutorials-early/data/ebola_cases_2.csv" class="btn btn-primary" target="_blank">Download ebola_cases_2.csv</a></p>
-</section>
-</section>
-<section id="data-usage" class="level2">
-<h2 class="anchored" data-anchor-id="data-usage">Data Usage</h2>
-<p>These datasets are provided for educational and training purposes as part of the Analytics Workshop Hackathon. Please refer to the original Epiverse tutorials for more information about the data sources and structure.</p>
+<section id="clean-case-linelist" class="level2">
+<h2 class="anchored" data-anchor-id="clean-case-linelist">Clean case linelist</h2>
+<p>Use this file for all other tasks. A .rds file is an R-specific file type that preserves column classes. This ensures you will have only minimal cleaning to do after importing the data into R.</p>
+<p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_cleaned.rds" class="btn btn-primary" target="_blank">Click to download the “clean” linelist (.rds)</a></p>
 
 
 </section>

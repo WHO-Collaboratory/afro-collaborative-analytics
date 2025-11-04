@@ -228,16 +228,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#step-by-step-instructions-creating-a-basic-epidemiological-report-in-quarto" id="toc-step-by-step-instructions-creating-a-basic-epidemiological-report-in-quarto" class="nav-link" data-scroll-target="#step-by-step-instructions-creating-a-basic-epidemiological-report-in-quarto">Step-by-Step Instructions: Creating a Basic Epidemiological Report in Quarto</a>
   <ul class="collapse">
   <li><a href="#step-1-set-up-your-project-folder-structure" id="toc-step-1-set-up-your-project-folder-structure" class="nav-link" data-scroll-target="#step-1-set-up-your-project-folder-structure">Step 1: Set Up Your Project Folder Structure</a></li>
-  <li><a href="#step-2-download-the-linelist-dataset" id="toc-step-2-download-the-linelist-dataset" class="nav-link" data-scroll-target="#step-2-download-the-linelist-dataset">Step 2: Download the Linelist Dataset</a></li>
+  <li><a href="#step-2-obtain-the-cleaned-linelist-dataset" id="toc-step-2-obtain-the-cleaned-linelist-dataset" class="nav-link" data-scroll-target="#step-2-obtain-the-cleaned-linelist-dataset">Step 2: Obtain the Cleaned Linelist Dataset</a></li>
   <li><a href="#step-3-create-a-new-quarto-document" id="toc-step-3-create-a-new-quarto-document" class="nav-link" data-scroll-target="#step-3-create-a-new-quarto-document">Step 3: Create a New Quarto Document</a></li>
   <li><a href="#step-4-set-up-the-yaml-header" id="toc-step-4-set-up-the-yaml-header" class="nav-link" data-scroll-target="#step-4-set-up-the-yaml-header">Step 4: Set Up the YAML Header</a></li>
   <li><a href="#step-5-install-and-load-required-packages" id="toc-step-5-install-and-load-required-packages" class="nav-link" data-scroll-target="#step-5-install-and-load-required-packages">Step 5: Install and Load Required Packages</a></li>
   <li><a href="#step-6-import-the-data" id="toc-step-6-import-the-data" class="nav-link" data-scroll-target="#step-6-import-the-data">Step 6: Import the Data</a></li>
-  <li><a href="#step-7-clean-and-prepare-the-data" id="toc-step-7-clean-and-prepare-the-data" class="nav-link" data-scroll-target="#step-7-clean-and-prepare-the-data">Step 7: Clean and Prepare the Data</a></li>
-  <li><a href="#step-8-create-an-incidence-curve" id="toc-step-8-create-an-incidence-curve" class="nav-link" data-scroll-target="#step-8-create-an-incidence-curve">Step 8: Create an Incidence Curve</a></li>
-  <li><a href="#step-9-calculate-case-fatality-ratio-cfr" id="toc-step-9-calculate-case-fatality-ratio-cfr" class="nav-link" data-scroll-target="#step-9-calculate-case-fatality-ratio-cfr">Step 9: Calculate Case Fatality Ratio (CFR)</a></li>
-  <li><a href="#step-10-create-an-interactive-summary-table-by-hospital" id="toc-step-10-create-an-interactive-summary-table-by-hospital" class="nav-link" data-scroll-target="#step-10-create-an-interactive-summary-table-by-hospital">Step 10: Create an Interactive Summary Table by Hospital</a></li>
-  <li><a href="#step-11-render-your-report" id="toc-step-11-render-your-report" class="nav-link" data-scroll-target="#step-11-render-your-report">Step 11: Render Your Report</a></li>
+  <li><a href="#step-7-create-an-incidence-curve" id="toc-step-7-create-an-incidence-curve" class="nav-link" data-scroll-target="#step-7-create-an-incidence-curve">Step 7: Create an Incidence Curve</a></li>
+  <li><a href="#step-8-calculate-case-fatality-ratio-cfr" id="toc-step-8-calculate-case-fatality-ratio-cfr" class="nav-link" data-scroll-target="#step-8-calculate-case-fatality-ratio-cfr">Step 8: Calculate Case Fatality Ratio (CFR)</a></li>
+  <li><a href="#step-9-create-an-interactive-summary-table-by-hospital" id="toc-step-9-create-an-interactive-summary-table-by-hospital" class="nav-link" data-scroll-target="#step-9-create-an-interactive-summary-table-by-hospital">Step 9: Create an Interactive Summary Table by Hospital</a></li>
+  <li><a href="#step-10-render-your-report" id="toc-step-10-render-your-report" class="nav-link" data-scroll-target="#step-10-render-your-report">Step 10: Render Your Report</a></li>
   </ul></li>
   <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
   </ul>
@@ -294,14 +293,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ol>
 </section>
-<section id="step-2-download-the-linelist-dataset" class="level3">
-<h3 class="anchored" data-anchor-id="step-2-download-the-linelist-dataset">Step 2: Download the Linelist Dataset</h3>
+<section id="step-2-obtain-the-cleaned-linelist-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-obtain-the-cleaned-linelist-dataset">Step 2: Obtain the Cleaned Linelist Dataset</h3>
+<p>For this task, we will be using the <strong>cleaned linelist file</strong>. You have two options:</p>
+<p><strong>Option 1</strong>: If you completed Task 1, you should have already cleaned the raw linelist and saved it as <code>data/linelist.rds</code>. You can use that file.</p>
+<p><strong>Option 2</strong>: If you haven’t completed Task 1, or prefer to use the pre-cleaned version, download the cleaned linelist:</p>
 <ol type="1">
 <li>Navigate to the <a href="./data.html">Data</a> page on this website.</li>
-<li>Click the download button for <strong>linelist.csv</strong>.</li>
+<li>Click the download button for the <strong>“clean” linelist (.rds)</strong>.</li>
 <li><strong>Save the file to your <code>data/</code> folder</strong> that you created in Step 1.</li>
-<li>The file path should be: <code>data/linelist.csv</code> (relative to where your Quarto document is saved).</li>
+<li>The file path should be: <code>data/linelist_cleaned.rds</code> (relative to where your Quarto document is saved).</li>
 </ol>
+<p>Alternatively, you can download it directly from: <a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_cleaned.rds">linelist_cleaned.rds</a></p>
 </section>
 <section id="step-3-create-a-new-quarto-document" class="level3">
 <h3 class="anchored" data-anchor-id="step-3-create-a-new-quarto-document">Step 3: Create a New Quarto Document</h3>
@@ -328,144 +331,134 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In the first code chunk of your document, install and load the required packages:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install pacman if needed</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) <span class="fu">install.packages</span>(<span class="st">"pacman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: pacman</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required packages</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  rio,        <span class="co"># For importing data</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  tidyverse,  <span class="co"># For data manipulation and visualization</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  DT,         <span class="co"># For interactive tables</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  lubridate   <span class="co"># For date handling</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) <span class="fu">install.packages</span>(<span class="st">"pacman"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required packages</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  rio, <span class="co"># For importing data</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  tidyverse, <span class="co"># For data manipulation and visualization</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  DT, <span class="co"># For interactive tables</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  lubridate <span class="co"># For date handling</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="step-6-import-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="step-6-import-the-data">Step 6: Import the Data</h3>
-<p>Create a new code chunk to import the linelist data. Since you’ve saved it in the <code>data/</code> folder, we use a relative path:</p>
+<p>Create a new code chunk to import the cleaned linelist data. The cleaned file is in RDS format, which preserves column classes:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import the linelist data from your local data folder</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>linelist <span class="ot">&lt;-</span> rio<span class="sc">::</span><span class="fu">import</span>(<span class="st">"data/linelist.csv"</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View the first few rows</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(linelist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import the cleaned linelist data from your local data folder</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the file you saved from Task 1, or the downloaded cleaned file</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>linelist <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/linelist.rds"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># View the first few rows</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(linelist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-e43df71de91616ce26f9" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-e43df71de91616ce26f9">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["d1fafd","53371b","f5c3d8","e66fa4","49731d","0f58c4"],[0,1,1,2,0,2],[null,"2014-04-09","2014-04-18",null,"2014-03-19","2014-04-22"],["2014-04-07","2014-04-15","2014-04-21","2014-04-21","2014-04-25","2014-04-26"],["2014-04-17","2014-04-20","2014-04-25","2014-05-06","2014-05-02","2014-04-29"],["2014-04-19",null,"2014-04-30","2014-05-12","2014-05-07","2014-05-17"],[null,null,"Recover","Recover",null,"Recover"],["f","m","f","m","f","f"],["Military Hospital","Connaught Hospital","other","other",null,"other"],["-13,2179906460980","-13,2149052395664","-13,2280410276091","-13,2612684289806","-13,2344265094994","-13,2101641430217"],["8,47351400551599","8,46492652251777","8,48335550908327","8,46466205027363","8,46857239958425","8,45214268335056"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>case_id<\/th>\n      <th>generation<\/th>\n      <th>date_of_infection<\/th>\n      <th>date_of_onset<\/th>\n      <th>date_of_hospitalisation<\/th>\n      <th>date_of_outcome<\/th>\n      <th>outcome<\/th>\n      <th>gender<\/th>\n      <th>hospital<\/th>\n      <th>lon<\/th>\n      <th>lat<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":-1,"scrollX":true,"dom":"rt","searching":false,"paging":false,"info":false,"ordering":false,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"case_id","targets":1},{"name":"generation","targets":2},{"name":"date_of_infection","targets":3},{"name":"date_of_onset","targets":4},{"name":"date_of_hospitalisation","targets":5},{"name":"date_of_outcome","targets":6},{"name":"outcome","targets":7},{"name":"gender","targets":8},{"name":"hospital","targets":9},{"name":"lon","targets":10},{"name":"lat","targets":11}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[-1,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-7c3a8661c3201299f95e" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-7c3a8661c3201299f95e">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["5fe599","8689b7","11f8ea","b8812a","893f25","be99c8"],[4,4,2,3,3,3],["2014-05-08",null,null,"2014-05-04","2014-05-18","2014-05-03"],["2014-05-13","2014-05-13","2014-05-16","2014-05-18","2014-05-21","2014-05-22"],["2014-05-15","2014-05-14","2014-05-18","2014-05-20","2014-05-22","2014-05-23"],[null,"2014-05-18","2014-05-30",null,"2014-05-29","2014-05-24"],[null,"Recover","Recover",null,"Recover","Recover"],["m","f","m","f","m","f"],[2,3,56,18,3,16],["years","years","years","years","years","years"],[2,3,56,18,3,16],["0-4","0-4","50-69","15-19","0-4","15-19"],["0-4","0-4","55-59","15-19","0-4","15-19"],["Other","Missing","St. Mark's Maternity Hospital (SMMH)","Port Hospital","Military Hospital","Port Hospital"],[-13.2157351064963,-13.2152339775486,-13.212910703914,-13.2363711169728,-13.2228638912441,-13.222625321098],[8.46897295100924,8.45171855856465,8.46481700596819,8.4754761613651,8.46082377490923,8.461830626007281],["f547d6",null,null,"f90f5f","11f8ea","aec8ec"],["other",null,null,"other","other","other"],[27,25,91,41,36,56],[48,59,238,135,71,116],[22,22,21,23,23,21],["no",null,null,"no","no","no"],["no",null,null,"no","no","no"],["yes",null,null,"no","yes","yes"],["no",null,null,"no","no","no"],["yes",null,null,"no","yes","yes"],[36.8,36.9,36.9,36.8,36.9,37.6],[null,"09:36","16:48","11:22","12:60","14:13"],[117.1875,71.81844297615629,16.06524962926347,22.49657064471879,71.41440190438405,41.61712247324614],[2,1,2,2,1,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>case_id<\/th>\n      <th>generation<\/th>\n      <th>date_infection<\/th>\n      <th>date_onset<\/th>\n      <th>date_hospitalisation<\/th>\n      <th>date_outcome<\/th>\n      <th>outcome<\/th>\n      <th>gender<\/th>\n      <th>age<\/th>\n      <th>age_unit<\/th>\n      <th>age_years<\/th>\n      <th>age_cat<\/th>\n      <th>age_cat5<\/th>\n      <th>hospital<\/th>\n      <th>lon<\/th>\n      <th>lat<\/th>\n      <th>infector<\/th>\n      <th>source<\/th>\n      <th>wt_kg<\/th>\n      <th>ht_cm<\/th>\n      <th>ct_blood<\/th>\n      <th>fever<\/th>\n      <th>chills<\/th>\n      <th>cough<\/th>\n      <th>aches<\/th>\n      <th>vomit<\/th>\n      <th>temp<\/th>\n      <th>time_admission<\/th>\n      <th>bmi<\/th>\n      <th>days_onset_hosp<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":-1,"scrollX":true,"dom":"rt","searching":false,"paging":false,"info":false,"ordering":false,"columnDefs":[{"className":"dt-right","targets":[2,9,11,15,16,19,20,21,27,29,30]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"case_id","targets":1},{"name":"generation","targets":2},{"name":"date_infection","targets":3},{"name":"date_onset","targets":4},{"name":"date_hospitalisation","targets":5},{"name":"date_outcome","targets":6},{"name":"outcome","targets":7},{"name":"gender","targets":8},{"name":"age","targets":9},{"name":"age_unit","targets":10},{"name":"age_years","targets":11},{"name":"age_cat","targets":12},{"name":"age_cat5","targets":13},{"name":"hospital","targets":14},{"name":"lon","targets":15},{"name":"lat","targets":16},{"name":"infector","targets":17},{"name":"source","targets":18},{"name":"wt_kg","targets":19},{"name":"ht_cm","targets":20},{"name":"ct_blood","targets":21},{"name":"fever","targets":22},{"name":"chills","targets":23},{"name":"cough","targets":24},{"name":"aches","targets":25},{"name":"vomit","targets":26},{"name":"temp","targets":27},{"name":"time_admission","targets":28},{"name":"bmi","targets":29},{"name":"days_onset_hosp","targets":30}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[-1,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
-<section id="step-7-clean-and-prepare-the-data" class="level3">
-<h3 class="anchored" data-anchor-id="step-7-clean-and-prepare-the-data">Step 7: Clean and Prepare the Data</h3>
-<p>Before creating visualizations, we need to ensure the date column is in the correct format:</p>
+<section id="step-7-create-an-incidence-curve" class="level3">
+<h3 class="anchored" data-anchor-id="step-7-create-an-incidence-curve">Step 7: Create an Incidence Curve</h3>
+<p>Create a new section in your document and add a code chunk to create an incidence curve (epidemic curve) using <code>date_onset</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert date_of_onset to date format</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>linelist <span class="ot">&lt;-</span> linelist <span class="sc">|&gt;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date_of_onset =</span> <span class="fu">as.Date</span>(date_of_onset))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="step-8-create-an-incidence-curve" class="level3">
-<h3 class="anchored" data-anchor-id="step-8-create-an-incidence-curve">Step 8: Create an Incidence Curve</h3>
-<p>Create a new section in your document and add a code chunk to create an incidence curve (epidemic curve) using <code>date_of_onset</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create incidence curve</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>incidence_curve <span class="ot">&lt;-</span> linelist <span class="sc">|&gt;</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date_of_onset)) <span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">7</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Incidence Curve by Date of Onset"</span>,</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Date of Onset"</span>,</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of Cases"</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>))</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(incidence_curve)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create incidence curve</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>incidence_curve <span class="ot">&lt;-</span> linelist <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date_onset)) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">7</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Incidence Curve by Date of Onset"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Date of Onset"</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of Cases"</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>))</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(incidence_curve)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="task2_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="task2_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption>Incidence Curve by Date of Onset</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="step-9-calculate-case-fatality-ratio-cfr" class="level3">
-<h3 class="anchored" data-anchor-id="step-9-calculate-case-fatality-ratio-cfr">Step 9: Calculate Case Fatality Ratio (CFR)</h3>
+<section id="step-8-calculate-case-fatality-ratio-cfr" class="level3">
+<h3 class="anchored" data-anchor-id="step-8-calculate-case-fatality-ratio-cfr">Step 8: Calculate Case Fatality Ratio (CFR)</h3>
 <p>Create a new section and calculate the CFR, making sure to exclude NA outcomes:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate CFR (excluding NA outcomes)</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>cfr_data <span class="ot">&lt;-</span> linelist <span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(outcome)) <span class="sc">|&gt;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_cases =</span> <span class="fu">n</span>(),</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">deaths =</span> <span class="fu">sum</span>(outcome <span class="sc">==</span> <span class="st">"Death"</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">recovered =</span> <span class="fu">sum</span>(outcome <span class="sc">==</span> <span class="st">"Recover"</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">cfr =</span> <span class="fu">round</span>((deaths <span class="sc">/</span> total_cases) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate CFR (excluding NA outcomes)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>cfr_data <span class="ot">&lt;-</span> linelist <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(outcome)) <span class="sc">|&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_cases =</span> <span class="fu">n</span>(),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">deaths =</span> <span class="fu">sum</span>(outcome <span class="sc">==</span> <span class="st">"Death"</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">recovered =</span> <span class="fu">sum</span>(outcome <span class="sc">==</span> <span class="st">"Recover"</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">cfr =</span> <span class="fu">round</span>((deaths <span class="sc">/</span> total_cases) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The estimated Case Fatality Ratio is 52.42%.</p>
+<p>The estimated Case Fatality Ratio is 56.56%.</p>
 </section>
-<section id="step-10-create-an-interactive-summary-table-by-hospital" class="level3">
-<h3 class="anchored" data-anchor-id="step-10-create-an-interactive-summary-table-by-hospital">Step 10: Create an Interactive Summary Table by Hospital</h3>
+<section id="step-9-create-an-interactive-summary-table-by-hospital" class="level3">
+<h3 class="anchored" data-anchor-id="step-9-create-an-interactive-summary-table-by-hospital">Step 9: Create an Interactive Summary Table by Hospital</h3>
 <p>Create a new section and generate an interactive summary table grouped by hospital using <code>DT::datatable()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create summary table by hospital</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Group NA and "other" together</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>hospital_summary <span class="ot">&lt;-</span> linelist <span class="sc">|&gt;</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">hospital_grouped =</span> <span class="fu">case_when</span>(</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">is.na</span>(hospital) <span class="sc">|</span> hospital <span class="sc">==</span> <span class="st">"other"</span> <span class="sc">~</span> <span class="st">"Other/Unknown"</span>,</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> hospital</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hospital_grouped) <span class="sc">|&gt;</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_cases =</span> <span class="fu">n</span>(),</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">deaths =</span> <span class="fu">sum</span>(outcome <span class="sc">==</span> <span class="st">"Death"</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">recovered =</span> <span class="fu">sum</span>(outcome <span class="sc">==</span> <span class="st">"Recover"</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">hospital =</span> hospital_grouped) <span class="sc">|&gt;</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">cfr =</span> <span class="fu">round</span>((deaths <span class="sc">/</span> (deaths <span class="sc">+</span> recovered)) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>),</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">cfr =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(cfr), <span class="dv">0</span>, cfr)</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Create interactive table</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  hospital_summary,</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">list</span>(</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">pageLength =</span> <span class="sc">-</span><span class="dv">1</span>,</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">scrollX =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">dom =</span> <span class="st">'rt'</span>,</span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">searching =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">paging =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">info =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordering =</span> <span class="cn">FALSE</span></span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Summary Statistics by Hospital"</span>,</span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">colnames =</span> <span class="fu">c</span>(</span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Hospital"</span> <span class="ot">=</span> <span class="st">"hospital"</span>,</span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Total Cases"</span> <span class="ot">=</span> <span class="st">"total_cases"</span>,</span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Deaths"</span> <span class="ot">=</span> <span class="st">"deaths"</span>,</span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Recovered"</span> <span class="ot">=</span> <span class="st">"recovered"</span>,</span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">"CFR (%)"</span> <span class="ot">=</span> <span class="st">"cfr"</span></span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create summary table by hospital</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Group NA and "Other" together</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>hospital_summary <span class="ot">&lt;-</span> linelist <span class="sc">|&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">hospital_grouped =</span> <span class="fu">case_when</span>(</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">is.na</span>(hospital) <span class="sc">|</span> hospital <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Missing"</span>, <span class="st">"Other"</span>) <span class="sc">~</span> <span class="st">"Other/Unknown"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> hospital</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hospital_grouped) <span class="sc">|&gt;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_cases =</span> <span class="fu">n</span>(),</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">deaths =</span> <span class="fu">sum</span>(outcome <span class="sc">==</span> <span class="st">"Death"</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">recovered =</span> <span class="fu">sum</span>(outcome <span class="sc">==</span> <span class="st">"Recover"</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">hospital =</span> hospital_grouped) <span class="sc">|&gt;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">cfr =</span> <span class="fu">round</span>((deaths <span class="sc">/</span> (deaths <span class="sc">+</span> recovered)) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>),</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">cfr =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(cfr), <span class="dv">0</span>, cfr)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Create interactive table</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  hospital_summary,</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">list</span>(</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">pageLength =</span> <span class="sc">-</span><span class="dv">1</span>,</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">scrollX =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">dom =</span> <span class="st">"rt"</span>,</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">searching =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">paging =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">info =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordering =</span> <span class="cn">FALSE</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Summary Statistics by Hospital"</span>,</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">colnames =</span> <span class="fu">c</span>(</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Hospital"</span> <span class="ot">=</span> <span class="st">"hospital"</span>,</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Total Cases"</span> <span class="ot">=</span> <span class="st">"total_cases"</span>,</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Deaths"</span> <span class="ot">=</span> <span class="st">"deaths"</span>,</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Recovered"</span> <span class="ot">=</span> <span class="st">"recovered"</span>,</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">"CFR (%)"</span> <span class="ot">=</span> <span class="st">"cfr"</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-1eac10eefec6f7001521" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-1eac10eefec6f7001521">{"x":{"filter":"none","vertical":false,"caption":"<caption>Summary Statistics by Hospital<\/caption>","data":[["1","2","3","4","5"],["Connaught Hospital","Military Hospital","Other/Unknown","Princess Christian Maternity Hospital (PCMH)","Rokupa Hospital"],[44,25,76,12,9],[16,10,29,6,4],[16,7,29,4,3],[50,58.82,50,60,57.14]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Hospital<\/th>\n      <th>Total Cases<\/th>\n      <th>Deaths<\/th>\n      <th>Recovered<\/th>\n      <th>CFR (%)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":-1,"scrollX":true,"dom":"rt","searching":false,"paging":false,"info":false,"ordering":false,"columnDefs":[{"className":"dt-right","targets":[2,3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"hospital","targets":1},{"name":"total_cases","targets":2},{"name":"deaths","targets":3},{"name":"recovered","targets":4},{"name":"cfr","targets":5}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[-1,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-9c2559531e6ecee68295" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-9c2559531e6ecee68295">{"x":{"filter":"none","vertical":false,"caption":"<caption>Summary Statistics by Hospital<\/caption>","data":[["1","2","3","4","5"],["Central Hospital","Military Hospital","Other/Unknown","Port Hospital","St. Mark's Maternity Hospital (SMMH)"],[454,896,2354,1762,422],[193,399,1006,785,199],[165,309,804,579,126],[53.91,56.36,55.58,57.55,61.23]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Hospital<\/th>\n      <th>Total Cases<\/th>\n      <th>Deaths<\/th>\n      <th>Recovered<\/th>\n      <th>CFR (%)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":-1,"scrollX":true,"dom":"rt","searching":false,"paging":false,"info":false,"ordering":false,"columnDefs":[{"className":"dt-right","targets":[2,3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"hospital","targets":1},{"name":"total_cases","targets":2},{"name":"deaths","targets":3},{"name":"recovered","targets":4},{"name":"cfr","targets":5}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[-1,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
-<section id="step-11-render-your-report" class="level3">
-<h3 class="anchored" data-anchor-id="step-11-render-your-report">Step 11: Render Your Report</h3>
+<section id="step-10-render-your-report" class="level3">
+<h3 class="anchored" data-anchor-id="step-10-render-your-report">Step 10: Render Your Report</h3>
 <ol type="1">
 <li>Click the <strong>Render</strong> button in RStudio (or press <code>Ctrl+Shift+K</code> / <code>Cmd+Shift+K</code>).</li>
 <li>Quarto will process your document and generate an HTML file.</li>

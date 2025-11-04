@@ -28,12 +28,20 @@ Before starting, it's important to organize your files properly. Let's create a 
    - `scripts/` - for storing R scripts (optional)
    - `outputs/` - for storing generated reports and figures
 
-### Step 2: Download the Linelist Dataset
+### Step 2: Obtain the Cleaned Linelist Dataset
+
+For this task, we will be using the **cleaned linelist file**. You have two options:
+
+**Option 1**: If you completed Task 1, you should have already cleaned the raw linelist and saved it as `data/linelist.rds`. You can use that file.
+
+**Option 2**: If you haven't completed Task 1, or prefer to use the pre-cleaned version, download the cleaned linelist:
 
 1. Navigate to the [Data](data.qmd) page on this website.
-2. Click the download button for **linelist.csv**.
+2. Click the download button for the **"clean" linelist (.rds)**.
 3. **Save the file to your `data/` folder** that you created in Step 1.
-4. The file path should be: `data/linelist.csv` (relative to where your Quarto document is saved).
+4. The file path should be: `data/linelist_cleaned.rds` (relative to where your Quarto document is saved).
+
+Alternatively, you can download it directly from: [linelist_cleaned.rds](https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_cleaned.rds)
 
 ### Step 3: Create a New Quarto Document
 
@@ -69,23 +77,24 @@ if (!require("pacman")) install.packages("pacman")
 
 # Load required packages
 pacman::p_load(
-  rio,        # For importing data
-  tidyverse,  # For data manipulation and visualization
-  DT,         # For interactive tables
-  lubridate   # For date handling
+  rio, # For importing data
+  tidyverse, # For data manipulation and visualization
+  DT, # For interactive tables
+  lubridate # For date handling
 )
 ```
 
 ### Step 6: Import the Data
 
-Create a new code chunk to import the linelist data. Since you've saved it in the `data/` folder, we use a relative path:
+Create a new code chunk to import the cleaned linelist data. The cleaned file is in RDS format, which preserves column classes:
 
 ```{r}
 #| echo: true
 #| eval: false
 
-# Import the linelist data from your local data folder
-linelist <- rio::import("data/linelist.csv")
+# Import the cleaned linelist data from your local data folder
+# Use the file you saved from Task 1, or the downloaded cleaned file
+linelist <- readRDS("data/linelist.rds")
 
 # View the first few rows
 head(linelist)
@@ -97,7 +106,7 @@ head(linelist)
 
 # For rendering purposes, if file doesn't exist locally, read from URL
 # This is only for website rendering - participants should have the file locally
-linelist <- read.csv("https://epiverse-trace.github.io/tutorials/data/linelist.csv")
+linelist <- readRDS(url("https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_cleaned.rds"))
 
 # View the first few rows
 
@@ -106,7 +115,7 @@ DT::datatable(
   options = list(
     pageLength = -1,
     scrollX = TRUE,
-    dom = 'rt',
+    dom = "rt",
     searching = FALSE,
     paging = FALSE,
     info = FALSE,
@@ -115,22 +124,9 @@ DT::datatable(
 )
 ```
 
-### Step 7: Clean and Prepare the Data
+### Step 7: Create an Incidence Curve
 
-Before creating visualizations, we need to ensure the date column is in the correct format:
-
-```{r}
-#| echo: true
-#| eval: true
-
-# Convert date_of_onset to date format
-linelist <- linelist |>
-  mutate(date_of_onset = as.Date(date_of_onset))
-```
-
-### Step 8: Create an Incidence Curve
-
-Create a new section in your document and add a code chunk to create an incidence curve (epidemic curve) using `date_of_onset`:
+Create a new section in your document and add a code chunk to create an incidence curve (epidemic curve) using `date_onset`:
 
 ```{r}
 #| echo: true
@@ -139,7 +135,7 @@ Create a new section in your document and add a code chunk to create an incidenc
 
 # Create incidence curve
 incidence_curve <- linelist |>
-  ggplot(aes(x = date_of_onset)) +
+  ggplot(aes(x = date_onset)) +
   geom_histogram(binwidth = 7, fill = "steelblue", color = "white") +
   labs(
     title = "Incidence Curve by Date of Onset",
@@ -153,7 +149,7 @@ incidence_curve <- linelist |>
 print(incidence_curve)
 ```
 
-### Step 9: Calculate Case Fatality Ratio (CFR)
+### Step 8: Calculate Case Fatality Ratio (CFR)
 
 Create a new section and calculate the CFR, making sure to exclude NA outcomes:
 
@@ -174,7 +170,7 @@ cfr_data <- linelist |>
 
 The estimated Case Fatality Ratio is `r cfr_data$cfr`%.
 
-### Step 10: Create an Interactive Summary Table by Hospital
+### Step 9: Create an Interactive Summary Table by Hospital
 
 Create a new section and generate an interactive summary table grouped by hospital using `DT::datatable()`:
 
@@ -183,11 +179,11 @@ Create a new section and generate an interactive summary table grouped by hospit
 #| eval: true
 
 # Create summary table by hospital
-# Group NA and "other" together
+# Group NA and "Other" together
 hospital_summary <- linelist |>
   mutate(
     hospital_grouped = case_when(
-      is.na(hospital) | hospital == "other" ~ "Other/Unknown",
+      is.na(hospital) | hospital %in% c("Missing", "Other") ~ "Other/Unknown",
       TRUE ~ hospital
     )
   ) |>
@@ -210,7 +206,7 @@ DT::datatable(
   options = list(
     pageLength = -1,
     scrollX = TRUE,
-    dom = 'rt',
+    dom = "rt",
     searching = FALSE,
     paging = FALSE,
     info = FALSE,
@@ -227,7 +223,7 @@ DT::datatable(
 )
 ```
 
-### Step 11: Render Your Report
+### Step 10: Render Your Report
 
 1. Click the **Render** button in RStudio (or press `Ctrl+Shift+K` / `Cmd+Shift+K`).
 2. Quarto will process your document and generate an HTML file.

@@ -15,7 +15,9 @@ This task covers the basics of reading, cleaning, validating and shaping basic e
 
 ## Tutorial
 
-[Access the tutorial here](https://epiverse-trace.github.io/tutorials-early/read-cases.html)
+[Access the tutorial here](https://www.epirhandbook.com/en/new_pages/cleaning.html)
+
+**Note**: This is a long and comprehensive introduction covering the basics of data cleaning. It can be skipped if you are already familiar with working in R and data cleaning workflows.
 
 ## Additional Resources
 
