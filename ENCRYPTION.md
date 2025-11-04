@@ -1,6 +1,6 @@
 ## Encryption
 
-Most of the incoming data tasks use encryption. This is so that data stored on your machines cannot be read (say, if your laptop is stolen on the tube).  You will need to follow additional instructions to use encrypted data.
+This repo uses encryption via the `cyphr` package to securely store API keys for deployment. Follow the instructions below to get it running on your end.
 
 ### Required packages
 
