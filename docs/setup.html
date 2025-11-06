@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Setup &amp; Installation</title>
+<title>Setup</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href=".//img/who_favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -113,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./../assets/img/who_logo.png" alt="" class="navbar-logo">
+    <img src="./img/who_logo.png" alt="" class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -141,7 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="dropdown-menu" aria-labelledby="nav-menu-tasks">    
         <li>
     <a class="dropdown-item" href="./task1.html">
- <span class="dropdown-text">1. Reading, cleaning and validating epidemiological data</span></a>
+ <span class="dropdown-text">1. Reading and cleaning data</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task2.html">
@@ -149,7 +150,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="./task3.html">
- <span class="dropdown-text">3. Making an interactive epi dashboard</span></a>
+ <span class="dropdown-text">3. Making an interactive dashboard</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task4.html">
@@ -161,7 +162,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="./task6.html">
- <span class="dropdown-text">6. Estimating reproduction numbers</span></a>
+ <span class="dropdown-text">6. Estimating the reproduction number</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task7.html">
@@ -185,7 +186,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="https://collaboratory.who.int/forum/"> 
-<span class="menu-text"><img src="./assets/img/collaboratory_logo.png" height="24px" style="vertical-align: middle; margin-right: 0.25em;"></span></a>
+<span class="menu-text"><img src="./img/collaboratory_logo.png" height="24px" style="vertical-align: middle; margin-right: 0.25em;"></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -203,11 +204,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#r-and-rstudio-installation" id="toc-r-and-rstudio-installation" class="nav-link active" data-scroll-target="#r-and-rstudio-installation">R and RStudio Installation</a>
+  <li><a href="#installing-r-and-rstudio" id="toc-installing-r-and-rstudio" class="nav-link active" data-scroll-target="#installing-r-and-rstudio">Installing R and RStudio</a>
   <ul class="collapse">
-  <li><a href="#unable-to-install-locally" id="toc-unable-to-install-locally" class="nav-link" data-scroll-target="#unable-to-install-locally">Unable to Install Locally?</a></li>
+  <li><a href="#unable-to-install-locally" id="toc-unable-to-install-locally" class="nav-link" data-scroll-target="#unable-to-install-locally">Unable to install locally?</a></li>
   </ul></li>
-  <li><a href="#installing-required-r-packages" id="toc-installing-required-r-packages" class="nav-link" data-scroll-target="#installing-required-r-packages">Installing Required R Packages</a></li>
+  <li><a href="#installing-r-packages" id="toc-installing-r-packages" class="nav-link" data-scroll-target="#installing-r-packages">Installing R Packages</a></li>
   <li><a href="#getting-help-with-r-basics" id="toc-getting-help-with-r-basics" class="nav-link" data-scroll-target="#getting-help-with-r-basics">Getting Help with R Basics</a></li>
   <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
   </ul>
@@ -218,7 +219,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Setup &amp; Installation</h1>
+<h1 class="title">Setup</h1>
 </div>
 
 
@@ -235,18 +236,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="r-and-rstudio-installation" class="level2">
-<h2 class="anchored" data-anchor-id="r-and-rstudio-installation">R and RStudio Installation</h2>
+<section id="installing-r-and-rstudio" class="level2">
+<h2 class="anchored" data-anchor-id="installing-r-and-rstudio">Installing R and RStudio</h2>
 <p>To get started, you’ll need to install R and RStudio on your computer.</p>
 <p><strong>For installation instructions and downloads, please visit</strong>: <a href="https://epiverse-trace.github.io/tutorials-early/index.html#software-setup">Epiverse-TRACE Software Setup</a>. This guide will assist you with installing R and RStudio, including checking your R version and updating if needed.</p>
 <section id="unable-to-install-locally" class="level3">
-<h3 class="anchored" data-anchor-id="unable-to-install-locally">Unable to Install Locally?</h3>
+<h3 class="anchored" data-anchor-id="unable-to-install-locally">Unable to install locally?</h3>
 <p>If you’re unable to install R and RStudio on your laptop, you can use <strong>Posit Cloud</strong> instead. Posit Cloud provides a free cloud-based RStudio environment that you can access from any web browser.</p>
 <p><strong>Get started with a free Posit Cloud account</strong>: <a href="https://posit.cloud/plans">Posit Cloud Plans</a></p>
 </section>
 </section>
-<section id="installing-required-r-packages" class="level2">
-<h2 class="anchored" data-anchor-id="installing-required-r-packages">Installing Required R Packages</h2>
+<section id="installing-r-packages" class="level2">
+<h2 class="anchored" data-anchor-id="installing-r-packages">Installing R Packages</h2>
 <p>Install the required R packages using the following code in your R console:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pak"</span>)) <span class="fu">install.packages</span>(<span class="st">"pak"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pkg_install</span>(</span>
@@ -269,8 +270,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="getting-help-with-r-basics">Getting Help with R Basics</h2>
 <p>If you’re new to R or need a refresher, here are some recommended resources:</p>
 <ul>
-<li><p><strong>R for Data Science (2e)</strong>: A more general introduction to R and coding: <a href="https://r4ds.hadley.nz/intro.html">R for Data Science</a></p></li>
-<li><p><strong>Epidemiologist R Handbook - R Basics</strong>: Comprehensive guide to R fundamentals for epidemiologists. Start with the <a href="https://www.epirhandbook.com/en/new_pages/basics.html">R Basics chapter</a>.</p></li>
+<li><p><strong>Epidemiologist R Handbook</strong>: Comprehensive guide to R fundamentals for epidemiologists. Start with the <a href="https://www.epirhandbook.com/en/new_pages/basics.html">R Basics chapter</a>.</p></li>
+<li><p><strong>R for Data Science</strong>: A more general introduction to R and coding: <a href="https://r4ds.hadley.nz/intro.html">R for Data Science</a></p></li>
 </ul>
 </section>
 <section id="next-steps" class="level2">

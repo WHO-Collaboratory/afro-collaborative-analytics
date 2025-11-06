@@ -1,5 +1,5 @@
 ---
-title: "Analytics Workshop Hackathon"
+title: "Collaborative Analytics Hackathon"
 ---
 
 ## Aim
@@ -18,12 +18,12 @@ You will be grouped by the analytical tasks you are interested in and work throu
 
 The analytical tasks you can choose from are:
 
-1. [Reading, cleaning and validating epidemiological data](task1.qmd)
-2. [Generating automated situation reports with dynamic figures and tables](task2.qmd)
-3. [Making an interactive epi dashboard using epishiny](task3.qmd)
-4. [Visualising transmission chains using epicontacts](task4.qmd)
-5. [Getting epidemiological parameters from your data or the literature](task5.qmd)
-6. [Estimating the basic & effective reproduction number](task6.qmd)
+1. [Reading and cleaning data](task1.qmd)
+2. [Generating automated situation reports](task2.qmd)
+3. [Making an interactive dashboard](task3.qmd)
+4. [Visualising transmission chains](task4.qmd)
+5. [Getting epidemiological parameters](task5.qmd)
+6. [Estimating the reproduction number](task6.qmd)
 7. [Nowcasting epidemiological data](task7.qmd)
 8. [Forecasting cases and deaths](task8.qmd)
 9. [Estimating disease severity](task9.qmd)
@@ -33,7 +33,7 @@ Each task has its own dedicated page with resources and guidance. Click on any t
 
 ## Getting Started
 
-1. **Install R and RStudio**: Visit the [Setup & Installation](setup.qmd) page for installation instructions and required packages.
+1. **Install R and RStudio**: Visit the [Setup](setup.qmd) page for installation instructions and required packages.
 
 2. **Download example datasets**: Visit the [Data](data.qmd) section to download the datasets you'll need.
 

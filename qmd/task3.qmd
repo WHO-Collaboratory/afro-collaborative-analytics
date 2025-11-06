@@ -1,5 +1,5 @@
 ---
-title: "Task 3: Making an interactive epi dashboard"
+title: "Task 3: Making an interactive dashboard"
 ---
 
 ## Overview

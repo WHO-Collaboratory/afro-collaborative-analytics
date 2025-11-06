@@ -1,20 +1,20 @@
 ---
-title: "Setup & Installation"
+title: "Setup"
 ---
 
-## R and RStudio Installation
+## Installing R and RStudio
 
 To get started, you'll need to install R and RStudio on your computer. 
 
 **For installation instructions and downloads, please visit**: [Epiverse-TRACE Software Setup](https://epiverse-trace.github.io/tutorials-early/index.html#software-setup). This guide will assist you with installing R and RStudio, including checking your R version and updating if needed.
 
-### Unable to Install Locally?
+### Unable to install locally?
 
 If you're unable to install R and RStudio on your laptop, you can use **Posit Cloud** instead. Posit Cloud provides a free cloud-based RStudio environment that you can access from any web browser.
 
 **Get started with a free Posit Cloud account**: [Posit Cloud Plans](https://posit.cloud/plans)
 
-## Installing Required R Packages
+## Installing R Packages
 
 Install the required R packages using the following code in your R console:
 
@@ -41,9 +41,9 @@ pak::pkg_install(
 
 If you're new to R or need a refresher, here are some recommended resources:
 
-- **R for Data Science (2e)**: A more general introduction to R and coding: [R for Data Science](https://r4ds.hadley.nz/intro.html)
+- **Epidemiologist R Handbook**: Comprehensive guide to R fundamentals for epidemiologists. Start with the [R Basics chapter](https://www.epirhandbook.com/en/new_pages/basics.html).
 
-- **Epidemiologist R Handbook - R Basics**: Comprehensive guide to R fundamentals for epidemiologists. Start with the [R Basics chapter](https://www.epirhandbook.com/en/new_pages/basics.html).
+- **R for Data Science**: A more general introduction to R and coding: [R for Data Science](https://r4ds.hadley.nz/intro.html)
 
 ## Next Steps
 

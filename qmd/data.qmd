@@ -6,14 +6,14 @@ Download the example datasets below to get started with the hackathon tasks. The
 
 ## Raw case linelist
 
-The "raw" case linelist is an Excel spreadsheet with messy data. Use this when tackling [Task 1](task1.qmd), which goes over the basics of cleaning data.
+The raw case linelist is an Excel spreadsheet with messy data. Use this when tackling [Task 1](task1.qmd), which goes over the basics of cleaning data.
 
-[Click to download the "raw" linelist (.xlsx)](https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_raw.xlsx){.btn .btn-primary target="_blank"}
+[Download raw linelist](https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_raw.xlsx){.btn .btn-primary target="_blank"}
 
 
 ## Clean case linelist
 
-Use this file for all other tasks. A .rds file is an R-specific file type that preserves column classes. This ensures you will have only minimal cleaning to do after importing the data into R.
+The clean linelist is stored in RDS format and can be directly imported into R; use this file for all other tasks.
 
-[Click to download the "clean" linelist (.rds)](https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_cleaned.rds){.btn .btn-primary target="_blank"}
+[Download clean linelist](https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_cleaned.rds){.btn .btn-primary target="_blank"}
 

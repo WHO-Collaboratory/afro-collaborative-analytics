@@ -107,35 +107,35 @@
   {
     "objectID": "task3.html",
     "href": "task3.html",
-    "title": "Task 3: Making an interactive epi dashboard",
+    "title": "Task 3: Making an interactive dashboard",
     "section": "",
     "text": "This task focuses on creating interactive epidemiological dashboards using epishiny. You will learn how to build user-friendly dashboards for exploring epidemiological data."
   },
   {
     "objectID": "task3.html#overview",
     "href": "task3.html#overview",
-    "title": "Task 3: Making an interactive epi dashboard",
+    "title": "Task 3: Making an interactive dashboard",
     "section": "",
     "text": "This task focuses on creating interactive epidemiological dashboards using epishiny. You will learn how to build user-friendly dashboards for exploring epidemiological data."
   },
   {
     "objectID": "task3.html#learning-objectives",
     "href": "task3.html#learning-objectives",
-    "title": "Task 3: Making an interactive epi dashboard",
+    "title": "Task 3: Making an interactive dashboard",
     "section": "Learning Objectives",
     "text": "Learning Objectives\n\nBuild interactive dashboards using epishiny\nCreate reactive visualizations\nDesign user-friendly dashboard interfaces\nDeploy dashboards for sharing"
   },
   {
     "objectID": "task3.html#tutorial",
     "href": "task3.html#tutorial",
-    "title": "Task 3: Making an interactive epi dashboard",
+    "title": "Task 3: Making an interactive dashboard",
     "section": "Tutorial",
     "text": "Tutorial\nAccess the tutorial here"
   },
   {
     "objectID": "task3.html#additional-resources",
     "href": "task3.html#additional-resources",
-    "title": "Task 3: Making an interactive epi dashboard",
+    "title": "Task 3: Making an interactive dashboard",
     "section": "Additional Resources",
     "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
   },
@@ -177,35 +177,35 @@
   {
     "objectID": "setup.html",
     "href": "setup.html",
-    "title": "Setup & Installation",
+    "title": "Setup",
     "section": "",
     "text": "To get started, you’ll need to install R and RStudio on your computer.\nFor installation instructions and downloads, please visit: Epiverse-TRACE Software Setup. This guide will assist you with installing R and RStudio, including checking your R version and updating if needed.\n\n\nIf you’re unable to install R and RStudio on your laptop, you can use Posit Cloud instead. Posit Cloud provides a free cloud-based RStudio environment that you can access from any web browser.\nGet started with a free Posit Cloud account: Posit Cloud Plans"
   },
   {
-    "objectID": "setup.html#r-and-rstudio-installation",
-    "href": "setup.html#r-and-rstudio-installation",
-    "title": "Setup & Installation",
+    "objectID": "setup.html#installing-r-and-rstudio",
+    "href": "setup.html#installing-r-and-rstudio",
+    "title": "Setup",
     "section": "",
     "text": "To get started, you’ll need to install R and RStudio on your computer.\nFor installation instructions and downloads, please visit: Epiverse-TRACE Software Setup. This guide will assist you with installing R and RStudio, including checking your R version and updating if needed.\n\n\nIf you’re unable to install R and RStudio on your laptop, you can use Posit Cloud instead. Posit Cloud provides a free cloud-based RStudio environment that you can access from any web browser.\nGet started with a free Posit Cloud account: Posit Cloud Plans"
   },
   {
-    "objectID": "setup.html#installing-required-r-packages",
-    "href": "setup.html#installing-required-r-packages",
-    "title": "Setup & Installation",
-    "section": "Installing Required R Packages",
-    "text": "Installing Required R Packages\nInstall the required R packages using the following code in your R console:\nif(!require(\"pak\")) install.packages(\"pak\")\npak::pkg_install(\n  \"epiverse-trace/readepi@readepi_no_his_spc_deps\",\n  \"cleanepi@1.1.0\",\n  \"reactable\",\n  \"rio\",\n  \"here\",\n  \"DBI\",\n  \"RSQLite\",\n  \"dbplyr\",\n  \"linelist\",\n  \"simulist\",\n  \"incidence2\",\n  \"epiverse-trace/tracetheme\",\n  \"tidyverse\"\n)"
+    "objectID": "setup.html#installing-r-packages",
+    "href": "setup.html#installing-r-packages",
+    "title": "Setup",
+    "section": "Installing R Packages",
+    "text": "Installing R Packages\nInstall the required R packages using the following code in your R console:\nif(!require(\"pak\")) install.packages(\"pak\")\npak::pkg_install(\n  \"epiverse-trace/readepi@readepi_no_his_spc_deps\",\n  \"cleanepi@1.1.0\",\n  \"reactable\",\n  \"rio\",\n  \"here\",\n  \"DBI\",\n  \"RSQLite\",\n  \"dbplyr\",\n  \"linelist\",\n  \"simulist\",\n  \"incidence2\",\n  \"epiverse-trace/tracetheme\",\n  \"tidyverse\"\n)"
   },
   {
     "objectID": "setup.html#getting-help-with-r-basics",
     "href": "setup.html#getting-help-with-r-basics",
-    "title": "Setup & Installation",
+    "title": "Setup",
     "section": "Getting Help with R Basics",
-    "text": "Getting Help with R Basics\nIf you’re new to R or need a refresher, here are some recommended resources:\n\nR for Data Science (2e): A more general introduction to R and coding: R for Data Science\nEpidemiologist R Handbook - R Basics: Comprehensive guide to R fundamentals for epidemiologists. Start with the R Basics chapter."
+    "text": "Getting Help with R Basics\nIf you’re new to R or need a refresher, here are some recommended resources:\n\nEpidemiologist R Handbook: Comprehensive guide to R fundamentals for epidemiologists. Start with the R Basics chapter.\nR for Data Science: A more general introduction to R and coding: R for Data Science"
   },
   {
     "objectID": "setup.html#next-steps",
     "href": "setup.html#next-steps",
-    "title": "Setup & Installation",
+    "title": "Setup",
     "section": "Next Steps",
     "text": "Next Steps\nOnce you have R and RStudio installed:\n\nVisit the Data section to download example datasets.\nExplore the Tasks menu to find the analytical task(s) you’re interested in.\nJoin your assigned group and start working through the materials with facilitator support."
   },
@@ -221,89 +221,89 @@
     "href": "data.html#raw-case-linelist",
     "title": "Data",
     "section": "Raw case linelist",
-    "text": "Raw case linelist\nThe “raw” case linelist is an Excel spreadsheet with messy data. Use this when tackling Task 1, which goes over the basics of cleaning data.\nClick to download the “raw” linelist (.xlsx)"
+    "text": "Raw case linelist\nThe raw case linelist is an Excel spreadsheet with messy data. Use this when tackling Task 1, which goes over the basics of cleaning data.\nDownload raw linelist"
   },
   {
     "objectID": "data.html#clean-case-linelist",
     "href": "data.html#clean-case-linelist",
     "title": "Data",
     "section": "Clean case linelist",
-    "text": "Clean case linelist\nUse this file for all other tasks. A .rds file is an R-specific file type that preserves column classes. This ensures you will have only minimal cleaning to do after importing the data into R.\nClick to download the “clean” linelist (.rds)"
+    "text": "Clean case linelist\nThe clean linelist is stored in RDS format and can be directly imported into R; use this file for all other tasks.\nDownload clean linelist"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Analytics Workshop Hackathon",
+    "title": "Collaborative Analytics Hackathon",
     "section": "",
     "text": "There are two core aims of the hackathon we would like you to achieve:\n\nExplore different tools and resources for conducting a range of common analytical tasks.\nWrite a functional script that applies one or more analyses to their own data and generates a report or dashboard to visualise the outputs."
   },
   {
     "objectID": "index.html#aim",
     "href": "index.html#aim",
-    "title": "Analytics Workshop Hackathon",
+    "title": "Collaborative Analytics Hackathon",
     "section": "",
     "text": "There are two core aims of the hackathon we would like you to achieve:\n\nExplore different tools and resources for conducting a range of common analytical tasks.\nWrite a functional script that applies one or more analyses to their own data and generates a report or dashboard to visualise the outputs."
   },
   {
     "objectID": "index.html#structure",
     "href": "index.html#structure",
-    "title": "Analytics Workshop Hackathon",
+    "title": "Collaborative Analytics Hackathon",
     "section": "Structure",
     "text": "Structure\nYou will be grouped by the analytical tasks you are interested in and work through them together with support from the facilitators. During these sessions, you will apply the analyses to your own data and incorporate the analysis into your final report/dashboard script. Depending on your technical level, you may complete multiple tasks over different sessions and therefore change groups."
   },
   {
     "objectID": "index.html#tasks",
     "href": "index.html#tasks",
-    "title": "Analytics Workshop Hackathon",
+    "title": "Collaborative Analytics Hackathon",
     "section": "Tasks",
-    "text": "Tasks\nThe analytical tasks you can choose from are:\n\nReading, cleaning and validating epidemiological data\nGenerating automated situation reports with dynamic figures and tables\nMaking an interactive epi dashboard using epishiny\nVisualising transmission chains using epicontacts\nGetting epidemiological parameters from your data or the literature\nEstimating the basic & effective reproduction number\nNowcasting epidemiological data\nForecasting cases and deaths\nEstimating disease severity\nSimulating disease transmission\n\nEach task has its own dedicated page with resources and guidance. Click on any task above to explore it."
+    "text": "Tasks\nThe analytical tasks you can choose from are:\n\nReading and cleaning data\nGenerating automated situation reports\nMaking an interactive dashboard\nVisualising transmission chains\nGetting epidemiological parameters\nEstimating the reproduction number\nNowcasting epidemiological data\nForecasting cases and deaths\nEstimating disease severity\nSimulating disease transmission\n\nEach task has its own dedicated page with resources and guidance. Click on any task above to explore it."
   },
   {
     "objectID": "index.html#getting-started",
     "href": "index.html#getting-started",
-    "title": "Analytics Workshop Hackathon",
+    "title": "Collaborative Analytics Hackathon",
     "section": "Getting Started",
-    "text": "Getting Started\n\nInstall R and RStudio: Visit the Setup & Installation page for installation instructions and required packages.\nDownload example datasets: Visit the Data section to download the datasets you’ll need.\nExplore tasks: Navigate to the Tasks menu to find the analytical task(s) you’re interested in.\nJoin your group: Work through the materials with support from facilitators."
+    "text": "Getting Started\n\nInstall R and RStudio: Visit the Setup page for installation instructions and required packages.\nDownload example datasets: Visit the Data section to download the datasets you’ll need.\nExplore tasks: Navigate to the Tasks menu to find the analytical task(s) you’re interested in.\nJoin your group: Work through the materials with support from facilitators."
   },
   {
     "objectID": "index.html#additional-resources",
     "href": "index.html#additional-resources",
-    "title": "Analytics Workshop Hackathon",
+    "title": "Collaborative Analytics Hackathon",
     "section": "Additional Resources",
     "text": "Additional Resources\n\nRecommended refresher on basic R literacy by AppliedEpi"
   },
   {
     "objectID": "task1.html",
     "href": "task1.html",
-    "title": "Task 1: Reading, cleaning and validating epidemiological data",
+    "title": "Task 1: Reading and cleaning data",
     "section": "",
     "text": "This task covers the basics of reading, cleaning, validating and shaping basic epidemiological data. You will learn how to import data from various sources, clean messy datasets, validate data quality, and prepare data for epidemiological analysis."
   },
   {
     "objectID": "task1.html#overview",
     "href": "task1.html#overview",
-    "title": "Task 1: Reading, cleaning and validating epidemiological data",
+    "title": "Task 1: Reading and cleaning data",
     "section": "",
     "text": "This task covers the basics of reading, cleaning, validating and shaping basic epidemiological data. You will learn how to import data from various sources, clean messy datasets, validate data quality, and prepare data for epidemiological analysis."
   },
   {
     "objectID": "task1.html#learning-objectives",
     "href": "task1.html#learning-objectives",
-    "title": "Task 1: Reading, cleaning and validating epidemiological data",
+    "title": "Task 1: Reading and cleaning data",
     "section": "Learning Objectives",
     "text": "Learning Objectives\n\nImport epidemiological data from various file formats\nClean and standardize data structures\nValidate data quality and completeness\nHandle missing values and data inconsistencies"
   },
   {
     "objectID": "task1.html#tutorial",
     "href": "task1.html#tutorial",
-    "title": "Task 1: Reading, cleaning and validating epidemiological data",
+    "title": "Task 1: Reading and cleaning data",
     "section": "Tutorial",
     "text": "Tutorial\nAccess the tutorial here\nNote: This is a long and comprehensive introduction covering the basics of data cleaning. It can be skipped if you are already familiar with working in R and data cleaning workflows."
   },
   {
     "objectID": "task1.html#additional-resources",
     "href": "task1.html#additional-resources",
-    "title": "Task 1: Reading, cleaning and validating epidemiological data",
+    "title": "Task 1: Reading and cleaning data",
     "section": "Additional Resources",
     "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
   },
@@ -371,6 +371,13 @@
     "text": "Tutorial\nAccess the tutorial here"
   },
   {
+    "objectID": "task4.html#example-report",
+    "href": "task4.html#example-report",
+    "title": "Task 4: Visualising transmission chains",
+    "section": "Example Report",
+    "text": "Example Report\n\n\nCode\n# INSTALL AND LOAD PACKAGES\n\n# install development version of epicontacts\npacman::p_install_gh(\"reconhub/epicontacts@timeline\")\n\n# Load required packages\npacman::p_load(\n   rio,          # File import\n   here,         # File locator\n   tidyverse,    # Data management + ggplot2 graphics\n   remotes,      # Package installation from github\n   epicontacts   # Transmission chain analysis\n)\n\n\n# LOAD DATA\nlinelist &lt;- readRDS(\"data/linelist.rds\")\n\n\n# SETTING UP EPICONTACTS\n\n# generate contacts\ncontacts &lt;- linelist %&gt;%\n  transmute(\n    infector = infector,\n    case_id = case_id,\n    location = sample(c(\"Community\", \"Nosocomial\"), n(), TRUE),\n    duration = sample.int(10, n(), TRUE)\n  ) %&gt;%\n  drop_na(infector)\n\n# generate epicontacts object\nepic &lt;- make_epicontacts(\n  linelist = linelist,\n  contacts = contacts,\n  id = \"case_id\",\n  from = \"infector\",\n  to = \"case_id\",\n  directed = TRUE\n)\n\n\n\nFuneral infections\nWe first investigated funeral infections that occured during the year of 2014.\n\n\nCode\n# filter by nosocomial infection between april and july\nfuneral &lt;- subset(\n  epic,\n  node_attribute = list(\n    date_infection = as.Date(c(\"2014-01-01\", \"2014-12-31\"))\n  ), \n  edge_attribute = list(source = \"funeral\")\n) |&gt;\n  thin(what = \"contacts\") |&gt;\n  thin(what = \"linelist\")\n\n# plot and set the selector to hospital\nplot(\n  funeral,\n  label = FALSE,\n  node_color = \"gender\",\n  height = 400,\n  width = 700\n)\n\n\n\n\n\n\n\n\nInfection clusters\nWe then investigated clusters larger than 12 cases:\n\n\nCode\n# keep linelist and contacts part of a cluster of at least 13 cases\nlarge &lt;- subset(epic, cs_min = 12)\n\n# plot\nplot(\n  large,\n  selector = \"hospital\",\n  x_axis = \"date_infection\",\n  label = FALSE,\n  height = 500,\n  width = 700,\n  node_size = 5,\n  arrow_size = 0.25,\n  network_shape = \"rectangle\"\n)\n\n\n\n\n\n\nBelow are key summary statistics:\n\n\nCode\n# calculate cluster statistics\nclusters &lt;- get_clusters(epic)\ncluster_sizes &lt;- table(clusters$linelist$cluster_member)\nn_clusters &lt;-  length(\n  unique(filter(clusters$linelist, cluster_size &gt; 1)$cluster_member)\n)\n\n# plot the cluster size distribution\ncluster_sizes |&gt;\n  table() |&gt;\n  as.data.frame() |&gt;\n  ggplot(aes(cluster_sizes, Freq)) +\n  geom_col() +\n  scale_y_continuous(expand = expansion(mult = c(0, 0.01))) +\n  labs(\n    x = \"Size of cluster\",\n    y = \"Frequency\"\n  ) +\n  theme_classic()\n\n\n\n\n\n\n\n\n\n\n\nTransmission Chain Statistics\nHere we present some key statistics:\n\n\nCode\n# Calculate transmission statistics\ntibble(\n  Metric = c(\n    \"Total transmission links\",\n    \"Number of clusters\",\n    \"Largest cluster size\",\n    \"Mean cluster size\",\n    \"Proportion cases with infector information\"\n  ),\n  Value = c(\n    nrow(epic$contacts),\n    n_clusters,\n    max(cluster_sizes),\n    round(mean(cluster_sizes), 1),\n    scales::percent(mean(!is.na(epic$linelist$infector)))\n  )\n) |&gt;\n  DT::datatable(\n    options = list(\n      pageLength = -1,\n      dom = \"rt\",\n      searching = FALSE,\n      paging = FALSE,\n      info = FALSE,\n      ordering = FALSE\n    ),\n    rownames = FALSE\n  )"
+  },
+  {
     "objectID": "task4.html#additional-resources",
     "href": "task4.html#additional-resources",
     "title": "Task 4: Visualising transmission chains",
@@ -380,35 +387,35 @@
   {
     "objectID": "task6.html",
     "href": "task6.html",
-    "title": "Task 6: Estimating reproduction numbers",
+    "title": "Task 6: Estimating the reproduction number",
     "section": "",
     "text": "This task covers estimating the basic and effective reproduction number (R0 and Re). You will learn methods for calculating these key epidemiological metrics from outbreak data."
   },
   {
     "objectID": "task6.html#overview",
     "href": "task6.html#overview",
-    "title": "Task 6: Estimating reproduction numbers",
+    "title": "Task 6: Estimating the reproduction number",
     "section": "",
     "text": "This task covers estimating the basic and effective reproduction number (R0 and Re). You will learn methods for calculating these key epidemiological metrics from outbreak data."
   },
   {
     "objectID": "task6.html#learning-objectives",
     "href": "task6.html#learning-objectives",
-    "title": "Task 6: Estimating reproduction numbers",
+    "title": "Task 6: Estimating the reproduction number",
     "section": "Learning Objectives",
     "text": "Learning Objectives\n\nUnderstand the difference between R0 and Re\nEstimate reproduction numbers from case data\nUse appropriate methods for different data types\nVisualize and interpret reproduction number estimates"
   },
   {
     "objectID": "task6.html#tutorial",
     "href": "task6.html#tutorial",
-    "title": "Task 6: Estimating reproduction numbers",
+    "title": "Task 6: Estimating the reproduction number",
     "section": "Tutorial",
     "text": "Tutorial\nAccess the tutorial here"
   },
   {
     "objectID": "task6.html#additional-resources",
     "href": "task6.html#additional-resources",
-    "title": "Task 6: Estimating reproduction numbers",
+    "title": "Task 6: Estimating the reproduction number",
     "section": "Additional Resources",
     "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
   },

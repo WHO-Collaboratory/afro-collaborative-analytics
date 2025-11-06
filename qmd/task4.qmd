@@ -1,5 +1,10 @@
 ---
 title: "Task 4: Visualising transmission chains"
+format:
+  html:
+    code-fold: true
+execute:
+  warning: false
 ---
 
 ## Overview
@@ -16,6 +21,214 @@ This task covers visualizing transmission chains using epicontacts. You will lea
 ## Tutorial
 
 [Access the tutorial here](https://www.epirhandbook.com/en/new_pages/transmission_chains.html)
+
+## Example Report
+
+
+```{r}
+#| echo: true
+#| eval: false
+#| message: false
+#| warning: false
+
+# INSTALL AND LOAD PACKAGES
+
+# install development version of epicontacts
+pacman::p_install_gh("reconhub/epicontacts@timeline")
+
+# Load required packages
+pacman::p_load(
+   rio,          # File import
+   here,         # File locator
+   tidyverse,    # Data management + ggplot2 graphics
+   remotes,      # Package installation from github
+   epicontacts   # Transmission chain analysis
+)
+
+
+# LOAD DATA
+linelist <- readRDS("data/linelist.rds")
+
+
+# SETTING UP EPICONTACTS
+
+# generate contacts
+contacts <- linelist %>%
+  transmute(
+    infector = infector,
+    case_id = case_id,
+    location = sample(c("Community", "Nosocomial"), n(), TRUE),
+    duration = sample.int(10, n(), TRUE)
+  ) %>%
+  drop_na(infector)
+
+# generate epicontacts object
+epic <- make_epicontacts(
+  linelist = linelist,
+  contacts = contacts,
+  id = "case_id",
+  from = "infector",
+  to = "case_id",
+  directed = TRUE
+)
+```
+
+```{r}
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+
+# INSTALL AND LOAD PACKAGES
+
+# install development version of epicontacts
+pacman::p_install_gh("reconhub/epicontacts@timeline")
+
+# Load required packages
+pacman::p_load(
+   rio,          # File import
+   here,         # File locator
+   tidyverse,    # Data management + ggplot2 graphics
+   remotes,      # Package installation from github
+   epicontacts   # Transmission chain analysis
+)
+
+
+# LOAD DATA
+# Import the cleaned linelist data
+linelist <- readRDS(
+  url("https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_cleaned.rds")
+)
+
+
+# SETTING UP EPICONTACTS
+
+## generate contacts
+contacts <- linelist %>%
+  transmute(
+    infector = infector,
+    case_id = case_id,
+    source = source
+  ) %>%
+  drop_na(infector)
+
+# generate epicontacts object
+epic <- make_epicontacts(
+  linelist = linelist,
+  contacts = contacts,
+  id = "case_id",
+  from = "infector",
+  to = "case_id",
+  directed = TRUE
+)
+```
+
+### Funeral infections
+
+We first investigated funeral infections that occured during the year of 2014.
+
+```{r}
+# filter by nosocomial infection between april and july
+funeral <- subset(
+  epic,
+  node_attribute = list(
+    date_infection = as.Date(c("2014-01-01", "2014-12-31"))
+  ), 
+  edge_attribute = list(source = "funeral")
+) |>
+  thin(what = "contacts") |>
+  thin(what = "linelist")
+
+# plot and set the selector to hospital
+plot(
+  funeral,
+  label = FALSE,
+  node_color = "gender",
+  height = 400,
+  width = 700
+)
+```
+
+### Infection clusters
+
+We then investigated clusters larger than 12 cases:
+
+```{r}
+# keep linelist and contacts part of a cluster of at least 13 cases
+large <- subset(epic, cs_min = 12)
+
+# plot
+plot(
+  large,
+  selector = "hospital",
+  x_axis = "date_infection",
+  label = FALSE,
+  height = 500,
+  width = 700,
+  node_size = 5,
+  arrow_size = 0.25,
+  network_shape = "rectangle"
+)
+```
+
+Below are key summary statistics:
+
+```{r}
+# calculate cluster statistics
+clusters <- get_clusters(epic)
+cluster_sizes <- table(clusters$linelist$cluster_member)
+n_clusters <-  length(
+  unique(filter(clusters$linelist, cluster_size > 1)$cluster_member)
+)
+
+# plot the cluster size distribution
+cluster_sizes |>
+  table() |>
+  as.data.frame() |>
+  ggplot(aes(cluster_sizes, Freq)) +
+  geom_col() +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.01))) +
+  labs(
+    x = "Size of cluster",
+    y = "Frequency"
+  ) +
+  theme_classic()
+```
+
+### Transmission Chain Statistics
+
+Here we present some key statistics:
+
+```{r}
+# Calculate transmission statistics
+tibble(
+  Metric = c(
+    "Total transmission links",
+    "Number of clusters",
+    "Largest cluster size",
+    "Mean cluster size",
+    "Proportion cases with infector information"
+  ),
+  Value = c(
+    nrow(epic$contacts),
+    n_clusters,
+    max(cluster_sizes),
+    round(mean(cluster_sizes), 1),
+    scales::percent(mean(!is.na(epic$linelist$infector)))
+  )
+) |>
+  DT::datatable(
+    options = list(
+      pageLength = -1,
+      dom = "rt",
+      searching = FALSE,
+      paging = FALSE,
+      info = FALSE,
+      ordering = FALSE
+    ),
+    rownames = FALSE
+  )
+```
 
 ## Additional Resources
 

@@ -1,5 +1,5 @@
 ---
-title: "Task 1: Reading, cleaning and validating epidemiological data"
+title: "Task 1: Reading and cleaning data"
 ---
 
 ## Overview
