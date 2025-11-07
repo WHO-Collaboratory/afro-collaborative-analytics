@@ -1,5 +1,11 @@
 ---
 title: "Task 3: Making an interactive dashboard"
+format:
+  html:
+    code-fold: true
+execute:
+  warning: false
+  message: false
 ---
 
 ## Overview
@@ -16,6 +22,107 @@ This task focuses on creating interactive epidemiological dashboards using epish
 ## Tutorial
 
 [Access the tutorial here](https://epicentre-msf.github.io/epishiny/articles/epishiny.html)
+
+## Example Report
+
+### Mapping Incidence
+
+Total incidence to date was mapped by health-area.
+
+```{r}
+
+# INSTALL AND LOAD PACKAGES
+
+# Load required packages
+pacman::p_load(
+  tidyverse,    # basic data manipulation
+  sf,           # handling shapefiles
+  here,         # handing file paths
+  leaflet,      # mapping
+  htmltools     # handlers for html objects
+)
+
+
+# LOAD DATA
+
+# load shapefiles and keep relevant areas
+shp <- sf::read_sf("data/gis/sle_adm3.shp") |>
+  # standardize column names
+  janitor::clean_names() |>
+  # filter to keep certain areas
+  filter(adm1_en == "Western")
+
+# import the cleaned linelist data
+linelist <- rio::import("data/epi/linelist.rds") |>
+  # interpret the lon and lat variables for GIS use
+  st_as_sf(coords = c("lon", "lat"), crs = 4326) |>
+  # join the administrative boundary file to the linelist, based on
+  # spatial intersection
+  st_join(shp, join = st_intersects)
+
+# convert to aggregate format
+agg <- linelist |>
+  # remove the geometry for now
+  st_drop_geometry() |>
+  # count the number of cases per adm3
+  summarise(n = n(), .by = adm3_en) |>
+  # add the shape files of the adm3 zones
+  inner_join(shp, by = "adm3_en") |>
+  # convert back to shapefile
+  st_as_sf()
+
+# define colour palette
+pal <- colorNumeric(palette = "YlOrRd", domain = agg$n)
+
+# generate leaflet map
+leaflet(agg) |>
+  # use CartoDB for background
+  addProviderTiles("CartoDB.Positron") |>
+  # add adm3 shaded by number of cases
+  addPolygons(
+    fillColor = ~ pal(n),
+    color = "white",
+    weight = 1,
+    fillOpacity = 0.7,
+    # define labels
+    label = ~ map(
+      paste0("<b>", adm3_en, "</b><br>", n, " cases"),
+      htmltools::HTML
+    ),
+    labelOptions = labelOptions(direction = "auto"),
+    highlightOptions = highlightOptions(
+      weight = 3,
+      color = "black",
+      bringToFront = FALSE
+    )
+  ) |>
+  # add points per case
+  addCircleMarkers(
+    data = linelist,
+    radius = 4,
+    color = "black",
+    fillColor = "grey",
+    weight = 1,
+    fillOpacity = 0.8,
+    label = ~ map(
+      paste0("<b>Case ID:</b> ", case_id, "<br>",
+             "<b>Date onset:</b> ", date_onset, "<br>",
+             "<b>Health facility:</b> ", hospital),
+      htmltools::HTML
+    ),
+    labelOptions = labelOptions(direction = "auto"),
+    group = "Cases"
+  ) |>
+  # add legend
+  addLegend(
+    pal = pal,
+    values = ~ n,
+    title = "Case count",
+    opacity = 0.7,
+    position = "bottomright"
+  )
+
+```
 
 ## Additional Resources
 
