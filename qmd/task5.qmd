@@ -1,5 +1,10 @@
 ---
 title: "Task 5: Getting epidemiological parameters"
+format:
+  html:
+    code-fold: true
+execute:
+  warning: false
 ---
 
 ## Overview
@@ -17,6 +22,79 @@ This task focuses on obtaining epidemiological parameters from your data or the 
 
 [Access the tutorial here](https://epiverse-trace.github.io/tutorials-middle/delays-access.html)
 
+## Example Report
+
+### Ebola serial interval
+We first extract this parameter from the {epiparameter} package database:
+
+```{r}
+#| echo: true
+#| eval: true
+#| message: false
+#| warning: false
+
+# INSTALL AND LOAD PACKAGES
+
+# Install epiparameter and dplyr if not already installed
+if (!"epiparameter" %in% rownames(installed.packages())) {
+  install.packages("epiparameter")
+}
+
+if (!"tidyverse" %in% rownames(installed.packages())) {
+  install.packages("tidyverse")
+}
+
+if (!"EpiNow2" %in% rownames(installed.packages())) {
+  install.packages("EpiNow2")
+}
+
+# Load required packages
+library(tidyverse)
+library(epiparameter)
+library(EpiNow2)
+
+# Creating epiparameter objects by accessing the {epiparameter} library
+ebola_serial_int <- epiparameter::epiparameter_db(
+  disease = "ebola", 
+  epi_name = "serial",
+  subset = sample_size > 10,
+  author = "WHO Ebola Response Team",
+  single_epiparameter = TRUE
+)
+
+ebola_serial_int
+```
+
+### Visualise parameters 
+We can then view the serial interval either as a table, or as a plot of its
+probability density function:
+
+```{r}
+epiparameter::parameter_tbl(ebola_serial_int) # as a table
+plot(ebola_serial_int) # as a plot of the PDF
+```
+
+### Extract and use relevant info
+Once we have an {epiparameter} object ready, we extract relevant information
+such as its summary statistics or distribution parameters, and use these in 
+subsequent analyses. Below, the extracted serial interval for Ebola is
+passed onto {EpiNow2}.
+
+```{r}
+ebola_serial_int$summary_stats[c("mean", "sd")] # summary statistics
+epiparameter::get_parameters(ebola_serial_int) # distribution parameters
+
+serial_interval_EN2 <-
+  EpiNow2::Gamma(
+    mean = ebola_serial_int$summary_stats$mean,
+    sd = ebola_serial_int$summary_stats$sd,
+    max = 30
+  )
+
+serial_interval_EN2
+```
+
+
 ## Additional Resources
 
 ::: {.panel-tabset}
@@ -28,4 +106,3 @@ Relevant chapters from the Epidemiologist R Handbook.
 Package vignettes and documentation for relevant R packages.
 
 :::
-
