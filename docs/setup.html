@@ -141,51 +141,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-tasks">    
         <li>
-    <a class="dropdown-item" href="./task1.html">
- <span class="dropdown-text">1. Reading and cleaning data</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="./task2.html">
- <span class="dropdown-text">2. Generating automated situation reports</span></a>
+ <span class="dropdown-text">1. Generating a basic situation report</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task3.html">
- <span class="dropdown-text">3. Making an interactive dashboard</span></a>
+ <span class="dropdown-text">2. Generating interactive maps</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task4.html">
- <span class="dropdown-text">4. Visualising transmission chains</span></a>
+ <span class="dropdown-text">3. Visualising transmission chains</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task5.html">
- <span class="dropdown-text">5. Getting epidemiological parameters</span></a>
+ <span class="dropdown-text">4. Getting epidemiological parameters</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task6.html">
- <span class="dropdown-text">6. Estimating the reproduction number</span></a>
+ <span class="dropdown-text">5. Estimating the reproduction number</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task7.html">
- <span class="dropdown-text">7. Nowcasting epidemiological data</span></a>
+ <span class="dropdown-text">6. Nowcasting epidemiological data</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task8.html">
- <span class="dropdown-text">8. Forecasting cases and deaths</span></a>
+ <span class="dropdown-text">7. Forecasting cases and deaths</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task9.html">
- <span class="dropdown-text">9. Estimating disease severity</span></a>
+ <span class="dropdown-text">8. Estimating disease severity</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task10.html">
- <span class="dropdown-text">10. Simulating disease transmission</span></a>
+ <span class="dropdown-text">9. Simulating disease transmission</span></a>
   </li>  
     </ul>
   </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="https://collaboratory.who.int/forum/"> 
+    <a class="nav-link" href="https://collaboratory.who.int/forum/c/afro-ca-cop/"> 
 <span class="menu-text"><img src="./img/collaboratory_logo.png" height="24px" style="vertical-align: middle; margin-right: 0.25em;"></span></a>
   </li>  
 </ul>
@@ -209,7 +205,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#unable-to-install-locally" id="toc-unable-to-install-locally" class="nav-link" data-scroll-target="#unable-to-install-locally">Unable to install locally?</a></li>
   </ul></li>
   <li><a href="#installing-r-packages" id="toc-installing-r-packages" class="nav-link" data-scroll-target="#installing-r-packages">Installing R Packages</a></li>
-  <li><a href="#getting-help-with-r-basics" id="toc-getting-help-with-r-basics" class="nav-link" data-scroll-target="#getting-help-with-r-basics">Getting Help with R Basics</a></li>
+  <li><a href="#setting-up-your-project" id="toc-setting-up-your-project" class="nav-link" data-scroll-target="#setting-up-your-project">Setting Up Your Project</a>
+  <ul class="collapse">
+  <li><a href="#step-1-create-an-rstudio-r-project" id="toc-step-1-create-an-rstudio-r-project" class="nav-link" data-scroll-target="#step-1-create-an-rstudio-r-project">Step 1: Create an RStudio R Project</a></li>
+  <li><a href="#step-2-set-up-your-project-folder-structure" id="toc-step-2-set-up-your-project-folder-structure" class="nav-link" data-scroll-target="#step-2-set-up-your-project-folder-structure">Step 2: Set Up Your Project Folder Structure</a></li>
+  <li><a href="#step-3-create-a-new-quarto-document" id="toc-step-3-create-a-new-quarto-document" class="nav-link" data-scroll-target="#step-3-create-a-new-quarto-document">Step 3: Create a New Quarto Document</a></li>
+  <li><a href="#step-4-set-up-the-yaml-header-and-report-structure" id="toc-step-4-set-up-the-yaml-header-and-report-structure" class="nav-link" data-scroll-target="#step-4-set-up-the-yaml-header-and-report-structure">Step 4: Set Up the YAML Header and Report Structure</a></li>
+  <li><a href="#step-5-install-and-load-basic-packages" id="toc-step-5-install-and-load-basic-packages" class="nav-link" data-scroll-target="#step-5-install-and-load-basic-packages">Step 5: Install and Load Basic Packages</a></li>
+  <li><a href="#step-6-render-your-report" id="toc-step-6-render-your-report" class="nav-link" data-scroll-target="#step-6-render-your-report">Step 6: Render Your Report</a></li>
+  <li><a href="#learning-more-about-quarto" id="toc-learning-more-about-quarto" class="nav-link" data-scroll-target="#learning-more-about-quarto">Learning More About Quarto</a></li>
+  </ul></li>
   <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
   </ul>
 </nav>
@@ -248,35 +253,156 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="installing-r-packages" class="level2">
 <h2 class="anchored" data-anchor-id="installing-r-packages">Installing R Packages</h2>
-<p>Install the required R packages using the following code in your R console:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pak"</span>)) <span class="fu">install.packages</span>(<span class="st">"pak"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pkg_install</span>(</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"epiverse-trace/readepi@readepi_no_his_spc_deps"</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"cleanepi@1.1.0"</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"reactable"</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"rio"</span>,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"here"</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"DBI"</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"RSQLite"</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dbplyr"</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"linelist"</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"simulist"</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"incidence2"</span>,</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"epiverse-trace/tracetheme"</span>,</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"tidyverse"</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Before setting up your project, you’ll need to install some essential R packages. We’ll use <strong>pacman</strong>, a package management tool for R that simplifies installing and loading packages. Pacman automatically installs packages if they’re not already installed, then loads them - making it much easier to manage dependencies.</p>
+<p>Run the following code in your R console to install pacman (if needed) and then install the essential packages:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install pacman if needed</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"pacman"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"pacman"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Install essential packages using pacman</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  tidyverse,  <span class="co"># For data manipulation and visualization</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  rmarkdown   <span class="co"># For creating reports (required for Quarto)</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Note:</strong> Additional packages will be installed as you work through specific tasks. For now, these two packages are sufficient to get started.</p>
 </section>
-<section id="getting-help-with-r-basics" class="level2">
-<h2 class="anchored" data-anchor-id="getting-help-with-r-basics">Getting Help with R Basics</h2>
-<p>If you’re new to R or need a refresher, here are some recommended resources:</p>
+<section id="setting-up-your-project" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-your-project">Setting Up Your Project</h2>
+<p>Before you begin working on the tasks, let’s set up your RStudio project and create a basic Quarto document that you’ll use for your epidemiological reports.</p>
+<section id="step-1-create-an-rstudio-r-project" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-create-an-rstudio-r-project">Step 1: Create an RStudio R Project</h3>
+<p>An <strong>R Project</strong> is a way to organize your work in RStudio. It helps keep all your files, data, and outputs together in one place, and automatically sets your working directory so file paths work correctly.</p>
+<ol type="1">
+<li>Open RStudio.</li>
+<li>Go to <strong>File → New Project</strong>.</li>
+<li>Select <strong>New Directory</strong>.</li>
+<li>Select <strong>New Project</strong>.</li>
+<li>In the “Directory name” field, enter <code>sitrep</code>.</li>
+<li>Choose a location on your computer where you want to save the project.</li>
+<li>Click <strong>Create Project</strong>.</li>
+</ol>
+<p>RStudio will now open your new project. You’ll see the project name (<code>sitrep</code>) in the top-right corner of RStudio.</p>
+</section>
+<section id="step-2-set-up-your-project-folder-structure" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-set-up-your-project-folder-structure">Step 2: Set Up Your Project Folder Structure</h3>
+<p>Within your project, create the following subfolders to organize your files:</p>
+<ol type="1">
+<li>In RStudio, click the <strong>Files</strong> tab in the bottom-right pane.</li>
+<li>Click <strong>New Folder</strong>.</li>
+<li>Create a folder called <code>data/</code> - for storing your datasets.</li>
+<li>Create another folder called <code>outputs/</code> - for storing generated reports and figures.</li>
+</ol>
+</section>
+<section id="step-3-create-a-new-quarto-document" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-create-a-new-quarto-document">Step 3: Create a New Quarto Document</h3>
+<ol type="1">
+<li>In RStudio, go to <strong>File → New File → Quarto Document</strong>.</li>
+<li>Choose <strong>HTML</strong> as the output format.</li>
+<li>Give your document a title (e.g., “Epidemiological Situation Report”).</li>
+<li>Click <strong>Create</strong>.</li>
+<li><strong>Save the document</strong> in your project folder (e.g., <code>sitrep.qmd</code>).</li>
+</ol>
+<section id="understanding-visual-and-source-editing-modes" class="level4">
+<h4 class="anchored" data-anchor-id="understanding-visual-and-source-editing-modes">Understanding Visual and Source Editing Modes</h4>
+<p>When you open your Quarto document, you’ll notice two editing mode buttons in the top-left corner of the editor: <strong>Visual</strong> and <strong>Source</strong>.</p>
 <ul>
-<li><p><strong>Epidemiologist R Handbook</strong>: Comprehensive guide to R fundamentals for epidemiologists. Start with the <a href="https://www.epirhandbook.com/en/new_pages/basics.html">R Basics chapter</a>.</p></li>
-<li><p><strong>R for Data Science</strong>: A more general introduction to R and coding: <a href="https://r4ds.hadley.nz/intro.html">R for Data Science</a></p></li>
+<li><p><strong>Visual mode</strong>: Provides a WYSIWYG (What You See Is What You Get) editing experience, similar to a word processor. You can format text using buttons and menus, and see a preview of how your document will look.</p></li>
+<li><p><strong>Source mode</strong>: Shows the raw Markdown and code syntax. You work directly with the text, code chunks, and formatting syntax (like <code>##</code> for headings, <code>**bold**</code> for bold text, etc.).</p></li>
 </ul>
+<p><strong>For the rest of this tutorial and the task tutorials, we’ll assume you’re using Source mode.</strong> This allows you to directly copy and paste code chunks and content from the tutorials into your document. You can switch between modes at any time using the buttons in the top-left corner - just click <strong>Source</strong> to switch to source mode.</p>
+</section>
+</section>
+<section id="step-4-set-up-the-yaml-header-and-report-structure" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-set-up-the-yaml-header-and-report-structure">Step 4: Set Up the YAML Header and Report Structure</h3>
+<p>At the top of your Quarto document, you’ll see a <strong>YAML header</strong> (the section between the <code>---</code> lines). The YAML header contains metadata about your document, such as the title and output format. It tells Quarto how to render your document.</p>
+<p>Ensure your YAML header looks like this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Epidemiological Situation Report"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">editor</span><span class="kw">:</span><span class="at"> visual</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Below the YAML header, create a basic report structure with sections. In Quarto (and Markdown), you use <code>##</code> to create section headings (level 2 headings). Each <code>##</code> creates a new major section in your report. You can use <code>###</code> for subsections, <code>####</code> for sub-subsections, and so on.</p>
+<p>Add this basic outline to your document:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Executive Summary</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>This section will contain key findings and recommendations.</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Overview</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>This section will describe the dataset and data quality.</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Epidemiological Analysis</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>This section will contain your analytical outputs, including:</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Incidence curves</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Summary statistics</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Key epidemiological parameters</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusions</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>This section will summarize findings and next steps.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="understanding-code-chunks" class="level4">
+<h4 class="anchored" data-anchor-id="understanding-code-chunks">Understanding Code Chunks</h4>
+<p>A <strong>code chunk</strong> is a section in your Quarto document where you write and execute R code. Code chunks are enclosed between three backticks (<code>```</code>) followed by <code>{r}</code> and closed with three more backticks.</p>
+<p>To create a code chunk:</p>
+<ol type="1">
+<li>Type three backticks followed by <code>{r}</code> on a new line: <code>```{r}</code></li>
+<li>Press Enter to start a new line</li>
+<li>Write your R code</li>
+<li>Type three backticks on a new line to close the chunk: <code>```</code></li>
+</ol>
+<p>Here’s what a code chunk looks like:</p>
+<pre><code>```{r}
+# Your R code goes here
+library(tidyverse)
+```</code></pre>
+<p>You can also insert a code chunk in RStudio by: - Clicking the <strong>Insert</strong> button (green plus icon with a “C”) in the toolbar, or - Using the keyboard shortcut: <code>Ctrl+Alt+I</code> (Windows/Linux) or <code>Cmd+Option+I</code> (Mac)</p>
+<p>Code chunks allow you to run R code, create plots, generate tables, and perform data analysis. The results (outputs, plots, tables) will appear in your rendered HTML report.</p>
+</section>
+</section>
+<section id="step-5-install-and-load-basic-packages" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-install-and-load-basic-packages">Step 5: Install and Load Basic Packages</h3>
+<p>In the first code chunk of your document, install and load the basic packages needed for report generation. We’ll use <strong>pacman</strong>, a package management tool for R that simplifies installing and loading packages. Pacman automatically installs packages if they’re not already installed, then loads them - making it much easier to manage dependencies.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install pacman if needed</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"pacman"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"pacman"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Install and load required packages using pacman</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  tidyverse, <span class="co"># For data manipulation and visualization</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  rio, <span class="co"># For importing data</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  reactable <span class="co"># For interactive tables</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Note:</strong> We’ll add more packages as needed when you work through specific tasks. Additional packages will be installed as you progress through the tutorials.</p>
+</section>
+<section id="step-6-render-your-report" class="level3">
+<h3 class="anchored" data-anchor-id="step-6-render-your-report">Step 6: Render Your Report</h3>
+<p>Now let’s test that everything is working by rendering your report:</p>
+<ol type="1">
+<li>Click the <strong>Render</strong> button in RStudio (or press <code>Ctrl+Shift+K</code> / <code>Cmd+Shift+K</code>).</li>
+<li>Quarto will process your document and generate an HTML file.</li>
+<li>The HTML report will open automatically in your browser.</li>
+</ol>
+<p><strong>Note:</strong> The rendered HTML file will be saved in the same folder as your Quarto document, or you can specify a different output location in your YAML header.</p>
+<p>You should now see a basic HTML report with your title and section headings. This confirms that your Quarto setup is working correctly!</p>
+</section>
+<section id="learning-more-about-quarto" class="level3">
+<h3 class="anchored" data-anchor-id="learning-more-about-quarto">Learning More About Quarto</h3>
+<p>If you’d like to learn more about Quarto, here are some helpful resources:</p>
+<ul>
+<li><p><strong><a href="https://quarto.org/docs/get-started/hello/rstudio.html">Quarto Tutorial: Hello, Quarto</a></strong>: An overview of the basics, including rendering, authoring, YAML headers, code chunks, and markdown text.</p></li>
+<li><p><strong><a href="https://quarto.org/docs/guide/">Quarto Guide</a></strong>: A comprehensive guide covering all aspects of Quarto, including authoring, computations, tools, documents, presentations, dashboards, websites, and more.</p></li>
+</ul>
+</section>
 </section>
 <section id="next-steps" class="level2">
 <h2 class="anchored" data-anchor-id="next-steps">Next Steps</h2>
-<p>Once you have R and RStudio installed:</p>
+<p>Once you have R and RStudio installed and your project set up:</p>
 <ol type="1">
 <li>Visit the <a href="./data.html">Data</a> section to download example datasets.</li>
 <li>Explore the <a href="./task1.html">Tasks</a> menu to find the analytical task(s) you’re interested in.</li>

@@ -1,5 +1,5 @@
 ---
-title: "Task 8: Forecasting cases and deaths"
+title: "Task 7: Forecasting cases and deaths"
 ---
 
 ## Overview

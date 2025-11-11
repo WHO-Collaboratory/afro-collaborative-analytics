@@ -1,5 +1,5 @@
 ---
-title: "Task 4: Visualising transmission chains"
+title: "Task 3: Visualising transmission chains"
 format:
   html:
     code-fold: true
@@ -42,7 +42,8 @@ pacman::p_load(
    here,         # File locator
    tidyverse,    # Data management + ggplot2 graphics
    remotes,      # Package installation from github
-   epicontacts   # Transmission chain analysis
+   epicontacts,  # Transmission chain analysis
+   reactable     # Interactive tables
 )
 
 
@@ -90,7 +91,8 @@ pacman::p_load(
    here,         # File locator
    tidyverse,    # Data management + ggplot2 graphics
    remotes,      # Package installation from github
-   epicontacts   # Transmission chain analysis
+   epicontacts,  # Transmission chain analysis
+   reactable     # Interactive tables
 )
 
 
@@ -201,7 +203,7 @@ Here we present some key statistics:
 
 ```{r}
 # Calculate transmission statistics
-tibble(
+transmission_stats <- tibble(
   Metric = c(
     "Total transmission links",
     "Number of clusters",
@@ -216,18 +218,12 @@ tibble(
     round(mean(cluster_sizes), 1),
     scales::percent(mean(!is.na(epic$linelist$infector)))
   )
-) |>
-  DT::datatable(
-    options = list(
-      pageLength = -1,
-      dom = "rt",
-      searching = FALSE,
-      paging = FALSE,
-      info = FALSE,
-      ordering = FALSE
-    ),
-    rownames = FALSE
-  )
+)
+
+reactable(
+  transmission_stats,
+  defaultPageSize = nrow(transmission_stats)
+)
 ```
 
 ## Additional Resources

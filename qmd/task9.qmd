@@ -1,5 +1,5 @@
 ---
-title: "Task 9: Estimating disease severity"
+title: "Task 8: Estimating disease severity"
 ---
 
 ## Overview

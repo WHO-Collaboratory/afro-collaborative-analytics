@@ -1,5 +1,5 @@
 ---
-title: "Task 3: Making an interactive dashboard"
+title: "Task 2: Generating interactive maps"
 format:
   html:
     code-fold: true
@@ -10,18 +10,18 @@ execute:
 
 ## Overview
 
-This task focuses on creating interactive epidemiological dashboards using epishiny. You will learn how to build user-friendly dashboards for exploring epidemiological data.
+This task focuses on creating interactive maps for visualizing spatial aspects of epidemiological data. You will learn how to work with spatial data, create maps using GIS tools in R, and visualize disease patterns geographically.
 
 ## Learning Objectives
 
-- Build interactive dashboards using epishiny
-- Create reactive visualizations
-- Design user-friendly dashboard interfaces
-- Deploy dashboards for sharing
+- Work with spatial data formats (shapefiles, coordinates)
+- Create interactive maps using GIS tools in R
+- Visualize disease patterns and hotspots geographically
+- Perform basic spatial analysis
 
 ## Tutorial
 
-[Access the tutorial here](https://epicentre-msf.github.io/epishiny/articles/epishiny.html)
+[Access the tutorial here](https://www.epirhandbook.com/en/new_pages/gis.html)
 
 ## Example Report
 

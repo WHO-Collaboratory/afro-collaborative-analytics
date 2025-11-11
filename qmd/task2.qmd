@@ -1,10 +1,10 @@
 ---
-title: "Task 2: Generating automated situation reports"
+title: "Task 1: Generating a basic situation report"
 ---
 
 ## Overview
 
-This task covers generating automated situation reports with dynamic figures and tables. You will learn how to create reproducible reports that can be easily updated as new data becomes available.
+This task covers generating a basic situation report with dynamic figures and tables. You will learn how to create reproducible reports that can be easily updated as new data becomes available.
 
 ## Learning Objectives
 
@@ -17,74 +17,34 @@ This task covers generating automated situation reports with dynamic figures and
 
 This tutorial will guide you through creating a basic epidemiological report using Quarto. You'll generate an HTML report with an incidence curve, case fatality ratio (CFR), and an interactive summary table.
 
-### Step 1: Set Up Your Project Folder Structure
+**Note:** Before starting this task, make sure you have completed the setup steps on the [Setup](setup.qmd) page, including creating your project folder structure and a basic Quarto document.
 
-Before starting, it's important to organize your files properly. Let's create a clear folder structure:
+### Step 1: Obtain the Cleaned Linelist Dataset
 
-1. **Create a project folder** on your computer called `situation_report`.
-
-2. **Within that folder, create the following subfolders**:
-   - `data/` - for storing your datasets
-   - `scripts/` - for storing R scripts (optional)
-   - `outputs/` - for storing generated reports and figures
-
-### Step 2: Obtain the Cleaned Linelist Dataset
-
-For this task, we will be using the **cleaned linelist file**. You have two options:
-
-**Option 1**: If you completed Task 1, you should have already cleaned the raw linelist and saved it as `data/linelist.rds`. You can use that file.
-
-**Option 2**: If you haven't completed Task 1, or prefer to use the pre-cleaned version, download the cleaned linelist:
+For this task, we will be using the **cleaned linelist file**. Download the cleaned linelist:
 
 1. Navigate to the [Data](data.qmd) page on this website.
 2. Click the download button for the **"clean" linelist (.rds)**.
-3. **Save the file to your `data/` folder** that you created in Step 1.
+3. **Save the file to your `data/` folder** that you created during setup.
 4. The file path should be: `data/linelist_cleaned.rds` (relative to where your Quarto document is saved).
 
 Alternatively, you can download it directly from: [linelist_cleaned.rds](https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_cleaned.rds)
 
-### Step 3: Create a New Quarto Document
+### Step 2: Load Required Packages
 
-1. Open RStudio.
-2. Go to **File → New File → Quarto Document**.
-3. Choose **HTML** as the output format.
-4. Give your document a title (e.g., "Epidemiological Situation Report").
-5. Click **Create**.
-6. **Save the document in your project folder** (e.g., `situation_report.qmd`).
-
-### Step 4: Set Up the YAML Header
-
-At the top of your Quarto document, ensure your YAML header looks like this:
-
-```yaml
----
-title: "Epidemiological Situation Report"
-format: html
-editor: visual
----
-```
-
-### Step 5: Install and Load Required Packages
-
-In the first code chunk of your document, install and load the required packages:
+In your Quarto document, add or update the code chunk to load the packages needed for this task:
 
 ```{r}
 #| echo: true
 #| eval: true
 
-# Install pacman if needed
-if (!require("pacman")) install.packages("pacman")
-
 # Load required packages
-pacman::p_load(
-  rio, # For importing data
-  tidyverse, # For data manipulation and visualization
-  DT, # For interactive tables
-  lubridate # For date handling
-)
+library(tidyverse)  # For data manipulation and visualization
+library(reactable)  # For interactive tables
+library(lubridate)   # For date handling
 ```
 
-### Step 6: Import the Data
+### Step 3: Import the Data
 
 Create a new code chunk to import the cleaned linelist data. The cleaned file is in RDS format, which preserves column classes:
 
@@ -93,8 +53,8 @@ Create a new code chunk to import the cleaned linelist data. The cleaned file is
 #| eval: false
 
 # Import the cleaned linelist data from your local data folder
-# Use the file you saved from Task 1, or the downloaded cleaned file
-linelist <- readRDS("data/linelist.rds")
+# Use the downloaded cleaned file
+linelist <- readRDS("data/linelist_cleaned.rds")
 
 # View the first few rows
 head(linelist)
@@ -110,21 +70,10 @@ linelist <- readRDS(url("https://github.com/appliedepi/epirhandbook_eng/raw/mast
 
 # View the first few rows
 
-DT::datatable(
-  head(linelist),
-  options = list(
-    pageLength = -1,
-    scrollX = TRUE,
-    dom = "rt",
-    searching = FALSE,
-    paging = FALSE,
-    info = FALSE,
-    ordering = FALSE
-  )
-)
+reactable(head(linelist))
 ```
 
-### Step 7: Create an Incidence Curve
+### Step 4: Create an Incidence Curve
 
 Create a new section in your document and add a code chunk to create an incidence curve (epidemic curve) using `date_onset`:
 
@@ -149,7 +98,7 @@ incidence_curve <- linelist |>
 print(incidence_curve)
 ```
 
-### Step 8: Calculate Case Fatality Ratio (CFR)
+### Step 5: Calculate Case Fatality Ratio (CFR)
 
 Create a new section and calculate the CFR, making sure to exclude NA outcomes:
 
@@ -170,9 +119,9 @@ cfr_data <- linelist |>
 
 The estimated Case Fatality Ratio is `r cfr_data$cfr`%.
 
-### Step 9: Create an Interactive Summary Table by Hospital
+### Step 6: Create an Interactive Summary Table by Hospital
 
-Create a new section and generate an interactive summary table grouped by hospital using `DT::datatable()`:
+Create a new section and generate an interactive summary table grouped by hospital using `reactable()`:
 
 ```{r}
 #| echo: true
@@ -201,35 +150,18 @@ hospital_summary <- linelist |>
   )
 
 # Create interactive table
-DT::datatable(
+reactable(
   hospital_summary,
-  options = list(
-    pageLength = -1,
-    scrollX = TRUE,
-    dom = "rt",
-    searching = FALSE,
-    paging = FALSE,
-    info = FALSE,
-    ordering = FALSE
+  columns = list(
+    hospital = colDef(name = "Hospital"),
+    total_cases = colDef(name = "Total Cases"),
+    deaths = colDef(name = "Deaths"),
+    recovered = colDef(name = "Recovered"),
+    cfr = colDef(name = "CFR (%)", format = colFormat(digits = 2))
   ),
-  caption = "Summary Statistics by Hospital",
-  colnames = c(
-    "Hospital" = "hospital",
-    "Total Cases" = "total_cases",
-    "Deaths" = "deaths",
-    "Recovered" = "recovered",
-    "CFR (%)" = "cfr"
-  )
+  defaultPageSize = nrow(hospital_summary)
 )
 ```
-
-### Step 10: Render Your Report
-
-1. Click the **Render** button in RStudio (or press `Ctrl+Shift+K` / `Cmd+Shift+K`).
-2. Quarto will process your document and generate an HTML file.
-3. The HTML report will open automatically in your browser.
-
-**Note:** The rendered HTML file will be saved in the same folder as your Quarto document, or you can specify a different output location in your YAML header.
 
 ## Additional Resources
 
@@ -245,6 +177,6 @@ DT::datatable(
 
 ### Package Documentation
 - [ggplot2 Documentation](https://ggplot2.tidyverse.org/)
-- [DT (DataTables) Package](https://rstudio.github.io/DT/)
+- [reactable Package](https://glin.github.io/reactable/)
 
 :::

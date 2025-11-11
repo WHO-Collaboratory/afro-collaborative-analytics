@@ -1,5 +1,5 @@
 ---
-title: "Task 10: Simulating disease transmission"
+title: "Task 9: Simulating disease transmission"
 ---
 
 ## Overview

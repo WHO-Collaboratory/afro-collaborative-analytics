@@ -107,51 +107,47 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-tasks">    
         <li>
-    <a class="dropdown-item" href="./task1.html">
- <span class="dropdown-text">1. Reading and cleaning data</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="./task2.html">
- <span class="dropdown-text">2. Generating automated situation reports</span></a>
+ <span class="dropdown-text">1. Generating automated situation reports</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task3.html">
- <span class="dropdown-text">3. Making an interactive dashboard</span></a>
+ <span class="dropdown-text">2. Generating interactive maps</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task4.html">
- <span class="dropdown-text">4. Visualising transmission chains</span></a>
+ <span class="dropdown-text">3. Visualising transmission chains</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task5.html">
- <span class="dropdown-text">5. Getting epidemiological parameters</span></a>
+ <span class="dropdown-text">4. Getting epidemiological parameters</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task6.html">
- <span class="dropdown-text">6. Estimating the reproduction number</span></a>
+ <span class="dropdown-text">5. Estimating the reproduction number</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task7.html">
- <span class="dropdown-text">7. Nowcasting epidemiological data</span></a>
+ <span class="dropdown-text">6. Nowcasting epidemiological data</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task8.html">
- <span class="dropdown-text">8. Forecasting cases and deaths</span></a>
+ <span class="dropdown-text">7. Forecasting cases and deaths</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task9.html">
- <span class="dropdown-text">9. Estimating disease severity</span></a>
+ <span class="dropdown-text">8. Estimating disease severity</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task10.html">
- <span class="dropdown-text">10. Simulating disease transmission</span></a>
+ <span class="dropdown-text">9. Simulating disease transmission</span></a>
   </li>  
     </ul>
   </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="https://collaboratory.who.int/forum/"> 
+    <a class="nav-link" href="https://collaboratory.who.int/forum/c/afro-ca-cop/"> 
 <span class="menu-text"><img src="./img/collaboratory_logo.png" height="24px" style="vertical-align: middle; margin-right: 0.25em;"></span></a>
   </li>  
 </ul>
@@ -170,8 +166,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#raw-case-linelist" id="toc-raw-case-linelist" class="nav-link active" data-scroll-target="#raw-case-linelist">Raw case linelist</a></li>
-  <li><a href="#clean-case-linelist" id="toc-clean-case-linelist" class="nav-link" data-scroll-target="#clean-case-linelist">Clean case linelist</a></li>
+  <li><a href="#clean-case-linelist" id="toc-clean-case-linelist" class="nav-link active" data-scroll-target="#clean-case-linelist">Clean case linelist</a></li>
+  <li><a href="#raw-case-linelist-optional---data-cleaning" id="toc-raw-case-linelist-optional---data-cleaning" class="nav-link" data-scroll-target="#raw-case-linelist-optional---data-cleaning">Raw case linelist (Optional - Data Cleaning)</a></li>
   </ul>
 </nav>
     </div>
@@ -197,16 +193,16 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Download the example datasets below to get started with the hackathon tasks. These datasets are from the <a href="https://www.epirhandbook.com/">Applied Epi R Handbook</a> and can be used for practice and testing your analytical scripts. They resemble a fictional Ebola outbreak.</p>
-<section id="raw-case-linelist" class="level2">
-<h2 class="anchored" data-anchor-id="raw-case-linelist">Raw case linelist</h2>
-<p>The raw case linelist is an Excel spreadsheet with messy data. Use this when tackling <a href="./task1.html">Task 1</a>, which goes over the basics of cleaning data.</p>
-<p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_raw.xlsx" class="btn btn-primary" target="_blank">Download raw linelist</a></p>
-</section>
+<p>You can use your own data for the workshop tasks, or you can use the example datasets provided below. The example datasets are from the <a href="https://www.epirhandbook.com/">Applied Epi R Handbook</a> and resemble a fictional Ebola outbreak. If you don’t have your own dataset or don’t feel R-competent enough to adapt the code to your data, you can use the example dataset and example code provided in each task. This is perfectly fine and will still allow you to learn the analytical techniques and generate a functional report.</p>
 <section id="clean-case-linelist" class="level2">
 <h2 class="anchored" data-anchor-id="clean-case-linelist">Clean case linelist</h2>
-<p>The clean linelist is stored in RDS format and can be directly imported into R; use this file for all other tasks.</p>
+<p>The clean linelist is stored in RDS format and can be directly imported into R. The example code in each task is already set up to work with this dataset, so you can simply download it and run the code without any modifications.</p>
 <p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_cleaned.rds" class="btn btn-primary" target="_blank">Download clean linelist</a></p>
+</section>
+<section id="raw-case-linelist-optional---data-cleaning" class="level2">
+<h2 class="anchored" data-anchor-id="raw-case-linelist-optional---data-cleaning">Raw case linelist (Optional - Data Cleaning)</h2>
+<p>If you’re interested in learning about data cleaning workflows, you can download the raw case linelist (an Excel spreadsheet with messy data) and follow the <a href="https://www.epirhandbook.com/en/new_pages/cleaning.html">data cleaning tutorial</a>. This tutorial covers the basics of reading, cleaning, validating and shaping epidemiological data, including how to import data from various sources, clean messy datasets, validate data quality, and prepare data for epidemiological analysis.</p>
+<p><a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_raw.xlsx" class="btn btn-primary" target="_blank">Download raw linelist</a></p>
 
 
 </section>

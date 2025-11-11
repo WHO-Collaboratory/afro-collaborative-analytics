@@ -1,5 +1,5 @@
 ---
-title: "Task 5: Getting epidemiological parameters"
+title: "Task 4: Getting epidemiological parameters"
 format:
   html:
     code-fold: true
@@ -35,23 +35,8 @@ We first extract this parameter from the {epiparameter} package database:
 
 # INSTALL AND LOAD PACKAGES
 
-# Install epiparameter and dplyr if not already installed
-if (!"epiparameter" %in% rownames(installed.packages())) {
-  install.packages("epiparameter")
-}
-
-if (!"tidyverse" %in% rownames(installed.packages())) {
-  install.packages("tidyverse")
-}
-
-if (!"EpiNow2" %in% rownames(installed.packages())) {
-  install.packages("EpiNow2")
-}
-
 # Load required packages
-library(tidyverse)
-library(epiparameter)
-library(EpiNow2)
+pacman::p_load(epiparameter, tidyverse, EpiNow2)
 
 # Creating epiparameter objects by accessing the {epiparameter} library
 ebola_serial_int <- epiparameter::epiparameter_db(

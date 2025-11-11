@@ -2,18 +2,16 @@
 title: "Data"
 ---
 
-Download the example datasets below to get started with the hackathon tasks. These datasets are from the [Applied Epi R Handbook](https://www.epirhandbook.com/) and can be used for practice and testing your analytical scripts. They resemble a fictional Ebola outbreak. 
-
-## Raw case linelist
-
-The raw case linelist is an Excel spreadsheet with messy data. Use this when tackling [Task 1](task1.qmd), which goes over the basics of cleaning data.
-
-[Download raw linelist](https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_raw.xlsx){.btn .btn-primary target="_blank"}
-
+You can use your own data for the workshop tasks, or you can use the example datasets provided below. The example datasets are from the [Applied Epi R Handbook](https://www.epirhandbook.com/) and resemble a fictional Ebola outbreak. If you don't have your own dataset or don't feel R-competent enough to adapt the code to your data, you can use the example dataset and example code provided in each task. This is perfectly fine and will still allow you to learn the analytical techniques and generate a functional report.
 
 ## Clean case linelist
 
-The clean linelist is stored in RDS format and can be directly imported into R; use this file for all other tasks.
+The clean linelist is stored in RDS format and can be directly imported into R. The example code in each task is already set up to work with this dataset, so you can simply download it and run the code without any modifications.
 
 [Download clean linelist](https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_cleaned.rds){.btn .btn-primary target="_blank"}
 
+## Raw case linelist (Optional - Data Cleaning)
+
+If you're interested in learning about data cleaning workflows, you can download the raw case linelist (an Excel spreadsheet with messy data) and follow the [data cleaning tutorial](https://www.epirhandbook.com/en/new_pages/cleaning.html). This tutorial covers the basics of reading, cleaning, validating and shaping epidemiological data, including how to import data from various sources, clean messy datasets, validate data quality, and prepare data for epidemiological analysis.
+
+[Download raw linelist](https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_raw.xlsx){.btn .btn-primary target="_blank"}
