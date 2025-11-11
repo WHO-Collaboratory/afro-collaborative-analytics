@@ -5,3 +5,7 @@ docs/rsconnect/
 task*.html
 deploy.R
 assets/keys/
+.Rproj.user
+.DS_Store
+.Rhistory
+.RData
