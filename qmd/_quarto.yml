@@ -16,23 +16,23 @@ website:
         text: Data
       - text: Tasks
         menu:
-          - href: task2.qmd
+          - href: task1.qmd
             text: "1. Generating a basic situation report"
-          - href: task3.qmd
+          - href: task2.qmd
             text: "2. Generating interactive maps"
-          - href: task4.qmd
+          - href: task3.qmd
             text: "3. Visualising transmission chains"
-          - href: task5.qmd
+          - href: task4.qmd
             text: "4. Getting epidemiological parameters"
-          - href: task6.qmd
+          - href: task5.qmd
             text: "5. Estimating the reproduction number"
-          - href: task7.qmd
+          - href: task6.qmd
             text: "6. Nowcasting epidemiological data"
-          - href: task8.qmd
+          - href: task7.qmd
             text: "7. Forecasting cases and deaths"
-          - href: task9.qmd
+          - href: task8.qmd
             text: "8. Estimating disease severity"
-          - href: task10.qmd
+          - href: task9.qmd
             text: "9. Simulating disease transmission"
     right:
       - href: https://collaboratory.who.int/forum/c/afro-ca-cop/

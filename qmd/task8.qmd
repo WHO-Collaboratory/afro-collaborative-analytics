@@ -1,21 +1,21 @@
 ---
-title: "Task 7: Forecasting cases and deaths"
+title: "Task 8: Estimating disease severity"
 ---
 
 ## Overview
 
-This task covers forecasting cases and deaths. You will learn how to build forecasting models and generate predictions of future disease incidence.
+This task focuses on estimating disease severity. You will learn how to calculate and interpret key severity metrics such as case fatality ratio and infection fatality ratio.
 
 ## Learning Objectives
 
-- Build forecasting models for epidemiological data
-- Generate short-term and long-term forecasts
-- Quantify forecast uncertainty
-- Evaluate forecast performance
+- Calculate case fatality ratio (CFR)
+- Estimate infection fatality ratio (IFR)
+- Adjust for time-to-death and censoring
+- Compare severity across populations and time periods
 
 ## Tutorial
 
-[Access the tutorial here](https://epiverse-trace.github.io/tutorials-middle/create-forecast.html)
+[Access the tutorial here](https://epiverse-trace.github.io/tutorials-middle/severity-static.html)
 
 ## Additional Resources
 
@@ -28,4 +28,3 @@ Relevant chapters from the Epidemiologist R Handbook.
 Package vignettes and documentation for relevant R packages.
 
 :::
-

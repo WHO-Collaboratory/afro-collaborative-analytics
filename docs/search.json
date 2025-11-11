@@ -2,184 +2,261 @@
   {
     "objectID": "task9.html",
     "href": "task9.html",
-    "title": "Task 9: Estimating disease severity",
+    "title": "Task 9: Simulating disease transmission",
     "section": "",
-    "text": "This task focuses on estimating disease severity. You will learn how to calculate and interpret key severity metrics such as case fatality ratio and infection fatality ratio."
+    "text": "This task covers simulating disease spread using mathematical models. You will learn how to generate disease trajectories, set up model parameters, and account for uncertainty in model simulations."
   },
   {
     "objectID": "task9.html#overview",
     "href": "task9.html#overview",
-    "title": "Task 9: Estimating disease severity",
+    "title": "Task 9: Simulating disease transmission",
     "section": "",
-    "text": "This task focuses on estimating disease severity. You will learn how to calculate and interpret key severity metrics such as case fatality ratio and infection fatality ratio."
+    "text": "This task covers simulating disease spread using mathematical models. You will learn how to generate disease trajectories, set up model parameters, and account for uncertainty in model simulations."
   },
   {
     "objectID": "task9.html#learning-objectives",
     "href": "task9.html#learning-objectives",
-    "title": "Task 9: Estimating disease severity",
+    "title": "Task 9: Simulating disease transmission",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nCalculate case fatality ratio (CFR)\nEstimate infection fatality ratio (IFR)\nAdjust for time-to-death and censoring\nCompare severity across populations and time periods"
+    "text": "Learning Objectives\n\nLoad and use model structures from the epidemics package\nLoad social contact matrices with socialmixr\nGenerate disease spread model simulations\nGenerate multiple model simulations and visualize uncertainty"
   },
   {
     "objectID": "task9.html#tutorial",
     "href": "task9.html#tutorial",
-    "title": "Task 9: Estimating disease severity",
+    "title": "Task 9: Simulating disease transmission",
     "section": "Tutorial",
     "text": "Tutorial\nAccess the tutorial here"
   },
   {
     "objectID": "task9.html#additional-resources",
     "href": "task9.html#additional-resources",
-    "title": "Task 9: Estimating disease severity",
+    "title": "Task 9: Simulating disease transmission",
     "section": "Additional Resources",
     "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
   },
   {
     "objectID": "task7.html",
     "href": "task7.html",
-    "title": "Task 7: Nowcasting epidemiological data",
+    "title": "Task 7: Forecasting cases and deaths",
     "section": "",
-    "text": "This task focuses on nowcasting epidemiological data. You will learn how to adjust for reporting delays and estimate current case counts from incomplete data."
+    "text": "This task covers forecasting cases and deaths. You will learn how to build forecasting models and generate predictions of future disease incidence."
   },
   {
     "objectID": "task7.html#overview",
     "href": "task7.html#overview",
-    "title": "Task 7: Nowcasting epidemiological data",
+    "title": "Task 7: Forecasting cases and deaths",
     "section": "",
-    "text": "This task focuses on nowcasting epidemiological data. You will learn how to adjust for reporting delays and estimate current case counts from incomplete data."
+    "text": "This task covers forecasting cases and deaths. You will learn how to build forecasting models and generate predictions of future disease incidence."
   },
   {
     "objectID": "task7.html#learning-objectives",
     "href": "task7.html#learning-objectives",
-    "title": "Task 7: Nowcasting epidemiological data",
+    "title": "Task 7: Forecasting cases and deaths",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nUnderstand reporting delays and their impact\nApply nowcasting methods to epidemiological data\nAdjust for underreporting and delays\nGenerate real-time estimates of current incidence"
+    "text": "Learning Objectives\n\nBuild forecasting models for epidemiological data\nGenerate short-term and long-term forecasts\nQuantify forecast uncertainty\nEvaluate forecast performance"
   },
   {
     "objectID": "task7.html#tutorial",
     "href": "task7.html#tutorial",
-    "title": "Task 7: Nowcasting epidemiological data",
+    "title": "Task 7: Forecasting cases and deaths",
     "section": "Tutorial",
     "text": "Tutorial\nAccess the tutorial here"
   },
   {
     "objectID": "task7.html#additional-resources",
     "href": "task7.html#additional-resources",
-    "title": "Task 7: Nowcasting epidemiological data",
+    "title": "Task 7: Forecasting cases and deaths",
     "section": "Additional Resources",
     "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
   },
   {
     "objectID": "task5.html",
     "href": "task5.html",
-    "title": "Task 5: Getting epidemiological parameters",
+    "title": "Task 5: Estimating the reproduction number",
     "section": "",
-    "text": "This task focuses on obtaining epidemiological parameters from your data or the literature. You will learn how to extract, estimate, and use key epidemiological parameters in your analyses."
+    "text": "This task covers estimating the basic and effective reproduction number (R0 and Re). You will learn methods for calculating these key epidemiological metrics from outbreak data."
   },
   {
     "objectID": "task5.html#overview",
     "href": "task5.html#overview",
-    "title": "Task 5: Getting epidemiological parameters",
+    "title": "Task 5: Estimating the reproduction number",
     "section": "",
-    "text": "This task focuses on obtaining epidemiological parameters from your data or the literature. You will learn how to extract, estimate, and use key epidemiological parameters in your analyses."
+    "text": "This task covers estimating the basic and effective reproduction number (R0 and Re). You will learn methods for calculating these key epidemiological metrics from outbreak data."
   },
   {
     "objectID": "task5.html#learning-objectives",
     "href": "task5.html#learning-objectives",
-    "title": "Task 5: Getting epidemiological parameters",
+    "title": "Task 5: Estimating the reproduction number",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nExtract epidemiological parameters from data\nSearch and retrieve parameters from literature\nEstimate parameters using available data\nIncorporate parameters into analytical models"
+    "text": "Learning Objectives\n\nUnderstand the difference between R0 and Re\nEstimate reproduction numbers from case data\nUse appropriate methods for different data types\nVisualize and interpret reproduction number estimates"
   },
   {
     "objectID": "task5.html#tutorial",
     "href": "task5.html#tutorial",
-    "title": "Task 5: Getting epidemiological parameters",
+    "title": "Task 5: Estimating the reproduction number",
     "section": "Tutorial",
     "text": "Tutorial\nAccess the tutorial here"
   },
   {
     "objectID": "task5.html#additional-resources",
     "href": "task5.html#additional-resources",
-    "title": "Task 5: Getting epidemiological parameters",
+    "title": "Task 5: Estimating the reproduction number",
     "section": "Additional Resources",
     "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
   },
   {
     "objectID": "task3.html",
     "href": "task3.html",
-    "title": "Task 2: Generating interactive maps",
+    "title": "Task 3: Visualising transmission chains",
     "section": "",
-    "text": "This task focuses on creating interactive maps for visualizing spatial aspects of epidemiological data. You will learn how to work with spatial data, create maps using GIS tools in R, and visualize disease patterns geographically."
+    "text": "This task covers visualizing transmission chains using epicontacts. You will learn how to analyze and visualize contact networks and transmission pathways."
   },
   {
     "objectID": "task3.html#overview",
     "href": "task3.html#overview",
-    "title": "Task 2: Generating interactive maps",
+    "title": "Task 3: Visualising transmission chains",
     "section": "",
-    "text": "This task focuses on creating interactive maps for visualizing spatial aspects of epidemiological data. You will learn how to work with spatial data, create maps using GIS tools in R, and visualize disease patterns geographically."
+    "text": "This task covers visualizing transmission chains using epicontacts. You will learn how to analyze and visualize contact networks and transmission pathways."
   },
   {
     "objectID": "task3.html#learning-objectives",
     "href": "task3.html#learning-objectives",
-    "title": "Task 2: Generating interactive maps",
+    "title": "Task 3: Visualising transmission chains",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nWork with spatial data formats (shapefiles, coordinates)\nCreate interactive maps using GIS tools in R\nVisualize disease patterns and hotspots geographically\nPerform basic spatial analysis"
+    "text": "Learning Objectives\n\nWork with contact network data\nVisualize transmission chains using epicontacts\nAnalyze contact patterns\nIdentify transmission clusters"
   },
   {
     "objectID": "task3.html#tutorial",
     "href": "task3.html#tutorial",
-    "title": "Task 2: Generating interactive maps",
+    "title": "Task 3: Visualising transmission chains",
     "section": "Tutorial",
     "text": "Tutorial\nAccess the tutorial here"
   },
   {
     "objectID": "task3.html#example-report",
     "href": "task3.html#example-report",
-    "title": "Task 2: Generating interactive maps",
+    "title": "Task 3: Visualising transmission chains",
     "section": "Example Report",
-    "text": "Example Report\n\nMapping Incidence\nTotal incidence to date was mapped by health-area.\n\n\nCode\n# INSTALL AND LOAD PACKAGES\n\n# Load required packages\npacman::p_load(\n  tidyverse,    # basic data manipulation\n  sf,           # handling shapefiles\n  here,         # handing file paths\n  leaflet,      # mapping\n  htmltools     # handlers for html objects\n)\n\n\n# LOAD DATA\n\n# load shapefiles and keep relevant areas\nshp &lt;- sf::read_sf(\"data/gis/sle_adm3.shp\") |&gt;\n  # standardize column names\n  janitor::clean_names() |&gt;\n  # filter to keep certain areas\n  filter(adm1_en == \"Western\")\n\n# import the cleaned linelist data\nlinelist &lt;- rio::import(\"data/linelist.rds\") |&gt;\n  # interpret the lon and lat variables for GIS use\n  st_as_sf(coords = c(\"lon\", \"lat\"), crs = 4326) |&gt;\n  # join the administrative boundary file to the linelist, based on\n  # spatial intersection\n  st_join(shp, join = st_intersects)\n\n# convert to aggregate format\nagg &lt;- linelist |&gt;\n  # remove the geometry for now\n  st_drop_geometry() |&gt;\n  # count the number of cases per adm3\n  summarise(n = n(), .by = adm3_en) |&gt;\n  # add the shape files of the adm3 zones\n  inner_join(shp, by = \"adm3_en\") |&gt;\n  # convert back to shapefile\n  st_as_sf()\n\n# define colour palette\npal &lt;- colorNumeric(palette = \"YlOrRd\", domain = agg$n)\n\n# generate leaflet map\nleaflet(agg) |&gt;\n  # use CartoDB for background\n  addProviderTiles(\"CartoDB.Positron\") |&gt;\n  # add adm3 shaded by number of cases\n  addPolygons(\n    fillColor = ~ pal(n),\n    color = \"white\",\n    weight = 1,\n    fillOpacity = 0.7,\n    # define labels\n    label = ~ map(\n      paste0(\"&lt;b&gt;\", adm3_en, \"&lt;/b&gt;&lt;br&gt;\", n, \" cases\"),\n      htmltools::HTML\n    ),\n    labelOptions = labelOptions(direction = \"auto\"),\n    highlightOptions = highlightOptions(\n      weight = 3,\n      color = \"black\",\n      bringToFront = FALSE\n    )\n  ) |&gt;\n  # add points per case\n  addCircleMarkers(\n    data = linelist,\n    radius = 4,\n    color = \"black\",\n    fillColor = \"grey\",\n    weight = 1,\n    fillOpacity = 0.8,\n    label = ~ map(\n      paste0(\"&lt;b&gt;Case ID:&lt;/b&gt; \", case_id, \"&lt;br&gt;\",\n             \"&lt;b&gt;Date onset:&lt;/b&gt; \", date_onset, \"&lt;br&gt;\",\n             \"&lt;b&gt;Health facility:&lt;/b&gt; \", hospital),\n      htmltools::HTML\n    ),\n    labelOptions = labelOptions(direction = \"auto\"),\n    group = \"Cases\"\n  ) |&gt;\n  # add legend\n  addLegend(\n    pal = pal,\n    values = ~ n,\n    title = \"Case count\",\n    opacity = 0.7,\n    position = \"bottomright\"\n  )"
+    "text": "Example Report\n\n\nCode\n# INSTALL AND LOAD PACKAGES\n\n# install development version of epicontacts\npacman::p_install_gh(\"reconhub/epicontacts@timeline\")\n\n# Load required packages\npacman::p_load(\n   rio,          # File import\n   here,         # File locator\n   tidyverse,    # Data management + ggplot2 graphics\n   remotes,      # Package installation from github\n   epicontacts,  # Transmission chain analysis\n   reactable     # Interactive tables\n)\n\n\n# LOAD DATA\nlinelist &lt;- readRDS(\"data/linelist.rds\")\n\n\n# SETTING UP EPICONTACTS\n\n# generate contacts\ncontacts &lt;- linelist %&gt;%\n  transmute(\n    infector = infector,\n    case_id = case_id,\n    location = sample(c(\"Community\", \"Nosocomial\"), n(), TRUE),\n    duration = sample.int(10, n(), TRUE)\n  ) %&gt;%\n  drop_na(infector)\n\n# generate epicontacts object\nepic &lt;- make_epicontacts(\n  linelist = linelist,\n  contacts = contacts,\n  id = \"case_id\",\n  from = \"infector\",\n  to = \"case_id\",\n  directed = TRUE\n)\n\n\n\nFuneral infections\nWe first investigated funeral infections that occured during the year of 2014.\n\n\nCode\n# filter by nosocomial infection between april and july\nfuneral &lt;- subset(\n  epic,\n  node_attribute = list(\n    date_infection = as.Date(c(\"2014-01-01\", \"2014-12-31\"))\n  ), \n  edge_attribute = list(source = \"funeral\")\n) |&gt;\n  thin(what = \"contacts\") |&gt;\n  thin(what = \"linelist\")\n\n# plot and set the selector to hospital\nplot(\n  funeral,\n  label = FALSE,\n  node_color = \"gender\",\n  height = 400,\n  width = 700\n)\n\n\n\n\n\n\n\n\nInfection clusters\nWe then investigated clusters larger than 12 cases:\n\n\nCode\n# keep linelist and contacts part of a cluster of at least 13 cases\nlarge &lt;- subset(epic, cs_min = 12)\n\n# plot\nplot(\n  large,\n  selector = \"hospital\",\n  x_axis = \"date_infection\",\n  label = FALSE,\n  height = 500,\n  width = 700,\n  node_size = 5,\n  arrow_size = 0.25,\n  network_shape = \"rectangle\"\n)\n\n\n\n\n\n\nBelow are key summary statistics:\n\n\nCode\n# calculate cluster statistics\nclusters &lt;- get_clusters(epic)\ncluster_sizes &lt;- table(clusters$linelist$cluster_member)\nn_clusters &lt;-  length(\n  unique(filter(clusters$linelist, cluster_size &gt; 1)$cluster_member)\n)\n\n# plot the cluster size distribution\ncluster_sizes |&gt;\n  table() |&gt;\n  as.data.frame() |&gt;\n  ggplot(aes(cluster_sizes, Freq)) +\n  geom_col() +\n  scale_y_continuous(expand = expansion(mult = c(0, 0.01))) +\n  labs(\n    x = \"Size of cluster\",\n    y = \"Frequency\"\n  ) +\n  theme_classic()\n\n\n\n\n\n\n\n\n\n\n\nTransmission Chain Statistics\nHere we present some key statistics:\n\n\nCode\n# Calculate transmission statistics\ntransmission_stats &lt;- tibble(\n  Metric = c(\n    \"Total transmission links\",\n    \"Number of clusters\",\n    \"Largest cluster size\",\n    \"Mean cluster size\",\n    \"Proportion cases with infector information\"\n  ),\n  Value = c(\n    nrow(epic$contacts),\n    n_clusters,\n    max(cluster_sizes),\n    round(mean(cluster_sizes), 1),\n    scales::percent(mean(!is.na(epic$linelist$infector)))\n  )\n)\n\nreactable(\n  transmission_stats,\n  defaultPageSize = nrow(transmission_stats)\n)"
   },
   {
     "objectID": "task3.html#additional-resources",
     "href": "task3.html#additional-resources",
-    "title": "Task 2: Generating interactive maps",
+    "title": "Task 3: Visualising transmission chains",
     "section": "Additional Resources",
-    "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
+    "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for epicontacts and related packages."
   },
   {
-    "objectID": "task10.html",
-    "href": "task10.html",
-    "title": "Task 9: Simulating disease transmission",
+    "objectID": "task1.html",
+    "href": "task1.html",
+    "title": "Task 1: Generating a basic situation report",
     "section": "",
-    "text": "This task covers simulating disease spread using mathematical models. You will learn how to generate disease trajectories, set up model parameters, and account for uncertainty in model simulations."
+    "text": "This task covers generating a basic situation report with dynamic figures and tables. You will learn how to create reproducible reports that can be easily updated as new data becomes available."
   },
   {
-    "objectID": "task10.html#overview",
-    "href": "task10.html#overview",
-    "title": "Task 9: Simulating disease transmission",
+    "objectID": "task1.html#overview",
+    "href": "task1.html#overview",
+    "title": "Task 1: Generating a basic situation report",
     "section": "",
-    "text": "This task covers simulating disease spread using mathematical models. You will learn how to generate disease trajectories, set up model parameters, and account for uncertainty in model simulations."
+    "text": "This task covers generating a basic situation report with dynamic figures and tables. You will learn how to create reproducible reports that can be easily updated as new data becomes available."
   },
   {
-    "objectID": "task10.html#learning-objectives",
-    "href": "task10.html#learning-objectives",
-    "title": "Task 9: Simulating disease transmission",
+    "objectID": "task1.html#learning-objectives",
+    "href": "task1.html#learning-objectives",
+    "title": "Task 1: Generating a basic situation report",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nLoad and use model structures from the epidemics package\nLoad social contact matrices with socialmixr\nGenerate disease spread model simulations\nGenerate multiple model simulations and visualize uncertainty"
+    "text": "Learning Objectives\n\nCreate automated report generation workflows\nIncorporate dynamic figures and tables\nUse Quarto for report generation\nBuild a basic epidemiological report with incidence curves and summary statistics\nVisualize demographic patterns using age-sex pyramids"
   },
   {
-    "objectID": "task10.html#tutorial",
-    "href": "task10.html#tutorial",
-    "title": "Task 9: Simulating disease transmission",
+    "objectID": "task1.html#tutorial",
+    "href": "task1.html#tutorial",
+    "title": "Task 1: Generating a basic situation report",
     "section": "Tutorial",
-    "text": "Tutorial\nAccess the tutorial here"
+    "text": "Tutorial\nFor detailed guidance on creating and customizing visualizations:\n\nEpidemic Curves tutorial - Learn how to create and customize incidence curves\nDemographic Pyramids tutorial - Learn how to create age-sex pyramids"
   },
   {
-    "objectID": "task10.html#additional-resources",
-    "href": "task10.html#additional-resources",
-    "title": "Task 9: Simulating disease transmission",
+    "objectID": "task1.html#example-report",
+    "href": "task1.html#example-report",
+    "title": "Task 1: Generating a basic situation report",
+    "section": "Example Report",
+    "text": "Example Report\n\n\nCode\n# INSTALL AND LOAD PACKAGES\n\n# Load required packages\npacman::p_load(\n  tidyverse, # For data manipulation and visualization\n  reactable, # For interactive tables\n  lubridate, # For date handling\n  apyramid # For age-sex pyramids\n)\n\n\n# LOAD DATA\n\n# Import the cleaned linelist data from your local data folder\nlinelist &lt;- readRDS(\"data/linelist.rds\")\n\n\n\nTrends in reported cases\n\n\nCode\n# Calculate first case month and peak month\nfirst_case_date &lt;- min(linelist$date_onset, na.rm = TRUE)\nfirst_case_month &lt;- format(first_case_date, \"%B %Y\")\n\n# Calculate month with most cases\nmonthly_cases &lt;- linelist |&gt;\n  filter(!is.na(date_onset)) |&gt;\n  mutate(month = floor_date(date_onset, unit = \"month\")) |&gt;\n  count(month) |&gt;\n  arrange(desc(n))\n\npeak_month_date &lt;- monthly_cases$month[1]\npeak_month &lt;- format(peak_month_date, \"%B %Y\")\npeak_cases &lt;- monthly_cases$n[1]\n\n\nThe first case was reported in April 2014, the month with the highest number of cases was October 2014 with 1112 cases.\n\n\nCode\n# CREATE INCIDENCE CURVE\n\n# Create incidence curve\nincidence_curve &lt;- linelist |&gt;\n  ggplot(aes(x = date_onset)) +\n  geom_histogram(binwidth = 7, fill = \"steelblue\", color = \"white\") +\n  labs(\n    x = \"Date of Onset\",\n    y = \"Number of Cases\"\n  ) +\n  theme_minimal()\n\n# Display the plot\nincidence_curve\n\n\n\n\n\n\n\n\n\n\n\nAge and Sex Distribution\nThe age and sex distribution of cases was visualized to identify demographic patterns in the outbreak.\n\n\nCode\n# CREATE AGE-SEX PYRAMID\n\n# Create age-sex pyramid using apyramid package\nage_pyramid &lt;- apyramid::age_pyramid(\n  data = linelist,\n  age_group = \"age_cat\",\n  split_by = \"gender\",\n  show_midpoint = FALSE\n) +\n  labs(\n    title = NULL,\n    x = \"Age Group\",\n    y = \"Number of Cases\",\n    fill = \"Gender\"\n  ) +\n  theme_minimal() +\n  theme(\n    legend.position = \"bottom\"\n  )\n\n# Display the plot\nage_pyramid\n\n\n\n\n\n\n\n\n\n\n\nDisease Severity\n\n\nCode\n# Calculate CFR (excluding NA outcomes)\ncfr_data &lt;- linelist |&gt;\n  filter(!is.na(outcome)) |&gt;\n  summarise(\n    total_cases = n(),\n    deaths = sum(outcome == \"Death\", na.rm = TRUE),\n    recovered = sum(outcome == \"Recover\", na.rm = TRUE),\n    cfr = round((deaths / total_cases) * 100, 2)\n  )\n\n\nThe overall case fatality ratio (CFR) was estimated as 56.56%. A more detailed analysis by health facility is presented below.\n\n\nCode\n# Create summary table by hospital\n# Group NA and \"Other\" together\nhospital_summary &lt;- linelist |&gt;\n  mutate(\n    hospital_grouped = case_when(\n      is.na(hospital) | hospital %in% c(\"Missing\", \"Other\") ~ \"Other/Unknown\",\n      TRUE ~ hospital\n    )\n  ) |&gt;\n  group_by(hospital_grouped) |&gt;\n  summarise(\n    total_cases = n(),\n    deaths = sum(outcome == \"Death\", na.rm = TRUE),\n    recovered = sum(outcome == \"Recover\", na.rm = TRUE),\n    .groups = \"drop\"\n  ) |&gt;\n  rename(hospital = hospital_grouped) |&gt;\n  mutate(\n    cfr = round((deaths / (deaths + recovered)) * 100, 2),\n    cfr = ifelse(is.na(cfr), 0, cfr)\n  )\n\n# Create interactive table\nreactable(\n  hospital_summary,\n  columns = list(\n    hospital = colDef(name = \"Hospital\"),\n    total_cases = colDef(name = \"Total Cases\"),\n    deaths = colDef(name = \"Deaths\"),\n    recovered = colDef(name = \"Recovered\"),\n    cfr = colDef(name = \"CFR (%)\", format = colFormat(digits = 2))\n  ),\n  defaultPageSize = nrow(hospital_summary)\n)"
+  },
+  {
+    "objectID": "task1.html#additional-resources",
+    "href": "task1.html#additional-resources",
+    "title": "Task 1: Generating a basic situation report",
     "section": "Additional Resources",
     "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Collaborative Analytics Workshop",
+    "section": "",
+    "text": "Welcome to the Collaborative Analytics Workshop! This workshop is designed to help you explore different tools and resources for conducting a range of common epidemiological analytical tasks. Our primary goal is for you to take home a functional script that generates an interactive epidemiological situation report that you can build on and adapt for your own work moving forward."
+  },
+  {
+    "objectID": "index.html#using-your-own-data-or-example-data",
+    "href": "index.html#using-your-own-data-or-example-data",
+    "title": "Collaborative Analytics Workshop",
+    "section": "Using Your Own Data or Example Data",
+    "text": "Using Your Own Data or Example Data\nYou can work with your own data throughout the workshop, or you can use the example datasets provided. If you don’t have your own dataset or don’t feel comfortable adapting code to your data, you can use the example datasets and example code. This is perfectly fine and will still allow you to learn the analytical techniques and generate a functional report."
+  },
+  {
+    "objectID": "index.html#how-tasks-are-structured",
+    "href": "index.html#how-tasks-are-structured",
+    "title": "Collaborative Analytics Workshop",
+    "section": "How Tasks Are Structured",
+    "text": "How Tasks Are Structured\nEach task page includes:\n\nLinks to external tutorials that provide comprehensive learning materials and detailed explanations of the analytical concepts and methods\nComplete, ready-to-run example code that generates all the outputs needed for an example report. The example code works with the provided example datasets\n\nYou can use the example code and example datasets as-is. You don’t need to adapt anything if you’re not comfortable doing so. Simply download the example data, copy the example code into your Quarto document, and run it to generate a complete example report. This approach is fully supported and will help you learn the analytical techniques while producing a functional script you can reference later."
+  },
+  {
+    "objectID": "index.html#workshop-structure",
+    "href": "index.html#workshop-structure",
+    "title": "Collaborative Analytics Workshop",
+    "section": "Workshop Structure",
+    "text": "Workshop Structure\nYou will be grouped by the analytical tasks you are interested in and work through them together with support from the facilitators. During these sessions, you can apply the analyses to your own data (if you have it and feel comfortable adapting the code) or use the example datasets and code. Depending on your technical level, you may complete multiple tasks over different sessions and therefore change groups."
+  },
+  {
+    "objectID": "index.html#workshop-timeline",
+    "href": "index.html#workshop-timeline",
+    "title": "Collaborative Analytics Workshop",
+    "section": "Workshop Timeline",
+    "text": "Workshop Timeline\nBy the end of Day 1, you should have:\n\nCompleted the Setup section (installing R, RStudio, packages, and creating your project)\nDownloaded the example datasets from the Data section\nCompleted Task 1, which generates a basic descriptive outline of a situation report\n\nBy the end of Day 2, you should have:\n\nCompleted one or more of the other analytical tasks (Tasks 2-9)\nIncorporated your chosen analytical tasks into your example report\nA functional script that generates an interactive epidemiological situation report ready to adapt for your own work"
+  },
+  {
+    "objectID": "index.html#getting-started",
+    "href": "index.html#getting-started",
+    "title": "Collaborative Analytics Workshop",
+    "section": "Getting Started",
+    "text": "Getting Started\nTo get started, visit the Setup page for installation instructions and required packages, download the example datasets from the Data section, navigate to the Tasks menu to find the analytical tasks you’re interested in, and join your group to work through the materials with support from facilitators."
+  },
+  {
+    "objectID": "index.html#additional-resources",
+    "href": "index.html#additional-resources",
+    "title": "Collaborative Analytics Workshop",
+    "section": "Additional Resources",
+    "text": "Additional Resources\nIf you’re new to R or need a refresher, the Epidemiologist R Handbook provides a comprehensive guide to R fundamentals for epidemiologists. Start with the R Basics chapter. For a more general introduction to R and coding, see R for Data Science."
+  },
+  {
+    "objectID": "data.html",
+    "href": "data.html",
+    "title": "Data",
+    "section": "",
+    "text": "You can use your own data for the workshop tasks, or you can use the example datasets provided below. The example datasets are from the Applied Epi R Handbook and resemble a fictional Ebola outbreak. If you don’t have your own dataset or don’t feel R-competent enough to adapt the code to your data, you can use the example dataset and example code provided in each task. This is perfectly fine and will still allow you to learn the analytical techniques and generate a functional report."
+  },
+  {
+    "objectID": "data.html#clean-case-linelist",
+    "href": "data.html#clean-case-linelist",
+    "title": "Data",
+    "section": "Clean case linelist",
+    "text": "Clean case linelist\nThe clean linelist is stored in RDS format and can be directly imported into R. The example code in each task is already set up to work with this dataset, so you can simply download it and run the code without any modifications.\nDownload clean linelist"
+  },
+  {
+    "objectID": "data.html#raw-case-linelist-optional",
+    "href": "data.html#raw-case-linelist-optional",
+    "title": "Data",
+    "section": "Raw case linelist (optional)",
+    "text": "Raw case linelist (optional)\nIf you’re interested in learning about data cleaning workflows, you can download the raw case linelist (an Excel spreadsheet with messy data) and follow the data cleaning tutorial. This tutorial covers the basics of reading, cleaning, validating and shaping epidemiological data, including how to import data from various sources, clean messy datasets, validate data quality, and prepare data for epidemiological analysis.\nDownload raw linelist"
   },
   {
     "objectID": "setup.html",
@@ -203,11 +280,11 @@
     "text": "Installing R Packages\nBefore setting up your project, you’ll need to install some essential R packages. We’ll use pacman, a package management tool for R that simplifies installing and loading packages. Pacman automatically installs packages if they’re not already installed, then loads them - making it much easier to manage dependencies.\nRun the following code in your R console to install pacman (if needed) and then install the essential packages:\n# Install pacman if needed\nif (!requireNamespace(\"pacman\", quietly = TRUE)) {\n  install.packages(\"pacman\")\n}\n\n# Install essential packages using pacman\npacman::p_load(\n  tidyverse,  # For data manipulation and visualization\n  rmarkdown   # For creating reports (required for Quarto)\n)\nNote: Additional packages will be installed as you work through specific tasks. For now, these two packages are sufficient to get started."
   },
   {
-    "objectID": "setup.html#getting-help-with-r-basics",
-    "href": "setup.html#getting-help-with-r-basics",
+    "objectID": "setup.html#setting-up-your-project",
+    "href": "setup.html#setting-up-your-project",
     "title": "Setup",
-    "section": "Getting Help with R Basics",
-    "text": "Getting Help with R Basics\nIf you’re new to R or need a refresher, here are some recommended resources:\n\nEpidemiologist R Handbook: Comprehensive guide to R fundamentals for epidemiologists. Start with the R Basics chapter.\nR for Data Science: A more general introduction to R and coding: R for Data Science"
+    "section": "Setting Up Your Project",
+    "text": "Setting Up Your Project\nBefore you begin working on the tasks, let’s set up your RStudio project and create a basic Quarto document that you’ll use for your epidemiological reports.\n\nStep 1: Create an RStudio R Project\nAn R Project is a way to organize your work in RStudio. It helps keep all your files, data, and outputs together in one place, and automatically sets your working directory so file paths work correctly.\n\nOpen RStudio.\nGo to File → New Project.\nSelect New Directory.\nSelect New Project.\nIn the “Directory name” field, enter sitrep.\nChoose a location on your computer where you want to save the project.\nClick Create Project.\n\nRStudio will now open your new project. You’ll see the project name (sitrep) in the top-right corner of RStudio.\n\n\nStep 2: Set Up Your Project Folder Structure\nWithin your project, create the following subfolders to organize your files:\n\nIn RStudio, click the Files tab in the bottom-right pane.\nClick New Folder.\nCreate a folder called data/ - for storing your datasets.\nCreate another folder called outputs/ - for storing generated reports and figures.\n\n\n\nStep 3: Create a New Quarto Document\n\nIn RStudio, go to File → New File → Quarto Document.\nChoose HTML as the output format.\nGive your document a title (e.g., “Epidemiological Situation Report”).\nClick Create.\nSave the document in your project folder (e.g., sitrep.qmd).\n\n\nUnderstanding Visual and Source Editing Modes\nWhen you open your Quarto document, you’ll notice two editing mode buttons in the top-left corner of the editor: Visual and Source.\n\nVisual mode: Provides a WYSIWYG (What You See Is What You Get) editing experience, similar to a word processor. You can format text using buttons and menus, and see a preview of how your document will look.\nSource mode: Shows the raw Markdown and code syntax. You work directly with the text, code chunks, and formatting syntax (like ## for headings, **bold** for bold text, etc.).\n\nFor the rest of this tutorial and the task tutorials, we’ll assume you’re using Source mode. This allows you to directly copy and paste code chunks and content from the tutorials into your document. You can switch between modes at any time using the buttons in the top-left corner - just click Source to switch to source mode.\n\n\n\nStep 4: Set Up the YAML Header and Report Structure\nAt the top of your Quarto document, you’ll see a YAML header (the section between the --- lines). The YAML header contains metadata about your document, such as the title and output format. It tells Quarto how to render your document.\nEnsure your YAML header looks like this:\n---\ntitle: \"Epidemiological Situation Report\"\nformat: html\neditor: visual\n---\nBelow the YAML header, create a basic report structure with sections. In Quarto (and Markdown), you use ## to create section headings (level 2 headings). Each ## creates a new major section in your report. You can use ### for subsections, #### for sub-subsections, and so on.\nAdd this basic outline to your document:\n## Executive Summary\n\nThis section will contain key findings and recommendations.\n\n## Data Overview\n\nThis section will describe the dataset and data quality.\n\n## Epidemiological Analysis\n\nThis section will contain your analytical outputs, including:\n\n- Incidence curves\n- Summary statistics\n- Key epidemiological parameters\n\n## Conclusions\n\nThis section will summarize findings and next steps.\n\nUnderstanding Code Chunks\nA code chunk is a section in your Quarto document where you write and execute R code. Code chunks are enclosed between three backticks (```) followed by {r} and closed with three more backticks.\nTo create a code chunk:\n\nType three backticks followed by {r} on a new line: ```{r}\nPress Enter to start a new line\nWrite your R code\nType three backticks on a new line to close the chunk: ```\n\nHere’s what a code chunk looks like:\n```{r}\n# Your R code goes here\nlibrary(tidyverse)\n```\nYou can also insert a code chunk in RStudio by: - Clicking the Insert button (green plus icon with a “C”) in the toolbar, or - Using the keyboard shortcut: Ctrl+Alt+I (Windows/Linux) or Cmd+Option+I (Mac)\nCode chunks allow you to run R code, create plots, generate tables, and perform data analysis. The results (outputs, plots, tables) will appear in your rendered HTML report.\n\n\n\nStep 5: Install and Load Basic Packages\nIn the first code chunk of your document, install and load the basic packages needed for report generation. We’ll use pacman, a package management tool for R that simplifies installing and loading packages. Pacman automatically installs packages if they’re not already installed, then loads them - making it much easier to manage dependencies.\n\n# Install pacman if needed\nif (!requireNamespace(\"pacman\", quietly = TRUE)) {\n  install.packages(\"pacman\")\n}\n\n# Install and load required packages using pacman\npacman::p_load(\n  tidyverse, # For data manipulation and visualization\n  rio, # For importing data\n  reactable # For interactive tables\n)\n\nNote: We’ll add more packages as needed when you work through specific tasks. Additional packages will be installed as you progress through the tutorials.\n\n\nStep 6: Render Your Report\nNow let’s test that everything is working by rendering your report:\n\nClick the Render button in RStudio (or press Ctrl+Shift+K / Cmd+Shift+K).\nQuarto will process your document and generate an HTML file.\nThe HTML report will open automatically in your browser.\n\nNote: The rendered HTML file will be saved in the same folder as your Quarto document, or you can specify a different output location in your YAML header.\nYou should now see a basic HTML report with your title and section headings. This confirms that your Quarto setup is working correctly!\n\n\nLearning More About Quarto\nIf you’d like to learn more about Quarto, here are some helpful resources:\n\nQuarto Tutorial: Hello, Quarto: An overview of the basics, including rendering, authoring, YAML headers, code chunks, and markdown text.\nQuarto Guide: A comprehensive guide covering all aspects of Quarto, including authoring, computations, tools, documents, presentations, dashboards, websites, and more."
   },
   {
     "objectID": "setup.html#next-steps",
@@ -217,297 +294,178 @@
     "text": "Next Steps\nOnce you have R and RStudio installed and your project set up:\n\nVisit the Data section to download example datasets.\nExplore the Tasks menu to find the analytical task(s) you’re interested in.\nJoin your assigned group and start working through the materials with facilitator support."
   },
   {
-    "objectID": "data.html",
-    "href": "data.html",
-    "title": "Data",
-    "section": "",
-    "text": "You can use your own data for the workshop tasks, or you can use the example datasets provided below. The example datasets are from the Applied Epi R Handbook and resemble a fictional Ebola outbreak. If you don’t have your own dataset or don’t feel R-competent enough to adapt the code to your data, you can use the example dataset and example code provided in each task. This is perfectly fine and will still allow you to learn the analytical techniques and generate a functional report."
-  },
-  {
-    "objectID": "data.html#raw-case-linelist",
-    "href": "data.html#raw-case-linelist",
-    "title": "Data",
-    "section": "Raw case linelist",
-    "text": "Raw case linelist\nThe raw case linelist is an Excel spreadsheet with messy data. Use this when tackling Task 1, which goes over the basics of cleaning data.\nDownload raw linelist"
-  },
-  {
-    "objectID": "data.html#clean-case-linelist",
-    "href": "data.html#clean-case-linelist",
-    "title": "Data",
-    "section": "Clean case linelist",
-    "text": "Clean case linelist\nThe clean linelist is stored in RDS format and can be directly imported into R. The example code in each task is already set up to work with this dataset, so you can simply download it and run the code without any modifications.\nDownload clean linelist"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Collaborative Analytics Workshop",
-    "section": "",
-    "text": "Welcome to the Collaborative Analytics Workshop! This workshop is designed to help you explore different tools and resources for conducting a range of common epidemiological analytical tasks. Our primary goal is for you to take home a functional script that generates an interactive epidemiological situation report that you can build on and adapt for your own work moving forward."
-  },
-  {
-    "objectID": "index.html#aim",
-    "href": "index.html#aim",
-    "title": "Collaborative Analytics Hackathon",
-    "section": "",
-    "text": "There are two core aims of the hackathon we would like you to achieve:\n\nExplore different tools and resources for conducting a range of common analytical tasks.\nWrite a functional script that applies one or more analyses to their own data and generates a report or dashboard to visualise the outputs."
-  },
-  {
-    "objectID": "index.html#structure",
-    "href": "index.html#structure",
-    "title": "Collaborative Analytics Hackathon",
-    "section": "Structure",
-    "text": "Structure\nYou will be grouped by the analytical tasks you are interested in and work through them together with support from the facilitators. During these sessions, you will apply the analyses to your own data and incorporate the analysis into your final report/dashboard script. Depending on your technical level, you may complete multiple tasks over different sessions and therefore change groups."
-  },
-  {
-    "objectID": "index.html#tasks",
-    "href": "index.html#tasks",
-    "title": "Collaborative Analytics Hackathon",
-    "section": "Tasks",
-    "text": "Tasks\nThe analytical tasks you can choose from are:\n\nReading and cleaning data\nGenerating automated situation reports\nMaking an interactive dashboard\nVisualising transmission chains\nGetting epidemiological parameters\nEstimating the reproduction number\nNowcasting epidemiological data\nForecasting cases and deaths\nEstimating disease severity\nSimulating disease transmission\n\nEach task has its own dedicated page with resources and guidance. Click on any task above to explore it."
-  },
-  {
-    "objectID": "index.html#getting-started",
-    "href": "index.html#getting-started",
-    "title": "Collaborative Analytics Workshop",
-    "section": "Getting Started",
-    "text": "Getting Started\nTo get started, visit the Setup page for installation instructions and required packages, download the example datasets from the Data section, navigate to the Tasks menu to find the analytical tasks you’re interested in, and join your group to work through the materials with support from facilitators."
-  },
-  {
-    "objectID": "index.html#additional-resources",
-    "href": "index.html#additional-resources",
-    "title": "Collaborative Analytics Workshop",
-    "section": "Additional Resources",
-    "text": "Additional Resources\nIf you’re new to R or need a refresher, the Epidemiologist R Handbook provides a comprehensive guide to R fundamentals for epidemiologists. Start with the R Basics chapter. For a more general introduction to R and coding, see R for Data Science."
-  },
-  {
-    "objectID": "task1.html",
-    "href": "task1.html",
-    "title": "Task 1: Reading and cleaning data",
-    "section": "",
-    "text": "This task covers the basics of reading, cleaning, validating and shaping basic epidemiological data. You will learn how to import data from various sources, clean messy datasets, validate data quality, and prepare data for epidemiological analysis."
-  },
-  {
-    "objectID": "task1.html#overview",
-    "href": "task1.html#overview",
-    "title": "Task 1: Reading and cleaning data",
-    "section": "",
-    "text": "This task covers the basics of reading, cleaning, validating and shaping basic epidemiological data. You will learn how to import data from various sources, clean messy datasets, validate data quality, and prepare data for epidemiological analysis."
-  },
-  {
-    "objectID": "task1.html#learning-objectives",
-    "href": "task1.html#learning-objectives",
-    "title": "Task 1: Reading and cleaning data",
-    "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nImport epidemiological data from various file formats\nClean and standardize data structures\nValidate data quality and completeness\nHandle missing values and data inconsistencies"
-  },
-  {
-    "objectID": "task1.html#tutorial",
-    "href": "task1.html#tutorial",
-    "title": "Task 1: Reading and cleaning data",
-    "section": "Tutorial",
-    "text": "Tutorial\nAccess the tutorial here\nNote: This is a long and comprehensive introduction covering the basics of data cleaning. It can be skipped if you are already familiar with working in R and data cleaning workflows."
-  },
-  {
-    "objectID": "task1.html#additional-resources",
-    "href": "task1.html#additional-resources",
-    "title": "Task 1: Reading and cleaning data",
-    "section": "Additional Resources",
-    "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
-  },
-  {
     "objectID": "task2.html",
     "href": "task2.html",
-    "title": "Task 1: Generating a basic situation report",
+    "title": "Task 2: Generating interactive maps",
     "section": "",
-    "text": "This task covers generating a basic situation report with dynamic figures and tables. You will learn how to create reproducible reports that can be easily updated as new data becomes available."
+    "text": "This task focuses on creating interactive maps for visualizing spatial aspects of epidemiological data. You will learn how to work with spatial data, create maps using GIS tools in R, and visualize disease patterns geographically."
   },
   {
     "objectID": "task2.html#overview",
     "href": "task2.html#overview",
-    "title": "Task 1: Generating a basic situation report",
+    "title": "Task 2: Generating interactive maps",
     "section": "",
-    "text": "This task covers generating a basic situation report with dynamic figures and tables. You will learn how to create reproducible reports that can be easily updated as new data becomes available."
+    "text": "This task focuses on creating interactive maps for visualizing spatial aspects of epidemiological data. You will learn how to work with spatial data, create maps using GIS tools in R, and visualize disease patterns geographically."
   },
   {
     "objectID": "task2.html#learning-objectives",
     "href": "task2.html#learning-objectives",
-    "title": "Task 1: Generating a basic situation report",
+    "title": "Task 2: Generating interactive maps",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nCreate automated report generation workflows\nIncorporate dynamic figures and tables\nUse Quarto for report generation\nBuild a basic epidemiological report with incidence curves and summary statistics"
+    "text": "Learning Objectives\n\nWork with spatial data formats (shapefiles, coordinates)\nCreate interactive maps using GIS tools in R\nVisualize disease patterns and hotspots geographically\nPerform basic spatial analysis"
   },
   {
-    "objectID": "task2.html#step-by-step-instructions-creating-a-basic-epidemiological-report-in-quarto",
-    "href": "task2.html#step-by-step-instructions-creating-a-basic-epidemiological-report-in-quarto",
-    "title": "Task 1: Generating a basic situation report",
-    "section": "Step-by-Step Instructions: Creating a Basic Epidemiological Report in Quarto",
-    "text": "Step-by-Step Instructions: Creating a Basic Epidemiological Report in Quarto\nThis tutorial will guide you through creating a basic epidemiological report using Quarto. You’ll generate an HTML report with an incidence curve, case fatality ratio (CFR), and an interactive summary table.\nNote: Before starting this task, make sure you have completed the setup steps on the Setup page, including creating your project folder structure and a basic Quarto document.\n\nStep 1: Obtain the Cleaned Linelist Dataset\nFor this task, we will be using the cleaned linelist file. Download the cleaned linelist:\n\nNavigate to the Data page on this website.\nClick the download button for the “clean” linelist (.rds).\nSave the file to your data/ folder that you created during setup.\nThe file path should be: data/linelist_cleaned.rds (relative to where your Quarto document is saved).\n\nAlternatively, you can download it directly from: linelist_cleaned.rds\n\n\nStep 2: Load Required Packages\nIn your Quarto document, add or update the code chunk to load the packages needed for this task:\n\n# Load required packages\nlibrary(tidyverse)  # For data manipulation and visualization\nlibrary(reactable)  # For interactive tables\nlibrary(lubridate)   # For date handling\n\n\n\nStep 3: Import the Data\nCreate a new code chunk to import the cleaned linelist data. The cleaned file is in RDS format, which preserves column classes:\n\n# Import the cleaned linelist data from your local data folder\n# Use the downloaded cleaned file\nlinelist &lt;- readRDS(\"data/linelist_cleaned.rds\")\n\n# View the first few rows\nhead(linelist)\n\n\n\n\n\n\n\n\n\nStep 4: Create an Incidence Curve\nCreate a new section in your document and add a code chunk to create an incidence curve (epidemic curve) using date_onset:\n\n# Create incidence curve\nincidence_curve &lt;- linelist |&gt;\n  ggplot(aes(x = date_onset)) +\n  geom_histogram(binwidth = 7, fill = \"steelblue\", color = \"white\") +\n  labs(\n    title = \"Incidence Curve by Date of Onset\",\n    x = \"Date of Onset\",\n    y = \"Number of Cases\"\n  ) +\n  theme_minimal() +\n  theme(plot.title = element_text(face = \"bold\", size = 14))\n\n# Display the plot\nprint(incidence_curve)\n\n\n\n\nIncidence Curve by Date of Onset\n\n\n\n\n\n\nStep 5: Calculate Case Fatality Ratio (CFR)\nCreate a new section and calculate the CFR, making sure to exclude NA outcomes:\n\n# Calculate CFR (excluding NA outcomes)\ncfr_data &lt;- linelist |&gt;\n  filter(!is.na(outcome)) |&gt;\n  summarise(\n    total_cases = n(),\n    deaths = sum(outcome == \"Death\", na.rm = TRUE),\n    recovered = sum(outcome == \"Recover\", na.rm = TRUE),\n    cfr = round((deaths / total_cases) * 100, 2)\n  )\n\nThe estimated Case Fatality Ratio is 56.56%.\n\n\nStep 6: Create an Interactive Summary Table by Hospital\nCreate a new section and generate an interactive summary table grouped by hospital using reactable():\n\n# Create summary table by hospital\n# Group NA and \"Other\" together\nhospital_summary &lt;- linelist |&gt;\n  mutate(\n    hospital_grouped = case_when(\n      is.na(hospital) | hospital %in% c(\"Missing\", \"Other\") ~ \"Other/Unknown\",\n      TRUE ~ hospital\n    )\n  ) |&gt;\n  group_by(hospital_grouped) |&gt;\n  summarise(\n    total_cases = n(),\n    deaths = sum(outcome == \"Death\", na.rm = TRUE),\n    recovered = sum(outcome == \"Recover\", na.rm = TRUE),\n    .groups = \"drop\"\n  ) |&gt;\n  rename(hospital = hospital_grouped) |&gt;\n  mutate(\n    cfr = round((deaths / (deaths + recovered)) * 100, 2),\n    cfr = ifelse(is.na(cfr), 0, cfr)\n  )\n\n# Create interactive table\nreactable(\n  hospital_summary,\n  columns = list(\n    hospital = colDef(name = \"Hospital\"),\n    total_cases = colDef(name = \"Total Cases\"),\n    deaths = colDef(name = \"Deaths\"),\n    recovered = colDef(name = \"Recovered\"),\n    cfr = colDef(name = \"CFR (%)\", format = colFormat(digits = 2))\n  ),\n  defaultPageSize = nrow(hospital_summary)\n)"
+    "objectID": "task2.html#tutorial",
+    "href": "task2.html#tutorial",
+    "title": "Task 2: Generating interactive maps",
+    "section": "Tutorial",
+    "text": "Tutorial\nAccess the tutorial here"
+  },
+  {
+    "objectID": "task2.html#download-gis-data",
+    "href": "task2.html#download-gis-data",
+    "title": "Task 2: Generating interactive maps",
+    "section": "Download GIS Data",
+    "text": "Download GIS Data\nFor this task, you will need the GIS shapefile data to create the maps. The shapefile contains administrative boundaries for Sierra Leone.\n\nDownload the GIS data zip file using the button below.\nUnzip the file and extract its contents to your data/gis/ folder.\nThe extracted files should include sle_adm3.shp and other related shapefile components in the data/gis/ directory.\n\nDownload GIS data (zip)"
+  },
+  {
+    "objectID": "task2.html#example-report",
+    "href": "task2.html#example-report",
+    "title": "Task 2: Generating interactive maps",
+    "section": "Example Report",
+    "text": "Example Report\n\nMapping Incidence\nTotal incidence to date was mapped by health-area.\n\n\nCode\n# INSTALL AND LOAD PACKAGES\n\n# Load required packages\npacman::p_load(\n  tidyverse, # basic data manipulation\n  sf, # handling shapefiles\n  here, # handing file paths\n  leaflet, # mapping\n  htmltools # handlers for html objects\n)\n\n\n# LOAD DATA\n\n# load shapefiles and keep relevant areas\nshp &lt;- sf::read_sf(\"data/gis/sle_adm3.shp\") |&gt;\n  # standardize column names\n  janitor::clean_names() |&gt;\n  # filter to keep certain areas\n  filter(adm1_en == \"Western\")\n\n# import the cleaned linelist data\nlinelist &lt;- rio::import(\"data/linelist.rds\") |&gt;\n  # interpret the lon and lat variables for GIS use\n  st_as_sf(coords = c(\"lon\", \"lat\"), crs = 4326) |&gt;\n  # join the administrative boundary file to the linelist, based on\n  # spatial intersection\n  st_join(shp, join = st_intersects)\n\n# convert to aggregate format\nagg &lt;- linelist |&gt;\n  # remove the geometry for now\n  st_drop_geometry() |&gt;\n  # count the number of cases per adm3\n  summarise(n = n(), .by = adm3_en) |&gt;\n  # add the shape files of the adm3 zones\n  inner_join(shp, by = \"adm3_en\") |&gt;\n  # convert back to shapefile\n  st_as_sf()\n\n# define colour palette\npal &lt;- colorNumeric(palette = \"YlOrRd\", domain = agg$n)\n\n# generate leaflet map\nleaflet(agg) |&gt;\n  # use CartoDB for background\n  addProviderTiles(\"CartoDB.Positron\") |&gt;\n  # add adm3 shaded by number of cases\n  addPolygons(\n    fillColor = ~ pal(n),\n    color = \"white\",\n    weight = 1,\n    fillOpacity = 0.7,\n    # define labels\n    label = ~ map(\n      paste0(\"&lt;b&gt;\", adm3_en, \"&lt;/b&gt;&lt;br&gt;\", n, \" cases\"),\n      htmltools::HTML\n    ),\n    labelOptions = labelOptions(direction = \"auto\"),\n    highlightOptions = highlightOptions(\n      weight = 3,\n      color = \"black\",\n      bringToFront = FALSE\n    )\n  ) |&gt;\n  # add points per case\n  addCircleMarkers(\n    data = linelist,\n    radius = 4,\n    color = \"black\",\n    fillColor = \"grey\",\n    weight = 1,\n    fillOpacity = 0.8,\n    label = ~ map(\n      paste0(\n        \"&lt;b&gt;Case ID:&lt;/b&gt; \", case_id, \"&lt;br&gt;\",\n        \"&lt;b&gt;Date onset:&lt;/b&gt; \", date_onset, \"&lt;br&gt;\",\n        \"&lt;b&gt;Health facility:&lt;/b&gt; \", hospital\n      ),\n      htmltools::HTML\n    ),\n    labelOptions = labelOptions(direction = \"auto\"),\n    group = \"Cases\"\n  ) |&gt;\n  # add legend\n  addLegend(\n    pal = pal,\n    values = ~n,\n    title = \"Case count\",\n    opacity = 0.7,\n    position = \"bottomright\"\n  )"
   },
   {
     "objectID": "task2.html#additional-resources",
     "href": "task2.html#additional-resources",
-    "title": "Task 1: Generating a basic situation report",
+    "title": "Task 2: Generating interactive maps",
     "section": "Additional Resources",
-    "text": "Additional Resources\n\nQuarto DocumentationR HandbookPackage Documentation\n\n\n\nQuarto Documentation\nQuarto for R\n\n\n\n\nEpidemiologist R Handbook - Reports\nEpidemiologist R Handbook - Epidemic Curves\n\n\n\n\nggplot2 Documentation\nreactable Package"
+    "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
   },
   {
     "objectID": "task4.html",
     "href": "task4.html",
-    "title": "Task 3: Visualising transmission chains",
+    "title": "Task 4: Getting epidemiological parameters",
     "section": "",
-    "text": "This task covers visualizing transmission chains using epicontacts. You will learn how to analyze and visualize contact networks and transmission pathways."
+    "text": "This task focuses on obtaining epidemiological parameters from your data or the literature. You will learn how to extract, estimate, and use key epidemiological parameters in your analyses."
   },
   {
     "objectID": "task4.html#overview",
     "href": "task4.html#overview",
-    "title": "Task 3: Visualising transmission chains",
+    "title": "Task 4: Getting epidemiological parameters",
     "section": "",
-    "text": "This task covers visualizing transmission chains using epicontacts. You will learn how to analyze and visualize contact networks and transmission pathways."
+    "text": "This task focuses on obtaining epidemiological parameters from your data or the literature. You will learn how to extract, estimate, and use key epidemiological parameters in your analyses."
   },
   {
     "objectID": "task4.html#learning-objectives",
     "href": "task4.html#learning-objectives",
-    "title": "Task 3: Visualising transmission chains",
+    "title": "Task 4: Getting epidemiological parameters",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nWork with contact network data\nVisualize transmission chains using epicontacts\nAnalyze contact patterns\nIdentify transmission clusters"
+    "text": "Learning Objectives\n\nExtract epidemiological parameters from data\nSearch and retrieve parameters from literature\nEstimate parameters using available data\nIncorporate parameters into analytical models"
   },
   {
     "objectID": "task4.html#tutorial",
     "href": "task4.html#tutorial",
-    "title": "Task 3: Visualising transmission chains",
+    "title": "Task 4: Getting epidemiological parameters",
     "section": "Tutorial",
     "text": "Tutorial\nAccess the tutorial here"
   },
   {
     "objectID": "task4.html#example-report",
     "href": "task4.html#example-report",
-    "title": "Task 3: Visualising transmission chains",
+    "title": "Task 4: Getting epidemiological parameters",
     "section": "Example Report",
-    "text": "Example Report\n\n\nCode\n# INSTALL AND LOAD PACKAGES\n\n# install development version of epicontacts\npacman::p_install_gh(\"reconhub/epicontacts@timeline\")\n\n# Load required packages\npacman::p_load(\n   rio,          # File import\n   here,         # File locator\n   tidyverse,    # Data management + ggplot2 graphics\n   remotes,      # Package installation from github\n   epicontacts,  # Transmission chain analysis\n   reactable     # Interactive tables\n)\n\n\n# LOAD DATA\nlinelist &lt;- readRDS(\"data/linelist.rds\")\n\n\n# SETTING UP EPICONTACTS\n\n# generate contacts\ncontacts &lt;- linelist %&gt;%\n  transmute(\n    infector = infector,\n    case_id = case_id,\n    location = sample(c(\"Community\", \"Nosocomial\"), n(), TRUE),\n    duration = sample.int(10, n(), TRUE)\n  ) %&gt;%\n  drop_na(infector)\n\n# generate epicontacts object\nepic &lt;- make_epicontacts(\n  linelist = linelist,\n  contacts = contacts,\n  id = \"case_id\",\n  from = \"infector\",\n  to = \"case_id\",\n  directed = TRUE\n)\n\n\n\nFuneral infections\nWe first investigated funeral infections that occured during the year of 2014.\n\n\nCode\n# filter by nosocomial infection between april and july\nfuneral &lt;- subset(\n  epic,\n  node_attribute = list(\n    date_infection = as.Date(c(\"2014-01-01\", \"2014-12-31\"))\n  ), \n  edge_attribute = list(source = \"funeral\")\n) |&gt;\n  thin(what = \"contacts\") |&gt;\n  thin(what = \"linelist\")\n\n# plot and set the selector to hospital\nplot(\n  funeral,\n  label = FALSE,\n  node_color = \"gender\",\n  height = 400,\n  width = 700\n)\n\n\n\n\n\n\n\n\nInfection clusters\nWe then investigated clusters larger than 12 cases:\n\n\nCode\n# keep linelist and contacts part of a cluster of at least 13 cases\nlarge &lt;- subset(epic, cs_min = 12)\n\n# plot\nplot(\n  large,\n  selector = \"hospital\",\n  x_axis = \"date_infection\",\n  label = FALSE,\n  height = 500,\n  width = 700,\n  node_size = 5,\n  arrow_size = 0.25,\n  network_shape = \"rectangle\"\n)\n\n\n\n\n\n\nBelow are key summary statistics:\n\n\nCode\n# calculate cluster statistics\nclusters &lt;- get_clusters(epic)\ncluster_sizes &lt;- table(clusters$linelist$cluster_member)\nn_clusters &lt;-  length(\n  unique(filter(clusters$linelist, cluster_size &gt; 1)$cluster_member)\n)\n\n# plot the cluster size distribution\ncluster_sizes |&gt;\n  table() |&gt;\n  as.data.frame() |&gt;\n  ggplot(aes(cluster_sizes, Freq)) +\n  geom_col() +\n  scale_y_continuous(expand = expansion(mult = c(0, 0.01))) +\n  labs(\n    x = \"Size of cluster\",\n    y = \"Frequency\"\n  ) +\n  theme_classic()\n\n\n\n\n\n\n\n\n\n\n\nTransmission Chain Statistics\nHere we present some key statistics:\n\n\nCode\n# Calculate transmission statistics\ntransmission_stats &lt;- tibble(\n  Metric = c(\n    \"Total transmission links\",\n    \"Number of clusters\",\n    \"Largest cluster size\",\n    \"Mean cluster size\",\n    \"Proportion cases with infector information\"\n  ),\n  Value = c(\n    nrow(epic$contacts),\n    n_clusters,\n    max(cluster_sizes),\n    round(mean(cluster_sizes), 1),\n    scales::percent(mean(!is.na(epic$linelist$infector)))\n  )\n)\n\nreactable(\n  transmission_stats,\n  defaultPageSize = nrow(transmission_stats)\n)"
+    "text": "Example Report\n\nEbola serial interval\nWe first extract this parameter from the {epiparameter} package database:\n\n\nCode\n# INSTALL AND LOAD PACKAGES\n\n# Load required packages\npacman::p_load(epiparameter, tidyverse, EpiNow2)\n\n# Creating epiparameter objects by accessing the {epiparameter} library\nebola_serial_int &lt;- epiparameter::epiparameter_db(\n  disease = \"ebola\", \n  epi_name = \"serial\",\n  subset = sample_size &gt; 10,\n  author = \"WHO Ebola Response Team\",\n  single_epiparameter = TRUE\n)\n\nebola_serial_int\n\n\nDisease: Ebola Virus Disease\nPathogen: Ebola Virus\nEpi Parameter: serial interval\nStudy: WHO Ebola Response Team, Agua-Agum J, Ariyarajah A, Aylward B, Blake I,\nBrennan R, Cori A, Donnelly C, Dorigatti I, Dye C, Eckmanns T, Ferguson\nN, Formenty P, Fraser C, Garcia E, Garske T, Hinsley W, Holmes D,\nHugonnet S, Iyengar S, Jombart T, Krishnan R, Meijers S, Mills H,\nMohamed Y, Nedjati-Gilani G, Newton E, Nouvellet P, Pelletier L,\nPerkins D, Riley S, Sagrado M, Schnitzler J, Schumacher D, Shah A, Van\nKerkhove M, Varsaneux O, Kannangarage N (2015). \"West African Ebola\nEpidemic after One Year — Slowing but Not Yet under Control.\" _The New\nEngland Journal of Medicine_. doi:10.1056/NEJMc1414992\n&lt;https://doi.org/10.1056/NEJMc1414992&gt;.\nDistribution: gamma (days)\nParameters:\n  shape: 2.188\n  scale: 6.490\n\n\n\n\nVisualise parameters\nWe can then view the serial interval either as a table, or as a plot of its probability density function:\n\n\nCode\nepiparameter::parameter_tbl(ebola_serial_int) # as a table\n\n\n# Parameter table:\n# A data frame:    1 × 7\n  disease           pathogen epi_name prob_distribution author  year sample_size\n  &lt;chr&gt;             &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;             &lt;chr&gt;  &lt;dbl&gt;       &lt;dbl&gt;\n1 Ebola Virus Dise… Ebola V… serial … gamma             WHO E…  2015         305\n\n\nCode\nplot(ebola_serial_int) # as a plot of the PDF\n\n\n\n\n\n\n\n\n\n\n\nExtract and use relevant info\nOnce we have an {epiparameter} object ready, we extract relevant information such as its summary statistics or distribution parameters, and use these in subsequent analyses. Below, the extracted serial interval for Ebola is passed onto {EpiNow2}.\n\n\nCode\nebola_serial_int$summary_stats[c(\"mean\", \"sd\")] # summary statistics\n\n\n$mean\n[1] 14.2\n\n$sd\n[1] 9.6\n\n\nCode\nepiparameter::get_parameters(ebola_serial_int) # distribution parameters\n\n\n   shape    scale \n2.187934 6.490141 \n\n\nCode\nserial_interval_EN2 &lt;-\n  EpiNow2::Gamma(\n    mean = ebola_serial_int$summary_stats$mean,\n    sd = ebola_serial_int$summary_stats$sd,\n    max = 30\n  )\n\nserial_interval_EN2\n\n\n- gamma distribution (max: 30):\n  shape:\n    2.2\n  rate:\n    0.15"
   },
   {
     "objectID": "task4.html#additional-resources",
     "href": "task4.html#additional-resources",
-    "title": "Task 3: Visualising transmission chains",
+    "title": "Task 4: Getting epidemiological parameters",
     "section": "Additional Resources",
-    "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for epicontacts and related packages."
+    "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
   },
   {
     "objectID": "task6.html",
     "href": "task6.html",
-    "title": "Task 6: Estimating the reproduction number",
+    "title": "Task 6: Nowcasting epidemiological data",
     "section": "",
-    "text": "This task covers estimating the basic and effective reproduction number (R0 and Re). You will learn methods for calculating these key epidemiological metrics from outbreak data."
+    "text": "This task focuses on nowcasting epidemiological data. You will learn how to adjust for reporting delays and estimate current case counts from incomplete data."
   },
   {
     "objectID": "task6.html#overview",
     "href": "task6.html#overview",
-    "title": "Task 6: Estimating the reproduction number",
+    "title": "Task 6: Nowcasting epidemiological data",
     "section": "",
-    "text": "This task covers estimating the basic and effective reproduction number (R0 and Re). You will learn methods for calculating these key epidemiological metrics from outbreak data."
+    "text": "This task focuses on nowcasting epidemiological data. You will learn how to adjust for reporting delays and estimate current case counts from incomplete data."
   },
   {
     "objectID": "task6.html#learning-objectives",
     "href": "task6.html#learning-objectives",
-    "title": "Task 6: Estimating the reproduction number",
+    "title": "Task 6: Nowcasting epidemiological data",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nUnderstand the difference between R0 and Re\nEstimate reproduction numbers from case data\nUse appropriate methods for different data types\nVisualize and interpret reproduction number estimates"
+    "text": "Learning Objectives\n\nUnderstand reporting delays and their impact\nApply nowcasting methods to epidemiological data\nAdjust for underreporting and delays\nGenerate real-time estimates of current incidence"
   },
   {
     "objectID": "task6.html#tutorial",
     "href": "task6.html#tutorial",
-    "title": "Task 6: Estimating the reproduction number",
+    "title": "Task 6: Nowcasting epidemiological data",
     "section": "Tutorial",
     "text": "Tutorial\nAccess the tutorial here"
   },
   {
     "objectID": "task6.html#additional-resources",
     "href": "task6.html#additional-resources",
-    "title": "Task 6: Estimating the reproduction number",
+    "title": "Task 6: Nowcasting epidemiological data",
     "section": "Additional Resources",
     "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
   },
   {
     "objectID": "task8.html",
     "href": "task8.html",
-    "title": "Task 8: Forecasting cases and deaths",
+    "title": "Task 8: Estimating disease severity",
     "section": "",
-    "text": "This task covers forecasting cases and deaths. You will learn how to build forecasting models and generate predictions of future disease incidence."
+    "text": "This task focuses on estimating disease severity. You will learn how to calculate and interpret key severity metrics such as case fatality ratio and infection fatality ratio."
   },
   {
     "objectID": "task8.html#overview",
     "href": "task8.html#overview",
-    "title": "Task 8: Forecasting cases and deaths",
+    "title": "Task 8: Estimating disease severity",
     "section": "",
-    "text": "This task covers forecasting cases and deaths. You will learn how to build forecasting models and generate predictions of future disease incidence."
+    "text": "This task focuses on estimating disease severity. You will learn how to calculate and interpret key severity metrics such as case fatality ratio and infection fatality ratio."
   },
   {
     "objectID": "task8.html#learning-objectives",
     "href": "task8.html#learning-objectives",
-    "title": "Task 8: Forecasting cases and deaths",
+    "title": "Task 8: Estimating disease severity",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nBuild forecasting models for epidemiological data\nGenerate short-term and long-term forecasts\nQuantify forecast uncertainty\nEvaluate forecast performance"
+    "text": "Learning Objectives\n\nCalculate case fatality ratio (CFR)\nEstimate infection fatality ratio (IFR)\nAdjust for time-to-death and censoring\nCompare severity across populations and time periods"
   },
   {
     "objectID": "task8.html#tutorial",
     "href": "task8.html#tutorial",
-    "title": "Task 8: Forecasting cases and deaths",
+    "title": "Task 8: Estimating disease severity",
     "section": "Tutorial",
     "text": "Tutorial\nAccess the tutorial here"
   },
   {
     "objectID": "task8.html#additional-resources",
     "href": "task8.html#additional-resources",
-    "title": "Task 8: Forecasting cases and deaths",
+    "title": "Task 8: Estimating disease severity",
     "section": "Additional Resources",
     "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
   },
   {
-    "objectID": "task5.html#example-report",
-    "href": "task5.html#example-report",
-    "title": "Task 5: Getting epidemiological parameters",
-    "section": "Example Report",
-    "text": "Example Report\n\nEbola serial interval\nWe first extract this parameter from the {epiparameter} package database:\n\n\nCode\n# INSTALL AND LOAD PACKAGES\n\n# Load required packages\npacman::p_load(epiparameter, tidyverse, EpiNow2)\n\n# Creating epiparameter objects by accessing the {epiparameter} library\nebola_serial_int &lt;- epiparameter::epiparameter_db(\n  disease = \"ebola\", \n  epi_name = \"serial\",\n  subset = sample_size &gt; 10,\n  author = \"WHO Ebola Response Team\",\n  single_epiparameter = TRUE\n)\n\nebola_serial_int\n\n\nDisease: Ebola Virus Disease\nPathogen: Ebola Virus\nEpi Parameter: serial interval\nStudy: WHO Ebola Response Team, Agua-Agum J, Ariyarajah A, Aylward B, Blake I,\nBrennan R, Cori A, Donnelly C, Dorigatti I, Dye C, Eckmanns T, Ferguson\nN, Formenty P, Fraser C, Garcia E, Garske T, Hinsley W, Holmes D,\nHugonnet S, Iyengar S, Jombart T, Krishnan R, Meijers S, Mills H,\nMohamed Y, Nedjati-Gilani G, Newton E, Nouvellet P, Pelletier L,\nPerkins D, Riley S, Sagrado M, Schnitzler J, Schumacher D, Shah A, Van\nKerkhove M, Varsaneux O, Kannangarage N (2015). \"West African Ebola\nEpidemic after One Year — Slowing but Not Yet under Control.\" _The New\nEngland Journal of Medicine_. doi:10.1056/NEJMc1414992\n&lt;https://doi.org/10.1056/NEJMc1414992&gt;.\nDistribution: gamma (days)\nParameters:\n  shape: 2.188\n  scale: 6.490\n\n\n\n\nVisualise parameters\nWe can then view the serial interval either as a table, or as a plot of its probability density function:\n\n\nCode\nepiparameter::parameter_tbl(ebola_serial_int) # as a table\n\n\n# Parameter table:\n# A data frame:    1 × 7\n  disease           pathogen epi_name prob_distribution author  year sample_size\n  &lt;chr&gt;             &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;             &lt;chr&gt;  &lt;dbl&gt;       &lt;dbl&gt;\n1 Ebola Virus Dise… Ebola V… serial … gamma             WHO E…  2015         305\n\n\nCode\nplot(ebola_serial_int) # as a plot of the PDF\n\n\n\n\n\n\n\n\n\n\n\nExtract and use relevant info\nOnce we have an {epiparameter} object ready, we extract relevant information such as its summary statistics or distribution parameters, and use these in subsequent analyses. Below, the extracted serial interval for Ebola is passed onto {EpiNow2}.\n\n\nCode\nebola_serial_int$summary_stats[c(\"mean\", \"sd\")] # summary statistics\n\n\n$mean\n[1] 14.2\n\n$sd\n[1] 9.6\n\n\nCode\nepiparameter::get_parameters(ebola_serial_int) # distribution parameters\n\n\n   shape    scale \n2.187934 6.490141 \n\n\nCode\nserial_interval_EN2 &lt;-\n  EpiNow2::Gamma(\n    mean = ebola_serial_int$summary_stats$mean,\n    sd = ebola_serial_int$summary_stats$sd,\n    max = 30\n  )\n\nserial_interval_EN2\n\n\n- gamma distribution (max: 30):\n  shape:\n    2.2\n  rate:\n    0.15"
-  },
-  {
-    "objectID": "setup.html#setting-up-your-project",
-    "href": "setup.html#setting-up-your-project",
-    "title": "Setup",
-    "section": "Setting Up Your Project",
-    "text": "Setting Up Your Project\nBefore you begin working on the tasks, let’s set up your RStudio project and create a basic Quarto document that you’ll use for your epidemiological reports.\n\nStep 1: Create an RStudio R Project\nAn R Project is a way to organize your work in RStudio. It helps keep all your files, data, and outputs together in one place, and automatically sets your working directory so file paths work correctly.\n\nOpen RStudio.\nGo to File → New Project.\nSelect New Directory.\nSelect New Project.\nIn the “Directory name” field, enter sitrep.\nChoose a location on your computer where you want to save the project.\nClick Create Project.\n\nRStudio will now open your new project. You’ll see the project name (sitrep) in the top-right corner of RStudio.\n\n\nStep 2: Set Up Your Project Folder Structure\nWithin your project, create the following subfolders to organize your files:\n\nIn RStudio, click the Files tab in the bottom-right pane.\nClick New Folder.\nCreate a folder called data/ - for storing your datasets.\nCreate another folder called outputs/ - for storing generated reports and figures.\n\n\n\nStep 3: Create a New Quarto Document\n\nIn RStudio, go to File → New File → Quarto Document.\nChoose HTML as the output format.\nGive your document a title (e.g., “Epidemiological Situation Report”).\nClick Create.\nSave the document in your project folder (e.g., sitrep.qmd).\n\n\nUnderstanding Visual and Source Editing Modes\nWhen you open your Quarto document, you’ll notice two editing mode buttons in the top-left corner of the editor: Visual and Source.\n\nVisual mode: Provides a WYSIWYG (What You See Is What You Get) editing experience, similar to a word processor. You can format text using buttons and menus, and see a preview of how your document will look.\nSource mode: Shows the raw Markdown and code syntax. You work directly with the text, code chunks, and formatting syntax (like ## for headings, **bold** for bold text, etc.).\n\nFor the rest of this tutorial and the task tutorials, we’ll assume you’re using Source mode. This allows you to directly copy and paste code chunks and content from the tutorials into your document. You can switch between modes at any time using the buttons in the top-left corner - just click Source to switch to source mode.\n\n\n\nStep 4: Set Up the YAML Header and Report Structure\nAt the top of your Quarto document, you’ll see a YAML header (the section between the --- lines). The YAML header contains metadata about your document, such as the title and output format. It tells Quarto how to render your document.\nEnsure your YAML header looks like this:\n---\ntitle: \"Epidemiological Situation Report\"\nformat: html\neditor: visual\n---\nBelow the YAML header, create a basic report structure with sections. In Quarto (and Markdown), you use ## to create section headings (level 2 headings). Each ## creates a new major section in your report. You can use ### for subsections, #### for sub-subsections, and so on.\nAdd this basic outline to your document:\n## Executive Summary\n\nThis section will contain key findings and recommendations.\n\n## Data Overview\n\nThis section will describe the dataset and data quality.\n\n## Epidemiological Analysis\n\nThis section will contain your analytical outputs, including:\n\n- Incidence curves\n- Summary statistics\n- Key epidemiological parameters\n\n## Conclusions\n\nThis section will summarize findings and next steps.\n\nUnderstanding Code Chunks\nA code chunk is a section in your Quarto document where you write and execute R code. Code chunks are enclosed between three backticks (```) followed by {r} and closed with three more backticks.\nTo create a code chunk:\n\nType three backticks followed by {r} on a new line: ```{r}\nPress Enter to start a new line\nWrite your R code\nType three backticks on a new line to close the chunk: ```\n\nHere’s what a code chunk looks like:\n```{r}\n# Your R code goes here\nlibrary(tidyverse)\n```\nYou can also insert a code chunk in RStudio by: - Clicking the Insert button (green plus icon with a “C”) in the toolbar, or - Using the keyboard shortcut: Ctrl+Alt+I (Windows/Linux) or Cmd+Option+I (Mac)\nCode chunks allow you to run R code, create plots, generate tables, and perform data analysis. The results (outputs, plots, tables) will appear in your rendered HTML report.\n\n\n\nStep 5: Install and Load Basic Packages\nIn the first code chunk of your document, install and load the basic packages needed for report generation. We’ll use pacman, a package management tool for R that simplifies installing and loading packages. Pacman automatically installs packages if they’re not already installed, then loads them - making it much easier to manage dependencies.\n\n# Install pacman if needed\nif (!requireNamespace(\"pacman\", quietly = TRUE)) {\n  install.packages(\"pacman\")\n}\n\n# Install and load required packages using pacman\npacman::p_load(\n  tidyverse, # For data manipulation and visualization\n  rio, # For importing data\n  reactable # For interactive tables\n)\n\nNote: We’ll add more packages as needed when you work through specific tasks. Additional packages will be installed as you progress through the tutorials.\n\n\nStep 6: Render Your Report\nNow let’s test that everything is working by rendering your report:\n\nClick the Render button in RStudio (or press Ctrl+Shift+K / Cmd+Shift+K).\nQuarto will process your document and generate an HTML file.\nThe HTML report will open automatically in your browser.\n\nNote: The rendered HTML file will be saved in the same folder as your Quarto document, or you can specify a different output location in your YAML header.\nYou should now see a basic HTML report with your title and section headings. This confirms that your Quarto setup is working correctly!\n\n\nLearning More About Quarto\nIf you’d like to learn more about Quarto, here are some helpful resources:\n\nQuarto Tutorial: Hello, Quarto: An overview of the basics, including rendering, authoring, YAML headers, code chunks, and markdown text.\nQuarto Guide: A comprehensive guide covering all aspects of Quarto, including authoring, computations, tools, documents, presentations, dashboards, websites, and more."
-  },
-  {
-    "objectID": "index.html#workshop-structure",
-    "href": "index.html#workshop-structure",
+    "objectID": "index.html#datasets",
+    "href": "index.html#datasets",
     "title": "Collaborative Analytics Workshop",
-    "section": "Workshop Structure",
-    "text": "Workshop Structure\nYou will be grouped by the analytical tasks you are interested in and work through them together with support from the facilitators. During these sessions, you can apply the analyses to your own data (if you have it and feel comfortable adapting the code) or use the example datasets and code. Depending on your technical level, you may complete multiple tasks over different sessions and therefore change groups."
+    "section": "Datasets",
+    "text": "Datasets\nYou can work with your own data throughout the workshop, or you can use the example datasets provided. If you don’t have your own dataset or don’t feel comfortable adapting code to your data, you can use the example datasets and example code. This is perfectly fine and will still allow you to learn the analytical techniques and generate a functional report."
   },
   {
-    "objectID": "index.html#workshop-timeline",
-    "href": "index.html#workshop-timeline",
+    "objectID": "index.html#tasks",
+    "href": "index.html#tasks",
     "title": "Collaborative Analytics Workshop",
-    "section": "Workshop Timeline",
-    "text": "Workshop Timeline\nBy the end of Day 1, you should have:\n\nCompleted the Setup section (installing R, RStudio, packages, and creating your project)\nDownloaded the example datasets from the Data section\nCompleted Task 1, which generates a basic descriptive outline of a situation report\n\nBy the end of Day 2, you should have:\n\nCompleted one or more of the other analytical tasks (Tasks 2-9)\nIncorporated your chosen analytical tasks into your example report\nA functional script that generates an interactive epidemiological situation report ready to adapt for your own work"
-  },
-  {
-    "objectID": "data.html#raw-case-linelist-optional---data-cleaning",
-    "href": "data.html#raw-case-linelist-optional---data-cleaning",
-    "title": "Data",
-    "section": "Raw case linelist (Optional - Data Cleaning)",
-    "text": "Raw case linelist (Optional - Data Cleaning)\nIf you’re interested in learning about data cleaning workflows, you can download the raw case linelist (an Excel spreadsheet with messy data) and follow the data cleaning tutorial. This tutorial covers the basics of reading, cleaning, validating and shaping epidemiological data, including how to import data from various sources, clean messy datasets, validate data quality, and prepare data for epidemiological analysis.\nDownload raw linelist"
-  },
-  {
-    "objectID": "index.html#using-your-own-data-or-example-data",
-    "href": "index.html#using-your-own-data-or-example-data",
-    "title": "Collaborative Analytics Workshop",
-    "section": "Using Your Own Data or Example Data",
-    "text": "Using Your Own Data or Example Data\nYou can work with your own data throughout the workshop, or you can use the example datasets provided. If you don’t have your own dataset or don’t feel comfortable adapting code to your data, you can use the example datasets and example code. This is perfectly fine and will still allow you to learn the analytical techniques and generate a functional report."
-  },
-  {
-    "objectID": "index.html#how-tasks-are-structured",
-    "href": "index.html#how-tasks-are-structured",
-    "title": "Collaborative Analytics Workshop",
-    "section": "How Tasks Are Structured",
-    "text": "How Tasks Are Structured\nEach task page includes:\n\nLinks to external tutorials that provide comprehensive learning materials and detailed explanations of the analytical concepts and methods\nComplete, ready-to-run example code that generates all the outputs needed for an example report. The example code works with the provided example datasets\n\nYou can use the example code and example datasets as-is. You don’t need to adapt anything if you’re not comfortable doing so. Simply download the example data, copy the example code into your Quarto document, and run it to generate a complete example report. This approach is fully supported and will help you learn the analytical techniques while producing a functional script you can reference later."
+    "section": "Tasks",
+    "text": "Tasks\nEach task page includes:\n\nLinks to external tutorials that provide comprehensive learning materials and detailed explanations of the analytical concepts and methods\nComplete, ready-to-run example code that generates all the outputs needed for an example report. The example code works with the provided example datasets\n\nYou can use the example code and example datasets as-is. You don’t need to adapt anything if you’re not comfortable doing so. Simply download the example data, copy the example code into your Quarto document, and run it to generate a complete example report. This approach is fully supported and will help you learn the analytical techniques while producing a functional script you can reference later."
   }
 ]

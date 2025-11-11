@@ -10,7 +10,7 @@ The clean linelist is stored in RDS format and can be directly imported into R. 
 
 [Download clean linelist](https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_cleaned.rds){.btn .btn-primary target="_blank"}
 
-## Raw case linelist (Optional - Data Cleaning)
+## Raw case linelist (optional)
 
 If you're interested in learning about data cleaning workflows, you can download the raw case linelist (an Excel spreadsheet with messy data) and follow the [data cleaning tutorial](https://www.epirhandbook.com/en/new_pages/cleaning.html). This tutorial covers the basics of reading, cleaning, validating and shaping epidemiological data, including how to import data from various sources, clean messy datasets, validate data quality, and prepare data for epidemiological analysis.
 

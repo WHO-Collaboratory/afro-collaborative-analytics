@@ -1,182 +1,149 @@
 ---
-title: "Task 1: Generating a basic situation report"
+title: "Task 2: Generating interactive maps"
+format:
+  html:
+    code-fold: true
+execute:
+  warning: false
+  message: false
 ---
 
 ## Overview
 
-This task covers generating a basic situation report with dynamic figures and tables. You will learn how to create reproducible reports that can be easily updated as new data becomes available.
+This task focuses on creating interactive maps for visualizing spatial aspects of epidemiological data. You will learn how to work with spatial data, create maps using GIS tools in R, and visualize disease patterns geographically.
 
 ## Learning Objectives
 
-- Create automated report generation workflows
-- Incorporate dynamic figures and tables
-- Use Quarto for report generation
-- Build a basic epidemiological report with incidence curves and summary statistics
+- Work with spatial data formats (shapefiles, coordinates)
+- Create interactive maps using GIS tools in R
+- Visualize disease patterns and hotspots geographically
+- Perform basic spatial analysis
 
-## Step-by-Step Instructions: Creating a Basic Epidemiological Report in Quarto
+## Tutorial
 
-This tutorial will guide you through creating a basic epidemiological report using Quarto. You'll generate an HTML report with an incidence curve, case fatality ratio (CFR), and an interactive summary table.
+[Access the tutorial here](https://www.epirhandbook.com/en/new_pages/gis.html)
 
-**Note:** Before starting this task, make sure you have completed the setup steps on the [Setup](setup.qmd) page, including creating your project folder structure and a basic Quarto document.
+## Download GIS Data
 
-### Step 1: Obtain the Cleaned Linelist Dataset
+For this task, you will need the GIS shapefile data to create the maps. The shapefile contains administrative boundaries for Sierra Leone.
 
-For this task, we will be using the **cleaned linelist file**. Download the cleaned linelist:
+1. Download the GIS data zip file using the button below.
+2. **Unzip the file** and extract its contents to your `data/gis/` folder.
+3. The extracted files should include `sle_adm3.shp` and other related shapefile components in the `data/gis/` directory.
 
-1. Navigate to the [Data](data.qmd) page on this website.
-2. Click the download button for the **"clean" linelist (.rds)**.
-3. **Save the file to your `data/` folder** that you created during setup.
-4. The file path should be: `data/linelist_cleaned.rds` (relative to where your Quarto document is saved).
+[Download GIS data (zip)](https://github.com/WHO-Collaboratory/afro-collaborative-analytics/raw/refs/heads/main/qmd/data/gis.zip){.btn .btn-primary target="_blank"}
 
-Alternatively, you can download it directly from: [linelist_cleaned.rds](https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_cleaned.rds)
+## Example Report
 
-### Step 2: Load Required Packages
+### Mapping Incidence
 
-In your Quarto document, add or update the code chunk to load the packages needed for this task:
+Total incidence to date was mapped by health-area.
 
 ```{r}
-#| echo: true
-#| eval: true
+
+# INSTALL AND LOAD PACKAGES
 
 # Load required packages
-library(tidyverse)  # For data manipulation and visualization
-library(reactable)  # For interactive tables
-library(lubridate)   # For date handling
-```
+pacman::p_load(
+  tidyverse, # basic data manipulation
+  sf, # handling shapefiles
+  here, # handing file paths
+  leaflet, # mapping
+  htmltools # handlers for html objects
+)
 
-### Step 3: Import the Data
 
-Create a new code chunk to import the cleaned linelist data. The cleaned file is in RDS format, which preserves column classes:
+# LOAD DATA
 
-```{r}
-#| echo: true
-#| eval: false
+# load shapefiles and keep relevant areas
+shp <- sf::read_sf("data/gis/sle_adm3.shp") |>
+  # standardize column names
+  janitor::clean_names() |>
+  # filter to keep certain areas
+  filter(adm1_en == "Western")
 
-# Import the cleaned linelist data from your local data folder
-# Use the downloaded cleaned file
-linelist <- readRDS("data/linelist_cleaned.rds")
+# import the cleaned linelist data
+linelist <- rio::import("data/linelist.rds") |>
+  # interpret the lon and lat variables for GIS use
+  st_as_sf(coords = c("lon", "lat"), crs = 4326) |>
+  # join the administrative boundary file to the linelist, based on
+  # spatial intersection
+  st_join(shp, join = st_intersects)
 
-# View the first few rows
-head(linelist)
-```
+# convert to aggregate format
+agg <- linelist |>
+  # remove the geometry for now
+  st_drop_geometry() |>
+  # count the number of cases per adm3
+  summarise(n = n(), .by = adm3_en) |>
+  # add the shape files of the adm3 zones
+  inner_join(shp, by = "adm3_en") |>
+  # convert back to shapefile
+  st_as_sf()
 
-```{r}
-#| echo: false
-#| eval: true
+# define colour palette
+pal <- colorNumeric(palette = "YlOrRd", domain = agg$n)
 
-# For rendering purposes, if file doesn't exist locally, read from URL
-# This is only for website rendering - participants should have the file locally
-linelist <- readRDS(url("https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_cleaned.rds"))
-
-# View the first few rows
-
-reactable(head(linelist))
-```
-
-### Step 4: Create an Incidence Curve
-
-Create a new section in your document and add a code chunk to create an incidence curve (epidemic curve) using `date_onset`:
-
-```{r}
-#| echo: true
-#| eval: true
-#| fig-cap: "Incidence Curve by Date of Onset"
-
-# Create incidence curve
-incidence_curve <- linelist |>
-  ggplot(aes(x = date_onset)) +
-  geom_histogram(binwidth = 7, fill = "steelblue", color = "white") +
-  labs(
-    title = "Incidence Curve by Date of Onset",
-    x = "Date of Onset",
-    y = "Number of Cases"
-  ) +
-  theme_minimal() +
-  theme(plot.title = element_text(face = "bold", size = 14))
-
-# Display the plot
-print(incidence_curve)
-```
-
-### Step 5: Calculate Case Fatality Ratio (CFR)
-
-Create a new section and calculate the CFR, making sure to exclude NA outcomes:
-
-```{r}
-#| echo: true
-#| eval: true
-
-# Calculate CFR (excluding NA outcomes)
-cfr_data <- linelist |>
-  filter(!is.na(outcome)) |>
-  summarise(
-    total_cases = n(),
-    deaths = sum(outcome == "Death", na.rm = TRUE),
-    recovered = sum(outcome == "Recover", na.rm = TRUE),
-    cfr = round((deaths / total_cases) * 100, 2)
-  )
-```
-
-The estimated Case Fatality Ratio is `r cfr_data$cfr`%.
-
-### Step 6: Create an Interactive Summary Table by Hospital
-
-Create a new section and generate an interactive summary table grouped by hospital using `reactable()`:
-
-```{r}
-#| echo: true
-#| eval: true
-
-# Create summary table by hospital
-# Group NA and "Other" together
-hospital_summary <- linelist |>
-  mutate(
-    hospital_grouped = case_when(
-      is.na(hospital) | hospital %in% c("Missing", "Other") ~ "Other/Unknown",
-      TRUE ~ hospital
+# generate leaflet map
+leaflet(agg) |>
+  # use CartoDB for background
+  addProviderTiles("CartoDB.Positron") |>
+  # add adm3 shaded by number of cases
+  addPolygons(
+    fillColor = ~ pal(n),
+    color = "white",
+    weight = 1,
+    fillOpacity = 0.7,
+    # define labels
+    label = ~ map(
+      paste0("<b>", adm3_en, "</b><br>", n, " cases"),
+      htmltools::HTML
+    ),
+    labelOptions = labelOptions(direction = "auto"),
+    highlightOptions = highlightOptions(
+      weight = 3,
+      color = "black",
+      bringToFront = FALSE
     )
   ) |>
-  group_by(hospital_grouped) |>
-  summarise(
-    total_cases = n(),
-    deaths = sum(outcome == "Death", na.rm = TRUE),
-    recovered = sum(outcome == "Recover", na.rm = TRUE),
-    .groups = "drop"
+  # add points per case
+  addCircleMarkers(
+    data = linelist,
+    radius = 4,
+    color = "black",
+    fillColor = "grey",
+    weight = 1,
+    fillOpacity = 0.8,
+    label = ~ map(
+      paste0(
+        "<b>Case ID:</b> ", case_id, "<br>",
+        "<b>Date onset:</b> ", date_onset, "<br>",
+        "<b>Health facility:</b> ", hospital
+      ),
+      htmltools::HTML
+    ),
+    labelOptions = labelOptions(direction = "auto"),
+    group = "Cases"
   ) |>
-  rename(hospital = hospital_grouped) |>
-  mutate(
-    cfr = round((deaths / (deaths + recovered)) * 100, 2),
-    cfr = ifelse(is.na(cfr), 0, cfr)
+  # add legend
+  addLegend(
+    pal = pal,
+    values = ~n,
+    title = "Case count",
+    opacity = 0.7,
+    position = "bottomright"
   )
 
-# Create interactive table
-reactable(
-  hospital_summary,
-  columns = list(
-    hospital = colDef(name = "Hospital"),
-    total_cases = colDef(name = "Total Cases"),
-    deaths = colDef(name = "Deaths"),
-    recovered = colDef(name = "Recovered"),
-    cfr = colDef(name = "CFR (%)", format = colFormat(digits = 2))
-  ),
-  defaultPageSize = nrow(hospital_summary)
-)
 ```
 
 ## Additional Resources
 
 ::: {.panel-tabset}
 
-### Quarto Documentation
-- [Quarto Documentation](https://quarto.org/)
-- [Quarto for R](https://quarto.org/docs/get-started/hello/rstudio.html)
-
 ### R Handbook
-- [Epidemiologist R Handbook - Reports](https://www.epirhandbook.com/en/new_pages/reports.html)
-- [Epidemiologist R Handbook - Epidemic Curves](https://www.epirhandbook.com/en/new_pages/epidemic-curves.html)
+Relevant chapters from the Epidemiologist R Handbook.
 
 ### Package Documentation
-- [ggplot2 Documentation](https://ggplot2.tidyverse.org/)
-- [reactable Package](https://glin.github.io/reactable/)
+Package vignettes and documentation for relevant R packages.
 
 :::

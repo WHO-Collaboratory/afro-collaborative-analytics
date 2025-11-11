@@ -1,33 +1,188 @@
 ---
-title: "Task 1: Reading and cleaning data"
+title: "Task 1: Generating a basic situation report"
+format:
+  html:
+    code-fold: true
+execute:
+  warning: false
+  message: false
 ---
 
 ## Overview
 
-This task covers the basics of reading, cleaning, validating and shaping basic epidemiological data. You will learn how to import data from various sources, clean messy datasets, validate data quality, and prepare data for epidemiological analysis.
+This task covers generating a basic situation report with dynamic figures and tables. You will learn how to create reproducible reports that can be easily updated as new data becomes available.
 
 ## Learning Objectives
 
-- Import epidemiological data from various file formats
-- Clean and standardize data structures
-- Validate data quality and completeness
-- Handle missing values and data inconsistencies
+- Create automated report generation workflows
+- Incorporate dynamic figures and tables
+- Use Quarto for report generation
+- Build a basic epidemiological report with incidence curves and summary statistics
+- Visualize demographic patterns using age-sex pyramids
 
 ## Tutorial
 
-[Access the tutorial here](https://www.epirhandbook.com/en/new_pages/cleaning.html)
+For detailed guidance on creating and customizing visualizations:
 
-**Note**: This is a long and comprehensive introduction covering the basics of data cleaning. It can be skipped if you are already familiar with working in R and data cleaning workflows.
+- [Epidemic Curves tutorial](https://www.epirhandbook.com/en/new_pages/epicurves.html) - Learn how to create and customize incidence curves
+- [Demographic Pyramids tutorial](https://www.epirhandbook.com/en/new_pages/age_pyramid.html) - Learn how to create age-sex pyramids
+
+## Example Report
+
+```{r}
+# INSTALL AND LOAD PACKAGES
+
+# Load required packages
+pacman::p_load(
+  tidyverse, # For data manipulation and visualization
+  reactable, # For interactive tables
+  lubridate, # For date handling
+  apyramid # For age-sex pyramids
+)
+
+
+# LOAD DATA
+
+# Import the cleaned linelist data from your local data folder
+linelist <- readRDS("data/linelist.rds")
+```
+
+### Trends in reported cases
+
+```{r}
+# Calculate first case month and peak month
+first_case_date <- min(linelist$date_onset, na.rm = TRUE)
+first_case_month <- format(first_case_date, "%B %Y")
+
+# Calculate month with most cases
+monthly_cases <- linelist |>
+  filter(!is.na(date_onset)) |>
+  mutate(month = floor_date(date_onset, unit = "month")) |>
+  count(month) |>
+  arrange(desc(n))
+
+peak_month_date <- monthly_cases$month[1]
+peak_month <- format(peak_month_date, "%B %Y")
+peak_cases <- monthly_cases$n[1]
+```
+
+The first case was reported in `r first_case_month`, the month with the highest number of cases was `r peak_month` with `r peak_cases` cases.
+
+```{r}
+# CREATE INCIDENCE CURVE
+
+# Create incidence curve
+incidence_curve <- linelist |>
+  ggplot(aes(x = date_onset)) +
+  geom_histogram(binwidth = 7, fill = "steelblue", color = "white") +
+  labs(
+    x = "Date of Onset",
+    y = "Number of Cases"
+  ) +
+  theme_minimal()
+
+# Display the plot
+incidence_curve
+
+```
+
+### Age and Sex Distribution
+
+The age and sex distribution of cases was visualized to identify demographic patterns in the outbreak.
+
+```{r}
+# CREATE AGE-SEX PYRAMID
+
+# Create age-sex pyramid using apyramid package
+age_pyramid <- apyramid::age_pyramid(
+  data = linelist,
+  age_group = "age_cat",
+  split_by = "gender",
+  show_midpoint = FALSE
+) +
+  labs(
+    title = NULL,
+    x = "Age Group",
+    y = "Number of Cases",
+    fill = "Gender"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom"
+  )
+
+# Display the plot
+age_pyramid
+
+```
+
+### Disease Severity
+
+```{r}
+
+# Calculate CFR (excluding NA outcomes)
+cfr_data <- linelist |>
+  filter(!is.na(outcome)) |>
+  summarise(
+    total_cases = n(),
+    deaths = sum(outcome == "Death", na.rm = TRUE),
+    recovered = sum(outcome == "Recover", na.rm = TRUE),
+    cfr = round((deaths / total_cases) * 100, 2)
+  )
+
+```
+
+The overall case fatality ratio (CFR) was estimated as `r cfr_data$cfr`%. A more detailed analysis by health facility is presented below.
+
+```{r}
+
+# Create summary table by hospital
+# Group NA and "Other" together
+hospital_summary <- linelist |>
+  mutate(
+    hospital_grouped = case_when(
+      is.na(hospital) | hospital %in% c("Missing", "Other") ~ "Other/Unknown",
+      TRUE ~ hospital
+    )
+  ) |>
+  group_by(hospital_grouped) |>
+  summarise(
+    total_cases = n(),
+    deaths = sum(outcome == "Death", na.rm = TRUE),
+    recovered = sum(outcome == "Recover", na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  rename(hospital = hospital_grouped) |>
+  mutate(
+    cfr = round((deaths / (deaths + recovered)) * 100, 2),
+    cfr = ifelse(is.na(cfr), 0, cfr)
+  )
+
+# Create interactive table
+reactable(
+  hospital_summary,
+  columns = list(
+    hospital = colDef(name = "Hospital"),
+    total_cases = colDef(name = "Total Cases"),
+    deaths = colDef(name = "Deaths"),
+    recovered = colDef(name = "Recovered"),
+    cfr = colDef(name = "CFR (%)", format = colFormat(digits = 2))
+  ),
+  defaultPageSize = nrow(hospital_summary)
+)
+
+```
 
 ## Additional Resources
 
 ::: {.panel-tabset}
 
 ### R Handbook
+
 Relevant chapters from the Epidemiologist R Handbook.
 
 ### Package Documentation
+
 Package vignettes and documentation for relevant R packages.
 
 :::
-

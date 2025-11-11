@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Task 5: Getting epidemiological parameters</title>
+<title>Task 5: Estimating the reproduction number</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -141,39 +107,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-tasks">    
         <li>
-    <a class="dropdown-item" href="./task2.html">
- <span class="dropdown-text">1. Generating automated situation reports</span></a>
+    <a class="dropdown-item" href="./task1.html">
+ <span class="dropdown-text">1. Generating a basic situation report</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./task3.html">
+    <a class="dropdown-item" href="./task2.html">
  <span class="dropdown-text">2. Generating interactive maps</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./task4.html">
+    <a class="dropdown-item" href="./task3.html">
  <span class="dropdown-text">3. Visualising transmission chains</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./task5.html">
+    <a class="dropdown-item" href="./task4.html">
  <span class="dropdown-text">4. Getting epidemiological parameters</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./task6.html">
+    <a class="dropdown-item" href="./task5.html">
  <span class="dropdown-text">5. Estimating the reproduction number</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./task7.html">
+    <a class="dropdown-item" href="./task6.html">
  <span class="dropdown-text">6. Nowcasting epidemiological data</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./task8.html">
+    <a class="dropdown-item" href="./task7.html">
  <span class="dropdown-text">7. Forecasting cases and deaths</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./task9.html">
+    <a class="dropdown-item" href="./task8.html">
  <span class="dropdown-text">8. Estimating disease severity</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./task10.html">
+    <a class="dropdown-item" href="./task9.html">
  <span class="dropdown-text">9. Simulating disease transmission</span></a>
   </li>  
     </ul>
@@ -203,12 +169,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
   <li><a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial">Tutorial</a></li>
-  <li><a href="#example-report" id="toc-example-report" class="nav-link" data-scroll-target="#example-report">Example Report</a>
-  <ul class="collapse">
-  <li><a href="#ebola-serial-interval" id="toc-ebola-serial-interval" class="nav-link" data-scroll-target="#ebola-serial-interval">Ebola serial interval</a></li>
-  <li><a href="#visualise-parameters" id="toc-visualise-parameters" class="nav-link" data-scroll-target="#visualise-parameters">Visualise parameters</a></li>
-  <li><a href="#extract-and-use-relevant-info" id="toc-extract-and-use-relevant-info" class="nav-link" data-scroll-target="#extract-and-use-relevant-info">Extract and use relevant info</a></li>
-  </ul></li>
   <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
   </ul>
 </nav>
@@ -218,7 +178,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Task 5: Getting epidemiological parameters</h1>
+<h1 class="title">Task 5: Estimating the reproduction number</h1>
 </div>
 
 
@@ -237,137 +197,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>This task focuses on obtaining epidemiological parameters from your data or the literature. You will learn how to extract, estimate, and use key epidemiological parameters in your analyses.</p>
+<p>This task covers estimating the basic and effective reproduction number (R0 and Re). You will learn methods for calculating these key epidemiological metrics from outbreak data.</p>
 </section>
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
 <ul>
-<li>Extract epidemiological parameters from data</li>
-<li>Search and retrieve parameters from literature</li>
-<li>Estimate parameters using available data</li>
-<li>Incorporate parameters into analytical models</li>
+<li>Understand the difference between R0 and Re</li>
+<li>Estimate reproduction numbers from case data</li>
+<li>Use appropriate methods for different data types</li>
+<li>Visualize and interpret reproduction number estimates</li>
 </ul>
 </section>
 <section id="tutorial" class="level2">
 <h2 class="anchored" data-anchor-id="tutorial">Tutorial</h2>
-<p><a href="https://epiverse-trace.github.io/tutorials-middle/delays-access.html">Access the tutorial here</a></p>
-</section>
-<section id="example-report" class="level2">
-<h2 class="anchored" data-anchor-id="example-report">Example Report</h2>
-<section id="ebola-serial-interval" class="level3">
-<h3 class="anchored" data-anchor-id="ebola-serial-interval">Ebola serial interval</h3>
-<p>We first extract this parameter from the {epiparameter} package database:</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INSTALL AND LOAD PACKAGES</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required packages</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(epiparameter, tidyverse, EpiNow2)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating epiparameter objects by accessing the {epiparameter} library</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>ebola_serial_int <span class="ot">&lt;-</span> epiparameter<span class="sc">::</span><span class="fu">epiparameter_db</span>(</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">disease =</span> <span class="st">"ebola"</span>, </span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">epi_name =</span> <span class="st">"serial"</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">subset =</span> sample_size <span class="sc">&gt;</span> <span class="dv">10</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">author =</span> <span class="st">"WHO Ebola Response Team"</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">single_epiparameter =</span> <span class="cn">TRUE</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>ebola_serial_int</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Disease: Ebola Virus Disease
-Pathogen: Ebola Virus
-Epi Parameter: serial interval
-Study: WHO Ebola Response Team, Agua-Agum J, Ariyarajah A, Aylward B, Blake I,
-Brennan R, Cori A, Donnelly C, Dorigatti I, Dye C, Eckmanns T, Ferguson
-N, Formenty P, Fraser C, Garcia E, Garske T, Hinsley W, Holmes D,
-Hugonnet S, Iyengar S, Jombart T, Krishnan R, Meijers S, Mills H,
-Mohamed Y, Nedjati-Gilani G, Newton E, Nouvellet P, Pelletier L,
-Perkins D, Riley S, Sagrado M, Schnitzler J, Schumacher D, Shah A, Van
-Kerkhove M, Varsaneux O, Kannangarage N (2015). "West African Ebola
-Epidemic after One Year — Slowing but Not Yet under Control." _The New
-England Journal of Medicine_. doi:10.1056/NEJMc1414992
-&lt;https://doi.org/10.1056/NEJMc1414992&gt;.
-Distribution: gamma (days)
-Parameters:
-  shape: 2.188
-  scale: 6.490</code></pre>
-</div>
-</div>
-</section>
-<section id="visualise-parameters" class="level3">
-<h3 class="anchored" data-anchor-id="visualise-parameters">Visualise parameters</h3>
-<p>We can then view the serial interval either as a table, or as a plot of its probability density function:</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>epiparameter<span class="sc">::</span><span class="fu">parameter_tbl</span>(ebola_serial_int) <span class="co"># as a table</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code># Parameter table:
-# A data frame:    1 × 7
-  disease           pathogen epi_name prob_distribution author  year sample_size
-  &lt;chr&gt;             &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;             &lt;chr&gt;  &lt;dbl&gt;       &lt;dbl&gt;
-1 Ebola Virus Dise… Ebola V… serial … gamma             WHO E…  2015         305</code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ebola_serial_int) <span class="co"># as a plot of the PDF</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="task5_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="extract-and-use-relevant-info" class="level3">
-<h3 class="anchored" data-anchor-id="extract-and-use-relevant-info">Extract and use relevant info</h3>
-<p>Once we have an {epiparameter} object ready, we extract relevant information such as its summary statistics or distribution parameters, and use these in subsequent analyses. Below, the extracted serial interval for Ebola is passed onto {EpiNow2}.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ebola_serial_int<span class="sc">$</span>summary_stats[<span class="fu">c</span>(<span class="st">"mean"</span>, <span class="st">"sd"</span>)] <span class="co"># summary statistics</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>$mean
-[1] 14.2
-
-$sd
-[1] 9.6</code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>epiparameter<span class="sc">::</span><span class="fu">get_parameters</span>(ebola_serial_int) <span class="co"># distribution parameters</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>   shape    scale 
-2.187934 6.490141 </code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>serial_interval_EN2 <span class="ot">&lt;-</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  EpiNow2<span class="sc">::</span><span class="fu">Gamma</span>(</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> ebola_serial_int<span class="sc">$</span>summary_stats<span class="sc">$</span>mean,</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> ebola_serial_int<span class="sc">$</span>summary_stats<span class="sc">$</span>sd,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="dv">30</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>serial_interval_EN2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>- gamma distribution (max: 30):
-  shape:
-    2.2
-  rate:
-    0.15</code></pre>
-</div>
-</div>
-</section>
+<p><a href="https://epiverse-trace.github.io/tutorials-middle/quantify-transmissibility.html">Access the tutorial here</a></p>
 </section>
 <section id="additional-resources" class="level2">
 <h2 class="anchored" data-anchor-id="additional-resources">Additional Resources</h2>

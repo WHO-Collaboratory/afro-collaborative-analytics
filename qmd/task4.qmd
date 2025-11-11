@@ -1,5 +1,5 @@
 ---
-title: "Task 3: Visualising transmission chains"
+title: "Task 4: Getting epidemiological parameters"
 format:
   html:
     code-fold: true
@@ -9,222 +9,76 @@ execute:
 
 ## Overview
 
-This task covers visualizing transmission chains using epicontacts. You will learn how to analyze and visualize contact networks and transmission pathways.
+This task focuses on obtaining epidemiological parameters from your data or the literature. You will learn how to extract, estimate, and use key epidemiological parameters in your analyses.
 
 ## Learning Objectives
 
-- Work with contact network data
-- Visualize transmission chains using epicontacts
-- Analyze contact patterns
-- Identify transmission clusters
+- Extract epidemiological parameters from data
+- Search and retrieve parameters from literature
+- Estimate parameters using available data
+- Incorporate parameters into analytical models
 
 ## Tutorial
 
-[Access the tutorial here](https://www.epirhandbook.com/en/new_pages/transmission_chains.html)
+[Access the tutorial here](https://epiverse-trace.github.io/tutorials-middle/delays-access.html)
 
 ## Example Report
 
+### Ebola serial interval
+We first extract this parameter from the {epiparameter} package database:
 
 ```{r}
 #| echo: true
-#| eval: false
-#| message: false
-#| warning: false
-
-# INSTALL AND LOAD PACKAGES
-
-# install development version of epicontacts
-pacman::p_install_gh("reconhub/epicontacts@timeline")
-
-# Load required packages
-pacman::p_load(
-   rio,          # File import
-   here,         # File locator
-   tidyverse,    # Data management + ggplot2 graphics
-   remotes,      # Package installation from github
-   epicontacts,  # Transmission chain analysis
-   reactable     # Interactive tables
-)
-
-
-# LOAD DATA
-linelist <- readRDS("data/linelist.rds")
-
-
-# SETTING UP EPICONTACTS
-
-# generate contacts
-contacts <- linelist %>%
-  transmute(
-    infector = infector,
-    case_id = case_id,
-    location = sample(c("Community", "Nosocomial"), n(), TRUE),
-    duration = sample.int(10, n(), TRUE)
-  ) %>%
-  drop_na(infector)
-
-# generate epicontacts object
-epic <- make_epicontacts(
-  linelist = linelist,
-  contacts = contacts,
-  id = "case_id",
-  from = "infector",
-  to = "case_id",
-  directed = TRUE
-)
-```
-
-```{r}
-#| echo: false
 #| eval: true
 #| message: false
 #| warning: false
 
 # INSTALL AND LOAD PACKAGES
 
-# install development version of epicontacts
-pacman::p_install_gh("reconhub/epicontacts@timeline")
-
 # Load required packages
-pacman::p_load(
-   rio,          # File import
-   here,         # File locator
-   tidyverse,    # Data management + ggplot2 graphics
-   remotes,      # Package installation from github
-   epicontacts,  # Transmission chain analysis
-   reactable     # Interactive tables
+pacman::p_load(epiparameter, tidyverse, EpiNow2)
+
+# Creating epiparameter objects by accessing the {epiparameter} library
+ebola_serial_int <- epiparameter::epiparameter_db(
+  disease = "ebola", 
+  epi_name = "serial",
+  subset = sample_size > 10,
+  author = "WHO Ebola Response Team",
+  single_epiparameter = TRUE
 )
 
-
-# LOAD DATA
-# Import the cleaned linelist data
-linelist <- readRDS(
-  url("https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_cleaned.rds")
-)
-
-
-# SETTING UP EPICONTACTS
-
-## generate contacts
-contacts <- linelist %>%
-  transmute(
-    infector = infector,
-    case_id = case_id,
-    source = source
-  ) %>%
-  drop_na(infector)
-
-# generate epicontacts object
-epic <- make_epicontacts(
-  linelist = linelist,
-  contacts = contacts,
-  id = "case_id",
-  from = "infector",
-  to = "case_id",
-  directed = TRUE
-)
+ebola_serial_int
 ```
 
-### Funeral infections
-
-We first investigated funeral infections that occured during the year of 2014.
+### Visualise parameters 
+We can then view the serial interval either as a table, or as a plot of its
+probability density function:
 
 ```{r}
-# filter by nosocomial infection between april and july
-funeral <- subset(
-  epic,
-  node_attribute = list(
-    date_infection = as.Date(c("2014-01-01", "2014-12-31"))
-  ), 
-  edge_attribute = list(source = "funeral")
-) |>
-  thin(what = "contacts") |>
-  thin(what = "linelist")
-
-# plot and set the selector to hospital
-plot(
-  funeral,
-  label = FALSE,
-  node_color = "gender",
-  height = 400,
-  width = 700
-)
+epiparameter::parameter_tbl(ebola_serial_int) # as a table
+plot(ebola_serial_int) # as a plot of the PDF
 ```
 
-### Infection clusters
-
-We then investigated clusters larger than 12 cases:
-
-```{r}
-# keep linelist and contacts part of a cluster of at least 13 cases
-large <- subset(epic, cs_min = 12)
-
-# plot
-plot(
-  large,
-  selector = "hospital",
-  x_axis = "date_infection",
-  label = FALSE,
-  height = 500,
-  width = 700,
-  node_size = 5,
-  arrow_size = 0.25,
-  network_shape = "rectangle"
-)
-```
-
-Below are key summary statistics:
+### Extract and use relevant info
+Once we have an {epiparameter} object ready, we extract relevant information
+such as its summary statistics or distribution parameters, and use these in 
+subsequent analyses. Below, the extracted serial interval for Ebola is
+passed onto {EpiNow2}.
 
 ```{r}
-# calculate cluster statistics
-clusters <- get_clusters(epic)
-cluster_sizes <- table(clusters$linelist$cluster_member)
-n_clusters <-  length(
-  unique(filter(clusters$linelist, cluster_size > 1)$cluster_member)
-)
+ebola_serial_int$summary_stats[c("mean", "sd")] # summary statistics
+epiparameter::get_parameters(ebola_serial_int) # distribution parameters
 
-# plot the cluster size distribution
-cluster_sizes |>
-  table() |>
-  as.data.frame() |>
-  ggplot(aes(cluster_sizes, Freq)) +
-  geom_col() +
-  scale_y_continuous(expand = expansion(mult = c(0, 0.01))) +
-  labs(
-    x = "Size of cluster",
-    y = "Frequency"
-  ) +
-  theme_classic()
-```
-
-### Transmission Chain Statistics
-
-Here we present some key statistics:
-
-```{r}
-# Calculate transmission statistics
-transmission_stats <- tibble(
-  Metric = c(
-    "Total transmission links",
-    "Number of clusters",
-    "Largest cluster size",
-    "Mean cluster size",
-    "Proportion cases with infector information"
-  ),
-  Value = c(
-    nrow(epic$contacts),
-    n_clusters,
-    max(cluster_sizes),
-    round(mean(cluster_sizes), 1),
-    scales::percent(mean(!is.na(epic$linelist$infector)))
+serial_interval_EN2 <-
+  EpiNow2::Gamma(
+    mean = ebola_serial_int$summary_stats$mean,
+    sd = ebola_serial_int$summary_stats$sd,
+    max = 30
   )
-)
 
-reactable(
-  transmission_stats,
-  defaultPageSize = nrow(transmission_stats)
-)
+serial_interval_EN2
 ```
+
 
 ## Additional Resources
 
@@ -234,7 +88,6 @@ reactable(
 Relevant chapters from the Epidemiologist R Handbook.
 
 ### Package Documentation
-Package vignettes and documentation for epicontacts and related packages.
+Package vignettes and documentation for relevant R packages.
 
 :::
-

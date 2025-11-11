@@ -4,19 +4,6 @@ title: "Collaborative Analytics Workshop"
 
 Welcome to the Collaborative Analytics Workshop! This workshop is designed to help you explore different tools and resources for conducting a range of common epidemiological analytical tasks. Our primary goal is for you to take home a functional script that generates an interactive epidemiological situation report that you can build on and adapt for your own work moving forward.
 
-## Using Your Own Data or Example Data
-
-You can work with your own data throughout the workshop, or you can use the example datasets provided. If you don't have your own dataset or don't feel comfortable adapting code to your data, you can use the example datasets and example code. This is perfectly fine and will still allow you to learn the analytical techniques and generate a functional report.
-
-## How Tasks Are Structured
-
-Each task page includes:
-
-- Links to external tutorials that provide comprehensive learning materials and detailed explanations of the analytical concepts and methods
-- Complete, ready-to-run example code that generates all the outputs needed for an example report. The example code works with the provided example datasets
-
-You can use the example code and example datasets as-is. You don't need to adapt anything if you're not comfortable doing so. Simply download the example data, copy the example code into your Quarto document, and run it to generate a complete example report. This approach is fully supported and will help you learn the analytical techniques while producing a functional script you can reference later.
-
 ## Workshop Structure
 
 You will be grouped by the analytical tasks you are interested in and work through them together with support from the facilitators. During these sessions, you can apply the analyses to your own data (if you have it and feel comfortable adapting the code) or use the example datasets and code. Depending on your technical level, you may complete multiple tasks over different sessions and therefore change groups.
@@ -27,13 +14,26 @@ By the end of Day 1, you should have:
 
 - Completed the [Setup](setup.qmd) section (installing R, RStudio, packages, and creating your project)
 - Downloaded the example datasets from the [Data](data.qmd) section
-- Completed [Task 1](task2.qmd), which generates a basic descriptive outline of a situation report
+- Completed [Task 1](task1.qmd), which generates a basic descriptive outline of a situation report
 
 By the end of Day 2, you should have:
 
 - Completed one or more of the other analytical tasks (Tasks 2-9)
 - Incorporated your chosen analytical tasks into your example report
 - A functional script that generates an interactive epidemiological situation report ready to adapt for your own work
+
+## Tasks
+
+Each task page includes:
+
+- Links to external tutorials that provide comprehensive learning materials and detailed explanations of the analytical concepts and methods
+- Complete, ready-to-run example code that generates all the outputs needed for an example report. The example code works with the provided example datasets
+
+You can use the example code and example datasets as-is. You don't need to adapt anything if you're not comfortable doing so. Simply download the example data, copy the example code into your Quarto document, and run it to generate a complete example report. This approach is fully supported and will help you learn the analytical techniques while producing a functional script you can reference later.
+
+## Datasets
+
+You can work with your own data throughout the workshop, or you can use the example datasets provided. If you don't have your own dataset or don't feel comfortable adapting code to your data, you can use the example datasets and example code. This is perfectly fine and will still allow you to learn the analytical techniques and generate a functional report.
 
 ## Getting Started
 
