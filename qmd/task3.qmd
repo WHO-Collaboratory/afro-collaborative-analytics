@@ -53,7 +53,7 @@ shp <- sf::read_sf("data/gis/sle_adm3.shp") |>
   filter(adm1_en == "Western")
 
 # import the cleaned linelist data
-linelist <- rio::import("data/epi/linelist.rds") |>
+linelist <- rio::import("data/linelist.rds") |>
   # interpret the lon and lat variables for GIS use
   st_as_sf(coords = c("lon", "lat"), crs = 4326) |>
   # join the administrative boundary file to the linelist, based on
