@@ -9,3 +9,4 @@ assets/keys/
 .DS_Store
 .Rhistory
 .RData
+docs/site_libs/font-awesome-4.7.0/*
