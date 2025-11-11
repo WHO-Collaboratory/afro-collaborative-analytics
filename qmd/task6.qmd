@@ -1,21 +1,130 @@
 ---
 title: "Task 6: Nowcasting epidemiological data"
+format:
+  html:
+    code-fold: true
+execute:
+  warning: false
 ---
 
 ## Overview
 
-This task focuses on nowcasting epidemiological data. You will learn how to adjust for reporting delays and estimate current case counts from incomplete data.
+This task covers estimating the basic and effective reproduction number (R0 and Rt), as well as other relevant metrics to quantify transmissibility such as the growth rate. You will learn methods for calculating these key epidemiological metrics from outbreak data, by accounting for reporting delays and uncertainty.
 
 ## Learning Objectives
 
-- Understand reporting delays and their impact
-- Apply nowcasting methods to epidemiological data
-- Adjust for underreporting and delays
-- Generate real-time estimates of current incidence
+- Understand the difference between R0 and Rt
+- Estimate reproduction numbers from case data
+- Use appropriate methods for different data types
+- Visualize and interpret reproduction number estimates
 
 ## Tutorial
 
 [Access the tutorial here](https://epiverse-trace.github.io/tutorials-middle/delays-functions.html)
+
+## Example Report
+
+### Converting linelist to incidence
+
+We first import linelist data for an Ebola outbreak that started in April 2014, convert it to incidence, and visualise the epidemic curve.
+
+```{r}
+#| echo: true
+#| eval: true
+#| message: false
+#| warning: false
+
+# INSTALL AND LOAD PACKAGES
+
+if (!"tidyverse" %in% rownames(installed.packages())) {
+  install.packages("tidyverse")
+}
+
+if (!"EpiNow2" %in% rownames(installed.packages())) {
+  install.packages("EpiNow2")
+}
+
+if (!"incidence2" %in% rownames(installed.packages())) {
+  install.packages("incidence2")
+}
+
+# Load required packages
+library(tidyverse)
+library(EpiNow2)
+library(incidence2)
+
+# LOAD DATA
+# Import the cleaned linelist data
+linelist <- readRDS("data/linelist.rds")
+
+# Convert linelist to incidence and format data for EpiNow2
+incidence_data <- linelist %>%
+  incidence2::incidence(
+    date_index = "date_onset",
+    count_values_to = "confirm",
+    date_names_to = "date",
+    complete_dates = TRUE) 
+
+incidence_sliced <-incidence_data %>%
+  # Keep the first 90 dates
+  dplyr::slice_head(n = 190)
+
+# Plotting incidence curve
+plot(incidence_sliced)+
+  labs(x = "Date", y = "Cases")
+
+```
+
+### Estimating Rt
+
+We used {EpiNow2} to estimate the time-varying reproduction number (Rt) for 
+the Ebola outbreak, accounting for reporting delays.
+
+```{r}
+# Drop column for {EpiNow2} input format
+cases <- incidence_sliced %>%
+  dplyr::select(-count_variable)
+
+# Creating distribution objects for the incubation period, reporting delay, and
+# generation time
+incubation_period_fixed <- EpiNow2::Gamma(
+  mean = 4,
+  sd = 2,
+  max = 20
+)
+
+reporting_delay_fixed <- EpiNow2::LogNormal(
+  mean = 2,
+  sd = 1,
+  max = 10
+)
+
+generation_time_fixed <- EpiNow2::LogNormal(
+  mean = 3,
+  sd = 2.5,
+  max = 15
+)
+
+# define Rt prior distribution
+rt_prior <- EpiNow2::rt_opts(prior = EpiNow2::LogNormal(mean = 1.5, sd = 0.2))
+withr::local_options(base::list(mc.cores = 4))
+
+# Finding estimates with EpiNow2
+estimates <- EpiNow2::epinow(
+  # reported cases
+  data = cases,
+  # delays
+  generation_time = EpiNow2::generation_time_opts(generation_time_fixed),
+  delays = EpiNow2::delay_opts(incubation_period_fixed + reporting_delay_fixed),
+  # prior
+  rt = rt_prior,
+  stan = EpiNow2::stan_opts(samples = 1000, chains = 3)
+)
+
+estimates$plots$R
+summary(estimates)
+```
+
 
 ## Additional Resources
 
