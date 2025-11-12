@@ -7,9 +7,18 @@ This is a Quarto website for the Analytics Workshop Hackathon.
 Website files are located in the `qmd/` directory:
 
 - `qmd/index.qmd` - Landing page introducing the hackathon
-- `qmd/task1.qmd` through `qmd/task10.qmd` - Individual pages for each analytical task
+- `qmd/setup.qmd` - Setup instructions for R, RStudio, and project structure
+- `qmd/data.qmd` - Data download page
+- `qmd/task1.qmd` through `qmd/task9.qmd` - Individual pages for each analytical task
 - `qmd/_quarto.yml` - Quarto website configuration
 - `qmd/styles.css` - Custom CSS for styling
+- `qmd/data/` - Data files including:
+  - `linelist.rds` - Clean case linelist dataset
+  - `gis/` - GIS shapefile data
+  - `solutions/` - Solution files for download (excluded from rendering)
+    - `sitrep.qmd` - Example situation report template
+    - `task1_solution.qmd` through `task4_solution.qmd` - Solution files for tasks
+- `scripts/generate_solutions.R` - Script to extract "Example Report" sections from task files and generate solution files
 
 ## Building the Website
 
@@ -28,6 +37,8 @@ quarto::quarto_render()
 
 The website will be built to the `docs/` directory at the project root.
 
+**Note:** Solution files in `qmd/data/solutions/` are excluded from rendering (configured in `_quarto.yml`) as they are intended for download only, not for display on the website.
+
 ## Preview
 
 To preview the website locally:
@@ -35,6 +46,23 @@ To preview the website locally:
 ```r
 quarto::quarto_preview()
 ```
+
+Or from the command line:
+
+```bash
+cd qmd
+quarto preview
+```
+
+## Generating Solution Files
+
+To generate solution files from task files, run the `generate_solutions.R` script:
+
+```r
+source("scripts/generate_solutions.R")
+```
+
+This script extracts the "Example Report" sections from `task2.qmd` through `task9.qmd` and creates corresponding solution files in `qmd/data/solutions/`. The solution files are configured with `echo: false` so code is hidden when rendered, making them suitable as reference solutions for participants.
 
 ## Deployment
 
