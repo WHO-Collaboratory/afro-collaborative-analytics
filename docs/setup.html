@@ -208,13 +208,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#setting-up-your-project" id="toc-setting-up-your-project" class="nav-link" data-scroll-target="#setting-up-your-project">Setting Up Your Project</a>
   <ul class="collapse">
   <li><a href="#step-1-create-an-rstudio-r-project" id="toc-step-1-create-an-rstudio-r-project" class="nav-link" data-scroll-target="#step-1-create-an-rstudio-r-project">Step 1: Create an RStudio R Project</a></li>
-  <li><a href="#step-2-set-up-your-project-folder-structure" id="toc-step-2-set-up-your-project-folder-structure" class="nav-link" data-scroll-target="#step-2-set-up-your-project-folder-structure">Step 2: Set Up Your Project Folder Structure</a></li>
-  <li><a href="#step-3-create-a-new-quarto-document" id="toc-step-3-create-a-new-quarto-document" class="nav-link" data-scroll-target="#step-3-create-a-new-quarto-document">Step 3: Create a New Quarto Document</a></li>
-  <li><a href="#step-4-set-up-the-yaml-header-and-report-structure" id="toc-step-4-set-up-the-yaml-header-and-report-structure" class="nav-link" data-scroll-target="#step-4-set-up-the-yaml-header-and-report-structure">Step 4: Set Up the YAML Header and Report Structure</a></li>
-  <li><a href="#step-5-install-and-load-basic-packages" id="toc-step-5-install-and-load-basic-packages" class="nav-link" data-scroll-target="#step-5-install-and-load-basic-packages">Step 5: Install and Load Basic Packages</a></li>
-  <li><a href="#step-6-render-your-report" id="toc-step-6-render-your-report" class="nav-link" data-scroll-target="#step-6-render-your-report">Step 6: Render Your Report</a></li>
-  <li><a href="#learning-more-about-quarto" id="toc-learning-more-about-quarto" class="nav-link" data-scroll-target="#learning-more-about-quarto">Learning More About Quarto</a></li>
+  <li><a href="#step-2-set-up-your-folder-structure" id="toc-step-2-set-up-your-folder-structure" class="nav-link" data-scroll-target="#step-2-set-up-your-folder-structure">Step 2: Set Up Your Folder Structure</a></li>
   </ul></li>
+  <li><a href="#setting-up-your-quarto-document" id="toc-setting-up-your-quarto-document" class="nav-link" data-scroll-target="#setting-up-your-quarto-document">Setting Up Your Quarto Document</a>
+  <ul class="collapse">
+  <li><a href="#step-1-create-a-new-quarto-document" id="toc-step-1-create-a-new-quarto-document" class="nav-link" data-scroll-target="#step-1-create-a-new-quarto-document">Step 1: Create a New Quarto Document</a></li>
+  <li><a href="#step-2-set-up-the-yaml-header-and-report-structure" id="toc-step-2-set-up-the-yaml-header-and-report-structure" class="nav-link" data-scroll-target="#step-2-set-up-the-yaml-header-and-report-structure">Step 2: Set Up the YAML Header and Report Structure</a></li>
+  <li><a href="#step-3-install-and-load-basic-packages" id="toc-step-3-install-and-load-basic-packages" class="nav-link" data-scroll-target="#step-3-install-and-load-basic-packages">Step 3: Install and Load Basic Packages</a></li>
+  <li><a href="#step-4-render-your-report" id="toc-step-4-render-your-report" class="nav-link" data-scroll-target="#step-4-render-your-report">Step 4: Render Your Report</a></li>
+  </ul></li>
+  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
   <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
   </ul>
 </nav>
@@ -247,8 +250,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>For installation instructions and downloads, please visit</strong>: <a href="https://epiverse-trace.github.io/tutorials-early/index.html#software-setup">Epiverse-TRACE Software Setup</a>. This guide will assist you with installing R and RStudio, including checking your R version and updating if needed.</p>
 <section id="unable-to-install-locally" class="level3">
 <h3 class="anchored" data-anchor-id="unable-to-install-locally">Unable to install locally?</h3>
-<p>If you’re unable to install R and RStudio on your laptop, you can use <strong>Posit Cloud</strong> instead. Posit Cloud provides a free cloud-based RStudio environment that you can access from any web browser.</p>
-<p><strong>Get started with a free Posit Cloud account</strong>: <a href="https://posit.cloud/plans">Posit Cloud Plans</a></p>
+<p>If you’re unable to install R and RStudio on your laptop, you can use <strong><a href="https://posit.cloud/plans">Posit Cloud</a></strong> instead: this provide a free cloud-based RStudio environment that you can access from any web browser.</p>
 </section>
 </section>
 <section id="installing-r-packages" class="level2">
@@ -269,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="setting-up-your-project" class="level2">
 <h2 class="anchored" data-anchor-id="setting-up-your-project">Setting Up Your Project</h2>
-<p>Before you begin working on the tasks, let’s set up your RStudio project and create a basic Quarto document that you’ll use for your epidemiological reports.</p>
+<p>Before you begin working on the tasks, let’s set up your RStudio project and folder structure.</p>
 <section id="step-1-create-an-rstudio-r-project" class="level3">
 <h3 class="anchored" data-anchor-id="step-1-create-an-rstudio-r-project">Step 1: Create an RStudio R Project</h3>
 <p>An <strong>R Project</strong> is a way to organize your work in RStudio. It helps keep all your files, data, and outputs together in one place, and automatically sets your working directory so file paths work correctly.</p>
@@ -284,8 +286,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>RStudio will now open your new project. You’ll see the project name (<code>sitrep</code>) in the top-right corner of RStudio.</p>
 </section>
-<section id="step-2-set-up-your-project-folder-structure" class="level3">
-<h3 class="anchored" data-anchor-id="step-2-set-up-your-project-folder-structure">Step 2: Set Up Your Project Folder Structure</h3>
+<section id="step-2-set-up-your-folder-structure" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-set-up-your-folder-structure">Step 2: Set Up Your Folder Structure</h3>
 <p>Within your project, create the following subfolders to organize your files:</p>
 <ol type="1">
 <li>In RStudio, click the <strong>Files</strong> tab in the bottom-right pane.</li>
@@ -294,8 +296,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Create another folder called <code>outputs/</code> - for storing generated reports and figures.</li>
 </ol>
 </section>
-<section id="step-3-create-a-new-quarto-document" class="level3">
-<h3 class="anchored" data-anchor-id="step-3-create-a-new-quarto-document">Step 3: Create a New Quarto Document</h3>
+</section>
+<section id="setting-up-your-quarto-document" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-your-quarto-document">Setting Up Your Quarto Document</h2>
+<p>Now let’s create a basic Quarto document that you’ll use for your epidemiological reports.</p>
+<section id="step-1-create-a-new-quarto-document" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-create-a-new-quarto-document">Step 1: Create a New Quarto Document</h3>
 <ol type="1">
 <li>In RStudio, go to <strong>File → New File → Quarto Document</strong>.</li>
 <li>Choose <strong>HTML</strong> as the output format.</li>
@@ -307,14 +313,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="anchored" data-anchor-id="understanding-visual-and-source-editing-modes">Understanding Visual and Source Editing Modes</h4>
 <p>When you open your Quarto document, you’ll notice two editing mode buttons in the top-left corner of the editor: <strong>Visual</strong> and <strong>Source</strong>.</p>
 <ul>
-<li><p><strong>Visual mode</strong>: Provides a WYSIWYG (What You See Is What You Get) editing experience, similar to a word processor. You can format text using buttons and menus, and see a preview of how your document will look.</p></li>
+<li><p><strong>Visual mode</strong>: Provides a “What You See Is What You Get” editing experience, similar to a word processor. You can format text using buttons and menus, and see a preview of how your document will look.</p></li>
 <li><p><strong>Source mode</strong>: Shows the raw Markdown and code syntax. You work directly with the text, code chunks, and formatting syntax (like <code>##</code> for headings, <code>**bold**</code> for bold text, etc.).</p></li>
 </ul>
 <p><strong>For the rest of this tutorial and the task tutorials, we’ll assume you’re using Source mode.</strong> This allows you to directly copy and paste code chunks and content from the tutorials into your document. You can switch between modes at any time using the buttons in the top-left corner - just click <strong>Source</strong> to switch to source mode.</p>
 </section>
 </section>
-<section id="step-4-set-up-the-yaml-header-and-report-structure" class="level3">
-<h3 class="anchored" data-anchor-id="step-4-set-up-the-yaml-header-and-report-structure">Step 4: Set Up the YAML Header and Report Structure</h3>
+<section id="step-2-set-up-the-yaml-header-and-report-structure" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-set-up-the-yaml-header-and-report-structure">Step 2: Set Up the YAML Header and Report Structure</h3>
 <p>At the top of your Quarto document, you’ll see a <strong>YAML header</strong> (the section between the <code>---</code> lines). The YAML header contains metadata about your document, such as the title and output format. It tells Quarto how to render your document.</p>
 <p>Ensure your YAML header looks like this:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
@@ -324,25 +330,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Below the YAML header, create a basic report structure with sections. In Quarto (and Markdown), you use <code>##</code> to create section headings (level 2 headings). Each <code>##</code> creates a new major section in your report. You can use <code>###</code> for subsections, <code>####</code> for sub-subsections, and so on.</p>
 <p>Add this basic outline to your document:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Executive Summary</span></span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>This section will contain key findings and recommendations.</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>This section will provide an introduction and overview of the situation report.</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Overview</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Epidemiological Trends</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>This section will describe the dataset and data quality.</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>This section will describe epidemiological trends.</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Epidemiological Analysis</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Severity</span></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>This section will contain your analytical outputs, including:</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>This section will conduct a severity analysis.</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Incidence curves</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Summary statistics</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Key epidemiological parameters</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusions</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>This section will summarize findings and next steps.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusions</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>This section will summarize findings and next steps.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="understanding-code-chunks" class="level4">
 <h4 class="anchored" data-anchor-id="understanding-code-chunks">Understanding Code Chunks</h4>
 <p>A <strong>code chunk</strong> is a section in your Quarto document where you write and execute R code. Code chunks are enclosed between three backticks (<code>```</code>) followed by <code>{r}</code> and closed with three more backticks.</p>
@@ -358,12 +360,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 # Your R code goes here
 library(tidyverse)
 ```</code></pre>
-<p>You can also insert a code chunk in RStudio by: - Clicking the <strong>Insert</strong> button (green plus icon with a “C”) in the toolbar, or - Using the keyboard shortcut: <code>Ctrl+Alt+I</code> (Windows/Linux) or <code>Cmd+Option+I</code> (Mac)</p>
+<p>You can also insert a code chunk in RStudio by:</p>
+<ul>
+<li>Clicking the <strong>Insert</strong> button (green plus icon with a “C”) in the toolbar, or</li>
+<li>Using the keyboard shortcut: <code>Ctrl+Alt+I</code> (Windows/Linux) or <code>Cmd+Option+I</code> (Mac)</li>
+</ul>
 <p>Code chunks allow you to run R code, create plots, generate tables, and perform data analysis. The results (outputs, plots, tables) will appear in your rendered HTML report.</p>
 </section>
 </section>
-<section id="step-5-install-and-load-basic-packages" class="level3">
-<h3 class="anchored" data-anchor-id="step-5-install-and-load-basic-packages">Step 5: Install and Load Basic Packages</h3>
+<section id="step-3-install-and-load-basic-packages" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-install-and-load-basic-packages">Step 3: Install and Load Basic Packages</h3>
 <p>In the first code chunk of your document, install and load the basic packages needed for report generation. We’ll use <strong>pacman</strong>, a package management tool for R that simplifies installing and loading packages. Pacman automatically installs packages if they’re not already installed, then loads them - making it much easier to manage dependencies.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install pacman if needed</span></span>
@@ -373,38 +379,38 @@ library(tidyverse)
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Install and load required packages using pacman</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  tidyverse, <span class="co"># For data manipulation and visualization</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  rio, <span class="co"># For importing data</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  reactable <span class="co"># For interactive tables</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  tidyverse,  <span class="co"># For data manipulation and visualization</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  rio,        <span class="co"># For importing data</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  reactable   <span class="co"># For interactive tables</span></span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Note:</strong> We’ll add more packages as needed when you work through specific tasks. Additional packages will be installed as you progress through the tutorials.</p>
 </section>
-<section id="step-6-render-your-report" class="level3">
-<h3 class="anchored" data-anchor-id="step-6-render-your-report">Step 6: Render Your Report</h3>
+<section id="step-4-render-your-report" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-render-your-report">Step 4: Render Your Report</h3>
 <p>Now let’s test that everything is working by rendering your report:</p>
 <ol type="1">
 <li>Click the <strong>Render</strong> button in RStudio (or press <code>Ctrl+Shift+K</code> / <code>Cmd+Shift+K</code>).</li>
 <li>Quarto will process your document and generate an HTML file.</li>
 <li>The HTML report will open automatically in your browser.</li>
 </ol>
-<p><strong>Note:</strong> The rendered HTML file will be saved in the same folder as your Quarto document, or you can specify a different output location in your YAML header.</p>
 <p>You should now see a basic HTML report with your title and section headings. This confirms that your Quarto setup is working correctly!</p>
+<p>If you prefer, you can download the example sitrep template directly instead of creating it yourself:</p>
+<p><a href="data/solutions/sitrep.qmd" download="" class="btn btn-primary" target="_blank">Download solution file</a></p>
 </section>
-<section id="learning-more-about-quarto" class="level3">
-<h3 class="anchored" data-anchor-id="learning-more-about-quarto">Learning More About Quarto</h3>
-<p>If you’d like to learn more about Quarto, here are some helpful resources:</p>
+</section>
+<section id="additional-resources" class="level2">
+<h2 class="anchored" data-anchor-id="additional-resources">Additional Resources</h2>
 <ul>
-<li><p><strong><a href="https://quarto.org/docs/get-started/hello/rstudio.html">Quarto Tutorial: Hello, Quarto</a></strong>: An overview of the basics, including rendering, authoring, YAML headers, code chunks, and markdown text.</p></li>
-<li><p><strong><a href="https://quarto.org/docs/guide/">Quarto Guide</a></strong>: A comprehensive guide covering all aspects of Quarto, including authoring, computations, tools, documents, presentations, dashboards, websites, and more.</p></li>
+<li><p><strong><a href="https://quarto.org/docs/get-started/hello/rstudio.html">Quarto Tutorial</a></strong>: An overview of the basics, including rendering, authoring, YAML headers, code chunks and markdown text.</p></li>
+<li><p><strong><a href="https://quarto.org/docs/guide/">Quarto Guide</a></strong>: A comprehensive guide covering all aspects of Quarto, including authoring, computations, tools, documents, presentations, dashboards, websites and more.</p></li>
 </ul>
-</section>
 </section>
 <section id="next-steps" class="level2">
 <h2 class="anchored" data-anchor-id="next-steps">Next Steps</h2>
-<p>Once you have R and RStudio installed and your project set up:</p>
+<p>Once you have the basics set up:</p>
 <ol type="1">
-<li>Visit the <a href="./data.html">Data</a> section to download example datasets.</li>
+<li>Visit the <a href="./data.html">Data</a> section to download the example dataset if you are not using your own data.</li>
 <li>Explore the <a href="./task1.html">Tasks</a> menu to find the analytical task(s) you’re interested in.</li>
 <li>Join your assigned group and start working through the materials with facilitator support.</li>
 </ol>
@@ -517,6 +523,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         if (link.dataset.originalHref !== undefined) {
           link.href = link.dataset.originalHref;
         }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
       }
     }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {

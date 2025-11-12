@@ -1,6 +1,9 @@
 project:
   type: website
   output-dir: ../docs
+  render:
+    - "*.qmd"
+    - "!data/solutions/"
 
 website:
   favicon: /img/who_favicon.png
@@ -38,6 +41,9 @@ website:
       - href: https://collaboratory.who.int/forum/c/afro-ca-cop/
         text: '<img src="/img/collaboratory_logo.png" height="24px" style="vertical-align: middle; margin-right: 0.25em;">'
 
+link-external: true
+link-external-icon: true
+link-external-newwindow: true
 
 format:
   html:

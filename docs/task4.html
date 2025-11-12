@@ -206,10 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#example-report" id="toc-example-report" class="nav-link" data-scroll-target="#example-report">Example Report</a>
   <ul class="collapse">
   <li><a href="#ebola-serial-interval" id="toc-ebola-serial-interval" class="nav-link" data-scroll-target="#ebola-serial-interval">Ebola serial interval</a></li>
-  <li><a href="#visualise-parameters" id="toc-visualise-parameters" class="nav-link" data-scroll-target="#visualise-parameters">Visualise parameters</a></li>
-  <li><a href="#extract-and-use-relevant-info" id="toc-extract-and-use-relevant-info" class="nav-link" data-scroll-target="#extract-and-use-relevant-info">Extract and use relevant info</a></li>
   </ul></li>
-  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
   </ul>
 </nav>
     </div>
@@ -254,136 +251,62 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="example-report" class="level2">
 <h2 class="anchored" data-anchor-id="example-report">Example Report</h2>
+<p><a href="data/solutions/task4_solution.qmd" download="" class="btn btn-primary" target="_blank">Download solution file</a></p>
 <section id="ebola-serial-interval" class="level3">
 <h3 class="anchored" data-anchor-id="ebola-serial-interval">Ebola serial interval</h3>
-<p>We first extract this parameter from the {epiparameter} package database:</p>
-<div class="cell">
+<p>The serial interval for Ebola was extracted from the <code>epiparameter</code> package, identifying the following source:</p>
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INSTALL AND LOAD PACKAGES</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required packages</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(epiparameter, tidyverse, EpiNow2)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(epiparameter, tidyverse, EpiNow2, reactable)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating epiparameter objects by accessing the {epiparameter} library</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>ebola_serial_int <span class="ot">&lt;-</span> epiparameter<span class="sc">::</span><span class="fu">epiparameter_db</span>(</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">disease =</span> <span class="st">"ebola"</span>, </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">disease =</span> <span class="st">"ebola"</span>,</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">epi_name =</span> <span class="st">"serial"</span>,</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">subset =</span> sample_size <span class="sc">&gt;</span> <span class="dv">10</span>,</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">author =</span> <span class="st">"WHO Ebola Response Team"</span>,</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">single_epiparameter =</span> <span class="cn">TRUE</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>ebola_serial_int</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>ebola_serial_int<span class="sc">$</span>citation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Disease: Ebola Virus Disease
-Pathogen: Ebola Virus
-Epi Parameter: serial interval
-Study: WHO Ebola Response Team, Agua-Agum J, Ariyarajah A, Aylward B, Blake I,
-Brennan R, Cori A, Donnelly C, Dorigatti I, Dye C, Eckmanns T, Ferguson
-N, Formenty P, Fraser C, Garcia E, Garske T, Hinsley W, Holmes D,
-Hugonnet S, Iyengar S, Jombart T, Krishnan R, Meijers S, Mills H,
-Mohamed Y, Nedjati-Gilani G, Newton E, Nouvellet P, Pelletier L,
-Perkins D, Riley S, Sagrado M, Schnitzler J, Schumacher D, Shah A, Van
-Kerkhove M, Varsaneux O, Kannangarage N (2015). "West African Ebola
-Epidemic after One Year — Slowing but Not Yet under Control." _The New
-England Journal of Medicine_. doi:10.1056/NEJMc1414992
-&lt;https://doi.org/10.1056/NEJMc1414992&gt;.
-Distribution: gamma (days)
-Parameters:
-  shape: 2.188
-  scale: 6.490</code></pre>
-</div>
-</div>
-</section>
-<section id="visualise-parameters" class="level3">
-<h3 class="anchored" data-anchor-id="visualise-parameters">Visualise parameters</h3>
-<p>We can then view the serial interval either as a table, or as a plot of its probability density function:</p>
+<p>WHO Ebola Response Team, Agua-Agum J, Ariyarajah A, Aylward B, Blake I, Brennan R, Cori A, Donnelly C, Dorigatti I, Dye C, Eckmanns T, Ferguson N, Formenty P, Fraser C, Garcia E, Garske T, Hinsley W, Holmes D, Hugonnet S, Iyengar S, Jombart T, Krishnan R, Meijers S, Mills H, Mohamed Y, Nedjati-Gilani G, Newton E, Nouvellet P, Pelletier L, Perkins D, Riley S, Sagrado M, Schnitzler J, Schumacher D, Shah A, Van Kerkhove M, Varsaneux O, Kannangarage N (2015). “West African Ebola Epidemic after One Year — Slowing but Not Yet under Control.” <em>The New England Journal of Medicine</em>. doi:10.1056/NEJMc1414992 <a href="https://doi.org/10.1056/NEJMc1414992" class="uri">https://doi.org/10.1056/NEJMc1414992</a>.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>epiparameter<span class="sc">::</span><span class="fu">parameter_tbl</span>(ebola_serial_int) <span class="co"># as a table</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract summary statistics and parameters</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>pars <span class="ot">&lt;-</span> epiparameter<span class="sc">::</span><span class="fu">get_parameters</span>(ebola_serial_int) <span class="co"># distribution parameters</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>serial_mean <span class="ot">&lt;-</span> ebola_serial_int<span class="sc">$</span>summary_stats<span class="sc">$</span>mean</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>serial_sd <span class="ot">&lt;-</span> ebola_serial_int<span class="sc">$</span>summary_stats<span class="sc">$</span>sd</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate 95th percentile of serial interval</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>serial_interval_95th <span class="ot">&lt;-</span> <span class="fu">qgamma</span>(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.95</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">shape =</span> pars[<span class="st">"shape"</span>],</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale =</span> pars[<span class="st">"scale"</span>]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code># Parameter table:
-# A data frame:    1 × 7
-  disease           pathogen epi_name prob_distribution author  year sample_size
-  &lt;chr&gt;             &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;             &lt;chr&gt;  &lt;dbl&gt;       &lt;dbl&gt;
-1 Ebola Virus Dise… Ebola V… serial … gamma             WHO E…  2015         305</code></pre>
 </div>
+<p>This estimate has a mean of 14.2 days and standard deviation of 9.6 days, meaning that 95% of cases have a serial interval of less than 33 days. The probability density function of the serial interval is given below:</p>
+<div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ebola_serial_int) <span class="co"># as a plot of the PDF</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ebola_serial_int) <span class="co"># as a plot of the PDF</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="task4_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="task4_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="extract-and-use-relevant-info" class="level3">
-<h3 class="anchored" data-anchor-id="extract-and-use-relevant-info">Extract and use relevant info</h3>
-<p>Once we have an {epiparameter} object ready, we extract relevant information such as its summary statistics or distribution parameters, and use these in subsequent analyses. Below, the extracted serial interval for Ebola is passed onto {EpiNow2}.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ebola_serial_int<span class="sc">$</span>summary_stats[<span class="fu">c</span>(<span class="st">"mean"</span>, <span class="st">"sd"</span>)] <span class="co"># summary statistics</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>$mean
-[1] 14.2
-
-$sd
-[1] 9.6</code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>epiparameter<span class="sc">::</span><span class="fu">get_parameters</span>(ebola_serial_int) <span class="co"># distribution parameters</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>   shape    scale 
-2.187934 6.490141 </code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>serial_interval_EN2 <span class="ot">&lt;-</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  EpiNow2<span class="sc">::</span><span class="fu">Gamma</span>(</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> ebola_serial_int<span class="sc">$</span>summary_stats<span class="sc">$</span>mean,</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> ebola_serial_int<span class="sc">$</span>summary_stats<span class="sc">$</span>sd,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="dv">30</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>serial_interval_EN2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>- gamma distribution (max: 30):
-  shape:
-    2.2
-  rate:
-    0.15</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="additional-resources" class="level2">
-<h2 class="anchored" data-anchor-id="additional-resources">Additional Resources</h2>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">R Handbook</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Package Documentation</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>Relevant chapters from the Epidemiologist R Handbook.</p>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p>Package vignettes and documentation for relevant R packages.</p>
-</div>
-</div>
-</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -491,6 +414,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         if (link.dataset.originalHref !== undefined) {
           link.href = link.dataset.originalHref;
         }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
       }
     }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {

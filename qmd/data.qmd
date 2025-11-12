@@ -8,7 +8,7 @@ You can use your own data for the workshop tasks, or you can use the example dat
 
 The clean linelist is stored in RDS format and can be directly imported into R. The example code in each task is already set up to work with this dataset, so you can simply download it and run the code without any modifications.
 
-[Download clean linelist](https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_cleaned.rds){.btn .btn-primary target="_blank"}
+<a href="data/linelist.rds" download class="btn btn-primary" target="_blank">Download clean linelist</a>
 
 ## Raw case linelist (optional)
 

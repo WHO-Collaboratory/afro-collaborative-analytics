@@ -1,0 +1,114 @@
+---
+title: "Task 3 Solution"
+format:
+  html
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+<a href="data/solutions/task3_solution.qmd" download class="btn btn-primary" target="_blank">Download solution file</a>
+
+```{r}
+
+# INSTALL AND LOAD PACKAGES
+
+# install development version of epicontacts
+pacman::p_install_gh("reconhub/epicontacts@timeline")
+
+# Load required packages
+pacman::p_load(
+  rio, # File import
+  here, # File locator
+  tidyverse, # Data management + ggplot2 graphics
+  remotes, # Package installation from github
+  epicontacts, # Transmission chain analysis
+  reactable # Interactive tables
+)
+
+
+# LOAD DATA
+# Import the cleaned linelist data
+linelist <- readRDS("data/linelist.rds")
+
+
+# SETTING UP EPICONTACTS
+
+## generate contacts
+contacts <- linelist %>%
+  transmute(
+    infector = infector,
+    case_id = case_id,
+    source = source
+  ) %>%
+  drop_na(infector)
+
+# generate epicontacts object
+epic <- make_epicontacts(
+  linelist = linelist,
+  contacts = contacts,
+  id = "case_id",
+  from = "infector",
+  to = "case_id",
+  directed = TRUE
+)
+```
+
+### Funeral infections
+
+We first investigated funeral infections that occured during the year of 2014. Hover individual cases to get more detailed information.
+
+```{r}
+# filter by nosocomial infection between april and july
+funeral <- subset(
+  epic,
+  node_attribute = list(
+    date_infection = as.Date(c("2014-01-01", "2014-12-31"))
+  ),
+  edge_attribute = list(source = "funeral")
+) |>
+  thin(what = "contacts") |>
+  thin(what = "linelist")
+
+# plot and set the selector to hospital
+plot(
+  funeral,
+  label = FALSE,
+  node_color = "gender",
+  selector = "adm3",
+  height = 400,
+  width = 600
+)
+```
+
+### Infection clusters
+
+```{r}
+# add cluster information
+clusters <- get_clusters(epic)
+largest_cluster <- which.max(clusters$linelist$cluster_size)
+largest_size <- clusters$linelist$cluster_size[largest_cluster]
+largest <- subset(epic, cluster_id = clusters$linelist$id[largest_cluster])
+
+```
+
+The largest transmission cluster consisted of `r largest_size` cases and is depicted on a timeline below.
+
+```{r}
+
+# plot
+plot(
+  largest,
+  node_color = "gender",
+  selector = "hospital",
+  x_axis = "date_infection",
+  date_labels = "%d %b %Y",
+  label = FALSE,
+  height = 400,
+  width = 600,
+  node_size = 8,
+  arrow_size = 0.25,
+  network_shape = "rectangle"
+)
+```

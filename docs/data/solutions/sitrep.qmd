@@ -1,0 +1,36 @@
+---
+title: "Epidemiological Situation Report"
+format: html
+editor: visual
+---
+
+## Overview
+
+This section will provide an introduction and overview of the situation report.
+
+## Epidemiological Trends
+
+This section will describe epidemiological trends.
+
+## Severity
+
+This section will conduct a severity analysis.
+
+## Conclusions
+
+This section will summarize findings and next steps.
+
+```{r}
+# Install pacman if needed
+if (!requireNamespace("pacman", quietly = TRUE)) {
+  install.packages("pacman")
+}
+
+# Install and load required packages using pacman
+pacman::p_load(
+  rmarkdown,
+  tidyverse, # For data manipulation and visualization
+  rio, # For importing data
+  reactable # For interactive tables
+)
+```

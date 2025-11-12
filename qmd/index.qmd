@@ -6,15 +6,13 @@ Welcome to the Collaborative Analytics Workshop! This workshop is designed to he
 
 ## Workshop Structure
 
-You will be grouped by the analytical tasks you are interested in and work through them together with support from the facilitators. During these sessions, you can apply the analyses to your own data (if you have it and feel comfortable adapting the code) or use the example datasets and code. Depending on your technical level, you may complete multiple tasks over different sessions and therefore change groups.
-
-## Workshop Timeline
+You will be grouped by the analytical tasks you are interested in and work through them together with support from the facilitators. Depending on your technical level, you may complete multiple tasks over different sessions and therefore change groups.
 
 By the end of Day 1, you should have:
 
-- Completed the [Setup](setup.qmd) section (installing R, RStudio, packages, and creating your project)
-- Downloaded the example datasets from the [Data](data.qmd) section
-- Completed [Task 1](task1.qmd), which generates a basic descriptive outline of a situation report
+- Completed the [Setup](setup.qmd) section (installing R, RStudio, packages and setting up the correct folder structure)
+- Imported your own data or the example dataset from the [Data](data.qmd) section
+- Completed [Task 1](task1.qmd), which generates a basic descriptive situation report
 
 By the end of Day 2, you should have:
 
@@ -26,19 +24,19 @@ By the end of Day 2, you should have:
 
 Each task page includes:
 
-- Links to external tutorials that provide comprehensive learning materials and detailed explanations of the analytical concepts and methods
-- Complete, ready-to-run example code that generates all the outputs needed for an example report. The example code works with the provided example datasets
+- Links to external tutorials that provide comprehensive learning materials and detailed explanations of the analytical concepts and methods.
+- Complete example code that generates all the outputs needed for an example report. The example code works with the provided example datasets
 
-You can use the example code and example datasets as-is. You don't need to adapt anything if you're not comfortable doing so. Simply download the example data, copy the example code into your Quarto document, and run it to generate a complete example report. This approach is fully supported and will help you learn the analytical techniques while producing a functional script you can reference later.
-
-## Datasets
-
-You can work with your own data throughout the workshop, or you can use the example datasets provided. If you don't have your own dataset or don't feel comfortable adapting code to your data, you can use the example datasets and example code. This is perfectly fine and will still allow you to learn the analytical techniques and generate a functional report.
+You can work with your own data throughout the workshop or you can use the example datasets provided. If you don't have your own dataset or don't feel comfortable adapting code to your data, you can use the example datasets and example code. This will still allow you to learn the analytical techniques and generate a functional report you can reference later.
 
 ## Getting Started
 
-To get started, visit the [Setup](setup.qmd) page for installation instructions and required packages, download the example datasets from the [Data](data.qmd) section, navigate to the Tasks menu to find the analytical tasks you're interested in, and join your group to work through the materials with support from facilitators.
+1. Visit the [Setup](setup.qmd) page for installation instructions and required packages
+2. Download the example datasets from the [Data](data.qmd) section
+3. Navigate to the Tasks menu to find the analytical tasks you're interested in
+4. Join your group to work through the materials with support from facilitators.
 
 ## Additional Resources
 
-If you're new to R or need a refresher, the Epidemiologist R Handbook provides a comprehensive guide to R fundamentals for epidemiologists. Start with the [R Basics chapter](https://www.epirhandbook.com/en/new_pages/basics.html). For a more general introduction to R and coding, see [R for Data Science](https://r4ds.hadley.nz/intro.html).
+- [Epidemiologist R Handbook](https://www.epirhandbook.com/en/new_pages/basics.html): A comprehensive guide to R fundamentals for epidemiologists
+- [R for Data Science](https://r4ds.hadley.nz/intro.html): A general introduction to R and coding

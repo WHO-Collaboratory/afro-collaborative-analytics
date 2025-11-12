@@ -1,0 +1,112 @@
+---
+title: "Task 2 Solution"
+format:
+  html
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+<a href="data/solutions/task2_solution.qmd" download class="btn btn-primary" target="_blank">Download solution file</a>
+
+### Geographic distribution of cases
+
+```{r}
+# INSTALL AND LOAD PACKAGES
+
+# Load required packages
+pacman::p_load(
+  tidyverse, # basic data manipulation
+  sf, # handling shapefiles
+  here, # handing file paths
+  leaflet, # mapping
+  leaflet.extras, # additional leaflet features including heatmaps
+  htmltools # handlers for html objects
+)
+
+
+# LOAD DATA
+
+# load shapefiles and keep relevant areas
+shp <- sf::read_sf("data/gis/sle_adm3.shp") |>
+  # standardize column names
+  janitor::clean_names()
+
+# import the cleaned linelist data
+linelist <- rio::import("data/linelist.rds")
+
+# convert to aggregate format
+agg <- linelist |>
+  # count the number of cases per adm3
+  summarise(n = n(), .by = adm3) |>
+  # add the shape files of the adm3 zones
+  inner_join(shp, by = c(adm3 = "adm3_en")) |>
+  # convert back to shapefile
+  st_as_sf()
+
+```
+
+Total incidence to date was mapped by chiefdom.
+
+```{r}
+# define colour palette
+pal <- colorNumeric(palette = "YlOrRd", domain = agg$n)
+
+# generate choropleth map (polygons only)
+leaflet(agg) |>
+  # use CartoDB for background
+  addProviderTiles("CartoDB.Positron") |>
+  # add adm3 shaded by number of cases
+  addPolygons(
+    fillColor = ~ pal(n),
+    color = "white",
+    weight = 1,
+    fillOpacity = 0.7,
+    # define labels
+    label = ~ map(
+      paste0("<b>", adm3, "</b><br>", n, " cases"),
+      htmltools::HTML
+    ),
+    labelOptions = labelOptions(direction = "auto"),
+    highlightOptions = highlightOptions(
+      weight = 3,
+      color = "black",
+      bringToFront = FALSE
+    )
+  ) |>
+  # add legend
+  addLegend(
+    pal = pal,
+    values = ~n,
+    title = "Case count",
+    opacity = 0.7,
+    position = "bottomright"
+  )
+
+```
+
+Spatial clustering of cases was then investigated at a higher spatial resolution using a heatmap.
+
+```{r}
+# Prepare linelist data for heatmap
+# Filter cases with valid coordinates
+linelist_coords <- linelist |>
+  filter(!is.na(lon), !is.na(lat))
+
+# Generate heatmap from individual cases
+leaflet(linelist_coords) |>
+  # use CartoDB for background
+  addProviderTiles("CartoDB.Positron") |>
+  # add heatmap layer
+  addHeatmap(
+    lng = ~lon,
+    lat = ~lat,
+    intensity = 0.5,
+    blur = 5,
+    max = 0.05,
+    radius = 7,
+    gradient = c("blue", "cyan", "yellow", "red")
+  )
+
+```

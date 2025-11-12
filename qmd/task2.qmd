@@ -35,12 +35,11 @@ For this task, you will need the GIS shapefile data to create the maps. The shap
 
 ## Example Report
 
-### Mapping Incidence
+<a href="data/solutions/task2_solution.qmd" download class="btn btn-primary" target="_blank">Download solution file</a>
 
-Total incidence to date was mapped by health-area.
+### Geographic distribution of cases
 
 ```{r}
-
 # INSTALL AND LOAD PACKAGES
 
 # Load required packages
@@ -49,6 +48,7 @@ pacman::p_load(
   sf, # handling shapefiles
   here, # handing file paths
   leaflet, # mapping
+  leaflet.extras, # additional leaflet features including heatmaps
   htmltools # handlers for html objects
 )
 
@@ -58,33 +58,29 @@ pacman::p_load(
 # load shapefiles and keep relevant areas
 shp <- sf::read_sf("data/gis/sle_adm3.shp") |>
   # standardize column names
-  janitor::clean_names() |>
-  # filter to keep certain areas
-  filter(adm1_en == "Western")
+  janitor::clean_names()
 
 # import the cleaned linelist data
-linelist <- rio::import("data/linelist.rds") |>
-  # interpret the lon and lat variables for GIS use
-  st_as_sf(coords = c("lon", "lat"), crs = 4326) |>
-  # join the administrative boundary file to the linelist, based on
-  # spatial intersection
-  st_join(shp, join = st_intersects)
+linelist <- rio::import("data/linelist.rds")
 
 # convert to aggregate format
 agg <- linelist |>
-  # remove the geometry for now
-  st_drop_geometry() |>
   # count the number of cases per adm3
-  summarise(n = n(), .by = adm3_en) |>
+  summarise(n = n(), .by = adm3) |>
   # add the shape files of the adm3 zones
-  inner_join(shp, by = "adm3_en") |>
+  inner_join(shp, by = c(adm3 = "adm3_en")) |>
   # convert back to shapefile
   st_as_sf()
 
+```
+
+Total incidence to date was mapped by chiefdom.
+
+```{r}
 # define colour palette
 pal <- colorNumeric(palette = "YlOrRd", domain = agg$n)
 
-# generate leaflet map
+# generate choropleth map (polygons only)
 leaflet(agg) |>
   # use CartoDB for background
   addProviderTiles("CartoDB.Positron") |>
@@ -96,7 +92,7 @@ leaflet(agg) |>
     fillOpacity = 0.7,
     # define labels
     label = ~ map(
-      paste0("<b>", adm3_en, "</b><br>", n, " cases"),
+      paste0("<b>", adm3, "</b><br>", n, " cases"),
       htmltools::HTML
     ),
     labelOptions = labelOptions(direction = "auto"),
@@ -105,25 +101,6 @@ leaflet(agg) |>
       color = "black",
       bringToFront = FALSE
     )
-  ) |>
-  # add points per case
-  addCircleMarkers(
-    data = linelist,
-    radius = 4,
-    color = "black",
-    fillColor = "grey",
-    weight = 1,
-    fillOpacity = 0.8,
-    label = ~ map(
-      paste0(
-        "<b>Case ID:</b> ", case_id, "<br>",
-        "<b>Date onset:</b> ", date_onset, "<br>",
-        "<b>Health facility:</b> ", hospital
-      ),
-      htmltools::HTML
-    ),
-    labelOptions = labelOptions(direction = "auto"),
-    group = "Cases"
   ) |>
   # add legend
   addLegend(
@@ -136,14 +113,27 @@ leaflet(agg) |>
 
 ```
 
-## Additional Resources
+Spatial clustering of cases was then investigated at a higher spatial resolution using a heatmap.
 
-::: {.panel-tabset}
+```{r}
+# Prepare linelist data for heatmap
+# Filter cases with valid coordinates
+linelist_coords <- linelist |>
+  filter(!is.na(lon), !is.na(lat))
 
-### R Handbook
-Relevant chapters from the Epidemiologist R Handbook.
+# Generate heatmap from individual cases
+leaflet(linelist_coords) |>
+  # use CartoDB for background
+  addProviderTiles("CartoDB.Positron") |>
+  # add heatmap layer
+  addHeatmap(
+    lng = ~lon,
+    lat = ~lat,
+    intensity = 0.5,
+    blur = 5,
+    max = 0.05,
+    radius = 7,
+    gradient = c("blue", "cyan", "yellow", "red")
+  )
 
-### Package Documentation
-Package vignettes and documentation for relevant R packages.
-
-:::
+```

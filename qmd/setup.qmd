@@ -10,9 +10,7 @@ To get started, you'll need to install R and RStudio on your computer.
 
 ### Unable to install locally?
 
-If you're unable to install R and RStudio on your laptop, you can use **Posit Cloud** instead. Posit Cloud provides a free cloud-based RStudio environment that you can access from any web browser.
-
-**Get started with a free Posit Cloud account**: [Posit Cloud Plans](https://posit.cloud/plans)
+If you're unable to install R and RStudio on your laptop, you can use **[Posit Cloud](https://posit.cloud/plans)** instead: this provide a free cloud-based RStudio environment that you can access from any web browser.
 
 ## Installing R Packages
 
@@ -37,7 +35,7 @@ pacman::p_load(
 
 ## Setting Up Your Project
 
-Before you begin working on the tasks, let's set up your RStudio project and create a basic Quarto document that you'll use for your epidemiological reports.
+Before you begin working on the tasks, let's set up your RStudio project and folder structure.
 
 ### Step 1: Create an RStudio R Project
 
@@ -53,7 +51,7 @@ An **R Project** is a way to organize your work in RStudio. It helps keep all yo
 
 RStudio will now open your new project. You'll see the project name (`sitrep`) in the top-right corner of RStudio.
 
-### Step 2: Set Up Your Project Folder Structure
+### Step 2: Set Up Your Folder Structure
 
 Within your project, create the following subfolders to organize your files:
 
@@ -62,7 +60,11 @@ Within your project, create the following subfolders to organize your files:
 3. Create a folder called `data/` - for storing your datasets.
 4. Create another folder called `outputs/` - for storing generated reports and figures.
 
-### Step 3: Create a New Quarto Document
+## Setting Up Your Quarto Document
+
+Now let's create a basic Quarto document that you'll use for your epidemiological reports.
+
+### Step 1: Create a New Quarto Document
 
 1. In RStudio, go to **File → New File → Quarto Document**.
 2. Choose **HTML** as the output format.
@@ -74,13 +76,13 @@ Within your project, create the following subfolders to organize your files:
 
 When you open your Quarto document, you'll notice two editing mode buttons in the top-left corner of the editor: **Visual** and **Source**.
 
-- **Visual mode**: Provides a WYSIWYG (What You See Is What You Get) editing experience, similar to a word processor. You can format text using buttons and menus, and see a preview of how your document will look.
+- **Visual mode**: Provides a "What You See Is What You Get" editing experience, similar to a word processor. You can format text using buttons and menus, and see a preview of how your document will look.
 
 - **Source mode**: Shows the raw Markdown and code syntax. You work directly with the text, code chunks, and formatting syntax (like `##` for headings, `**bold**` for bold text, etc.).
 
 **For the rest of this tutorial and the task tutorials, we'll assume you're using Source mode.** This allows you to directly copy and paste code chunks and content from the tutorials into your document. You can switch between modes at any time using the buttons in the top-left corner - just click **Source** to switch to source mode.
 
-### Step 4: Set Up the YAML Header and Report Structure
+### Step 2: Set Up the YAML Header and Report Structure
 
 At the top of your Quarto document, you'll see a **YAML header** (the section between the `---` lines). The YAML header contains metadata about your document, such as the title and output format. It tells Quarto how to render your document.
 
@@ -99,21 +101,17 @@ Below the YAML header, create a basic report structure with sections. In Quarto 
 Add this basic outline to your document:
 
 ```markdown
-## Executive Summary
+## Overview
 
-This section will contain key findings and recommendations.
+This section will provide an introduction and overview of the situation report.
 
-## Data Overview
+## Epidemiological Trends
 
-This section will describe the dataset and data quality.
+This section will describe epidemiological trends.
 
-## Epidemiological Analysis
+## Severity
 
-This section will contain your analytical outputs, including:
-
-- Incidence curves
-- Summary statistics
-- Key epidemiological parameters
+This section will conduct a severity analysis.
 
 ## Conclusions
 
@@ -139,12 +137,13 @@ library(tidyverse)
 ```</code></pre>
 
 You can also insert a code chunk in RStudio by:
+
 - Clicking the **Insert** button (green plus icon with a "C") in the toolbar, or
 - Using the keyboard shortcut: `Ctrl+Alt+I` (Windows/Linux) or `Cmd+Option+I` (Mac)
 
 Code chunks allow you to run R code, create plots, generate tables, and perform data analysis. The results (outputs, plots, tables) will appear in your rendered HTML report.
 
-### Step 5: Install and Load Basic Packages
+### Step 3: Install and Load Basic Packages
 
 In the first code chunk of your document, install and load the basic packages needed for report generation. We'll use **pacman**, a package management tool for R that simplifies installing and loading packages. Pacman automatically installs packages if they're not already installed, then loads them - making it much easier to manage dependencies.
 
@@ -159,15 +158,15 @@ if (!requireNamespace("pacman", quietly = TRUE)) {
 
 # Install and load required packages using pacman
 pacman::p_load(
-  tidyverse, # For data manipulation and visualization
-  rio, # For importing data
-  reactable # For interactive tables
+  tidyverse,  # For data manipulation and visualization
+  rio,        # For importing data
+  reactable   # For interactive tables
 )
 ```
 
 **Note:** We'll add more packages as needed when you work through specific tasks. Additional packages will be installed as you progress through the tutorials.
 
-### Step 6: Render Your Report
+### Step 4: Render Your Report
 
 Now let's test that everything is working by rendering your report:
 
@@ -175,23 +174,23 @@ Now let's test that everything is working by rendering your report:
 2. Quarto will process your document and generate an HTML file.
 3. The HTML report will open automatically in your browser.
 
-**Note:** The rendered HTML file will be saved in the same folder as your Quarto document, or you can specify a different output location in your YAML header.
-
 You should now see a basic HTML report with your title and section headings. This confirms that your Quarto setup is working correctly!
 
-### Learning More About Quarto
+If you prefer, you can download the example sitrep template directly instead of creating it yourself:
 
-If you'd like to learn more about Quarto, here are some helpful resources:
+<a href="data/solutions/sitrep.qmd" download class="btn btn-primary" target="_blank">Download solution file</a>
 
-- **[Quarto Tutorial: Hello, Quarto](https://quarto.org/docs/get-started/hello/rstudio.html)**: An overview of the basics, including rendering, authoring, YAML headers, code chunks, and markdown text.
+## Additional Resources
 
-- **[Quarto Guide](https://quarto.org/docs/guide/)**: A comprehensive guide covering all aspects of Quarto, including authoring, computations, tools, documents, presentations, dashboards, websites, and more.
+- **[Quarto Tutorial](https://quarto.org/docs/get-started/hello/rstudio.html)**: An overview of the basics, including rendering, authoring, YAML headers, code chunks and markdown text.
+
+- **[Quarto Guide](https://quarto.org/docs/guide/)**: A comprehensive guide covering all aspects of Quarto, including authoring, computations, tools, documents, presentations, dashboards, websites and more.
 
 ## Next Steps
 
-Once you have R and RStudio installed and your project set up:
+Once you have the basics set up:
 
-1. Visit the [Data](data.qmd) section to download example datasets.
+1. Visit the [Data](data.qmd) section to download the example dataset if you are not using your own data.
 2. Explore the [Tasks](task1.qmd) menu to find the analytical task(s) you're interested in.
 3. Join your assigned group and start working through the materials with facilitator support.
 

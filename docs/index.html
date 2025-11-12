@@ -167,9 +167,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#workshop-structure" id="toc-workshop-structure" class="nav-link active" data-scroll-target="#workshop-structure">Workshop Structure</a></li>
-  <li><a href="#workshop-timeline" id="toc-workshop-timeline" class="nav-link" data-scroll-target="#workshop-timeline">Workshop Timeline</a></li>
   <li><a href="#tasks" id="toc-tasks" class="nav-link" data-scroll-target="#tasks">Tasks</a></li>
-  <li><a href="#datasets" id="toc-datasets" class="nav-link" data-scroll-target="#datasets">Datasets</a></li>
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a></li>
   <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
   </ul>
@@ -200,15 +198,12 @@ ul.task-list li input[type="checkbox"] {
 <p>Welcome to the Collaborative Analytics Workshop! This workshop is designed to help you explore different tools and resources for conducting a range of common epidemiological analytical tasks. Our primary goal is for you to take home a functional script that generates an interactive epidemiological situation report that you can build on and adapt for your own work moving forward.</p>
 <section id="workshop-structure" class="level2">
 <h2 class="anchored" data-anchor-id="workshop-structure">Workshop Structure</h2>
-<p>You will be grouped by the analytical tasks you are interested in and work through them together with support from the facilitators. During these sessions, you can apply the analyses to your own data (if you have it and feel comfortable adapting the code) or use the example datasets and code. Depending on your technical level, you may complete multiple tasks over different sessions and therefore change groups.</p>
-</section>
-<section id="workshop-timeline" class="level2">
-<h2 class="anchored" data-anchor-id="workshop-timeline">Workshop Timeline</h2>
+<p>You will be grouped by the analytical tasks you are interested in and work through them together with support from the facilitators. Depending on your technical level, you may complete multiple tasks over different sessions and therefore change groups.</p>
 <p>By the end of Day 1, you should have:</p>
 <ul>
-<li>Completed the <a href="./setup.html">Setup</a> section (installing R, RStudio, packages, and creating your project)</li>
-<li>Downloaded the example datasets from the <a href="./data.html">Data</a> section</li>
-<li>Completed <a href="./task1.html">Task 1</a>, which generates a basic descriptive outline of a situation report</li>
+<li>Completed the <a href="./setup.html">Setup</a> section (installing R, RStudio, packages and setting up the correct folder structure)</li>
+<li>Imported your own data or the example dataset from the <a href="./data.html">Data</a> section</li>
+<li>Completed <a href="./task1.html">Task 1</a>, which generates a basic descriptive situation report</li>
 </ul>
 <p>By the end of Day 2, you should have:</p>
 <ul>
@@ -221,22 +216,26 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="tasks">Tasks</h2>
 <p>Each task page includes:</p>
 <ul>
-<li>Links to external tutorials that provide comprehensive learning materials and detailed explanations of the analytical concepts and methods</li>
-<li>Complete, ready-to-run example code that generates all the outputs needed for an example report. The example code works with the provided example datasets</li>
+<li>Links to external tutorials that provide comprehensive learning materials and detailed explanations of the analytical concepts and methods.</li>
+<li>Complete example code that generates all the outputs needed for an example report. The example code works with the provided example datasets</li>
 </ul>
-<p>You can use the example code and example datasets as-is. You don’t need to adapt anything if you’re not comfortable doing so. Simply download the example data, copy the example code into your Quarto document, and run it to generate a complete example report. This approach is fully supported and will help you learn the analytical techniques while producing a functional script you can reference later.</p>
-</section>
-<section id="datasets" class="level2">
-<h2 class="anchored" data-anchor-id="datasets">Datasets</h2>
-<p>You can work with your own data throughout the workshop, or you can use the example datasets provided. If you don’t have your own dataset or don’t feel comfortable adapting code to your data, you can use the example datasets and example code. This is perfectly fine and will still allow you to learn the analytical techniques and generate a functional report.</p>
+<p>You can work with your own data throughout the workshop or you can use the example datasets provided. If you don’t have your own dataset or don’t feel comfortable adapting code to your data, you can use the example datasets and example code. This will still allow you to learn the analytical techniques and generate a functional report you can reference later.</p>
 </section>
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
-<p>To get started, visit the <a href="./setup.html">Setup</a> page for installation instructions and required packages, download the example datasets from the <a href="./data.html">Data</a> section, navigate to the Tasks menu to find the analytical tasks you’re interested in, and join your group to work through the materials with support from facilitators.</p>
+<ol type="1">
+<li>Visit the <a href="./setup.html">Setup</a> page for installation instructions and required packages</li>
+<li>Download the example datasets from the <a href="./data.html">Data</a> section</li>
+<li>Navigate to the Tasks menu to find the analytical tasks you’re interested in</li>
+<li>Join your group to work through the materials with support from facilitators.</li>
+</ol>
 </section>
 <section id="additional-resources" class="level2">
 <h2 class="anchored" data-anchor-id="additional-resources">Additional Resources</h2>
-<p>If you’re new to R or need a refresher, the Epidemiologist R Handbook provides a comprehensive guide to R fundamentals for epidemiologists. Start with the <a href="https://www.epirhandbook.com/en/new_pages/basics.html">R Basics chapter</a>. For a more general introduction to R and coding, see <a href="https://r4ds.hadley.nz/intro.html">R for Data Science</a>.</p>
+<ul>
+<li><a href="https://www.epirhandbook.com/en/new_pages/basics.html">Epidemiologist R Handbook</a>: A comprehensive guide to R fundamentals for epidemiologists</li>
+<li><a href="https://r4ds.hadley.nz/intro.html">R for Data Science</a>: A general introduction to R and coding</li>
+</ul>
 
 
 </section>
@@ -346,6 +345,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         if (link.dataset.originalHref !== undefined) {
           link.href = link.dataset.originalHref;
         }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
       }
     }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {

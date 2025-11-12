@@ -24,70 +24,47 @@ This task focuses on obtaining epidemiological parameters from your data or the 
 
 ## Example Report
 
+<a href="data/solutions/task4_solution.qmd" download class="btn btn-primary" target="_blank">Download solution file</a>
+
 ### Ebola serial interval
-We first extract this parameter from the {epiparameter} package database:
+The serial interval for Ebola was extracted from the `epiparameter` package, identifying the following source:
 
 ```{r}
-#| echo: true
-#| eval: true
-#| message: false
-#| warning: false
+#| results: asis
 
 # INSTALL AND LOAD PACKAGES
 
 # Load required packages
-pacman::p_load(epiparameter, tidyverse, EpiNow2)
+pacman::p_load(epiparameter, tidyverse, EpiNow2, reactable)
 
 # Creating epiparameter objects by accessing the {epiparameter} library
 ebola_serial_int <- epiparameter::epiparameter_db(
-  disease = "ebola", 
+  disease = "ebola",
   epi_name = "serial",
   subset = sample_size > 10,
   author = "WHO Ebola Response Team",
   single_epiparameter = TRUE
 )
 
-ebola_serial_int
+ebola_serial_int$citation
 ```
 
-### Visualise parameters 
-We can then view the serial interval either as a table, or as a plot of its
-probability density function:
+```{r}
+# Extract summary statistics and parameters
+pars <- epiparameter::get_parameters(ebola_serial_int) # distribution parameters
+serial_mean <- ebola_serial_int$summary_stats$mean
+serial_sd <- ebola_serial_int$summary_stats$sd
+
+# Calculate 95th percentile of serial interval
+serial_interval_95th <- qgamma(
+  0.95,
+  shape = pars["shape"],
+  scale = pars["scale"]
+)
+```
+
+This estimate has a mean of `r round(serial_mean, 1)` days and standard deviation of `r round(serial_sd, 1)` days, meaning that 95% of cases have a serial interval of less than `r round(serial_interval_95th, 0)` days. The probability density function of the serial interval is given below:
 
 ```{r}
-epiparameter::parameter_tbl(ebola_serial_int) # as a table
 plot(ebola_serial_int) # as a plot of the PDF
 ```
-
-### Extract and use relevant info
-Once we have an {epiparameter} object ready, we extract relevant information
-such as its summary statistics or distribution parameters, and use these in 
-subsequent analyses. Below, the extracted serial interval for Ebola is
-passed onto {EpiNow2}.
-
-```{r}
-ebola_serial_int$summary_stats[c("mean", "sd")] # summary statistics
-epiparameter::get_parameters(ebola_serial_int) # distribution parameters
-
-serial_interval_EN2 <-
-  EpiNow2::Gamma(
-    mean = ebola_serial_int$summary_stats$mean,
-    sd = ebola_serial_int$summary_stats$sd,
-    max = 30
-  )
-
-serial_interval_EN2
-```
-
-
-## Additional Resources
-
-::: {.panel-tabset}
-
-### R Handbook
-Relevant chapters from the Epidemiologist R Handbook.
-
-### Package Documentation
-Package vignettes and documentation for relevant R packages.
-
-:::
