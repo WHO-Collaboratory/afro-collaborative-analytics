@@ -1,5 +1,5 @@
 ---
-title: "Task 6: Nowcasting epidemiological data"
+title: "Task 6: Estimating the reproduction number"
 format:
   html:
     code-fold: true
