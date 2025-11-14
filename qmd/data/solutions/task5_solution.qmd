@@ -1,30 +1,13 @@
 ---
-title: "Task 5: Estimating disease severity"
+title: "Task 5 Solution"
 format:
-  html:
-    code-fold: true
+  html
 execute:
+  echo: false
   warning: false
+  message: false
 ---
 
-## Overview
-
-This task focuses on estimating disease severity. You will learn how to calculate and interpret key severity metrics such as case fatality ratio and infection fatality ratio.
-
-## Learning Objectives
-
-- Calculate case fatality ratio (CFR)
-- Estimate infection fatality ratio (IFR)
-- Adjust for time-to-death and censoring
-- Compare severity across populations and time periods
-
-## Tutorial
-
-[Access the tutorial here](https://epiverse-trace.github.io/tutorials-middle/severity-static.html)
-
-## Example Report
-
-<a href="data/solutions/task5_solution.qmd" download class="btn btn-primary" target="_blank">Download solution file</a>
 
 # Visualising incidence and death data
 
@@ -145,15 +128,3 @@ dplyr::bind_rows(
   theme_bw()
 ```
 The unadjusted, naive CFR underestimates the CFR significantly at the beginning of the outbreak, and approaches the delay-adjusted CFR values as the epidemic passes its peak and data on deaths becomes available.
-
-## Additional Resources
-
-::: {.panel-tabset}
-
-### R Handbook
-Relevant chapters from the Epidemiologist R Handbook.
-
-### Package Documentation
-Package vignettes and documentation for relevant R packages.
-
-:::
