@@ -1,30 +1,143 @@
 ---
-title: "Task 7: Forecasting cases and deaths"
+title: "Task 7: Nowcasting epidemiological data"
+format:
+  html:
+    code-fold: true
+execute:
+  warning: false
 ---
 
 ## Overview
 
-This task covers forecasting cases and deaths. You will learn how to build forecasting models and generate predictions of future disease incidence.
+This task walks you through nowcasting epidemiological data. 
+You will learn to correct for epidemiological and reporting delays so you can 
+estimate current case counts even when the data are incomplete. 
+Along the way, you will learn how to work with the delay distributions provided 
+by {epiparameter}—discretising continuous distributions, turning parameters 
+into {EpiNow2} inputs, and using those distribution functions to guide decisions
+like setting appropriate quarantine lengths.
 
 ## Learning Objectives
 
-- Build forecasting models for epidemiological data
-- Generate short-term and long-term forecasts
-- Quantify forecast uncertainty
-- Evaluate forecast performance
+- Understand reporting delays and their impact
+- Apply nowcasting methods to epidemiological data
+- Adjust for underreporting and delays
+- Generate real-time estimates of current incidence
 
 ## Tutorial
 
-[Access the tutorial here](https://epiverse-trace.github.io/tutorials-middle/create-forecast.html)
+[Access the tutorial here](https://epiverse-trace.github.io/tutorials-middle/delays-functions.html)
 
-## Additional Resources
+## Downloading Nowcast Estimates
 
-::: {.panel-tabset}
+**Note:** Running EpiNow2 can be computationally expensive and may take several minutes to complete. If you want to skip this step, you can download the pre-computed estimates file and place it in your `outputs/` folder:
 
-### R Handbook
-Relevant chapters from the Epidemiologist R Handbook.
+<a href="outputs/nowcast_estimates.rds" download class="btn btn-primary" target="_blank">Download nowcast estimates</a>
 
-### Package Documentation
-Package vignettes and documentation for relevant R packages.
+## Example Report
 
-:::
+<a href="data/solutions/task7_solution.qmd" download class="btn btn-primary" target="_blank">Download solution file</a>
+
+### Visualising available epiparameter distributions
+
+ We first explore the available distributions in {epiparameter} that we can 
+ use to adjust for delays during an Ebola outbreak.
+
+```{r}
+# INSTALL AND LOAD PACKAGES
+pacman::p_load(tidyverse, EpiNow2, incidence2, reactable, rio)
+
+# List distributions
+epiparameter::epiparameter_db(disease = "ebola") |>
+  epiparameter::parameter_tbl() |>
+  select(-disease) |>
+  reactable::reactable(defaultPageSize = 5)
+```
+
+### Extracting relevant parameters and adjusting for delays
+
+We imported linelist data for the Ebola outbreak, and converted it to incidence.
+Then extracted parameter distributions for the serial interval and incubation
+period for Ebola, chosen from the table above.
+
+```{r}
+# LOAD DATA
+# Import linelist data and convert to incidence
+ebola_incidence <- readRDS("data/linelist.rds") |>
+  incidence2::incidence(
+    date_index = "date_onset",
+    count_values_to = "confirm",
+    date_names_to = "date",
+    complete_dates = TRUE
+  ) |>
+  dplyr::select(-count_variable)
+
+# serial interval ---------------------------------------------------------
+
+# subset one distribution for the SI
+ebola_serial <- epiparameter::epiparameter_db(
+  disease = "ebola",
+  epi_name = "serial",
+  single_epiparameter = TRUE
+)
+
+# adapt SI epiparameter object to EpiNow2
+ebola_serial_discrete <- epiparameter::discretise(ebola_serial)
+
+serial_interval_ebola <-
+  EpiNow2::Gamma(
+    mean = ebola_serial$summary_stats$mean,
+    sd = ebola_serial$summary_stats$sd,
+    max = quantile(ebola_serial_discrete, p = 0.99)
+  )
+
+# incubation period ---------------------------------------------------------
+
+# subset one distribution for ebola incubation period
+ebola_incubation <- epiparameter::epiparameter_db(
+  disease = "ebola",
+  epi_name = "incubation",
+  single_epiparameter = TRUE
+)
+
+# adapt IP epiparameter object to EpiNow2
+ebola_incubation_discrete <- epiparameter::discretise(ebola_incubation)
+
+incubation_period_ebola <-
+  EpiNow2::Gamma(
+    mean = ebola_incubation$summary_stats$mean,
+    sd = ebola_incubation$summary_stats$sd,
+    max = quantile(ebola_serial_discrete, p = 0.99)
+  )
+
+# reporting delay ---------------------------------------------------------
+reporting_delay <- EpiNow2::LogNormal(
+  mean = 2,
+  sd = 1,
+  max = 10
+)
+
+# check if the analysis has been run before and run EpiNow2 if not
+file_name <- "outputs/nowcast_estimates.rds"
+if (file.exists(file_name)) {
+  nowcast_estimates <- import(file_name)
+} else {
+  # nowcasting with epinow ---------------------------------------------------
+  withr::local_options(base::list(mc.cores = 4))
+  nowcast_estimates <- EpiNow2::estimate_infections(
+    data = ebola_incidence,
+    generation_time = EpiNow2::generation_time_opts(serial_interval_ebola),
+    delays = EpiNow2::delay_opts(incubation_period_ebola + reporting_delay),
+    forecast = NULL,
+    stan = EpiNow2::stan_opts(samples = 500, chains = 2)
+  )
+  export(nowcast_estimates, file_name)
+}
+
+```
+
+We then adjust for a reporting delay of 2 days from onset to notification, on average.
+
+```{r}
+plot(nowcast_estimates, type = "infections")
+```

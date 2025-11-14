@@ -8,7 +8,6 @@ execute:
   message: false
 ---
 
-<a href="data/solutions/task3_solution.qmd" download class="btn btn-primary" target="_blank">Download solution file</a>
 
 ```{r}
 
@@ -36,12 +35,12 @@ linelist <- readRDS("data/linelist.rds")
 # SETTING UP EPICONTACTS
 
 ## generate contacts
-contacts <- linelist %>%
+contacts <- linelist |>
   transmute(
     infector = infector,
     case_id = case_id,
     source = source
-  ) %>%
+  ) |>
   drop_na(infector)
 
 # generate epicontacts object

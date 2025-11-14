@@ -28,3 +28,8 @@
   color: white;
 }
 
+/* Reactable table spacing */
+.reactable {
+  margin-bottom: 2em;
+}
+

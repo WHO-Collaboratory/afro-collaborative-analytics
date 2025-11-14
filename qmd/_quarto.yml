@@ -28,13 +28,13 @@ website:
           - href: task4.qmd
             text: "4. Getting epidemiological parameters"
           - href: task5.qmd
-            text: "5. Estimating the reproduction number"
+            text: "5. Estimating disease severity"
           - href: task6.qmd
-            text: "6. Nowcasting epidemiological data"
+            text: "6. Estimating the reproduction number"
           - href: task7.qmd
-            text: "7. Forecasting cases and deaths"
+            text: "7. Nowcasting epidemiological data"
           - href: task8.qmd
-            text: "8. Estimating disease severity"
+            text: "8. Forecasting cases and deaths"
           - href: task9.qmd
             text: "9. Simulating disease transmission"
     right:

@@ -50,6 +50,12 @@ extract_example_report <- function(task_file) {
 
   extracted_lines <- lines[start_idx:end_idx]
 
+  # Remove download button links to solution files
+  # Pattern matches: <a href="data/solutions/taskX_solution.qmd" download
+  extracted_lines <- extracted_lines[
+    !str_detect(extracted_lines, '<a href="data/solutions/task\\d+_solution\\.qmd" download')
+  ]
+
   # Remove trailing empty lines
   while (length(extracted_lines) > 0 && extracted_lines[length(extracted_lines)] == "") {
     extracted_lines <- extracted_lines[-length(extracted_lines)]

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Task 7: Forecasting cases and deaths</title>
+<title>Task 7: Nowcasting epidemiological data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -67,6 +101,22 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+
+<script src="site_libs/react-18.2.0/react.min.js"></script>
+
+<script src="site_libs/react-18.2.0/react-dom.min.js"></script>
+
+<script src="site_libs/reactwidget-2.0.0/react-tools.js"></script>
+
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<link href="site_libs/reactable-0.4.4/reactable.css" rel="stylesheet">
+
+<script src="site_libs/reactable-binding-0.4.4/reactable.js"></script>
+
 
 
 <link rel="stylesheet" href="styles.css">
@@ -124,19 +174,19 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="./task5.html">
- <span class="dropdown-text">5. Estimating the reproduction number</span></a>
+ <span class="dropdown-text">5. Estimating disease severity</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task6.html">
- <span class="dropdown-text">6. Nowcasting epidemiological data</span></a>
+ <span class="dropdown-text">6. Estimating the reproduction number</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task7.html">
- <span class="dropdown-text">7. Forecasting cases and deaths</span></a>
+ <span class="dropdown-text">7. Nowcasting epidemiological data</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task8.html">
- <span class="dropdown-text">8. Estimating disease severity</span></a>
+ <span class="dropdown-text">8. Forecasting cases and deaths</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task9.html">
@@ -169,7 +219,12 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
   <li><a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial">Tutorial</a></li>
-  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
+  <li><a href="#downloading-nowcast-estimates" id="toc-downloading-nowcast-estimates" class="nav-link" data-scroll-target="#downloading-nowcast-estimates">Downloading Nowcast Estimates</a></li>
+  <li><a href="#example-report" id="toc-example-report" class="nav-link" data-scroll-target="#example-report">Example Report</a>
+  <ul class="collapse">
+  <li><a href="#visualising-available-epiparameter-distributions" id="toc-visualising-available-epiparameter-distributions" class="nav-link" data-scroll-target="#visualising-available-epiparameter-distributions">Visualising available epiparameter distributions</a></li>
+  <li><a href="#extracting-relevant-parameters-and-adjusting-for-delays" id="toc-extracting-relevant-parameters-and-adjusting-for-delays" class="nav-link" data-scroll-target="#extracting-relevant-parameters-and-adjusting-for-delays">Extracting relevant parameters and adjusting for delays</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -178,7 +233,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Task 7: Forecasting cases and deaths</h1>
+<h1 class="title">Task 7: Nowcasting epidemiological data</h1>
 </div>
 
 
@@ -197,36 +252,147 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>This task covers forecasting cases and deaths. You will learn how to build forecasting models and generate predictions of future disease incidence.</p>
+<p>This task walks you through nowcasting epidemiological data. You will learn to correct for epidemiological and reporting delays so you can estimate current case counts even when the data are incomplete. Along the way, you will learn how to work with the delay distributions provided by {epiparameter}—discretising continuous distributions, turning parameters into {EpiNow2} inputs, and using those distribution functions to guide decisions like setting appropriate quarantine lengths.</p>
 </section>
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
 <ul>
-<li>Build forecasting models for epidemiological data</li>
-<li>Generate short-term and long-term forecasts</li>
-<li>Quantify forecast uncertainty</li>
-<li>Evaluate forecast performance</li>
+<li>Understand reporting delays and their impact</li>
+<li>Apply nowcasting methods to epidemiological data</li>
+<li>Adjust for underreporting and delays</li>
+<li>Generate real-time estimates of current incidence</li>
 </ul>
 </section>
 <section id="tutorial" class="level2">
 <h2 class="anchored" data-anchor-id="tutorial">Tutorial</h2>
-<p><a href="https://epiverse-trace.github.io/tutorials-middle/create-forecast.html">Access the tutorial here</a></p>
+<p><a href="https://epiverse-trace.github.io/tutorials-middle/delays-functions.html">Access the tutorial here</a></p>
 </section>
-<section id="additional-resources" class="level2">
-<h2 class="anchored" data-anchor-id="additional-resources">Additional Resources</h2>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">R Handbook</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Package Documentation</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>Relevant chapters from the Epidemiologist R Handbook.</p>
+<section id="downloading-nowcast-estimates" class="level2">
+<h2 class="anchored" data-anchor-id="downloading-nowcast-estimates">Downloading Nowcast Estimates</h2>
+<p><strong>Note:</strong> Running EpiNow2 can be computationally expensive and may take several minutes to complete. If you want to skip this step, you can download the pre-computed estimates file and place it in your <code>outputs/</code> folder:</p>
+<p><a href="outputs/nowcast_estimates.rds" download="" class="btn btn-primary" target="_blank">Download nowcast estimates</a></p>
+</section>
+<section id="example-report" class="level2">
+<h2 class="anchored" data-anchor-id="example-report">Example Report</h2>
+<p><a href="data/solutions/task7_solution.qmd" download="" class="btn btn-primary" target="_blank">Download solution file</a></p>
+<section id="visualising-available-epiparameter-distributions" class="level3">
+<h3 class="anchored" data-anchor-id="visualising-available-epiparameter-distributions">Visualising available epiparameter distributions</h3>
+<p>We first explore the available distributions in {epiparameter} that we can use to adjust for delays during an Ebola outbreak.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INSTALL AND LOAD PACKAGES</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, EpiNow2, incidence2, reactable, rio)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># List distributions</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>epiparameter<span class="sc">::</span><span class="fu">epiparameter_db</span>(<span class="at">disease =</span> <span class="st">"ebola"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  epiparameter<span class="sc">::</span><span class="fu">parameter_tbl</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>disease) <span class="sc">|&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  reactable<span class="sc">::</span><span class="fu">reactable</span>(<span class="at">defaultPageSize =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="reactable html-widget html-fill-item" id="htmlwidget-0e60f52c8af2143f580f" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-0e60f52c8af2143f580f">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"pathogen":["Ebola Virus","Ebola Virus-Zaire Subtype","Ebola Virus-Zaire Subtype","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus"],"epi_name":["offspring distribution","incubation period","onset to death","incubation period","incubation period","incubation period","incubation period","serial interval","serial interval","serial interval","serial interval","hospitalisation to death","hospitalisation to discharge","notification to death","notification to discharge","onset to death","onset to discharge"],"prob_distribution":["nbinom","lnorm","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma"],"author":["Lloyd-Smith et al.","Eichner et al.","The Ebola Outbreak Epidemiology Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team"],"year":[2005,2011,2018,2015,2015,2015,2015,2015,2015,2015,2015,2015,2015,2015,2015,2015,2015],"sample_size":[13,196,14,1798,49,957,792,305,37,147,112,1167,1004,2536,1324,2741,1335]},"columns":[{"id":"pathogen","name":"pathogen","type":"character"},{"id":"epi_name","name":"epi_name","type":"character"},{"id":"prob_distribution","name":"prob_distribution","type":"character"},{"id":"author","name":"author","type":"character"},{"id":"year","name":"year","type":"numeric"},{"id":"sample_size","name":"sample_size","type":"numeric"}],"defaultPageSize":5,"dataKey":"47d49889a7a70b46bf8e67eea9d22a0f"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p>Package vignettes and documentation for relevant R packages.</p>
+</div>
+</section>
+<section id="extracting-relevant-parameters-and-adjusting-for-delays" class="level3">
+<h3 class="anchored" data-anchor-id="extracting-relevant-parameters-and-adjusting-for-delays">Extracting relevant parameters and adjusting for delays</h3>
+<p>We imported linelist data for the Ebola outbreak, and converted it to incidence. Then extracted parameter distributions for the serial interval and incubation period for Ebola, chosen from the table above.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LOAD DATA</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Import linelist data and convert to incidence</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>ebola_incidence <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/linelist.rds"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  incidence2<span class="sc">::</span><span class="fu">incidence</span>(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_index =</span> <span class="st">"date_onset"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">count_values_to =</span> <span class="st">"confirm"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_names_to =</span> <span class="st">"date"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">complete_dates =</span> <span class="cn">TRUE</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>count_variable)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># serial interval ---------------------------------------------------------</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># subset one distribution for the SI</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>ebola_serial <span class="ot">&lt;-</span> epiparameter<span class="sc">::</span><span class="fu">epiparameter_db</span>(</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">disease =</span> <span class="st">"ebola"</span>,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">epi_name =</span> <span class="st">"serial"</span>,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">single_epiparameter =</span> <span class="cn">TRUE</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># adapt SI epiparameter object to EpiNow2</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>ebola_serial_discrete <span class="ot">&lt;-</span> epiparameter<span class="sc">::</span><span class="fu">discretise</span>(ebola_serial)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>serial_interval_ebola <span class="ot">&lt;-</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  EpiNow2<span class="sc">::</span><span class="fu">Gamma</span>(</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> ebola_serial<span class="sc">$</span>summary_stats<span class="sc">$</span>mean,</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> ebola_serial<span class="sc">$</span>summary_stats<span class="sc">$</span>sd,</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="fu">quantile</span>(ebola_serial_discrete, <span class="at">p =</span> <span class="fl">0.99</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co"># incubation period ---------------------------------------------------------</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co"># subset one distribution for ebola incubation period</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>ebola_incubation <span class="ot">&lt;-</span> epiparameter<span class="sc">::</span><span class="fu">epiparameter_db</span>(</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">disease =</span> <span class="st">"ebola"</span>,</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">epi_name =</span> <span class="st">"incubation"</span>,</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">single_epiparameter =</span> <span class="cn">TRUE</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="co"># adapt IP epiparameter object to EpiNow2</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>ebola_incubation_discrete <span class="ot">&lt;-</span> epiparameter<span class="sc">::</span><span class="fu">discretise</span>(ebola_incubation)</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>incubation_period_ebola <span class="ot">&lt;-</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  EpiNow2<span class="sc">::</span><span class="fu">Gamma</span>(</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> ebola_incubation<span class="sc">$</span>summary_stats<span class="sc">$</span>mean,</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> ebola_incubation<span class="sc">$</span>summary_stats<span class="sc">$</span>sd,</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="fu">quantile</span>(ebola_serial_discrete, <span class="at">p =</span> <span class="fl">0.99</span>)</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="co"># reporting delay ---------------------------------------------------------</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>reporting_delay <span class="ot">&lt;-</span> EpiNow2<span class="sc">::</span><span class="fu">LogNormal</span>(</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> <span class="dv">2</span>,</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="dv">1</span>,</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>  <span class="at">max =</span> <span class="dv">10</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="co"># check if the analysis has been run before and run EpiNow2 if not</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>file_name <span class="ot">&lt;-</span> <span class="st">"outputs/nowcast_estimates.rds"</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">file.exists</span>(file_name)) {</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>  nowcast_estimates <span class="ot">&lt;-</span> <span class="fu">import</span>(file_name)</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>  <span class="co"># nowcasting with epinow ---------------------------------------------------</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>  withr<span class="sc">::</span><span class="fu">local_options</span>(base<span class="sc">::</span><span class="fu">list</span>(<span class="at">mc.cores =</span> <span class="dv">4</span>))</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>  nowcast_estimates <span class="ot">&lt;-</span> EpiNow2<span class="sc">::</span><span class="fu">estimate_infections</span>(</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> ebola_incidence,</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">generation_time =</span> EpiNow2<span class="sc">::</span><span class="fu">generation_time_opts</span>(serial_interval_ebola),</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">delays =</span> EpiNow2<span class="sc">::</span><span class="fu">delay_opts</span>(incubation_period_ebola <span class="sc">+</span> reporting_delay),</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">forecast =</span> <span class="cn">NULL</span>,</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>    <span class="at">stan =</span> EpiNow2<span class="sc">::</span><span class="fu">stan_opts</span>(<span class="at">samples =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">2</span>)</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">export</span>(nowcast_estimates, file_name)</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>We then adjust for a reporting delay of 2 days from onset to notification, on average.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nowcast_estimates, <span class="at">type =</span> <span class="st">"infections"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="task7_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

@@ -8,7 +8,6 @@ execute:
   message: false
 ---
 
-<a href="data/solutions/task4_solution.qmd" download class="btn btn-primary" target="_blank">Download solution file</a>
 
 ### Ebola serial interval
 The serial interval for Ebola was extracted from the `epiparameter` package, identifying the following source:
