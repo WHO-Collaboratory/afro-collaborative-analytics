@@ -1,30 +1,13 @@
 ---
-title: "Task 9: Simulating disease transmission"
+title: "Task 9 Solution"
 format:
-  html:
-    code-fold: true
+  html
 execute:
+  echo: false
   warning: false
+  message: false
 ---
 
-## Overview
-
-This task covers simulating disease spread using mathematical models. You will learn how to generate disease trajectories, set up model parameters, and account for uncertainty in model simulations.
-
-## Learning Objectives
-
-- Load and use model structures from the epidemics package
-- Load social contact matrices with socialmixr
-- Generate disease spread model simulations
-- Generate multiple model simulations and visualize uncertainty
-
-## Tutorial
-
-[Access the tutorial here](https://epiverse-trace.github.io/tutorials-late/simulating-transmission.html)
-
-## Example Report
-
-<a href="data/solutions/task9_solution.qmd" download class="btn btn-primary" target="_blank">Download solution file</a>
 
 ### Define population demographics and initial population conditions
 
@@ -157,15 +140,3 @@ output %>%
 ```
 
 The figure above shows the total number or cumulative amount of individuals in the infectious compartment at each time, across the 100 simulations run for different basic reproduction number values.
-
-## Additional Resources
-
-::: {.panel-tabset}
-
-### R Handbook
-Relevant chapters from the Epidemiologist R Handbook.
-
-### Package Documentation
-Package vignettes and documentation for relevant R packages.
-
-:::
