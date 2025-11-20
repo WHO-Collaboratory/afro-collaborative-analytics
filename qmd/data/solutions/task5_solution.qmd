@@ -83,7 +83,8 @@ reactable(
   columns = list(
     Method = colDef(name = "Method"),
     Estimate = colDef(name = "Estimate")
-  )
+  ),
+  fullWidth = FALSE
 )
 
 ```

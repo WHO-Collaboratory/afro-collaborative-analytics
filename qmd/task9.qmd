@@ -5,6 +5,7 @@ format:
     code-fold: true
 execute:
   warning: false
+  message: false
 ---
 
 ## Overview
@@ -26,6 +27,16 @@ This task covers simulating disease spread using mathematical models. You will l
 
 <a href="data/solutions/task9_solution.qmd" download class="btn btn-primary" target="_blank">Download solution file</a>
 
+```{r}
+# INSTALL AND LOAD PACKAGES
+
+# Install epidemics from GitHub
+pacman::p_load_gh("epiverse-trace/epidemics")
+
+# Load required packages
+pacman::p_load(tidyverse, epidemics, socialmixr, reactable)
+```
+
 ### Define population demographics and initial population conditions
 
 We first extract a social contact matrix from {socialmixr} for the United Kingdom. 
@@ -33,25 +44,9 @@ A single individual from the youngest age category (under 20 years old) was infe
 
 
 ```{r}
-# INSTALL AND LOAD PACKAGES
-
-# Install epidemics package from GitHub (not available on CRAN)
-if (!requireNamespace("epidemics", quietly = TRUE)) {
-  # Install remotes if needed
-  if (!requireNamespace("remotes", quietly = TRUE)) {
-    install.packages("remotes")
-  }
-  # Install epidemics from GitHub
-  remotes::install_github("epiverse-trace/epidemics")
-}
-
-# Load required packages
-pacman::p_load(tidyverse, epidemics, socialmixr)
-
 # Defining social contact matrix
-polymod <- socialmixr::polymod
 contact_data <- socialmixr::contact_matrix(
-  survey = polymod,
+  survey = socialmixr::polymod,
   countries = "United Kingdom",
   age.limits = c(0, 20, 40),
   symmetric = TRUE
@@ -89,9 +84,26 @@ uk_population <- population(
   demography_vector = demography_vector,
   initial_conditions = initial_conditions
 )
-
-uk_population
 ```
+
+Here we see the demography:
+```{r}
+enframe(uk_population$demography_vector, "Age group", "Population") |>
+  reactable(fullWidth = FALSE)
+```
+
+Here we see the contact matrix:
+```{r}
+round(uk_population$contact_matrix, 1) |>
+  reactable(fullWidth = FALSE)
+```
+
+And here the initial conditions:
+```{r}
+uk_population$initial_conditions |>
+  reactable(fullWidth = FALSE)
+```
+
 
 ### Simulating transmission
 
@@ -157,15 +169,3 @@ output %>%
 ```
 
 The figure above shows the total number or cumulative amount of individuals in the infectious compartment at each time, across the 100 simulations run for different basic reproduction number values.
-
-## Additional Resources
-
-::: {.panel-tabset}
-
-### R Handbook
-Relevant chapters from the Epidemiologist R Handbook.
-
-### Package Documentation
-Package vignettes and documentation for relevant R packages.
-
-:::

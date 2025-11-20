@@ -28,11 +28,11 @@
     "text": "Tutorial\nAccess the tutorial here"
   },
   {
-    "objectID": "task9.html#additional-resources",
-    "href": "task9.html#additional-resources",
+    "objectID": "task9.html#example-report",
+    "href": "task9.html#example-report",
     "title": "Task 9: Simulating disease transmission",
-    "section": "Additional Resources",
-    "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
+    "section": "Example Report",
+    "text": "Example Report\nDownload solution file\n\n\nCode\n# INSTALL AND LOAD PACKAGES\n\n# Install epidemics from GitHub\npacman::p_load_gh(\"epiverse-trace/epidemics\")\n\n# Load required packages\npacman::p_load(tidyverse, epidemics, socialmixr, reactable)\n\n\n\nDefine population demographics and initial population conditions\nWe first extract a social contact matrix from {socialmixr} for the United Kingdom. A single individual from the youngest age category (under 20 years old) was infected and introduced the disease in a population of 1 million, which were initially fully susceptible to the infection.\n\n\nCode\n# Defining social contact matrix\ncontact_data &lt;- socialmixr::contact_matrix(\n  survey = socialmixr::polymod,\n  countries = \"United Kingdom\",\n  age.limits = c(0, 20, 40),\n  symmetric = TRUE\n)\n# prepare contact matrix\ncontact_matrix &lt;- t(contact_data$matrix)\n\n# Define population's initial conditions\ninitial_i &lt;- 1e-6\ninitial_conditions_inf &lt;- c(\n  S = 1 - initial_i, E = 0, I = initial_i, R = 0, V = 0\n)\ninitial_conditions_free &lt;- c(\n  S = 1, E = 0, I = 0, R = 0, V = 0\n)\n\n# combine the initial conditions\ninitial_conditions &lt;- rbind(\n  initial_conditions_inf, # age group 1\n  initial_conditions_free, # age group 2\n  initial_conditions_free # age group 3\n)\n\n# use contact matrix to assign age group names\nrownames(initial_conditions) &lt;- rownames(contact_matrix)\n\n# Create demography vector\ndemography_vector &lt;- contact_data$demography$population\nnames(demography_vector) &lt;- rownames(contact_matrix)\n\n# Create population object for {epidemics}\nuk_population &lt;- population(\n  name = \"UK\",\n  contact_matrix = contact_matrix,\n  demography_vector = demography_vector,\n  initial_conditions = initial_conditions\n)\n\n\nHere we see the demography:\n\n\nCode\nenframe(uk_population$demography_vector, \"Age group\", \"Population\") |&gt;\n  reactable(fullWidth = FALSE)\n\n\n\n\n\n\nHere we see the contact matrix:\n\n\nCode\nround(uk_population$contact_matrix, 1) |&gt;\n  reactable(fullWidth = FALSE)\n\n\n\n\n\n\nAnd here the initial conditions:\n\n\nCode\nuk_population$initial_conditions |&gt;\n  reactable(fullWidth = FALSE)\n\n\n\n\n\n\n\n\nSimulating transmission\nWe fitted an SEIR to model the transmission of an infectious disease with a basic reproduction number of 1.5, an infectious period of 7 days, and a pre-infectious period of 3 days.\n\n\nCode\n# Defining model parameters\n# time periods\npreinfectious_period &lt;- 3.0\ninfectious_period &lt;- 7.0\n\n# specify the mean and standard deviation of R0\nr_estimate_mean &lt;- 1.5\nr_estimate_sd &lt;- 0.05\n\n# Generate 100 R samples\nr_samples &lt;- withr::with_seed(\n  seed = 1,\n  rnorm(\n    n = 100, mean = r_estimate_mean, sd = r_estimate_sd\n  )\n)\n\n# rates\ninfectiousness_rate &lt;- 1.0 / preinfectious_period\nrecovery_rate &lt;- 1.0 / infectious_period\nbeta &lt;- r_samples / infectious_period\n\n# running {epidemic} default model\noutput &lt;- model_default(\n  population = uk_population,\n  transmission_rate = beta,\n  infectiousness_rate = infectiousness_rate,\n  recovery_rate = recovery_rate,\n  time_end = 600, increment = 1\n)\n\n# Visualising output\noutput %&gt;%\n  mutate(r_value = r_samples) %&gt;%\n  unnest(data) %&gt;%\n  filter(compartment == \"infectious\") %&gt;%\n  ggplot() +\n  geom_line(\n    aes(time, value, color = r_value, group = param_set),\n    alpha = 3\n  ) +\n  scale_color_fermenter(\n    palette = \"RdBu\",\n    name = \"R\"\n  ) +\n  scale_y_continuous(\n    labels = scales::comma\n  ) +\n  facet_grid(\n    cols = vars(demography_group)\n  ) +\n  theme_bw() +\n  labs(\n    x = \"Simulation time (days)\",\n    y = \"Individuals\"\n  )\n\n\n\n\n\n\n\n\n\nThe figure above shows the total number or cumulative amount of individuals in the infectious compartment at each time, across the 100 simulations run for different basic reproduction number values."
   },
   {
     "objectID": "task7.html",
@@ -63,11 +63,18 @@
     "text": "Tutorial\nAccess the tutorial here"
   },
   {
-    "objectID": "task7.html#additional-resources",
-    "href": "task7.html#additional-resources",
-    "title": "Task 8: Estimating disease severity",
-    "section": "Additional Resources",
-    "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
+    "objectID": "task7.html#downloading-nowcast-estimates",
+    "href": "task7.html#downloading-nowcast-estimates",
+    "title": "Task 7: Nowcasting epidemiological data",
+    "section": "Downloading Nowcast Estimates",
+    "text": "Downloading Nowcast Estimates\nNote: Running EpiNow2 can be computationally expensive and may take several minutes to complete. If you want to skip this step, you can download the pre-computed estimates file and place it in your outputs/ folder:\nDownload nowcast estimates"
+  },
+  {
+    "objectID": "task7.html#example-report",
+    "href": "task7.html#example-report",
+    "title": "Task 7: Nowcasting epidemiological data",
+    "section": "Example Report",
+    "text": "Example Report\nDownload solution file\n\nVisualising available epiparameter distributions\nWe first explore the available distributions in {epiparameter} that we can use to adjust for delays during an Ebola outbreak.\n\n\nCode\n# INSTALL AND LOAD PACKAGES\npacman::p_load(tidyverse, EpiNow2, incidence2, reactable, rio)\n\n# List distributions\nepiparameter::epiparameter_db(disease = \"ebola\") |&gt;\n  epiparameter::parameter_tbl() |&gt;\n  select(-disease) |&gt;\n  reactable::reactable(defaultPageSize = 5)\n\n\n\n\n\n\n\n\nExtracting relevant parameters and adjusting for delays\nWe imported linelist data for the Ebola outbreak, and converted it to incidence. Then extracted parameter distributions for the serial interval and incubation period for Ebola, chosen from the table above.\n\n\nCode\n# LOAD DATA\n# Import linelist data and convert to incidence\nebola_incidence &lt;- readRDS(\"data/linelist.rds\") |&gt;\n  incidence2::incidence(\n    date_index = \"date_onset\",\n    count_values_to = \"confirm\",\n    date_names_to = \"date\",\n    complete_dates = TRUE\n  ) |&gt;\n  dplyr::select(-count_variable)\n\n# serial interval ---------------------------------------------------------\n\n# subset one distribution for the SI\nebola_serial &lt;- epiparameter::epiparameter_db(\n  disease = \"ebola\",\n  epi_name = \"serial\",\n  single_epiparameter = TRUE\n)\n\n# adapt SI epiparameter object to EpiNow2\nebola_serial_discrete &lt;- epiparameter::discretise(ebola_serial)\n\nserial_interval_ebola &lt;-\n  EpiNow2::Gamma(\n    mean = ebola_serial$summary_stats$mean,\n    sd = ebola_serial$summary_stats$sd,\n    max = quantile(ebola_serial_discrete, p = 0.99)\n  )\n\n# incubation period ---------------------------------------------------------\n\n# subset one distribution for ebola incubation period\nebola_incubation &lt;- epiparameter::epiparameter_db(\n  disease = \"ebola\",\n  epi_name = \"incubation\",\n  single_epiparameter = TRUE\n)\n\n# adapt IP epiparameter object to EpiNow2\nebola_incubation_discrete &lt;- epiparameter::discretise(ebola_incubation)\n\nincubation_period_ebola &lt;-\n  EpiNow2::Gamma(\n    mean = ebola_incubation$summary_stats$mean,\n    sd = ebola_incubation$summary_stats$sd,\n    max = quantile(ebola_serial_discrete, p = 0.99)\n  )\n\n# reporting delay ---------------------------------------------------------\nreporting_delay &lt;- EpiNow2::LogNormal(\n  mean = 2,\n  sd = 1,\n  max = 10\n)\n\n# check if the analysis has been run before and run EpiNow2 if not\nfile_name &lt;- \"outputs/nowcast_estimates.rds\"\nif (file.exists(file_name)) {\n  nowcast_estimates &lt;- import(file_name)\n} else {\n  # nowcasting with epinow ---------------------------------------------------\n  withr::local_options(base::list(mc.cores = 4))\n  nowcast_estimates &lt;- EpiNow2::estimate_infections(\n    data = ebola_incidence,\n    generation_time = EpiNow2::generation_time_opts(serial_interval_ebola),\n    delays = EpiNow2::delay_opts(incubation_period_ebola + reporting_delay),\n    forecast = NULL,\n    stan = EpiNow2::stan_opts(samples = 500, chains = 2)\n  )\n  export(nowcast_estimates, file_name)\n}\n\n\nWe then adjust for a reporting delay of 2 days from onset to notification, on average.\n\n\nCode\nplot(nowcast_estimates, type = \"infections\")"
   },
   {
     "objectID": "task5.html",
@@ -98,18 +105,25 @@
     "text": "Tutorial\nAccess the tutorial here"
   },
   {
-    "objectID": "task5.html#downloading-rt-estimates",
-    "href": "task5.html#downloading-rt-estimates",
-    "title": "Task 5: Estimating the reproduction number",
-    "section": "Downloading Rt Estimates",
-    "text": "Downloading Rt Estimates\nNote: Running EpiNow2 can be computationally expensive and may take several minutes to complete. If you want to skip this step, you can download the pre-computed estimates file and place it in your outputs/ folder:\nDownload Rt estimates"
-  },
-  {
     "objectID": "task5.html#example-report",
     "href": "task5.html#example-report",
-    "title": "Task 6: Nowcasting epidemiological data",
+    "title": "Task 5: Estimating disease severity",
     "section": "Example Report",
-    "text": "Example Report\nDownload solution file\n\nVisualising available epiparameter distributions\nWe first explore the available distributions in {epiparameter} that we can use to adjust for delays during an Ebola outbreak.\n\n\nCode\n# INSTALL AND LOAD PACKAGES\npacman::p_load(tidyverse, EpiNow2, incidence2, reactable, rio)\n\n# List distributions\nepiparameter::epiparameter_db(disease = \"ebola\") |&gt;\n  epiparameter::parameter_tbl() |&gt;\n  select(-disease) |&gt;\n  reactable::reactable(defaultPageSize = 5)\n\n\n\n\n\n\n\n\nExtracting relevant parameters and adjusting for delays\nWe imported linelist data for the Ebola outbreak, and converted it to incidence. Then extracted parameter distributions for the serial interval and incubation period for Ebola, chosen from the table above.\n\n\nCode\n# LOAD DATA\n# Import linelist data and convert to incidence\nebola_incidence &lt;- readRDS(\"data/linelist.rds\") |&gt;\n  incidence2::incidence(\n    date_index = \"date_onset\",\n    count_values_to = \"confirm\",\n    date_names_to = \"date\",\n    complete_dates = TRUE\n  ) |&gt;\n  dplyr::select(-count_variable)\n\n# serial interval ---------------------------------------------------------\n\n# subset one distribution for the SI\nebola_serial &lt;- epiparameter::epiparameter_db(\n  disease = \"ebola\",\n  epi_name = \"serial\",\n  single_epiparameter = TRUE\n)\n\n# adapt SI epiparameter object to EpiNow2\nebola_serial_discrete &lt;- epiparameter::discretise(ebola_serial)\n\nserial_interval_ebola &lt;-\n  EpiNow2::Gamma(\n    mean = ebola_serial$summary_stats$mean,\n    sd = ebola_serial$summary_stats$sd,\n    max = quantile(ebola_serial_discrete, p = 0.99)\n  )\n\n# incubation period ---------------------------------------------------------\n\n# subset one distribution for ebola incubation period\nebola_incubation &lt;- epiparameter::epiparameter_db(\n  disease = \"ebola\",\n  epi_name = \"incubation\",\n  single_epiparameter = TRUE\n)\n\n# adapt IP epiparameter object to EpiNow2\nebola_incubation_discrete &lt;- epiparameter::discretise(ebola_incubation)\n\nincubation_period_ebola &lt;-\n  EpiNow2::Gamma(\n    mean = ebola_incubation$summary_stats$mean,\n    sd = ebola_incubation$summary_stats$sd,\n    max = quantile(ebola_serial_discrete, p = 0.99)\n  )\n\n# reporting delay ---------------------------------------------------------\nreporting_delay &lt;- EpiNow2::LogNormal(\n  mean = 2,\n  sd = 1,\n  max = 10\n)\n\n# check if the analysis has been run before and run EpiNow2 if not\nfile_name &lt;- \"outputs/nowcast_estimates.rds\"\nif (file.exists(file_name)) {\n  nowcast_estimates &lt;- import(file_name)\n} else {\n  # nowcasting with epinow ---------------------------------------------------\n  withr::local_options(base::list(mc.cores = 4))\n  nowcast_estimates &lt;- EpiNow2::estimate_infections(\n    data = ebola_incidence,\n    generation_time = EpiNow2::generation_time_opts(serial_interval_ebola),\n    delays = EpiNow2::delay_opts(incubation_period_ebola + reporting_delay),\n    forecast = NULL,\n    stan = EpiNow2::stan_opts(samples = 500, chains = 2)\n  )\n  export(nowcast_estimates, file_name)\n}\n\n\nWe then adjust for a reporting delay of 2 days from onset to notification, on average.\n\n\nCode\nplot(nowcast_estimates, type = \"infections\")"
+    "text": "Example Report\nDownload solution file"
+  },
+  {
+    "objectID": "task5.html#estimating-case-fatality-risk-cfr-in-real-time",
+    "href": "task5.html#estimating-case-fatality-risk-cfr-in-real-time",
+    "title": "Task 5: Estimating disease severity",
+    "section": "Estimating Case Fatality Risk (CFR) in real-time",
+    "text": "Estimating Case Fatality Risk (CFR) in real-time\nTo estimate the static CFR at a specific time-point during the outbreak, we subset the data to include the initial 150 days of the outbreak only. Then we estimate both the naive and the delay-adjusted CFR.\n\n\nCode\n# Prepare data for {cfr} package\nebola_data_cfr &lt;- ebola_cases_deaths %&gt;%\n  pivot_wider(names_from = count_variable, values_from = count) %&gt;%\n  rename(cases = date_onset, deaths = date_death)\n\nebola_rt &lt;- ebola_data_cfr %&gt;%\n  slice(1:150)\n\n# Naive CFR\ncfr_naive &lt;- cfr::cfr_static(data = ebola_rt)\n\n# Delay-adjusted CFR\n# Getting distribution from {epiparameter}\nonset_to_death_ebola &lt;-\n  epiparameter::epiparameter_db(\n    disease = \"Ebola\",\n    epi_name = \"onset_to_death\",\n    single_epiparameter = TRUE\n  )\n\ncfr_adjusted &lt;- cfr::cfr_static(data = ebola_rt, delay_density = function(x) density(onset_to_death_ebola, x))\n\n# Create table with CFR estimates and confidence intervals\n# Create table with CFR estimates and confidence intervals\ncfr_table &lt;- tibble(\n  Method = c(\"Naive CFR\", \"Adjusted CFR\"),\n  Estimate = c(\n    round(cfr_naive$severity_estimate, 2),\n    round(cfr_adjusted$severity_estimate, 2)\n  ),\n  `Lower CI` = c(\n    round(cfr_naive$severity_low, 2),\n    round(cfr_adjusted$severity_low, 2)\n  ),\n  `Upper CI` = c(\n    round(cfr_naive$severity_high, 2),\n    round(cfr_adjusted$severity_high, 2)\n  )\n)\n\nreactable(\n  cfr_table,\n  columns = list(\n    Method = colDef(name = \"Method\"),\n    Estimate = colDef(name = \"Estimate\")\n  ),\n  fullWidth = FALSE\n)\n\n\n\n\n\n\nThe naive CFR underestimates the case fatality risk by 7%."
+  },
+  {
+    "objectID": "task5.html#additional-resources",
+    "href": "task5.html#additional-resources",
+    "title": "Task 5: Estimating disease severity",
+    "section": "Additional Resources",
+    "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
   },
   {
     "objectID": "task3.html",
@@ -392,6 +406,13 @@
     "text": "Tutorial\nAccess the tutorial here"
   },
   {
+    "objectID": "task6.html#downloading-rt-estimates",
+    "href": "task6.html#downloading-rt-estimates",
+    "title": "Task 6: Estimating the reproduction number",
+    "section": "Downloading Rt Estimates",
+    "text": "Downloading Rt Estimates\nNote: Running EpiNow2 can be computationally expensive and may take several minutes to complete. If you want to skip this step, you can download the pre-computed estimates file and place it in your outputs/ folder:\nDownload Rt estimates"
+  },
+  {
     "objectID": "task6.html#example-report",
     "href": "task6.html#example-report",
     "title": "Task 6: Estimating the reproduction number",
@@ -399,32 +420,25 @@
     "text": "Example Report\nDownload solution file\n\nConverting linelist to incidence\nWe first import linelist data for an Ebola outbreak that started in April 2014, convert it to incidence, and visualise the epidemic curve.\n\n\nCode\n# INSTALL AND LOAD PACKAGES\npacman::p_load(tidyverse, EpiNow2, incidence2, rio, reactable)\n\n# LOAD DATA\n# Import the cleaned linelist data\nlinelist &lt;- readRDS(\"data/linelist.rds\")\n\n# Convert linelist to incidence and format data for EpiNow2\nincidence &lt;- linelist |&gt;\n  incidence2::incidence(\n    date_index = \"date_onset\",\n    count_values_to = \"confirm\",\n    date_names_to = \"date\",\n    complete_dates = TRUE\n  ) |&gt;\n  # Keep the first 90 dates\n  dplyr::slice_head(n = 190)\n\n# Plotting incidence curve\nplot(incidence) +\n  labs(x = \"Date\", y = \"Cases\")\n\n\n\n\n\n\n\n\n\n\n\nEstimating Rt\nWe used {EpiNow2} to estimate the time-varying reproduction number (Rt) for the Ebola outbreak, accounting for reporting delays. We first defined the parameters.\n\n\nCode\n# define parameters\npars &lt;- tibble(\n  par = c(\"Incubation Period\", \"Reporting Delay\", \"Generation Time\"),\n  dist = c(\"Gamma\", \"LogNormal\", \"LogNormal\"),\n  mean = c(4, 2, 3),\n  sd = c(2, 1, 2.5),\n  max = c(20, 10, 15)\n)\n\n# Creating distribution objects for the incubation period, reporting delay, and\n# generation time\nincubation_period_fixed &lt;- EpiNow2::Gamma(\n  mean = pars$mean[1],\n  sd = pars$sd[1],\n  max = pars$max[1]\n)\n\nreporting_delay_fixed &lt;- EpiNow2::LogNormal(\n  mean = pars$mean[2],\n  sd = pars$sd[2],\n  max = pars$max[2]\n)\n\ngeneration_time_fixed &lt;- EpiNow2::LogNormal(\n  mean = pars$mean[3],\n  sd = pars$sd[3],\n  max = pars$max[3]\n)\n\n# define Rt prior distribution\nrt_prior &lt;- EpiNow2::rt_opts(\n  prior = EpiNow2::LogNormal(mean = 1.5, sd = 0.2)\n)\n\n# print table\nreactable(\n  pars,\n  columns = list(\n    par = colDef(name = \"Parameter\"),\n    dist = colDef(name = \"Distribution\"),\n    mean = colDef(name = \"Mean\"),\n    sd = colDef(name = \"Standard Deviation\"),\n    max = colDef(name = \"Maximum\")\n  )\n)\n\n\n\n\n\n\nThe estimated time-varying reproduction number is visualised below.\n\n\nCode\n# check if the analysis has been run before and run EpiNow2 if not\nfile_name &lt;- \"outputs/rt_estimates.rds\"\nif (file.exists(file_name)) {\n  rt_estimates &lt;- import(file_name)\n} else {\n  # define cores\n  withr::local_options(base::list(mc.cores = 4))\n  ## generate estimates\n  rt_estimates &lt;- EpiNow2::epinow(\n    # # Drop column for {EpiNow2} input format\n    data = select(incidence, -count_variable),\n    # delays\n    generation_time = EpiNow2::generation_time_opts(generation_time_fixed),\n    delays = EpiNow2::delay_opts(\n      incubation_period_fixed + reporting_delay_fixed\n    ),\n    # prior\n    rt = rt_prior,\n    stan = EpiNow2::stan_opts(samples = 1000, chains = 3)\n  )\n  export(rt_estimates, file_name)\n}\n\n# plot reproduction number\nrt_estimates$plots$R\n\n\n\n\n\n\n\n\n\nKey summary statistics are provided below:\n\n\nCode\n# generate an interactive table\nreactable(\n  summary(rt_estimates),\n  columns = list(\n    measure = colDef(name = \"Measure\"),\n    estimate = colDef(name = \"Estimate\")\n  )\n)"
   },
   {
-    "objectID": "task6.html#additional-resources",
-    "href": "task6.html#additional-resources",
-    "title": "Task 7: Forecasting cases and deaths",
-    "section": "Additional Resources",
-    "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
-  },
-  {
     "objectID": "task8.html",
     "href": "task8.html",
     "title": "Task 8: Forecasting cases and deaths",
     "section": "",
-    "text": "This task covers forecasting cases and deaths. You will learn how to build forecasting models and generate predictions of future disease incidence."
+    "text": "This task covers forecasting cases and deaths. You will learn how to build forecasting models and generate predictions of future disease incidence, by accounting for incomplete observations using Bayesian methods in {EpiNow2}. Covers short-term projections assuming a constant value for the reproduction number based on its latest estimate, handling incomplete observations, and forecasting secondary outcomes based on primary observations."
   },
   {
     "objectID": "task8.html#overview",
     "href": "task8.html#overview",
     "title": "Task 8: Forecasting cases and deaths",
     "section": "",
-    "text": "This task covers forecasting cases and deaths. You will learn how to build forecasting models and generate predictions of future disease incidence."
+    "text": "This task covers forecasting cases and deaths. You will learn how to build forecasting models and generate predictions of future disease incidence, by accounting for incomplete observations using Bayesian methods in {EpiNow2}. Covers short-term projections assuming a constant value for the reproduction number based on its latest estimate, handling incomplete observations, and forecasting secondary outcomes based on primary observations."
   },
   {
     "objectID": "task8.html#learning-objectives",
     "href": "task8.html#learning-objectives",
     "title": "Task 8: Forecasting cases and deaths",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nBuild forecasting models for epidemiological data\nGenerate short-term and long-term forecasts\nQuantify forecast uncertainty\nEvaluate forecast performance"
+    "text": "Learning Objectives\n\nBuild forecasting models for epidemiological data\nGenerate short-term forecasts\nQuantify forecast uncertainty\nForecast secondary observations"
   },
   {
     "objectID": "task8.html#tutorial",
@@ -434,66 +448,17 @@
     "text": "Tutorial\nAccess the tutorial here"
   },
   {
-    "objectID": "task8.html#additional-resources",
-    "href": "task8.html#additional-resources",
+    "objectID": "task8.html#downloading-forecast-estimates",
+    "href": "task8.html#downloading-forecast-estimates",
     "title": "Task 8: Forecasting cases and deaths",
-    "section": "Additional Resources",
-    "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
-  },
-  {
-    "objectID": "task6.html#downloading-nowcast-estimates",
-    "href": "task6.html#downloading-nowcast-estimates",
-    "title": "Task 6: Nowcasting epidemiological data",
-    "section": "Downloading Nowcast Estimates",
-    "text": "Downloading Nowcast Estimates\nNote: Running EpiNow2 can be computationally expensive and may take several minutes to complete. If you want to skip this step, you can download the pre-computed estimates file and place it in your outputs/ folder:\nDownload nowcast estimates"
-  },
-  {
-    "objectID": "task8.html#downloading-rt-estimates",
-    "href": "task8.html#downloading-rt-estimates",
-    "title": "Task 5: Estimating the reproduction number",
-    "section": "Downloading Rt Estimates",
-    "text": "Downloading Rt Estimates\nNote: Running EpiNow2 can be computationally expensive and may take several minutes to complete. If you want to skip this step, you can download the pre-computed estimates file and place it in your outputs/ folder:\nDownload Rt estimates"
+    "section": "Downloading Forecast Estimates",
+    "text": "Downloading Forecast Estimates\nNote: Running EpiNow2 can be computationally expensive and may take several minutes to complete. If you want to skip this step, you can download the pre-computed estimates file and place it in your outputs/ folder:\nDownload nowcast estimates"
   },
   {
     "objectID": "task8.html#example-report",
     "href": "task8.html#example-report",
-    "title": "Task 5: Estimating the reproduction number",
+    "title": "Task 8: Forecasting cases and deaths",
     "section": "Example Report",
-    "text": "Example Report\nDownload solution file\n\nConverting linelist to incidence\nWe first import linelist data for an Ebola outbreak that started in April 2014, convert it to incidence, and visualise the epidemic curve.\n\n\nCode\n# INSTALL AND LOAD PACKAGES\npacman::p_load(tidyverse, EpiNow2, incidence2, rio, reactable)\n\n# LOAD DATA\n# Import the cleaned linelist data\nlinelist &lt;- readRDS(\"data/linelist.rds\")\n\n# Convert linelist to incidence and format data for EpiNow2\nincidence &lt;- linelist |&gt;\n  incidence2::incidence(\n    date_index = \"date_onset\",\n    count_values_to = \"confirm\",\n    date_names_to = \"date\",\n    complete_dates = TRUE\n  ) |&gt;\n  # Keep the first 90 dates\n  dplyr::slice_head(n = 190)\n\n# Plotting incidence curve\nplot(incidence) +\n  labs(x = \"Date\", y = \"Cases\")\n\n\n\n\n\n\n\n\n\n\n\nEstimating Rt\nWe used {EpiNow2} to estimate the time-varying reproduction number (Rt) for the Ebola outbreak, accounting for reporting delays. We first defined the parameters.\n\n\nCode\n# define parameters\npars &lt;- tibble(\n  par = c(\"Incubation Period\", \"Reporting Delay\", \"Generation Time\"),\n  dist = c(\"Gamma\", \"LogNormal\", \"LogNormal\"),\n  mean = c(4, 2, 3),\n  sd = c(2, 1, 2.5),\n  max = c(20, 10, 15)\n)\n\n# Creating distribution objects for the incubation period, reporting delay, and\n# generation time\nincubation_period_fixed &lt;- EpiNow2::Gamma(\n  mean = pars$mean[1],\n  sd = pars$sd[1],\n  max = pars$max[1]\n)\n\nreporting_delay_fixed &lt;- EpiNow2::LogNormal(\n  mean = pars$mean[2],\n  sd = pars$sd[2],\n  max = pars$max[2]\n)\n\ngeneration_time_fixed &lt;- EpiNow2::LogNormal(\n  mean = pars$mean[3],\n  sd = pars$sd[3],\n  max = pars$max[3]\n)\n\n# define Rt prior distribution\nrt_prior &lt;- EpiNow2::rt_opts(\n  prior = EpiNow2::LogNormal(mean = 1.5, sd = 0.2)\n)\n\n# print table\nreactable(\n  pars,\n  columns = list(\n    par = colDef(name = \"Parameter\"),\n    dist = colDef(name = \"Distribution\"),\n    mean = colDef(name = \"Mean\"),\n    sd = colDef(name = \"Standard Deviation\"),\n    max = colDef(name = \"Maximum\")\n  )\n)\n\n\n\n\n\n\nThe estimated time-varying reproduction number is visualised below.\n\n\nCode\n# check if the analysis has been run before and run EpiNow2 if not\nfile_name &lt;- \"outputs/rt_estimates.rds\"\nif (file.exists(file_name)) {\n  estimates &lt;- import(file_name)\n} else {\n  # define cores\n  withr::local_options(base::list(mc.cores = 4))\n  ## generate estimates\n  estimates &lt;- EpiNow2::epinow(\n    # # Drop column for {EpiNow2} input format\n    data = select(incidence, -count_variable),\n    # delays\n    generation_time = EpiNow2::generation_time_opts(generation_time_fixed),\n    delays = EpiNow2::delay_opts(\n      incubation_period_fixed + reporting_delay_fixed\n    ),\n    # prior\n    rt = rt_prior,\n    stan = EpiNow2::stan_opts(samples = 1000, chains = 3)\n  )\n  export(estimates, file_name)\n}\n\n# plot reproduction number\nestimates$plots$R\n\n\n\n\n\n\n\n\n\nKey summary statistics are provided below:\n\n\nCode\n# generate an interactive table\nreactable(\n  summary(estimates),\n  columns = list(\n    measure = colDef(name = \"Measure\"),\n    estimate = colDef(name = \"Estimate\")\n  )\n)"
-  },
-  {
-    "objectID": "task5.html#downloading-nowcast-estimates",
-    "href": "task5.html#downloading-nowcast-estimates",
-    "title": "Task 6: Nowcasting epidemiological data",
-    "section": "Downloading Nowcast Estimates",
-    "text": "Downloading Nowcast Estimates\nNote: Running EpiNow2 can be computationally expensive and may take several minutes to complete. If you want to skip this step, you can download the pre-computed estimates file and place it in your outputs/ folder:\nDownload nowcast estimates"
-  },
-  {
-    "objectID": "task6.html#downloading-rt-estimates",
-    "href": "task6.html#downloading-rt-estimates",
-    "title": "Task 6: Estimating the reproduction number",
-    "section": "Downloading Rt Estimates",
-    "text": "Downloading Rt Estimates\nNote: Running EpiNow2 can be computationally expensive and may take several minutes to complete. If you want to skip this step, you can download the pre-computed estimates file and place it in your outputs/ folder:\nDownload Rt estimates"
-  },
-  {
-    "objectID": "task7.html#downloading-nowcast-estimates",
-    "href": "task7.html#downloading-nowcast-estimates",
-    "title": "Task 7: Nowcasting epidemiological data",
-    "section": "Downloading Nowcast Estimates",
-    "text": "Downloading Nowcast Estimates\nNote: Running EpiNow2 can be computationally expensive and may take several minutes to complete. If you want to skip this step, you can download the pre-computed estimates file and place it in your outputs/ folder:\nDownload nowcast estimates"
-  },
-  {
-    "objectID": "task7.html#example-report",
-    "href": "task7.html#example-report",
-    "title": "Task 7: Nowcasting epidemiological data",
-    "section": "Example Report",
-    "text": "Example Report\nDownload solution file\n\nVisualising available epiparameter distributions\nWe first explore the available distributions in {epiparameter} that we can use to adjust for delays during an Ebola outbreak.\n\n\nCode\n# INSTALL AND LOAD PACKAGES\npacman::p_load(tidyverse, EpiNow2, incidence2, reactable, rio)\n\n# List distributions\nepiparameter::epiparameter_db(disease = \"ebola\") |&gt;\n  epiparameter::parameter_tbl() |&gt;\n  select(-disease) |&gt;\n  reactable::reactable(defaultPageSize = 5)\n\n\n\n\n\n\n\n\nExtracting relevant parameters and adjusting for delays\nWe imported linelist data for the Ebola outbreak, and converted it to incidence. Then extracted parameter distributions for the serial interval and incubation period for Ebola, chosen from the table above.\n\n\nCode\n# LOAD DATA\n# Import linelist data and convert to incidence\nebola_incidence &lt;- readRDS(\"data/linelist.rds\") |&gt;\n  incidence2::incidence(\n    date_index = \"date_onset\",\n    count_values_to = \"confirm\",\n    date_names_to = \"date\",\n    complete_dates = TRUE\n  ) |&gt;\n  dplyr::select(-count_variable)\n\n# serial interval ---------------------------------------------------------\n\n# subset one distribution for the SI\nebola_serial &lt;- epiparameter::epiparameter_db(\n  disease = \"ebola\",\n  epi_name = \"serial\",\n  single_epiparameter = TRUE\n)\n\n# adapt SI epiparameter object to EpiNow2\nebola_serial_discrete &lt;- epiparameter::discretise(ebola_serial)\n\nserial_interval_ebola &lt;-\n  EpiNow2::Gamma(\n    mean = ebola_serial$summary_stats$mean,\n    sd = ebola_serial$summary_stats$sd,\n    max = quantile(ebola_serial_discrete, p = 0.99)\n  )\n\n# incubation period ---------------------------------------------------------\n\n# subset one distribution for ebola incubation period\nebola_incubation &lt;- epiparameter::epiparameter_db(\n  disease = \"ebola\",\n  epi_name = \"incubation\",\n  single_epiparameter = TRUE\n)\n\n# adapt IP epiparameter object to EpiNow2\nebola_incubation_discrete &lt;- epiparameter::discretise(ebola_incubation)\n\nincubation_period_ebola &lt;-\n  EpiNow2::Gamma(\n    mean = ebola_incubation$summary_stats$mean,\n    sd = ebola_incubation$summary_stats$sd,\n    max = quantile(ebola_serial_discrete, p = 0.99)\n  )\n\n# reporting delay ---------------------------------------------------------\nreporting_delay &lt;- EpiNow2::LogNormal(\n  mean = 2,\n  sd = 1,\n  max = 10\n)\n\n# check if the analysis has been run before and run EpiNow2 if not\nfile_name &lt;- \"outputs/nowcast_estimates.rds\"\nif (file.exists(file_name)) {\n  nowcast_estimates &lt;- import(file_name)\n} else {\n  # nowcasting with epinow ---------------------------------------------------\n  withr::local_options(base::list(mc.cores = 4))\n  nowcast_estimates &lt;- EpiNow2::estimate_infections(\n    data = ebola_incidence,\n    generation_time = EpiNow2::generation_time_opts(serial_interval_ebola),\n    delays = EpiNow2::delay_opts(incubation_period_ebola + reporting_delay),\n    forecast = NULL,\n    stan = EpiNow2::stan_opts(samples = 500, chains = 2)\n  )\n  export(nowcast_estimates, file_name)\n}\n\n\nWe then adjust for a reporting delay of 2 days from onset to notification, on average.\n\n\nCode\nplot(nowcast_estimates, type = \"infections\")"
-  },
-  {
-    "objectID": "task5.html#additional-resources",
-    "href": "task5.html#additional-resources",
-    "title": "Task 5: Estimating disease severity",
-    "section": "Additional Resources",
-    "text": "Additional Resources\n\nR HandbookPackage Documentation\n\n\nRelevant chapters from the Epidemiologist R Handbook.\n\n\nPackage vignettes and documentation for relevant R packages."
+    "text": "Example Report\nDownload solution file\n\nForecasting incidence with incomplete observations\nWe first used {EpiNow2} to forecast incidence of Ebola, accounting for under-reporting of outbreak cases. We estimate that only 40% of actual cases were reported during surveillance activities.\n\n\nCode\n# INSTALL AND LOAD PACKAGES\npacman::p_load(tidyverse, EpiNow2, incidence2, reactable, rio)\n\n# LOAD DATA\n# Import linelist data and convert to incidence\nebola_incidence &lt;- readRDS(\"data/linelist.rds\") |&gt;\n  incidence2::incidence(\n    date_index = \"date_onset\",\n    count_values_to = \"confirm\",\n    date_names_to = \"date\",\n    complete_dates = TRUE\n  ) |&gt;\n  dplyr::select(-count_variable)\n\n# Defining generation time and Rt priors\n# Generation time\ngeneration_time_fixed &lt;- EpiNow2::LogNormal(\n  mean = 4,\n  sd = 2,\n  max = 15\n)\n\n# define Rt prior distribution\nrt_prior &lt;- EpiNow2::rt_opts(prior = EpiNow2::LogNormal(mean = 2, sd = 2))\n\n# Define observation model with 40% of cases being reported\nobs_scale &lt;- EpiNow2::Normal(mean = 0.4, sd = 0.01)\n\n# Check if the analysis has been run before and run EpiNow2 if not\nfile_name &lt;- \"outputs/forecast_estimates.rds\"\nif (file.exists(file_name)) {\n  forecast_estimates &lt;- import(file_name)\n} else {\n  # forecasting with epinow ---------------------------------------------------\n  withr::local_options(base::list(mc.cores = 4))\n  forecast_estimates &lt;- EpiNow2::epinow(\n    data = ebola_incidence,\n    generation_time = EpiNow2::generation_time_opts(generation_time_fixed),\n    rt = rt_prior,\n    # Add observation model\n    obs = EpiNow2::obs_opts(scale = obs_scale),\n    # Forecast window\n    forecast = forecast_opts(horizon = 15),\n    stan = EpiNow2::stan_opts(samples = 500, chains = 2)\n  )\n  export(forecast_estimates, file_name)\n}\n\nforecast_estimates$plots$infections\n\n\n\n\n\n\n\n\n\n\n\nForecasting secondary observations\n\n\nCode\n# Select early stages of the outbreak and convert data to EpiNow2 input, with\n# date, primary, and secondary columns\n\nebola_cases_deaths &lt;- readRDS(\"data/linelist.rds\") |&gt;\n  # Create date_death column: use date_outcome for entries where outcome == \"Death\"\n  mutate(date_death = if_else(outcome == \"Death\", date_outcome, as.Date(NA))) |&gt;\n  incidence2::incidence(\n    date_index = c(\"date_onset\", \"date_death\"),\n    date_names_to = \"date\",\n    complete_dates = TRUE\n  ) |&gt;\n  pivot_wider(names_from = count_variable, values_from = count) |&gt;\n  rename(primary = date_onset, secondary = date_death)\n\n# onset to death delay ---------------------------------------------------------\nonset_death_ebola &lt;- epiparameter::epiparameter_db(\n  disease = \"ebola\",\n  epi_name = \"onset to death\",\n  single_epiparameter = TRUE\n)\n\nonset_death_ebola_discrete &lt;- epiparameter::discretise(onset_death_ebola)\n\nod_ebola_EN2 &lt;-\n  EpiNow2::Gamma(\n    mean = onset_death_ebola$summary_stats$mean,\n    sd = onset_death_ebola$summary_stats$sd,\n    max = quantile(onset_death_ebola, p = 0.99)\n  )\n\n# Establish relationship between cases and deaths\ndata_od_estimation &lt;- ebola_cases_deaths |&gt; slice(20:150)\nestimate_cases_to_deaths &lt;- EpiNow2::estimate_secondary(\n  data = data_od_estimation,\n  secondary = EpiNow2::secondary_opts(type = \"incidence\"),\n  delays = EpiNow2::delay_opts(od_ebola_EN2)\n)\n\n\nWe then forecasted the number of deaths that would arise from reported Ebola cases in the early stages of the outbreak that started in 2014.\n\n\nCode\nplot(estimate_cases_to_deaths, primary = TRUE)\n\n\n\n\n\n\n\n\n\nCode\n# Forecast from day 151 to day 300 (not included in model fit)\n# Rename primary to value (required by forecast_secondary)\ncases_to_forecast &lt;- ebola_cases_deaths |&gt;\n  slice(151:300) |&gt;\n  select(date, primary) |&gt;\n  rename(value = primary)\n\n# Forecast secondary cases\ndeaths_forecast &lt;- EpiNow2::forecast_secondary(\n  estimate = estimate_cases_to_deaths,\n  primary = cases_to_forecast\n)\n\nplot(deaths_forecast)"
   }
 ]

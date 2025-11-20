@@ -5,6 +5,7 @@ format:
     code-fold: true
 execute:
   warning: false
+  message: false
 ---
 
 ## Overview
@@ -92,22 +93,20 @@ forecast_estimates$plots$infections
 
 ### Forecasting secondary observations
 
-We then were able to forecast the number of deaths that would arise from 
-reported Ebola cases in the early stages of the outbreak that started in 2014.
-
 ```{r}
+#| output: false
 # Select early stages of the outbreak and convert data to EpiNow2 input, with
 # date, primary, and secondary columns
 
-ebola_cases_deaths <- readRDS("data/linelist.rds") %>%
+ebola_cases_deaths <- readRDS("data/linelist.rds") |>
   # Create date_death column: use date_outcome for entries where outcome == "Death"
-  mutate(date_death = if_else(outcome == "Death", date_outcome, as.Date(NA))) %>%
+  mutate(date_death = if_else(outcome == "Death", date_outcome, as.Date(NA))) |>
   incidence2::incidence(
     date_index = c("date_onset", "date_death"),
     date_names_to = "date",
     complete_dates = TRUE
-  ) %>%
-  pivot_wider(names_from = count_variable, values_from = count) %>%
+  ) |>
+  pivot_wider(names_from = count_variable, values_from = count) |>
   rename(primary = date_onset, secondary = date_death)
 
 # onset to death delay ---------------------------------------------------------
@@ -127,20 +126,24 @@ od_ebola_EN2 <-
   )
 
 # Establish relationship between cases and deaths
-data_od_estimation <- ebola_cases_deaths %>% slice(20:150)
+data_od_estimation <- ebola_cases_deaths |> slice(20:150)
 estimate_cases_to_deaths <- EpiNow2::estimate_secondary(
   data = data_od_estimation,
   secondary = EpiNow2::secondary_opts(type = "incidence"),
   delays = EpiNow2::delay_opts(od_ebola_EN2)
 )
+```
 
+We then forecasted the number of deaths that would arise from reported Ebola cases in the early stages of the outbreak that started in 2014.
+
+```{r}
 plot(estimate_cases_to_deaths, primary = TRUE)
 
 # Forecast from day 151 to day 300 (not included in model fit)
 # Rename primary to value (required by forecast_secondary)
-cases_to_forecast <- ebola_cases_deaths %>%
-  slice(151:300) %>%
-  select(date, primary) %>%
+cases_to_forecast <- ebola_cases_deaths |>
+  slice(151:300) |>
+  select(date, primary) |>
   rename(value = primary)
 
 # Forecast secondary cases
@@ -150,17 +153,4 @@ deaths_forecast <- EpiNow2::forecast_secondary(
 )
 
 plot(deaths_forecast)
-
 ```
-
-## Additional Resources
-
-::: {.panel-tabset}
-
-### R Handbook
-Relevant chapters from the Epidemiologist R Handbook.
-
-### Package Documentation
-Package vignettes and documentation for relevant R packages.
-
-:::

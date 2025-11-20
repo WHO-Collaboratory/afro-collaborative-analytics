@@ -8,9 +8,9 @@ if (!requireNamespace("pacman", quietly = TRUE)) {
 pacman::p_load(here, readr, stringr)
 
 # Set working directory to project root
-project_root <- here::here()
-qmd_dir <- file.path(project_root, "qmd")
-solutions_dir <- file.path(project_root, "qmd", "data", "solutions")
+project_root <- getwd()
+qmd_dir <- file.path("qmd")
+solutions_dir <- file.path("qmd", "data", "solutions")
 
 # Ensure solutions directory exists
 if (!dir.exists(solutions_dir)) {
