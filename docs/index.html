@@ -166,7 +166,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#workshop-structure" id="toc-workshop-structure" class="nav-link active" data-scroll-target="#workshop-structure">Workshop Structure</a></li>
+  <li><a href="#workshop-agenda" id="toc-workshop-agenda" class="nav-link active" data-scroll-target="#workshop-agenda">Workshop Agenda</a></li>
   <li><a href="#tasks" id="toc-tasks" class="nav-link" data-scroll-target="#tasks">Tasks</a></li>
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a></li>
   <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
@@ -196,24 +196,81 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>Welcome to the Collaborative Analytics Workshop! This workshop is designed to help you explore different tools and resources for conducting a range of common epidemiological analytical tasks. Our primary goal is for you to take home a functional script that generates an interactive epidemiological situation report that you can build on and adapt for your own work moving forward.</p>
-<section id="workshop-structure" class="level2">
-<h2 class="anchored" data-anchor-id="workshop-structure">Workshop Structure</h2>
-<p>You will be grouped by the analytical tasks you are interested in and work through them together with support from the facilitators. Depending on your technical level, you may complete multiple tasks over different sessions and therefore change groups.</p>
-<p>By the end of Day 1, you should have:</p>
-<ul>
-<li>Completed the <a href="./setup.html">Setup</a> section (installing R, RStudio, packages and setting up the correct folder structure)</li>
-<li>Imported your own data or the example dataset from the <a href="./data.html">Data</a> section</li>
-<li>Completed <a href="./task1.html">Task 1</a>, which generates a basic descriptive situation report</li>
-</ul>
-<p>By the end of Day 2, you should have:</p>
-<ul>
-<li>Completed one or more of the other analytical tasks (Tasks 2-9)</li>
-<li>Incorporated your chosen analytical tasks into your example report</li>
-<li>A functional script that generates an interactive epidemiological situation report ready to adapt for your own work</li>
-</ul>
+<section id="workshop-agenda" class="level3">
+<h3 class="anchored" data-anchor-id="workshop-agenda">Workshop Agenda</h3>
+<p>This is a single-day workshop running from 9:00 AM to 5:00 PM. You will be grouped by the datasets you are working on to facilitate collaboration and peer support. Throughout the day, facilitators will be available to provide guidance and answer questions.</p>
+<p>In the first half of the day, you will work on rendering your first automated situation report. In the second half of the day, you will work through one or two more advanced analytical tasks based on your interests and needs. The day will be structured as follows:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Time</th>
+<th>Duration</th>
+<th>Activity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>9:00 - 9:30</td>
+<td>30 min</td>
+<td>Welcome, introduction, divide into groups</td>
+</tr>
+<tr class="even">
+<td>9:30 - 10:30</td>
+<td>60 min</td>
+<td>Complete <a href="./setup.html">Setup</a> and <a href="./data.html">Data</a> sections</td>
+</tr>
+<tr class="odd">
+<td>10:30 - 11:00</td>
+<td>30 min</td>
+<td>Coffee break</td>
+</tr>
+<tr class="even">
+<td>11:00 - 12:00</td>
+<td>60 min</td>
+<td>Complete <a href="./task1.html">Task 1</a>: Generating a basic situation report sections</td>
+</tr>
+<tr class="odd">
+<td>12:00 - 12:30</td>
+<td>30 min</td>
+<td>Regroup and discuss progress</td>
+</tr>
+<tr class="even">
+<td>12:30 - 13:30</td>
+<td>60 min</td>
+<td>Lunch break</td>
+</tr>
+<tr class="odd">
+<td>13:30 - 15:00</td>
+<td>90 min</td>
+<td>Complete first advanced task</td>
+</tr>
+<tr class="even">
+<td>15:00 - 15:30</td>
+<td>30 min</td>
+<td>Coffee break</td>
+</tr>
+<tr class="odd">
+<td>15:30 - 17:00</td>
+<td>90 min</td>
+<td>Complete second advanced task</td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="tasks" class="level2">
-<h2 class="anchored" data-anchor-id="tasks">Tasks</h2>
+<section id="tasks" class="level3">
+<h3 class="anchored" data-anchor-id="tasks">Tasks</h3>
+<p>The analytical tasks you can choose from are:</p>
+<ol type="1">
+<li><a href="./task1.html">Generating a basic situation report</a></li>
+<li><a href="./task2.html">Generating interactive maps</a></li>
+<li><a href="./task3.html">Visualising transmission chains</a></li>
+<li><a href="./task4.html">Getting epidemiological parameters</a></li>
+<li><a href="./task5.html">Estimating disease severity</a></li>
+<li><a href="./task6.html">Estimating the reproduction number</a></li>
+<li><a href="./task7.html">Nowcasting epidemiological data</a></li>
+<li><a href="./task8.html">Forecasting cases and deaths</a></li>
+<li><a href="./task9.html">Simulating disease transmission</a></li>
+</ol>
 <p>Each task page includes:</p>
 <ul>
 <li>Links to external tutorials that provide comprehensive learning materials and detailed explanations of the analytical concepts and methods.</li>
@@ -221,8 +278,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>You can work with your own data throughout the workshop or you can use the example datasets provided. If you don’t have your own dataset or don’t feel comfortable adapting code to your data, you can use the example datasets and example code. This will still allow you to learn the analytical techniques and generate a functional report you can reference later.</p>
 </section>
-<section id="getting-started" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
+<section id="getting-started" class="level3">
+<h3 class="anchored" data-anchor-id="getting-started">Getting Started</h3>
 <ol type="1">
 <li>Visit the <a href="./setup.html">Setup</a> page for installation instructions and required packages</li>
 <li>Download the example datasets from the <a href="./data.html">Data</a> section</li>
@@ -230,8 +287,8 @@ ul.task-list li input[type="checkbox"] {
 <li>Join your group to work through the materials with support from facilitators.</li>
 </ol>
 </section>
-<section id="additional-resources" class="level2">
-<h2 class="anchored" data-anchor-id="additional-resources">Additional Resources</h2>
+<section id="additional-resources" class="level3">
+<h3 class="anchored" data-anchor-id="additional-resources">Additional Resources</h3>
 <ul>
 <li><a href="https://www.epirhandbook.com/en/new_pages/basics.html">Epidemiologist R Handbook</a>: A comprehensive guide to R fundamentals for epidemiologists</li>
 <li><a href="https://r4ds.hadley.nz/intro.html">R for Data Science</a>: A general introduction to R and coding</li>

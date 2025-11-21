@@ -165,56 +165,81 @@
     "href": "task1.html",
     "title": "Task 1: Generating a basic situation report",
     "section": "",
-    "text": "This task covers generating a basic situation report with dynamic figures and tables. You will learn how to create reproducible reports that can be easily updated as new data becomes available."
+    "text": "This task covers generating a basic situation report with dynamic figures and tables. You will learn how to create reproducible reports that can be easily updated as new data becomes available.",
+    "crumbs": [
+      "Home",
+      "Tasks",
+      "1. Generating a basic situation report"
+    ]
   },
   {
     "objectID": "task1.html#overview",
     "href": "task1.html#overview",
     "title": "Task 1: Generating a basic situation report",
     "section": "",
-    "text": "This task covers generating a basic situation report with dynamic figures and tables. You will learn how to create reproducible reports that can be easily updated as new data becomes available."
+    "text": "This task covers generating a basic situation report with dynamic figures and tables. You will learn how to create reproducible reports that can be easily updated as new data becomes available.",
+    "crumbs": [
+      "Home",
+      "Tasks",
+      "1. Generating a basic situation report"
+    ]
   },
   {
     "objectID": "task1.html#learning-objectives",
     "href": "task1.html#learning-objectives",
     "title": "Task 1: Generating a basic situation report",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nCreate automated report generation workflows\nIncorporate dynamic figures and tables\nUse Quarto for report generation\nBuild a basic epidemiological report with incidence curves and summary statistics\nVisualize demographic patterns using age-sex pyramids"
+    "text": "Learning Objectives\n\nCreate automated report generation workflows\nIncorporate dynamic figures and tables\nUse Quarto for report generation\nBuild a basic epidemiological report with incidence curves and summary statistics\nVisualize demographic patterns using age-sex pyramids",
+    "crumbs": [
+      "Home",
+      "Tasks",
+      "1. Generating a basic situation report"
+    ]
   },
   {
     "objectID": "task1.html#tutorial",
     "href": "task1.html#tutorial",
     "title": "Task 1: Generating a basic situation report",
     "section": "Tutorial",
-    "text": "Tutorial\nFor detailed guidance on creating and customizing visualizations:\n\nEpidemic Curves tutorial - Learn how to create and customize incidence curves\nDemographic Pyramids tutorial - Learn how to create age-sex pyramids"
+    "text": "Tutorial\nFor detailed guidance on creating and customizing visualizations:\n\nEpidemic Curves tutorial - Learn how to create and customize incidence curves\nDemographic Pyramids tutorial - Learn how to create age-sex pyramids",
+    "crumbs": [
+      "Home",
+      "Tasks",
+      "1. Generating a basic situation report"
+    ]
   },
   {
     "objectID": "task1.html#example-report",
     "href": "task1.html#example-report",
     "title": "Task 1: Generating a basic situation report",
     "section": "Example Report",
-    "text": "Example Report\nDownload solution file\n\n\nCode\n# INSTALL AND LOAD PACKAGES\n\n# Load required packages\npacman::p_load(\n  tidyverse, # For data manipulation and visualization\n  reactable, # For interactive tables\n  lubridate, # For date handling\n  apyramid # For age-sex pyramids\n)\n\n\n# LOAD DATA\n\n# Import the cleaned linelist data from your local data folder\nlinelist &lt;- readRDS(\"data/linelist.rds\")\n\n\n# SUMMARY STATISTICS\n\n# Calculate first case month and peak month\nfirst_case &lt;- which.min(linelist$date_onset)\nfirst_case_location &lt;- paste0(linelist$adm3[first_case], \", \", linelist$adm2[first_case])\nfirst_case_month &lt;- format(linelist$date_onset[first_case], \"%B %Y\")\n\n# Calculate month with most cases\nmonthly_cases &lt;- linelist |&gt;\n  filter(!is.na(date_onset)) |&gt;\n  mutate(month = floor_date(date_onset, unit = \"month\")) |&gt;\n  count(month) |&gt;\n  arrange(desc(n))\n\n# Extract monthly information\npeak_month &lt;- format(monthly_cases$month[1], \"%B %Y\")\npeak_cases &lt;- monthly_cases$n[1]\n\n# Create summary table by adm3\nadm3_summary &lt;- linelist |&gt;\n  summarise(\n    total_cases = n(),\n    deaths = sum(outcome == \"Death\", na.rm = TRUE),\n    .by = adm3\n  ) |&gt;\n  arrange(desc(total_cases))\n\n\n\nOverview\nThe first case was reported in Mountain Rural, Western Area Rural on April 2014. Case numbers increased to a maximum of 1112 cases in October 2014 before declining.\n\n\nCode\n# CREATE INCIDENCE CURVE\n\n# Create incidence curve\nincidence_curve &lt;- linelist |&gt;\n  ggplot(aes(x = date_onset, fill = adm3)) +\n  geom_histogram(binwidth = 7) +\n  scale_fill_viridis_d(\n    guide = guide_legend(reverse = FALSE),\n    na.value = \"grey\"\n  ) +\n  labs(\n    x = \"Date of Onset\",\n    y = \"Number of Cases\",\n    fill = \"Chiefdom\"\n  ) +\n  theme_minimal()\n\n# Display the plot\nincidence_curve\n\n\n\n\n\n\n\n\n\nSummary statistics of case and deaths by chiefdom are provided below.\n\n\nCode\n# Create interactive table\nreactable(\n  adm3_summary,\n  columns = list(\n    adm3 = colDef(name = \"Chiefdom\"),\n    total_cases = colDef(name = \"Total Cases\"),\n    deaths = colDef(name = \"Deaths\")\n  ),\n  defaultPageSize = nrow(adm3_summary)\n)\n\n\n\n\n\n\n\n\nAge and Sex Distribution\nThe age and sex distribution of cases was visualized to identify demographic patterns in the outbreak.\n\n\nCode\n# CREATE AGE-SEX PYRAMID\n\n# Create age-sex pyramid using apyramid package\nage_pyramid &lt;- apyramid::age_pyramid(\n  data = linelist,\n  age_group = \"age_cat\",\n  split_by = \"gender\",\n  show_midpoint = FALSE\n) +\n  labs(\n    title = NULL,\n    x = \"Age Group\",\n    y = \"Number of Cases\",\n    fill = \"Gender\"\n  ) +\n  theme_minimal() +\n  theme(\n    legend.position = \"bottom\"\n  )\n\n# Display the plot\nage_pyramid\n\n\n\n\n\n\n\n\n\n\n\nDisease Severity\n\n\nCode\n# Calculate CFR (excluding NA outcomes)\ncfr &lt;- linelist |&gt;\n  filter(!is.na(outcome)) |&gt;\n  summarise(\n    total_cases = n(),\n    deaths = sum(outcome == \"Death\", na.rm = TRUE),\n    recovered = sum(outcome == \"Recover\", na.rm = TRUE),\n    unknown = sum(is.na(outcome)),\n    cfr = round((deaths / (deaths + recovered)) * 100, 0)\n  )\n\nmissing_outcome &lt;- scales::percent(mean(is.na(linelist$outcome)))\n\n\nThe crude case fatality ratio (CFR) was estimated at 57%, though the outcome was unknown for 22% of cases. CFR estimates were also generated by health facility to identify potential facilities with significantly worse outcomes.\n\n\nCode\n# Create summary table by hospital\nhospital_summary &lt;- linelist |&gt;\n  # group missing and other hospitals\n  mutate(\n    hospital = modify_if(hospital, ~ .x %in% c(\"Other\", \"Missing\"), ~\"Other/Missing\")\n  ) |&gt;\n  summarise(\n    total_cases = n(),\n    deaths = sum(outcome == \"Death\", na.rm = TRUE),\n    recovered = sum(outcome == \"Recover\", na.rm = TRUE),\n    unknown = sum(is.na(outcome)),\n    cfr = round((deaths / (deaths + recovered)) * 100, 0),\n    .by = hospital\n  )\n\n# Create interactive table\nreactable(\n  hospital_summary,\n  columns = list(\n    hospital = colDef(name = \"Hospital\"),\n    total_cases = colDef(name = \"Total Cases\"),\n    deaths = colDef(name = \"Deaths\"),\n    recovered = colDef(name = \"Recovered\"),\n    unknown = colDef(name = \"Unknown\"),\n    cfr = colDef(name = \"CFR (%)\")\n  ),\n  defaultPageSize = nrow(hospital_summary)\n)"
+    "text": "Example Report\nDownload solution file\n\n\nCode\n# INSTALL AND LOAD PACKAGES\n\n# Load required packages\npacman::p_load(\n  tidyverse, # For data manipulation and visualization\n  reactable, # For interactive tables\n  lubridate, # For date handling\n  apyramid # For age-sex pyramids\n)\n\n\n# LOAD DATA\n\n# Import the cleaned linelist data from your local data folder\nlinelist &lt;- readRDS(\"data/linelist.rds\")\n\n\n# SUMMARY STATISTICS\n\n# Calculate first case month and peak month\nfirst_case &lt;- which.min(linelist$date_onset)\nfirst_case_location &lt;- paste0(linelist$adm3[first_case], \", \", linelist$adm2[first_case])\nfirst_case_month &lt;- format(linelist$date_onset[first_case], \"%B %Y\")\n\n# Calculate month with most cases\nmonthly_cases &lt;- linelist |&gt;\n  filter(!is.na(date_onset)) |&gt;\n  mutate(month = floor_date(date_onset, unit = \"month\")) |&gt;\n  count(month) |&gt;\n  arrange(desc(n))\n\n# Extract monthly information\npeak_month &lt;- format(monthly_cases$month[1], \"%B %Y\")\npeak_cases &lt;- monthly_cases$n[1]\n\n# Create summary table by adm3\nadm3_summary &lt;- linelist |&gt;\n  summarise(\n    total_cases = n(),\n    deaths = sum(outcome == \"Death\", na.rm = TRUE),\n    .by = adm3\n  ) |&gt;\n  arrange(desc(total_cases))\n\n\n\nOverview\nThe first case was reported in Mountain Rural, Western Area Rural on April 2014. Case numbers increased to a maximum of 1112 cases in October 2014 before declining.\n\n\nCode\n# CREATE INCIDENCE CURVE\n\n# Create incidence curve\nincidence_curve &lt;- linelist |&gt;\n  ggplot(aes(x = date_onset, fill = adm3)) +\n  geom_histogram(binwidth = 7) +\n  scale_fill_viridis_d(\n    guide = guide_legend(reverse = FALSE),\n    na.value = \"grey\"\n  ) +\n  labs(\n    x = \"Date of Onset\",\n    y = \"Number of Cases\",\n    fill = \"Chiefdom\"\n  ) +\n  theme_minimal()\n\n# Display the plot\nincidence_curve\n\n\n\n\n\n\n\n\n\nSummary statistics of case and deaths by chiefdom are provided below.\n\n\nCode\n# Create interactive table\nreactable(\n  adm3_summary,\n  columns = list(\n    adm3 = colDef(name = \"Chiefdom\"),\n    total_cases = colDef(name = \"Total Cases\"),\n    deaths = colDef(name = \"Deaths\")\n  ),\n  defaultPageSize = nrow(adm3_summary)\n)\n\n\n\n\n\n\n\n\nAge and Sex Distribution\nThe age and sex distribution of cases was visualized to identify demographic patterns in the outbreak.\n\n\nCode\n# CREATE AGE-SEX PYRAMID\n\n# Create age-sex pyramid using apyramid package\nage_pyramid &lt;- apyramid::age_pyramid(\n  data = linelist,\n  age_group = \"age_cat\",\n  split_by = \"gender\",\n  show_midpoint = FALSE\n) +\n  labs(\n    title = NULL,\n    x = \"Age Group\",\n    y = \"Number of Cases\",\n    fill = \"Gender\"\n  ) +\n  theme_minimal() +\n  theme(\n    legend.position = \"bottom\"\n  )\n\n# Display the plot\nage_pyramid\n\n\n\n\n\n\n\n\n\n\n\nDisease Severity\n\n\nCode\n# Calculate CFR (excluding NA outcomes)\ncfr &lt;- linelist |&gt;\n  filter(!is.na(outcome)) |&gt;\n  summarise(\n    total_cases = n(),\n    deaths = sum(outcome == \"Death\", na.rm = TRUE),\n    recovered = sum(outcome == \"Recover\", na.rm = TRUE),\n    unknown = sum(is.na(outcome)),\n    cfr = round((deaths / (deaths + recovered)) * 100, 0)\n  )\n\nmissing_outcome &lt;- scales::percent(mean(is.na(linelist$outcome)))\n\n\nThe crude case fatality ratio (CFR) was estimated at 57%, though the outcome was unknown for 22% of cases. CFR estimates were also generated by health facility to identify potential facilities with significantly worse outcomes.\n\n\nCode\n# Create summary table by hospital\nhospital_summary &lt;- linelist |&gt;\n  # group missing and other hospitals\n  mutate(\n    hospital = modify_if(hospital, ~ .x %in% c(\"Other\", \"Missing\"), ~\"Other/Missing\")\n  ) |&gt;\n  summarise(\n    total_cases = n(),\n    deaths = sum(outcome == \"Death\", na.rm = TRUE),\n    recovered = sum(outcome == \"Recover\", na.rm = TRUE),\n    unknown = sum(is.na(outcome)),\n    cfr = round((deaths / (deaths + recovered)) * 100, 0),\n    .by = hospital\n  )\n\n# Create interactive table\nreactable(\n  hospital_summary,\n  columns = list(\n    hospital = colDef(name = \"Hospital\"),\n    total_cases = colDef(name = \"Total Cases\"),\n    deaths = colDef(name = \"Deaths\"),\n    recovered = colDef(name = \"Recovered\"),\n    unknown = colDef(name = \"Unknown\"),\n    cfr = colDef(name = \"CFR (%)\")\n  ),\n  defaultPageSize = nrow(hospital_summary)\n)",
+    "crumbs": [
+      "Home",
+      "Tasks",
+      "1. Generating a basic situation report"
+    ]
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Collaborative Analytics Workshop",
     "section": "",
-    "text": "Welcome to the Collaborative Analytics Workshop! This workshop is designed to help you explore different tools and resources for conducting a range of common epidemiological analytical tasks. Our primary goal is for you to take home a functional script that generates an interactive epidemiological situation report that you can build on and adapt for your own work moving forward."
+    "text": "Welcome to the Collaborative Analytics Workshop! This workshop is designed to help you explore different tools and resources for conducting a range of common epidemiological analytical tasks. Our primary goal is for you to take home a functional script that generates an interactive epidemiological situation report that you can build on and adapt for your own work moving forward.\n\nWorkshop Agenda\nThis is a single-day workshop running from 9:00 AM to 5:00 PM. You will be grouped by the datasets you are working on to facilitate collaboration and peer support. Throughout the day, facilitators will be available to provide guidance and answer questions.\nIn the first half of the day, you will work on rendering your first automated situation report. In the second half of the day, you will work through one or two more advanced analytical tasks based on your interests and needs. The day will be structured as follows:\n\n\n\nTime\nDuration\nActivity\n\n\n\n\n9:00 - 9:30\n30 min\nWelcome, introduction, divide into groups\n\n\n9:30 - 10:30\n60 min\nComplete Setup and Data sections\n\n\n10:30 - 11:00\n30 min\nCoffee break\n\n\n11:00 - 12:00\n60 min\nComplete Task 1: Generating a basic situation report sections\n\n\n12:00 - 12:30\n30 min\nRegroup and discuss progress\n\n\n12:30 - 13:30\n60 min\nLunch break\n\n\n13:30 - 15:00\n90 min\nComplete first advanced task\n\n\n15:00 - 15:30\n30 min\nCoffee break\n\n\n15:30 - 17:00\n90 min\nComplete second advanced task\n\n\n\n\n\nTasks\nThe analytical tasks you can choose from are:\n\nGenerating a basic situation report\nGenerating interactive maps\nVisualising transmission chains\nGetting epidemiological parameters\nEstimating disease severity\nEstimating the reproduction number\nNowcasting epidemiological data\nForecasting cases and deaths\nSimulating disease transmission\n\nEach task page includes:\n\nLinks to external tutorials that provide comprehensive learning materials and detailed explanations of the analytical concepts and methods.\nComplete example code that generates all the outputs needed for an example report. The example code works with the provided example datasets\n\nYou can work with your own data throughout the workshop or you can use the example datasets provided. If you don’t have your own dataset or don’t feel comfortable adapting code to your data, you can use the example datasets and example code. This will still allow you to learn the analytical techniques and generate a functional report you can reference later.\n\n\nGetting Started\n\nVisit the Setup page for installation instructions and required packages\nDownload the example datasets from the Data section\nNavigate to the Tasks menu to find the analytical tasks you’re interested in\nJoin your group to work through the materials with support from facilitators.\n\n\n\nAdditional Resources\n\nEpidemiologist R Handbook: A comprehensive guide to R fundamentals for epidemiologists\nR for Data Science: A general introduction to R and coding"
   },
   {
     "objectID": "index.html#workshop-structure",
     "href": "index.html#workshop-structure",
     "title": "Collaborative Analytics Workshop",
     "section": "Workshop Structure",
-    "text": "Workshop Structure\nYou will be grouped by the analytical tasks you are interested in and work through them together with support from the facilitators. Depending on your technical level, you may complete multiple tasks over different sessions and therefore change groups.\nBy the end of Day 1, you should have:\n\nCompleted the Setup section (installing R, RStudio, packages and setting up the correct folder structure)\nImported your own data or the example dataset from the Data section\nCompleted Task 1, which generates a basic descriptive situation report\n\nBy the end of Day 2, you should have:\n\nCompleted one or more of the other analytical tasks (Tasks 2-9)\nIncorporated your chosen analytical tasks into your example report\nA functional script that generates an interactive epidemiological situation report ready to adapt for your own work"
+    "text": "Workshop Structure\nThis is a single-day workshop running from 9:00 AM to 5:00 PM. You will be grouped by the datasets you are working on to facilitate collaboration and peer support. Throughout the day, facilitators will be available to provide guidance and answer questions.\nBy the end of the first half of the day, you should have rendered your first basic situation report. In the second half of the day, you will complete an additional one or two more advanced tasks based on your interests .\n\n\n\nTime\nDuration\nActivity\n\n\n\n\n9:00 - 9:30\n30 min\nWelcome, introduction, divide into groups\n\n\n9:30 - 10:30\n1 hr\nSetup and Data\n\n\n10:30 - 11:00\n30 min\nCoffee break\n\n\n11:00 - 12:00\n1 hr\nTask 1: Generating a basic situation report\n\n\n12:00 - 12:30\n30 min\nRegroup and discuss progress\n\n\n12:30 - 13:30\n1 hr\nLunch break\n\n\n13:30 - 15:00\n1.5 hr\nComplete first advanced task of choice\n\n\n15:00 - 15:30\n30 min\nCoffee break\n\n\n15:30 - 17:00\n1.5 hr\nComplete second advanced task and wrap-up"
   },
   {
     "objectID": "index.html#tasks",
     "href": "index.html#tasks",
     "title": "Collaborative Analytics Workshop",
     "section": "Tasks",
-    "text": "Tasks\nEach task page includes:\n\nLinks to external tutorials that provide comprehensive learning materials and detailed explanations of the analytical concepts and methods.\nComplete example code that generates all the outputs needed for an example report. The example code works with the provided example datasets\n\nYou can work with your own data throughout the workshop or you can use the example datasets provided. If you don’t have your own dataset or don’t feel comfortable adapting code to your data, you can use the example datasets and example code. This will still allow you to learn the analytical techniques and generate a functional report you can reference later."
+    "text": "Tasks\nThe analytical tasks you can choose from are:\n\nGenerating a basic situation report\nGenerating interactive maps\nVisualising transmission chains\nGetting epidemiological parameters\nEstimating disease severity\nEstimating the reproduction number\nNowcasting epidemiological data\nForecasting cases and deaths\nSimulating disease transmission\n\nEach task page includes:\n\nLinks to external tutorials that provide comprehensive learning materials and detailed explanations of the analytical concepts and methods.\nComplete example code that generates all the outputs needed for an example report. The example code works with the provided example datasets\n\nYou can work with your own data throughout the workshop or you can use the example datasets provided. If you don’t have your own dataset or don’t feel comfortable adapting code to your data, you can use the example datasets and example code. This will still allow you to learn the analytical techniques and generate a functional report you can reference later."
   },
   {
     "objectID": "index.html#getting-started",
@@ -256,91 +281,149 @@
     "href": "setup.html",
     "title": "Setup",
     "section": "",
-    "text": "To get started, you’ll need to install R and RStudio on your computer.\nFor installation instructions and downloads, please visit: Epiverse-TRACE Software Setup. This guide will assist you with installing R and RStudio, including checking your R version and updating if needed.\n\n\nIf you’re unable to install R and RStudio on your laptop, you can use Posit Cloud instead: this provide a free cloud-based RStudio environment that you can access from any web browser."
+    "text": "To get started, you’ll need to install R and RStudio on your computer.\nFor installation instructions and downloads, please visit: Epiverse-TRACE Software Setup. This guide will assist you with installing R and RStudio, including checking your R version and updating if needed.\n\n\nIf you’re unable to install R and RStudio on your laptop, you can use Posit Cloud instead: this provide a free cloud-based RStudio environment that you can access from any web browser.",
+    "crumbs": [
+      "Home",
+      "Setup"
+    ]
   },
   {
     "objectID": "setup.html#installing-r-and-rstudio",
     "href": "setup.html#installing-r-and-rstudio",
     "title": "Setup",
     "section": "",
-    "text": "To get started, you’ll need to install R and RStudio on your computer.\nFor installation instructions and downloads, please visit: Epiverse-TRACE Software Setup. This guide will assist you with installing R and RStudio, including checking your R version and updating if needed.\n\n\nIf you’re unable to install R and RStudio on your laptop, you can use Posit Cloud instead: this provide a free cloud-based RStudio environment that you can access from any web browser."
+    "text": "To get started, you’ll need to install R and RStudio on your computer.\nFor installation instructions and downloads, please visit: Epiverse-TRACE Software Setup. This guide will assist you with installing R and RStudio, including checking your R version and updating if needed.\n\n\nIf you’re unable to install R and RStudio on your laptop, you can use Posit Cloud instead: this provide a free cloud-based RStudio environment that you can access from any web browser.",
+    "crumbs": [
+      "Home",
+      "Setup"
+    ]
   },
   {
     "objectID": "setup.html#installing-r-packages",
     "href": "setup.html#installing-r-packages",
     "title": "Setup",
     "section": "Installing R Packages",
-    "text": "Installing R Packages\nBefore setting up your project, you’ll need to install some essential R packages. We’ll use pacman, a package management tool for R that simplifies installing and loading packages. Pacman automatically installs packages if they’re not already installed, then loads them - making it much easier to manage dependencies.\nRun the following code in your R console to install pacman (if needed) and then install the essential packages:\n# Install pacman if needed\nif (!requireNamespace(\"pacman\", quietly = TRUE)) {\n  install.packages(\"pacman\")\n}\n\n# Install essential packages using pacman\npacman::p_load(\n  tidyverse,  # For data manipulation and visualization\n  rmarkdown   # For creating reports (required for Quarto)\n)\nNote: Additional packages will be installed as you work through specific tasks. For now, these two packages are sufficient to get started."
+    "text": "Installing R Packages\nBefore setting up your project, you’ll need to install some essential R packages. We’ll use pacman, a package management tool for R that simplifies installing and loading packages. Pacman automatically installs packages if they’re not already installed, then loads them - making it much easier to manage dependencies.\nRun the following code in your R console to install pacman (if needed) and then install the essential packages:\n# Install pacman if needed\nif (!requireNamespace(\"pacman\", quietly = TRUE)) {\n  install.packages(\"pacman\")\n}\n\n# Install essential packages using pacman\npacman::p_load(\n  tidyverse,  # For data manipulation and visualization\n  rmarkdown   # For creating reports (required for Quarto)\n)\nNote: Additional packages will be installed as you work through specific tasks. For now, these two packages are sufficient to get started.",
+    "crumbs": [
+      "Home",
+      "Setup"
+    ]
   },
   {
     "objectID": "setup.html#setting-up-your-project",
     "href": "setup.html#setting-up-your-project",
     "title": "Setup",
     "section": "Setting Up Your Project",
-    "text": "Setting Up Your Project\nBefore you begin working on the tasks, let’s set up your RStudio project and folder structure.\n\nStep 1: Create an RStudio R Project\nAn R Project is a way to organize your work in RStudio. It helps keep all your files, data, and outputs together in one place, and automatically sets your working directory so file paths work correctly.\n\nOpen RStudio.\nGo to File → New Project.\nSelect New Directory.\nSelect New Project.\nIn the “Directory name” field, enter sitrep.\nChoose a location on your computer where you want to save the project.\nClick Create Project.\n\nRStudio will now open your new project. You’ll see the project name (sitrep) in the top-right corner of RStudio.\n\n\nStep 2: Set Up Your Folder Structure\nWithin your project, create the following subfolders to organize your files:\n\nIn RStudio, click the Files tab in the bottom-right pane.\nClick New Folder.\nCreate a folder called data/ - for storing your datasets.\nCreate another folder called outputs/ - for storing generated reports and figures."
+    "text": "Setting Up Your Project\nBefore you begin working on the tasks, let’s set up your RStudio project and folder structure.\n\nStep 1: Create an RStudio R Project\nAn R Project is a way to organize your work in RStudio. It helps keep all your files, data, and outputs together in one place, and automatically sets your working directory so file paths work correctly.\n\nOpen RStudio.\nGo to File → New Project.\nSelect New Directory.\nSelect New Project.\nIn the “Directory name” field, enter sitrep.\nChoose a location on your computer where you want to save the project.\nClick Create Project.\n\nRStudio will now open your new project. You’ll see the project name (sitrep) in the top-right corner of RStudio.\n\n\nStep 2: Set Up Your Folder Structure\nWithin your project, create the following subfolders to organize your files:\n\nIn RStudio, click the Files tab in the bottom-right pane.\nClick New Folder.\nCreate a folder called data/ - for storing your datasets.\nCreate another folder called outputs/ - for storing generated reports and figures.",
+    "crumbs": [
+      "Home",
+      "Setup"
+    ]
   },
   {
     "objectID": "setup.html#setting-up-your-quarto-document",
     "href": "setup.html#setting-up-your-quarto-document",
     "title": "Setup",
     "section": "Setting Up Your Quarto Document",
-    "text": "Setting Up Your Quarto Document\nNow let’s create a basic Quarto document that you’ll use for your epidemiological reports.\n\nStep 1: Create a New Quarto Document\n\nIn RStudio, go to File → New File → Quarto Document.\nChoose HTML as the output format.\nGive your document a title (e.g., “Epidemiological Situation Report”).\nClick Create.\nSave the document in your project folder (e.g., sitrep.qmd).\n\n\nUnderstanding Visual and Source Editing Modes\nWhen you open your Quarto document, you’ll notice two editing mode buttons in the top-left corner of the editor: Visual and Source.\n\nVisual mode: Provides a “What You See Is What You Get” editing experience, similar to a word processor. You can format text using buttons and menus, and see a preview of how your document will look.\nSource mode: Shows the raw Markdown and code syntax. You work directly with the text, code chunks, and formatting syntax (like ## for headings, **bold** for bold text, etc.).\n\nFor the rest of this tutorial and the task tutorials, we’ll assume you’re using Source mode. This allows you to directly copy and paste code chunks and content from the tutorials into your document. You can switch between modes at any time using the buttons in the top-left corner - just click Source to switch to source mode.\n\n\n\nStep 2: Set Up the YAML Header and Report Structure\nAt the top of your Quarto document, you’ll see a YAML header (the section between the --- lines). The YAML header contains metadata about your document, such as the title and output format. It tells Quarto how to render your document.\nEnsure your YAML header looks like this:\n---\ntitle: \"Epidemiological Situation Report\"\nformat: html\neditor: visual\n---\nBelow the YAML header, create a basic report structure with sections. In Quarto (and Markdown), you use ## to create section headings (level 2 headings). Each ## creates a new major section in your report. You can use ### for subsections, #### for sub-subsections, and so on.\nAdd this basic outline to your document:\n## Overview\n\nThis section will provide an introduction and overview of the situation report.\n\n## Epidemiological Trends\n\nThis section will describe epidemiological trends.\n\n## Severity\n\nThis section will conduct a severity analysis.\n\n## Conclusions\n\nThis section will summarize findings and next steps.\n\nUnderstanding Code Chunks\nA code chunk is a section in your Quarto document where you write and execute R code. Code chunks are enclosed between three backticks (```) followed by {r} and closed with three more backticks.\nTo create a code chunk:\n\nType three backticks followed by {r} on a new line: ```{r}\nPress Enter to start a new line\nWrite your R code\nType three backticks on a new line to close the chunk: ```\n\nHere’s what a code chunk looks like:\n```{r}\n# Your R code goes here\nlibrary(tidyverse)\n```\nYou can also insert a code chunk in RStudio by:\n\nClicking the Insert button (green plus icon with a “C”) in the toolbar, or\nUsing the keyboard shortcut: Ctrl+Alt+I (Windows/Linux) or Cmd+Option+I (Mac)\n\nCode chunks allow you to run R code, create plots, generate tables, and perform data analysis. The results (outputs, plots, tables) will appear in your rendered HTML report.\n\n\n\nStep 3: Install and Load Basic Packages\nIn the first code chunk of your document, install and load the basic packages needed for report generation. We’ll use pacman, a package management tool for R that simplifies installing and loading packages. Pacman automatically installs packages if they’re not already installed, then loads them - making it much easier to manage dependencies.\n\n# Install pacman if needed\nif (!requireNamespace(\"pacman\", quietly = TRUE)) {\n  install.packages(\"pacman\")\n}\n\n# Install and load required packages using pacman\npacman::p_load(\n  tidyverse,  # For data manipulation and visualization\n  rio,        # For importing data\n  reactable   # For interactive tables\n)\n\nNote: We’ll add more packages as needed when you work through specific tasks. Additional packages will be installed as you progress through the tutorials.\n\n\nStep 4: Render Your Report\nNow let’s test that everything is working by rendering your report:\n\nClick the Render button in RStudio (or press Ctrl+Shift+K / Cmd+Shift+K).\nQuarto will process your document and generate an HTML file.\nThe HTML report will open automatically in your browser.\n\nYou should now see a basic HTML report with your title and section headings. This confirms that your Quarto setup is working correctly!\nIf you prefer, you can download the example sitrep template directly instead of creating it yourself:\nDownload solution file"
+    "text": "Setting Up Your Quarto Document\nNow let’s create a basic Quarto document that you’ll use for your epidemiological reports.\n\nStep 1: Create a New Quarto Document\n\nIn RStudio, go to File → New File → Quarto Document.\nChoose HTML as the output format.\nGive your document a title (e.g., “Epidemiological Situation Report”).\nClick Create.\nSave the document in your project folder (e.g., sitrep.qmd).\n\n\nUnderstanding Visual and Source Editing Modes\nWhen you open your Quarto document, you’ll notice two editing mode buttons in the top-left corner of the editor: Visual and Source.\n\nVisual mode: Provides a “What You See Is What You Get” editing experience, similar to a word processor. You can format text using buttons and menus, and see a preview of how your document will look.\nSource mode: Shows the raw Markdown and code syntax. You work directly with the text, code chunks, and formatting syntax (like ## for headings, **bold** for bold text, etc.).\n\nFor the rest of this tutorial and the task tutorials, we’ll assume you’re using Source mode. This allows you to directly copy and paste code chunks and content from the tutorials into your document. You can switch between modes at any time using the buttons in the top-left corner - just click Source to switch to source mode.\n\n\n\nStep 2: Set Up the YAML Header and Report Structure\nAt the top of your Quarto document, you’ll see a YAML header (the section between the --- lines). The YAML header contains metadata about your document, such as the title and output format. It tells Quarto how to render your document.\nEnsure your YAML header looks like this:\n---\ntitle: \"Epidemiological Situation Report\"\nformat: html\neditor: visual\n---\nBelow the YAML header, create a basic report structure with sections. In Quarto (and Markdown), you use ## to create section headings (level 2 headings). Each ## creates a new major section in your report. You can use ### for subsections, #### for sub-subsections, and so on.\nAdd this basic outline to your document:\n## Overview\n\nThis section will provide an introduction and overview of the situation report.\n\n## Epidemiological Trends\n\nThis section will describe epidemiological trends.\n\n## Severity\n\nThis section will conduct a severity analysis.\n\n## Conclusions\n\nThis section will summarize findings and next steps.\n\nUnderstanding Code Chunks\nA code chunk is a section in your Quarto document where you write and execute R code. Code chunks are enclosed between three backticks (```) followed by {r} and closed with three more backticks.\nTo create a code chunk:\n\nType three backticks followed by {r} on a new line: ```{r}\nPress Enter to start a new line\nWrite your R code\nType three backticks on a new line to close the chunk: ```\n\nHere’s what a code chunk looks like:\n```{r}\n# Your R code goes here\nlibrary(tidyverse)\n```\nYou can also insert a code chunk in RStudio by:\n\nClicking the Insert button (green plus icon with a “C”) in the toolbar, or\nUsing the keyboard shortcut: Ctrl+Alt+I (Windows/Linux) or Cmd+Option+I (Mac)\n\nCode chunks allow you to run R code, create plots, generate tables, and perform data analysis. The results (outputs, plots, tables) will appear in your rendered HTML report.\n\n\n\nStep 3: Install and Load Basic Packages\nIn the first code chunk of your document, install and load the basic packages needed for report generation. We’ll use pacman, a package management tool for R that simplifies installing and loading packages. Pacman automatically installs packages if they’re not already installed, then loads them - making it much easier to manage dependencies.\n\n# Install pacman if needed\nif (!requireNamespace(\"pacman\", quietly = TRUE)) {\n  install.packages(\"pacman\")\n}\n\n# Install and load required packages using pacman\npacman::p_load(\n  tidyverse,  # For data manipulation and visualization\n  rio,        # For importing data\n  reactable   # For interactive tables\n)\n\nNote: We’ll add more packages as needed when you work through specific tasks. Additional packages will be installed as you progress through the tutorials.\n\n\nStep 4: Render Your Report\nNow let’s test that everything is working by rendering your report:\n\nClick the Render button in RStudio (or press Ctrl+Shift+K / Cmd+Shift+K).\nQuarto will process your document and generate an HTML file.\nThe HTML report will open automatically in your browser.\n\nYou should now see a basic HTML report with your title and section headings. This confirms that your Quarto setup is working correctly!\nIf you prefer, you can download the example sitrep template directly instead of creating it yourself:\nDownload solution file",
+    "crumbs": [
+      "Home",
+      "Setup"
+    ]
   },
   {
     "objectID": "setup.html#additional-resources",
     "href": "setup.html#additional-resources",
     "title": "Setup",
     "section": "Additional Resources",
-    "text": "Additional Resources\n\nQuarto Tutorial: An overview of the basics, including rendering, authoring, YAML headers, code chunks and markdown text.\nQuarto Guide: A comprehensive guide covering all aspects of Quarto, including authoring, computations, tools, documents, presentations, dashboards, websites and more."
+    "text": "Additional Resources\n\nQuarto Tutorial: An overview of the basics, including rendering, authoring, YAML headers, code chunks and markdown text.\nQuarto Guide: A comprehensive guide covering all aspects of Quarto, including authoring, computations, tools, documents, presentations, dashboards, websites and more.",
+    "crumbs": [
+      "Home",
+      "Setup"
+    ]
   },
   {
     "objectID": "setup.html#next-steps",
     "href": "setup.html#next-steps",
     "title": "Setup",
     "section": "Next Steps",
-    "text": "Next Steps\nOnce you have the basics set up:\n\nVisit the Data section to download the example dataset if you are not using your own data.\nExplore the Tasks menu to find the analytical task(s) you’re interested in.\nJoin your assigned group and start working through the materials with facilitator support."
+    "text": "Next Steps\nOnce you have the basics set up:\n\nVisit the Data section to download the example dataset if you are not using your own data.\nExplore the Tasks menu to find the analytical task(s) you’re interested in.\nJoin your assigned group and start working through the materials with facilitator support.",
+    "crumbs": [
+      "Home",
+      "Setup"
+    ]
   },
   {
     "objectID": "task2.html",
     "href": "task2.html",
     "title": "Task 2: Generating interactive maps",
     "section": "",
-    "text": "This task focuses on creating interactive maps for visualizing spatial aspects of epidemiological data. You will learn how to work with spatial data, create maps using GIS tools in R, and visualize disease patterns geographically."
+    "text": "This task focuses on creating interactive maps for visualizing spatial aspects of epidemiological data. You will learn how to work with spatial data, create maps using GIS tools in R, and visualize disease patterns geographically.",
+    "crumbs": [
+      "Home",
+      "Tasks",
+      "2. Generating interactive maps"
+    ]
   },
   {
     "objectID": "task2.html#overview",
     "href": "task2.html#overview",
     "title": "Task 2: Generating interactive maps",
     "section": "",
-    "text": "This task focuses on creating interactive maps for visualizing spatial aspects of epidemiological data. You will learn how to work with spatial data, create maps using GIS tools in R, and visualize disease patterns geographically."
+    "text": "This task focuses on creating interactive maps for visualizing spatial aspects of epidemiological data. You will learn how to work with spatial data, create maps using GIS tools in R, and visualize disease patterns geographically.",
+    "crumbs": [
+      "Home",
+      "Tasks",
+      "2. Generating interactive maps"
+    ]
   },
   {
     "objectID": "task2.html#learning-objectives",
     "href": "task2.html#learning-objectives",
     "title": "Task 2: Generating interactive maps",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nWork with spatial data formats (shapefiles, coordinates)\nCreate interactive maps using GIS tools in R\nVisualize disease patterns and hotspots geographically\nPerform basic spatial analysis"
+    "text": "Learning Objectives\n\nWork with spatial data formats (shapefiles, coordinates)\nCreate interactive maps using GIS tools in R\nVisualize disease patterns and hotspots geographically\nPerform basic spatial analysis",
+    "crumbs": [
+      "Home",
+      "Tasks",
+      "2. Generating interactive maps"
+    ]
   },
   {
     "objectID": "task2.html#tutorial",
     "href": "task2.html#tutorial",
     "title": "Task 2: Generating interactive maps",
     "section": "Tutorial",
-    "text": "Tutorial\nAccess the tutorial here"
+    "text": "Tutorial\nAccess the tutorial here",
+    "crumbs": [
+      "Home",
+      "Tasks",
+      "2. Generating interactive maps"
+    ]
   },
   {
     "objectID": "task2.html#download-gis-data",
     "href": "task2.html#download-gis-data",
     "title": "Task 2: Generating interactive maps",
     "section": "Download GIS Data",
-    "text": "Download GIS Data\nFor this task, you will need the GIS shapefile data to create the maps. The shapefile contains administrative boundaries for Sierra Leone.\n\nDownload the GIS data zip file using the button below.\nUnzip the file and extract its contents to your data/gis/ folder.\nThe extracted files should include sle_adm3.shp and other related shapefile components in the data/gis/ directory.\n\nDownload GIS data (zip)"
+    "text": "Download GIS Data\nFor this task, you will need the GIS shapefile data to create the maps. The shapefile contains administrative boundaries for Sierra Leone.\n\nDownload the GIS data zip file using the button below.\nUnzip the file and extract its contents to your data/gis/ folder.\nThe extracted files should include sle_adm3.shp and other related shapefile components in the data/gis/ directory.\n\nDownload GIS data (zip)",
+    "crumbs": [
+      "Home",
+      "Tasks",
+      "2. Generating interactive maps"
+    ]
   },
   {
     "objectID": "task2.html#example-report",
     "href": "task2.html#example-report",
     "title": "Task 2: Generating interactive maps",
     "section": "Example Report",
-    "text": "Example Report\nDownload solution file\n\nGeographic distribution of cases\n\n\nCode\n# INSTALL AND LOAD PACKAGES\n\n# Load required packages\npacman::p_load(\n  tidyverse, # basic data manipulation\n  sf, # handling shapefiles\n  here, # handing file paths\n  leaflet, # mapping\n  leaflet.extras, # additional leaflet features including heatmaps\n  htmltools # handlers for html objects\n)\n\n\n# LOAD DATA\n\n# load shapefiles and keep relevant areas\nshp &lt;- sf::read_sf(\"data/gis/sle_adm3.shp\") |&gt;\n  # standardize column names\n  janitor::clean_names()\n\n# import the cleaned linelist data\nlinelist &lt;- rio::import(\"data/linelist.rds\")\n\n# convert to aggregate format\nagg &lt;- linelist |&gt;\n  # count the number of cases per adm3\n  summarise(n = n(), .by = adm3) |&gt;\n  # add the shape files of the adm3 zones\n  inner_join(shp, by = c(adm3 = \"adm3_en\")) |&gt;\n  # convert back to shapefile\n  st_as_sf()\n\n\nTotal incidence to date was mapped by chiefdom.\n\n\nCode\n# define colour palette\npal &lt;- colorNumeric(palette = \"YlOrRd\", domain = agg$n)\n\n# generate choropleth map (polygons only)\nleaflet(agg) |&gt;\n  # use CartoDB for background\n  addProviderTiles(\"CartoDB.Positron\") |&gt;\n  # add adm3 shaded by number of cases\n  addPolygons(\n    fillColor = ~ pal(n),\n    color = \"white\",\n    weight = 1,\n    fillOpacity = 0.7,\n    # define labels\n    label = ~ map(\n      paste0(\"&lt;b&gt;\", adm3, \"&lt;/b&gt;&lt;br&gt;\", n, \" cases\"),\n      htmltools::HTML\n    ),\n    labelOptions = labelOptions(direction = \"auto\"),\n    highlightOptions = highlightOptions(\n      weight = 3,\n      color = \"black\",\n      bringToFront = FALSE\n    )\n  ) |&gt;\n  # add legend\n  addLegend(\n    pal = pal,\n    values = ~n,\n    title = \"Case count\",\n    opacity = 0.7,\n    position = \"bottomright\"\n  )\n\n\n\n\n\n\nSpatial clustering of cases was then investigated at a higher spatial resolution using a heatmap.\n\n\nCode\n# Prepare linelist data for heatmap\n# Filter cases with valid coordinates\nlinelist_coords &lt;- linelist |&gt;\n  filter(!is.na(lon), !is.na(lat))\n\n# Generate heatmap from individual cases\nleaflet(linelist_coords) |&gt;\n  # use CartoDB for background\n  addProviderTiles(\"CartoDB.Positron\") |&gt;\n  # add heatmap layer\n  addHeatmap(\n    lng = ~lon,\n    lat = ~lat,\n    intensity = 0.5,\n    blur = 5,\n    max = 0.05,\n    radius = 7,\n    gradient = c(\"blue\", \"cyan\", \"yellow\", \"red\")\n  )"
+    "text": "Example Report\nDownload solution file\n\nGeographic distribution of cases\n\n\nCode\n# INSTALL AND LOAD PACKAGES\n\n# Load required packages\npacman::p_load(\n  tidyverse, # basic data manipulation\n  sf, # handling shapefiles\n  here, # handing file paths\n  leaflet, # mapping\n  leaflet.extras, # additional leaflet features including heatmaps\n  htmltools # handlers for html objects\n)\n\n\n# LOAD DATA\n\n# load shapefiles and keep relevant areas\nshp &lt;- sf::read_sf(\"data/gis/sle_adm3.shp\") |&gt;\n  # standardize column names\n  janitor::clean_names()\n\n# import the cleaned linelist data\nlinelist &lt;- rio::import(\"data/linelist.rds\")\n\n# convert to aggregate format\nagg &lt;- linelist |&gt;\n  # count the number of cases per adm3\n  summarise(n = n(), .by = adm3) |&gt;\n  # add the shape files of the adm3 zones\n  inner_join(shp, by = c(adm3 = \"adm3_en\")) |&gt;\n  # convert back to shapefile\n  st_as_sf()\n\n\nTotal incidence to date was mapped by chiefdom.\n\n\nCode\n# define colour palette\npal &lt;- colorNumeric(palette = \"YlOrRd\", domain = agg$n)\n\n# generate choropleth map (polygons only)\nleaflet(agg) |&gt;\n  # use CartoDB for background\n  addProviderTiles(\"CartoDB.Positron\") |&gt;\n  # add adm3 shaded by number of cases\n  addPolygons(\n    fillColor = ~ pal(n),\n    color = \"white\",\n    weight = 1,\n    fillOpacity = 0.7,\n    # define labels\n    label = ~ map(\n      paste0(\"&lt;b&gt;\", adm3, \"&lt;/b&gt;&lt;br&gt;\", n, \" cases\"),\n      htmltools::HTML\n    ),\n    labelOptions = labelOptions(direction = \"auto\"),\n    highlightOptions = highlightOptions(\n      weight = 3,\n      color = \"black\",\n      bringToFront = FALSE\n    )\n  ) |&gt;\n  # add legend\n  addLegend(\n    pal = pal,\n    values = ~n,\n    title = \"Case count\",\n    opacity = 0.7,\n    position = \"bottomright\"\n  )\n\n\n\n\n\n\nSpatial clustering of cases was then investigated at a higher spatial resolution using a heatmap.\n\n\nCode\n# Prepare linelist data for heatmap\n# Filter cases with valid coordinates\nlinelist_coords &lt;- linelist |&gt;\n  filter(!is.na(lon), !is.na(lat))\n\n# Generate heatmap from individual cases\nleaflet(linelist_coords) |&gt;\n  # use CartoDB for background\n  addProviderTiles(\"CartoDB.Positron\") |&gt;\n  # add heatmap layer\n  addHeatmap(\n    lng = ~lon,\n    lat = ~lat,\n    intensity = 0.5,\n    blur = 5,\n    max = 0.05,\n    radius = 7,\n    gradient = c(\"blue\", \"cyan\", \"yellow\", \"red\")\n  )",
+    "crumbs": [
+      "Home",
+      "Tasks",
+      "2. Generating interactive maps"
+    ]
   },
   {
     "objectID": "task4.html",
@@ -460,5 +543,12 @@
     "title": "Task 8: Forecasting cases and deaths",
     "section": "Example Report",
     "text": "Example Report\nDownload solution file\n\nForecasting incidence with incomplete observations\nWe first used {EpiNow2} to forecast incidence of Ebola, accounting for under-reporting of outbreak cases. We estimate that only 40% of actual cases were reported during surveillance activities.\n\n\nCode\n# INSTALL AND LOAD PACKAGES\npacman::p_load(tidyverse, EpiNow2, incidence2, reactable, rio)\n\n# LOAD DATA\n# Import linelist data and convert to incidence\nebola_incidence &lt;- readRDS(\"data/linelist.rds\") |&gt;\n  incidence2::incidence(\n    date_index = \"date_onset\",\n    count_values_to = \"confirm\",\n    date_names_to = \"date\",\n    complete_dates = TRUE\n  ) |&gt;\n  dplyr::select(-count_variable)\n\n# Defining generation time and Rt priors\n# Generation time\ngeneration_time_fixed &lt;- EpiNow2::LogNormal(\n  mean = 4,\n  sd = 2,\n  max = 15\n)\n\n# define Rt prior distribution\nrt_prior &lt;- EpiNow2::rt_opts(prior = EpiNow2::LogNormal(mean = 2, sd = 2))\n\n# Define observation model with 40% of cases being reported\nobs_scale &lt;- EpiNow2::Normal(mean = 0.4, sd = 0.01)\n\n# Check if the analysis has been run before and run EpiNow2 if not\nfile_name &lt;- \"outputs/forecast_estimates.rds\"\nif (file.exists(file_name)) {\n  forecast_estimates &lt;- import(file_name)\n} else {\n  # forecasting with epinow ---------------------------------------------------\n  withr::local_options(base::list(mc.cores = 4))\n  forecast_estimates &lt;- EpiNow2::epinow(\n    data = ebola_incidence,\n    generation_time = EpiNow2::generation_time_opts(generation_time_fixed),\n    rt = rt_prior,\n    # Add observation model\n    obs = EpiNow2::obs_opts(scale = obs_scale),\n    # Forecast window\n    forecast = forecast_opts(horizon = 15),\n    stan = EpiNow2::stan_opts(samples = 500, chains = 2)\n  )\n  export(forecast_estimates, file_name)\n}\n\nforecast_estimates$plots$infections\n\n\n\n\n\n\n\n\n\n\n\nForecasting secondary observations\n\n\nCode\n# Select early stages of the outbreak and convert data to EpiNow2 input, with\n# date, primary, and secondary columns\n\nebola_cases_deaths &lt;- readRDS(\"data/linelist.rds\") |&gt;\n  # Create date_death column: use date_outcome for entries where outcome == \"Death\"\n  mutate(date_death = if_else(outcome == \"Death\", date_outcome, as.Date(NA))) |&gt;\n  incidence2::incidence(\n    date_index = c(\"date_onset\", \"date_death\"),\n    date_names_to = \"date\",\n    complete_dates = TRUE\n  ) |&gt;\n  pivot_wider(names_from = count_variable, values_from = count) |&gt;\n  rename(primary = date_onset, secondary = date_death)\n\n# onset to death delay ---------------------------------------------------------\nonset_death_ebola &lt;- epiparameter::epiparameter_db(\n  disease = \"ebola\",\n  epi_name = \"onset to death\",\n  single_epiparameter = TRUE\n)\n\nonset_death_ebola_discrete &lt;- epiparameter::discretise(onset_death_ebola)\n\nod_ebola_EN2 &lt;-\n  EpiNow2::Gamma(\n    mean = onset_death_ebola$summary_stats$mean,\n    sd = onset_death_ebola$summary_stats$sd,\n    max = quantile(onset_death_ebola, p = 0.99)\n  )\n\n# Establish relationship between cases and deaths\ndata_od_estimation &lt;- ebola_cases_deaths |&gt; slice(20:150)\nestimate_cases_to_deaths &lt;- EpiNow2::estimate_secondary(\n  data = data_od_estimation,\n  secondary = EpiNow2::secondary_opts(type = \"incidence\"),\n  delays = EpiNow2::delay_opts(od_ebola_EN2)\n)\n\n\nWe then forecasted the number of deaths that would arise from reported Ebola cases in the early stages of the outbreak that started in 2014.\n\n\nCode\nplot(estimate_cases_to_deaths, primary = TRUE)\n\n\n\n\n\n\n\n\n\nCode\n# Forecast from day 151 to day 300 (not included in model fit)\n# Rename primary to value (required by forecast_secondary)\ncases_to_forecast &lt;- ebola_cases_deaths |&gt;\n  slice(151:300) |&gt;\n  select(date, primary) |&gt;\n  rename(value = primary)\n\n# Forecast secondary cases\ndeaths_forecast &lt;- EpiNow2::forecast_secondary(\n  estimate = estimate_cases_to_deaths,\n  primary = cases_to_forecast\n)\n\nplot(deaths_forecast)"
+  },
+  {
+    "objectID": "index.html#workshop-agenda",
+    "href": "index.html#workshop-agenda",
+    "title": "Collaborative Analytics Workshop",
+    "section": "Workshop Agenda",
+    "text": "Workshop Agenda\nThis is a single-day workshop running from 9:00 AM to 5:00 PM. You will be grouped by the datasets you are working on to facilitate collaboration and peer support. Throughout the day, facilitators will be available to provide guidance and answer questions.\nBy the end of the first half of the day, you should have rendered your first basic situation report (Task #1). In the second half of the day, you will complete an additional one or two more advanced tasks based on your interests (Tasks #2 - #9). The detailed agenda is given below:\n\n\n\nTime\nDuration\nActivity\n\n\n\n\n9:00 - 9:30\n30 min\nWelcome, introduction, divide into groups\n\n\n9:30 - 10:30\n1 hr\nSetup and Data\n\n\n10:30 - 11:00\n30 min\nCoffee break\n\n\n11:00 - 12:00\n1 hr\nTask 1: Generating a basic situation report\n\n\n12:00 - 12:30\n30 min\nRegroup and discuss progress\n\n\n12:30 - 13:30\n1 hr\nLunch break\n\n\n13:30 - 15:00\n1.5 hr\nComplete first advanced task of choice\n\n\n15:00 - 15:30\n30 min\nCoffee break\n\n\n15:30 - 17:00\n1.5 hr\nComplete second advanced task and wrap-up"
   }
 ]

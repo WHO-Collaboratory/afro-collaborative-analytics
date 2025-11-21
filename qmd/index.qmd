@@ -4,23 +4,37 @@ title: "Collaborative Analytics Workshop"
 
 Welcome to the Collaborative Analytics Workshop! This workshop is designed to help you explore different tools and resources for conducting a range of common epidemiological analytical tasks. Our primary goal is for you to take home a functional script that generates an interactive epidemiological situation report that you can build on and adapt for your own work moving forward.
 
-## Workshop Structure
+### Workshop Agenda
 
-You will be grouped by the analytical tasks you are interested in and work through them together with support from the facilitators. Depending on your technical level, you may complete multiple tasks over different sessions and therefore change groups.
+This is a single-day workshop running from 9:00 AM to 5:00 PM. You will be grouped by the datasets you are working on to facilitate collaboration and peer support. Throughout the day, facilitators will be available to provide guidance and answer questions. 
 
-By the end of Day 1, you should have:
+In the first half of the day, you will work on rendering your first automated situation report. In the second half of the day, you will work through one or two more advanced analytical tasks based on your interests and needs. The day will be structured as follows:
 
-- Completed the [Setup](setup.qmd) section (installing R, RStudio, packages and setting up the correct folder structure)
-- Imported your own data or the example dataset from the [Data](data.qmd) section
-- Completed [Task 1](task1.qmd), which generates a basic descriptive situation report
+| Time | Duration | Activity |
+|----|----|----------|
+| 9:00 - 9:30 | 30 min | Welcome, introduction, divide into groups |
+| 9:30 - 10:30 | 60 min | Complete [Setup](setup.qmd) and [Data](data.qmd) sections |
+| 10:30 - 11:00 | 30 min | Coffee break |
+| 11:00 - 12:00 | 60 min | Complete [Task 1](task1.qmd): Generating a basic situation report sections |
+| 12:00 - 12:30 | 30 min | Regroup and discuss progress |
+| 12:30 - 13:30 | 60 min | Lunch break |
+| 13:30 - 15:00 | 90 min | Complete first advanced task |
+| 15:00 - 15:30 | 30 min | Coffee break |
+| 15:30 - 17:00 | 90 min | Complete second advanced task |
 
-By the end of Day 2, you should have:
+### Tasks
 
-- Completed one or more of the other analytical tasks (Tasks 2-9)
-- Incorporated your chosen analytical tasks into your example report
-- A functional script that generates an interactive epidemiological situation report ready to adapt for your own work
+The analytical tasks you can choose from are:
 
-## Tasks
+1. [Generating a basic situation report](task1.qmd)
+2. [Generating interactive maps](task2.qmd)
+3. [Visualising transmission chains](task3.qmd)
+4. [Getting epidemiological parameters](task4.qmd)
+5. [Estimating disease severity](task5.qmd)
+6. [Estimating the reproduction number](task6.qmd)
+7. [Nowcasting epidemiological data](task7.qmd)
+8. [Forecasting cases and deaths](task8.qmd)
+9. [Simulating disease transmission](task9.qmd)
 
 Each task page includes:
 
@@ -29,14 +43,14 @@ Each task page includes:
 
 You can work with your own data throughout the workshop or you can use the example datasets provided. If you don't have your own dataset or don't feel comfortable adapting code to your data, you can use the example datasets and example code. This will still allow you to learn the analytical techniques and generate a functional report you can reference later.
 
-## Getting Started
+### Getting Started
 
 1. Visit the [Setup](setup.qmd) page for installation instructions and required packages
 2. Download the example datasets from the [Data](data.qmd) section
 3. Navigate to the Tasks menu to find the analytical tasks you're interested in
 4. Join your group to work through the materials with support from facilitators.
 
-## Additional Resources
+### Additional Resources
 
 - [Epidemiologist R Handbook](https://www.epirhandbook.com/en/new_pages/basics.html): A comprehensive guide to R fundamentals for epidemiologists
 - [R for Data Science](https://r4ds.hadley.nz/intro.html): A general introduction to R and coding
