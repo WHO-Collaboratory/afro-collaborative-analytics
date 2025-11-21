@@ -14,13 +14,15 @@ In the first half of the day, you will work on rendering your first automated si
 |----|----|----------|
 | 9:00 - 9:30 | 30 min | Welcome, introduction, divide into groups |
 | 9:30 - 10:30 | 60 min | Complete [Setup](setup.qmd) and [Data](data.qmd) sections |
-| 10:30 - 11:00 | 30 min | Coffee break |
+| 10:30 - 11:00 | 30 min | Morning tea |
 | 11:00 - 12:00 | 60 min | Complete [Task 1](task1.qmd): Generating a basic situation report sections |
 | 12:00 - 12:30 | 30 min | Regroup and discuss progress |
 | 12:30 - 13:30 | 60 min | Lunch break |
 | 13:30 - 15:00 | 90 min | Complete first advanced task |
-| 15:00 - 15:30 | 30 min | Coffee break |
+| 15:00 - 15:30 | 30 min | Afternoon break |
 | 15:30 - 17:00 | 90 min | Complete second advanced task |
+
+: {.hover}
 
 ### Tasks
 
