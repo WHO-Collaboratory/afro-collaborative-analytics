@@ -391,5 +391,3 @@ Let's summarise our findings, we can deduce various characteristics of measles d
 -   There are great discrepancies between regions: in some regions there is low incidence despite recurring outbreaks (Americas), while others still report a large number of cases every year.
 
 -   Some regions reported very few cases in 2021, which could be linked to the COVID-19 pandemic.
-
-All these findings would be much easier to spot and communicate to collaborators using figures and visual representation. This is what we'll focus on in Session 3: generating figures with R!
