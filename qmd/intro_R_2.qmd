@@ -1,0 +1,395 @@
+---
+title: 'Introduction to R: Session 2'
+date: "`r format.Date(Sys.Date(), format = '%d %B %Y')`"
+format:
+  html:
+    toc: true
+    toc-float: true
+    toc-depth: 2
+    number-sections: true
+    df-print: paged
+  docx:
+    toc: true
+    toc-depth: 2
+execute:
+  eval: true
+  warning: false
+  message: false
+---
+
+```{r setup, include = FALSE, eval = TRUE}
+# Install pacman if not already installed
+if (!requireNamespace("pacman", quietly = TRUE)) {
+  install.packages("pacman", repos = "https://cloud.r-project.org")
+}
+
+# Install and load required packages
+pacman::p_load(emoji, rio)
+```
+
+**Original material developed by Alexis Robert and Sophie Meakin.**
+
+**Updated (2025) by Alexis Robert and Carmen Tamayo.**
+
+# Introduction
+
+Welcome to *Introduction to R!*
+
+## Contents
+
+This session introduces functions, packages, and working directories.
+
+## Notation
+
+This exercise will contain examples of code and its output, as well as instructions to edit or write code yourself. We've used the following symbols to highlight certain instructions:
+
+-   `r emoji::emoji("star")` A key piece of information e.g. a useful R function.
+-   `r emoji::emoji("computer")` An instruction to copy-and-run code from the exercise, or write your own code, in your R Studio session.
+-   `r emoji::emoji("question")` A question, related to the material or code output.
+
+## Resources
+
+-   [The Epidemiologist R Handbook](https://www.epirhandbook.com/en/) - a comprehensive reference guide to using R for applied epidemiology and public health.
+-   [R for Data Science](https://r4ds.had.co.nz/index.html) - a general guide to using R for data science.
+-   [Stack Overflow](https://stackoverflow.com/questions/tagged/r) - general R questions answered by the community.
+
+# New session, new script!
+
+When you re-open RStudio, the script from Intro to R 1 will be open, and some objects may be saved in your environment. Before anything, let's clear this up so we can define new objects and avoid getting confused with commands from the first session.
+
+`r emoji::emoji("computer")` save and close any previous scripts.
+
+`r emoji::emoji("computer")` Create a new script that will contain the code for this practical.
+
+`r emoji::emoji("computer")` Start the script with the command `rm(list = ls())` which removes all objects from your environment. Run the command in the console, what changed in your Environment panel?
+
+```{r, eval = FALSE}
+rm(list = ls())
+```
+
+# R functions
+
+An R function contains a set of commands grouped together in order to perform a specific task. For example, the function `mean()` calculates the mean of some values. To do so, it first adds the values together, and divides by the number of values.
+
+Arguments are the bits of information that you have to give to a function in order for it to work. The function `mean()` has one argument, which tells R the vector of numbers it should use to compute the mean: `mean(x)` therefore computes the mean value of the vector `x`. It also has an optional argument: `na.rm`, which is set to FALSE unless specified by the user. This means that the function `mean` will not remove the unreported (NA) values by default.
+
+**Extra:** We can write our own functions, if we need them! In the example below, the function `sum_pow` takes two arguments (called `a` and `b`), computes their squared value., and returns the sum of the squared values.
+
+```{r, eval = FALSE}
+sum_pow <- function(a, b){
+  ## Compute a squared
+  a_squared <- a^2
+  ## Compute b squared
+  b_squared <- b^2
+
+  ## Compute the sum of the squared values
+  result <- a_squared + b_squared
+
+  return(result)
+}
+
+sum_pow(3, 7)
+sum_pow(10, 17)
+```
+
+`r emoji::emoji("computer")` Copy and paste the code above into your RStudio script and run it.
+
+`r emoji::emoji("question")` Optional: Can you create a function that takes 3 arguments (for instance `a`, `b`, and `c`) and returns the sum of their squared values?
+
+# R packages
+
+R packages are extensions of the set of base functions contained in R by default. They are mostly developed by the community, and extend what R can do. Packages typically contain functions, but can also contain datasets. In the first session, you installed the R package **palmerpenguins**, which contains two datasets: `penguins` and `penguins_raw`. Some packages contain a few functions that facilitate specific tasks that would be tedious using only base R, while others create new possibilities (like mixing R and other coding languages, or introducing new operators).
+
+We use the command `install_packages` to download a package on the computer. At that stage, the package is not yet imported in the R session, it just becomes accessible on your computer. To import the package on the current session, we use the function `library`. In this session, we will use the package **rio** to import datasets, let's make sure you are all able to install it.
+
+`r emoji::emoji("computer")` Copy and paste the code below.
+
+```{r, eval = FALSE}
+# Install the package rio
+install.packages("rio")
+
+# Import rio into the current session
+library(rio)
+```
+
+Packages have to be imported (using `library`) every time you open a new R session, but they only need to be installed once. If you run `library(palmerpenguins)`, your R session should import this library without needing to re-install it.
+
+If you're not certain what a package does or contains you can view the package documentation by using `?`, or `help()`.
+
+`r emoji::emoji("computer")` Check the description of the **palmerpenguins** package by running `?palmerpenguins` or `help(palmerpenguins)`.
+
+# Organising your files and repositories
+
+## Create a repository
+
+In Intro to R 1, we described the data contained a dataset from the **palmerpenguins** package. Usually, we would work with data downloaded from online repositories, or sent to us by collaborators, and generate various outputs in other files (figures, cleaned datasets, results from analysis etc..). Having the datasets, scripts, and outputs scattered across your computer in different folders and files can be confusing, and lead to bugs in your code. Therefore, it is important to create a repository that will contain all the files related to a given project.
+
+`r emoji::emoji("computer")` Start by creating a folder on your computer called `introduction_to_r`, that will contain all the files used and written during this module.
+
+`r emoji::emoji("computer")` In `introduction_to_r`, create a folder `practical_2`, which will contain the files used in this analysis.
+
+`r emoji::emoji("computer")` In `practical_2`, create three repositories: `data`, `scripts`, `output`. The script you are currently writing should be saved in `scripts`, download the two datasets from the Moodle page (`life_expectancy` and `measles_per_year` in `Session 2`) and place them in `data`.
+
+## Working directory
+
+The working directory is the root folder used by R, and will be the default location where R will start to look for data or saves files. You can find out your current working directory with the function `getwd()`:
+
+```{r, eval = FALSE}
+
+getwd()
+
+```
+
+```{r, eval = FALSE}
+
+## [1] "C:/Users/eidearob/Documents"
+
+```
+
+`r emoji::emoji("question")` Use `getwd()` to find out your working directory. How is it different from the one above? Check whether you have the same working directory as other students.
+
+You would want the working directory to be in the folder `practical_2`, so R can easily access all the scripts, data, and output contained in the folder. If it was in the `script` folder, then it would not be able to access the `data` folder.
+
+To change the working directory, you can use `setwd()`, a function that takes an argument called `dir`, the path to the new working directory.
+
+If you are not sure where path to the `practical_2` folder is on your computer, you can use the tab `session` (at the top of your screen), then click on `Set Working Directory` and `Choose Directory`. This way, you will be able to browse your computer and locate the folder you created previously.
+
+If you are still not certain where your `practical_2` folder is located, you can use the tab `session` (at the top of your screen), then click on `Set Working Directory` and `To Source File Location`. In your script, you will see the command run by your computer leading to the `script` folder (where you saved your current script in the previous section). Just remove `/script` from the command, and your working directory will be in `practical_2`.
+
+`r emoji::emoji("question")` Set your working directory to `practical_2`. Use `getwd()` to check you're in the right working directory. Is your working directory now the same as other students?
+
+## R projects
+
+`r emoji::emoji("star")` A common and easy way to manage your working directory is with **R projects**.
+
+As you saw in the previous section, setting the right working directory in R is tedious, and the path to the working directory depends on your computer: even when it's set to `practical_2`, you don't always have the same path as other students. That is a major issue when collaborating with people: the `setwd()` command at the start of your script may not work on their computer. That's why we use **R projects**.
+
+`r emoji::emoji("computer")` Follow the steps below to set up and open an R project in your R studio session.
+
+Step 1: ![](fig_rproject1.png){width="500"}
+
+Step 2: ![](fig_rproject2.png){width="500"}
+
+Step 3: ![](fig_rproject3.png){width="500"}
+
+The previous steps created a `.Rproj` object, called `practical_2.Rproj`. The project is automatically open when it's created.
+
+Opening a project will automatically set the working directory to the folder where the project is located, no need to use `setwd()` anymore. If you send your scripts and Rproj object to collaborators, they will be able to run the script without having to use or change `setwd()`. Just re-open the script you started working on and continue the practical.
+
+# Importing and exporting data
+
+## Importing data with **rio**
+
+We can import (i.e. 'read in') and export (i.e. save) data in common formats (e.g. .csv, .xlsx, .txt) with the **rio** package. In this section, we are going to import some data on life expectancy at birth and health expenditure per capita in USD for countries in 2015. This data is from Our World in Data: [ourworldindata.org/life-expectancy-vs-health-expenditure](https://ourworldindata.org/grapher/life-expectancy-vs-health-expenditure).
+
+`r emoji::emoji("star")` We import a data file (e.g. .csv) using the `import()` function from the **rio** library.
+
+`r emoji::emoji("computer")` Download the file `life_expectancy.csv` from Moodle, and place it in your Data folder.
+
+`r emoji::emoji("computer")` Copy and paste the code below. This code imports the data `life_expectancy.csv` from the folder `data`, and assigns it to an object called `life_expectancy`:
+
+```{r, eval = FALSE}
+
+life_expectancy <- import(file = "data/life_expectancy.csv")
+
+```
+
+Let's look more closely at how `import()` works.
+
+### The `import()` function
+
+The `import()` function has one main argument: `file`. This argument is where we tell R where to find the file we want to import.
+
+If you use R a lot, you might see people using other functions or libraries, such as the function `read.csv()` for .csv files only, or the library [`readxl`](https://readxl.tidyverse.org/) for .xls or .xlsx files only. But one of the great things about `import()` is that you can use it for all common data formats e.g. `.csv`, `.txt`, `.xlsx`, so you only have to remember that!
+
+## Exporting data
+
+`r emoji::emoji("star")` We export data using the `export()` function from the **rio** library.
+
+The argument `x` specified the name of the data (e.g. the data frame) that we want to export. The argument `file` tells R where to save the data and what to call it.
+
+The code below exports the data frame `life_expectancy` and saves it as a .csv file called "test_data_export.csv" in the data folder:
+
+```{r, eval = FALSE}
+export(x = life_expectancy, file = "data/test_data_export.csv")
+```
+
+# Investigating `life_expectancy`
+
+Now that we have imported a new data file, let's explore what data it contains. In the previous practical, Intro to R 1, we used several functions to describe the **palmerpenguin** dataset:
+
+-   `head()` shows the first 6 rows of the dataframe, use the argument `n` to show more than 6 rows.
+
+-   `colnames()` shows the column names of the dataframe.
+
+-   `ncol()` and `nrow()` respectively computes the number of rows (i.e. the number of observations) and the number of columns (i.e. the number of variables) in the dataframe.
+
+-   `class()` returns the class of the object.
+
+-   `mean()` and `median()` computes the mean and median of a vector.
+
+-   `min()` and `max()` computes the minimum and maximum value of a vector.
+
+-   `sd()` and `IQR()` computes the standard deviation and the interquartile range of a numeric vector.
+
+-   `summary()` returns the minimum, first quartile, median, mean, third quartile, and maximum value of a vector.
+
+-   `table()` returns the number of entries for each value of a vector.
+
+Now, we're going to use these functions to describe the `life_expectancy` dataset. First, let's have a look at what the data looks like by using `head()`
+
+```{r, eval = FALSE}
+head(life_expectancy)
+```
+
+This shows us that there are five columns in this dataset, and each row describes one country.
+
+`r emoji::emoji("question")` What values are shown in the column `health_expenditure_usd`? What does that mean?
+
+Now, let's describe the data contained in `life_expectancy`:
+
+`r emoji::emoji("question")` Using `nrow()`, how many observations are there in the dataset?
+
+`r emoji::emoji("question")` Using `class()`, which columns in the dataset are numeric?
+
+`r emoji::emoji("question")` Using `table()`, what are the regions (column `region`) contained in the dataset? How many entries are there by region? (hint: we are only interested in the column `region`, use the operator `$` to select that column from `life_expectancy`). Entering `table(life_expectancy)` would create a table across the whole dataframe, which is not what we are interested in.
+
+As you observed when we looked at the first few rows, there are unreported entries in the columns `life_expectancy_years` and `health_expenditure_usd`. However, we'd like to know how many entries are missing in each column. That will tell us whether this dataset can provide a good description of these values, or if there are too many missing entries to make any analysis on this data.
+
+The function `is.na()` returns `TRUE` for each `NA` value in the argument. We can use `table()` and `is.na` to know the number of `NA` values in `life_expectancy_years`.
+
+`r emoji::emoji("computer")` Run the code below to compute the number of `NA` values in `life_expectancy_years`. You should get 17 NA values out of 217 rows
+
+```{r, eval = FALSE}
+table(is.na(life_expectancy$life_expectancy_years))
+```
+
+`r emoji::emoji("question")` Compute the number of `NA` values in the column `health_expenditure_usd`. How does this compare to the column `life_expectancy_years`? Given the number of unreported entries in `health_expenditure_usd`, can we use this dataframe to give an accurate description of the distribution of health expenditure in the world?
+
+`r emoji::emoji("question")` Are there any missing entries in the other columns of the dataframe?
+
+Let's first describe the column `life_expectancy_years`:
+
+`r emoji::emoji("question")` Using `min()`, `max()`, `IQR()`, `mean()`, and `median()`, describe the column `life_expectancy_years` of the dataframe. What is the average life expectancy across all countries? Describe the dispersion of the values.
+
+Describing the entire dataframe is informative, but it may be more interesting to describe the regions separately, and see the countries that have extreme values of `life_expectancy` or `health_expenditure`.
+
+`r emoji::emoji("computer")` In base R, we can select certain rows using `==`, for instance, Use the following command to select only the rows describing countries from the region Europe and Central Asia:
+
+```{r, eval = FALSE}
+## Inside the brackets[]:
+## - conditions before the comma select rows,
+## - conditions after the comma select columns
+## Here, we select the rows where the region is Europe and Central Asia, and select all the columns
+life_expectancy[life_expectancy$region == "Europe and Central Asia",]
+```
+
+This shows us a subset of `life_expectancy`.
+
+`r emoji::emoji("computer")` Use the following command to compute the average life expectancy in Europe and Central Asia
+
+```{r, eval = FALSE}
+mean(life_expectancy[life_expectancy$region == "Europe and Central Asia",]$life_expectancy_years,
+     na.rm = TRUE)
+```
+
+`r emoji::emoji("question")` What is the mean life expectancy in East Asia and Pacific according to our dataframe? What is their average health expenditure?
+
+According to our dataframe, the average per capita health expenditure in East Asia and Pacific is about 3,759USD. However, we saw that lots of entries in `health_expenditure_usd` were missing.
+
+`r emoji::emoji("computer")` Use the code below to compute the number of missing entries of `health_expenditure_usd` in East Asia and Pacific. Is there enough reported entries to tell us something about health expenditure across countries in East Asia and Pacific?
+
+```{r, eval = FALSE}
+table(is.na(life_expectancy[life_expectancy$region == "East Asia and Pacific",
+                            ]$health_expenditure_usd))
+```
+
+Finally, we want to look at the extreme values in our dataframe: what countries have the longest average values of life expectancy? What countries report shorter values? To do so, we can use the function `order()` to order the rows. `order()` returns the position of each value in the vector, by default using an increasing order (the smallest value is assigned the value 1, the next smallest is 2 and so on).
+
+`r emoji::emoji("computer")`: Run the following command to order the `life_expectancy` dataframe by life expectancy.
+
+```{r, eval = FALSE}
+life_expectancy[order(life_expectancy$life_expectancy_years),]
+```
+
+If we are interested in countries with the highest values of life expectancy, it may be more convenient to order the dataframe in decreasing order (i.e. highest values are shown first). To do so, we can use the argument `decreasing` from the function `order()`.
+
+```{r, eval = FALSE}
+life_expectancy[order(life_expectancy$life_expectancy_years, decreasing = TRUE),]
+```
+
+We can now use the function `head()` to only see the rows that have the highest life expectancy.
+
+`r emoji::emoji("question")` What are the highest values of life expectancy in the dataframe?
+
+```{r, eval = FALSE}
+head(life_expectancy[order(life_expectancy$life_expectancy_years, decreasing = TRUE),])
+```
+
+Finally, let's find the extreme values per region. We can combine the selection process introduced earlier (using `==`) and the `order()` function. To avoid creating long lines of code that may be hard to understand for collaborators (or for yourself if you re-open your script in 6 months), we can use two different commands: First we create a new dataframe containing only the entries in East Asia and Pacific, then we order this new dataframe by `life_expectancy_years`.
+
+```{r, eval = FALSE}
+# Create a new dataframe containing only countries from East Asia and Pacific
+life_exp_asia_pacific <- life_expectancy[life_expectancy$region == "East Asia and Pacific",]
+
+# Order the newly created dataframe by life expectancy
+life_exp_asia_pacific[order(life_exp_asia_pacific$life_expectancy_years, decreasing = TRUE),]
+```
+
+`r emoji::emoji("question")` What countries report the highest life expectancy in the region `Europe and Central Asia`? And in the region Latin America and Caribbean?
+
+# Investigating `measles_per_year`
+
+In the last section of this practical, we will describe the dataset `measles_per_year`. This dataset contains the number of measles cases per year per WHO region, and was downloaded from [ourworldindata.org](https://ourworldindata.org/grapher/reported-cases-of-measles).
+
+`r emoji::emoji("computer")` Download the file `measles_per_year.csv` from Moodle, and place it in your Data folder. Import it into your R session using the function `import`:
+
+```{r, eval = FALSE}
+
+measles_cases <- import(file = "data/measles_per_year.csv")
+
+```
+
+Answer the following questions using the functions presented in this practical and in Intro to R 1:
+
+`r emoji::emoji("question")`: How many observations (rows) are there in the dataset?
+
+`r emoji::emoji("question")`: What are the column names of the dataset?
+
+The column names do not follow the best coding practice, let's change them to something shorter and more consistent, to avoid future errors:
+
+```{r, eval = FALSE}
+colnames(measles_cases) <- c("region", "year", "cases")
+```
+
+`r emoji::emoji("question")`: What is the class of each column in the dataset?
+
+`r emoji::emoji("question")`: Are there any `NA` entries in the `cases` column? (hint: use the functions `table()` and `is.na()`)
+
+`r emoji::emoji("question")`: Describe the column `cases`: what is the median number of annual cases in the dataset? What is the maximum / minimum values? What is the IQR?
+
+The dataset contains the number of cases per WHO region, let's look at how they changed through time:
+
+`r emoji::emoji("question")`: Describe the column `cases` in the `region` `Europe`: What was the minimum and maximum number of annual cases in Europe?
+
+`r emoji::emoji("question")`: Observe the number of cases per year in Europe: using `measles_cases[measles_cases$region == "Europe", ]`, did the number of measles cases decrease between 1990 and 2019? Did the number of cases decrease between 2007 and 2019?
+
+`r emoji::emoji("question")`: Was the dynamic similar in `Africa`: did the number of cases decrease between 1980 and 2020?
+
+`r emoji::emoji("question")`: Same question if the region is `Americas`: How does the number of cases in `Americas` compare to the number of cases in `Europe`?
+
+Check to see whether the other three regions (`South-east Asia`, `Western Pacific`, and `Eastern Mediterranean`) have similar dynamics
+
+Let's summarise our findings, we can deduce various characteristics of measles dynamics since 1990:
+
+-   Across all regions, the number of measles cases per year greatly decrease between 1980 and 2000.
+
+-   From 2000 onwards, the dynamics changed between regions: the decrease continued in certain regions (e.g Europe), but had already reached a very low level in the Americas
+
+-   Since 2010, we observe cyclical increase and decreases in the number of annual cases in each region.
+
+-   There are great discrepancies between regions: in some regions there is low incidence despite recurring outbreaks (Americas), while others still report a large number of cases every year.
+
+-   Some regions reported very few cases in 2021, which could be linked to the COVID-19 pandemic.
+
+All these findings would be much easier to spot and communicate to collaborators using figures and visual representation. This is what we'll focus on in Session 3: generating figures with R!
