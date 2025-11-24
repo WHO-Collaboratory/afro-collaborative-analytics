@@ -8,9 +8,6 @@ format:
     toc-depth: 2
     number-sections: true
     df-print: paged
-  docx:
-    toc: true
-    toc-depth: 2
 execute:
   eval: true
   warning: false
