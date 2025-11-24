@@ -1,6 +1,10 @@
 ---
 title: 'Introduction to R: Session 1'
 date: "`r format.Date(Sys.Date(), format = '%d %B %Y')`"
+author:
+  - Alexis Robert
+  - Sophie Meakin
+  - Carmen Tamayo
 format:
   html:
     toc: true
@@ -23,32 +27,6 @@ if (!requireNamespace("pacman", quietly = TRUE)) {
 # Install and load required packages
 pacman::p_load(emoji, palmerpenguins)
 ```
-
-**Original material developed by Alexis Robert and Sophie Meakin.**
-
-**Updated (2025) by Alexis Robert and Carmen Tamayo.**
-
-# Introduction
-
-Welcome to *Introduction to R!*
-
-## Contents
-
-This session introduces the basics of R.
-
-## Notation
-
-This exercise will contain examples of code and its output, as well as instructions to edit or write code yourself. We've used the following symbols to highlight certain instructions:
-
--   `r emoji::emoji("star")` A key piece of information e.g. a useful R function.
--   `r emoji::emoji("computer")` An instruction to copy-and-run code from the exercise, or write your own code, in your R Studio session.
--   `r emoji::emoji("question")` A question, related to the material or code output.
-
-## Resources
-
--   [The Epidemiologist R Handbook](https://www.epirhandbook.com/en/) - a comprehensive reference guide to using R for applied epidemiology and public health.
--   [R for Data Science](https://r4ds.had.co.nz/index.html) - a general guide to using R for data science.
--   [Stack Overflow](https://stackoverflow.com/questions/tagged/r) - general R questions answered by the community.
 
 # R basics
 
@@ -101,14 +79,14 @@ Examples:
 
 ```{r, eval = FALSE}
 
-x <- 10       # The object called x is assigned the value 10
-x             # Print the object x
+x <- 10 # The object called x is assigned the value 10
+x # Print the object x
 
-y <- 10 + 20  # The object called y is assigned the value 10 + 20
-y             # Print the object y
+y <- 10 + 20 # The object called y is assigned the value 10 + 20
+y # Print the object y
 
-z <- "hello"  # The object called z is assigned the text "hello"
-z             # Print the object z
+z <- "hello" # The object called z is assigned the text "hello"
+z # Print the object z
 
 ```
 
@@ -139,8 +117,8 @@ Expressions using relational operators will return `TRUE` or `FALSE`.
 `r emoji::emoji("computer")` Copy the below code into the console of your R Studio terminal.
 
 ```{r, eval = FALSE}
-x <- 3      # Assign the value 3 to the object called x
-y <- 11     # Assign the value 11 to the object called y
+x <- 3 # Assign the value 3 to the object called x
+y <- 11 # Assign the value 11 to the object called y
 ```
 
 Examples of using relational operators:

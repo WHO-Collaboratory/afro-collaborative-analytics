@@ -15,9 +15,21 @@ website:
         text: Home
       - href: setup.qmd
         text: Setup
-      - href: data.qmd
-        text: Data
-      - text: Tasks
+      - text: Intro to R
+        menu:
+          - href: intro_R_1.qmd
+            text: "Session 1"
+          - href: intro_R_2.qmd
+            text: "Session 2"
+      - text: Data
+        menu:
+          - href: data.qmd
+            text: "Downloading from HIS"
+          - href: data_cleaning.qmd
+            text: "Data Cleaning"
+          - href: data_download.qmd
+            text: "Download cleaned dataset"
+      - text: Analysis
         menu:
           - href: task1.qmd
             text: "1. Generating a basic situation report"

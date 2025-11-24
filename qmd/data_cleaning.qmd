@@ -1,0 +1,28 @@
+---
+title: "Data Cleaning"
+---
+
+## Overview
+
+Data cleaning is a crucial step in any epidemiological analysis. Before you can analyze your data, you need to ensure it is properly formatted, validated, and ready for analysis. This involves handling missing values, standardizing formats, validating data quality, and preparing data for epidemiological analysis.
+
+## Learning Objectives
+
+- Clean messy datasets
+- Validate data quality
+- Handle missing values
+- Standardize data formats
+- Prepare data for epidemiological analysis
+
+## Tutorial
+
+For comprehensive guidance on data cleaning workflows:
+
+- [Clean case data tutorial](https://epiverse-trace.github.io/tutorials-early/clean-data.html) - Learn how to clean, validate, and prepare epidemiological data
+- [Applied Epi R Handbook data cleaning tutorial](https://www.epirhandbook.com/en/new_pages/cleaning.html) - Step-by-step instructions for cleaning the raw case linelist
+
+## Example Dataset
+
+If you're working with the example dataset for this workshop, you can download the raw case linelist (an Excel spreadsheet with messy data) to practice data cleaning:
+
+<a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_raw.xlsx" download class="btn btn-primary" target="_blank">Download raw linelist</a>

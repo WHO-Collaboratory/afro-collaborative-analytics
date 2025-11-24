@@ -24,7 +24,7 @@ In the first half of the day, you will work on rendering your first automated si
 
 : {.hover}
 
-### Tasks
+### Analysis
 
 The analytical tasks you can choose from are:
 
@@ -48,8 +48,8 @@ You can work with your own data throughout the workshop or you can use the examp
 ### Getting Started
 
 1. Visit the [Setup](setup.qmd) page for installation instructions and required packages
-2. Download the example datasets from the [Data](data.qmd) section
-3. Navigate to the Tasks menu to find the analytical tasks you're interested in
+2. Download the example datasets from the [Download cleaned dataset](data_download.qmd) page
+3. Navigate to the Analysis menu to find the analytical tasks you're interested in
 4. Join your group to work through the materials with support from facilitators.
 
 ### Additional Resources

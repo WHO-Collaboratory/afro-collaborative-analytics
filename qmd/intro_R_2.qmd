@@ -1,6 +1,10 @@
 ---
 title: 'Introduction to R: Session 2'
 date: "`r format.Date(Sys.Date(), format = '%d %B %Y')`"
+author:
+  - Alexis Robert
+  - Sophie Meakin
+  - Carmen Tamayo
 format:
   html:
     toc: true
@@ -23,32 +27,6 @@ if (!requireNamespace("pacman", quietly = TRUE)) {
 # Install and load required packages
 pacman::p_load(emoji, rio)
 ```
-
-**Original material developed by Alexis Robert and Sophie Meakin.**
-
-**Updated (2025) by Alexis Robert and Carmen Tamayo.**
-
-# Introduction
-
-Welcome to *Introduction to R!*
-
-## Contents
-
-This session introduces functions, packages, and working directories.
-
-## Notation
-
-This exercise will contain examples of code and its output, as well as instructions to edit or write code yourself. We've used the following symbols to highlight certain instructions:
-
--   `r emoji::emoji("star")` A key piece of information e.g. a useful R function.
--   `r emoji::emoji("computer")` An instruction to copy-and-run code from the exercise, or write your own code, in your R Studio session.
--   `r emoji::emoji("question")` A question, related to the material or code output.
-
-## Resources
-
--   [The Epidemiologist R Handbook](https://www.epirhandbook.com/en/) - a comprehensive reference guide to using R for applied epidemiology and public health.
--   [R for Data Science](https://r4ds.had.co.nz/index.html) - a general guide to using R for data science.
--   [Stack Overflow](https://stackoverflow.com/questions/tagged/r) - general R questions answered by the community.
 
 # New session, new script!
 
@@ -73,7 +51,7 @@ Arguments are the bits of information that you have to give to a function in ord
 **Extra:** We can write our own functions, if we need them! In the example below, the function `sum_pow` takes two arguments (called `a` and `b`), computes their squared value., and returns the sum of the squared values.
 
 ```{r, eval = FALSE}
-sum_pow <- function(a, b){
+sum_pow <- function(a, b) {
   ## Compute a squared
   a_squared <- a^2
   ## Compute b squared
@@ -278,7 +256,7 @@ Describing the entire dataframe is informative, but it may be more interesting t
 ## - conditions before the comma select rows,
 ## - conditions after the comma select columns
 ## Here, we select the rows where the region is Europe and Central Asia, and select all the columns
-life_expectancy[life_expectancy$region == "Europe and Central Asia",]
+life_expectancy[life_expectancy$region == "Europe and Central Asia", ]
 ```
 
 This shows us a subset of `life_expectancy`.
@@ -286,8 +264,9 @@ This shows us a subset of `life_expectancy`.
 `r emoji::emoji("computer")` Use the following command to compute the average life expectancy in Europe and Central Asia
 
 ```{r, eval = FALSE}
-mean(life_expectancy[life_expectancy$region == "Europe and Central Asia",]$life_expectancy_years,
-     na.rm = TRUE)
+mean(life_expectancy[life_expectancy$region == "Europe and Central Asia", ]$life_expectancy_years,
+  na.rm = TRUE
+)
 ```
 
 `r emoji::emoji("question")` What is the mean life expectancy in East Asia and Pacific according to our dataframe? What is their average health expenditure?
@@ -297,8 +276,7 @@ According to our dataframe, the average per capita health expenditure in East As
 `r emoji::emoji("computer")` Use the code below to compute the number of missing entries of `health_expenditure_usd` in East Asia and Pacific. Is there enough reported entries to tell us something about health expenditure across countries in East Asia and Pacific?
 
 ```{r, eval = FALSE}
-table(is.na(life_expectancy[life_expectancy$region == "East Asia and Pacific",
-                            ]$health_expenditure_usd))
+table(is.na(life_expectancy[life_expectancy$region == "East Asia and Pacific", ]$health_expenditure_usd))
 ```
 
 Finally, we want to look at the extreme values in our dataframe: what countries have the longest average values of life expectancy? What countries report shorter values? To do so, we can use the function `order()` to order the rows. `order()` returns the position of each value in the vector, by default using an increasing order (the smallest value is assigned the value 1, the next smallest is 2 and so on).
@@ -306,13 +284,13 @@ Finally, we want to look at the extreme values in our dataframe: what countries 
 `r emoji::emoji("computer")`: Run the following command to order the `life_expectancy` dataframe by life expectancy.
 
 ```{r, eval = FALSE}
-life_expectancy[order(life_expectancy$life_expectancy_years),]
+life_expectancy[order(life_expectancy$life_expectancy_years), ]
 ```
 
 If we are interested in countries with the highest values of life expectancy, it may be more convenient to order the dataframe in decreasing order (i.e. highest values are shown first). To do so, we can use the argument `decreasing` from the function `order()`.
 
 ```{r, eval = FALSE}
-life_expectancy[order(life_expectancy$life_expectancy_years, decreasing = TRUE),]
+life_expectancy[order(life_expectancy$life_expectancy_years, decreasing = TRUE), ]
 ```
 
 We can now use the function `head()` to only see the rows that have the highest life expectancy.
@@ -320,17 +298,17 @@ We can now use the function `head()` to only see the rows that have the highest 
 `r emoji::emoji("question")` What are the highest values of life expectancy in the dataframe?
 
 ```{r, eval = FALSE}
-head(life_expectancy[order(life_expectancy$life_expectancy_years, decreasing = TRUE),])
+head(life_expectancy[order(life_expectancy$life_expectancy_years, decreasing = TRUE), ])
 ```
 
 Finally, let's find the extreme values per region. We can combine the selection process introduced earlier (using `==`) and the `order()` function. To avoid creating long lines of code that may be hard to understand for collaborators (or for yourself if you re-open your script in 6 months), we can use two different commands: First we create a new dataframe containing only the entries in East Asia and Pacific, then we order this new dataframe by `life_expectancy_years`.
 
 ```{r, eval = FALSE}
 # Create a new dataframe containing only countries from East Asia and Pacific
-life_exp_asia_pacific <- life_expectancy[life_expectancy$region == "East Asia and Pacific",]
+life_exp_asia_pacific <- life_expectancy[life_expectancy$region == "East Asia and Pacific", ]
 
 # Order the newly created dataframe by life expectancy
-life_exp_asia_pacific[order(life_exp_asia_pacific$life_expectancy_years, decreasing = TRUE),]
+life_exp_asia_pacific[order(life_exp_asia_pacific$life_expectancy_years, decreasing = TRUE), ]
 ```
 
 `r emoji::emoji("question")` What countries report the highest life expectancy in the region `Europe and Central Asia`? And in the region Latin America and Caribbean?
