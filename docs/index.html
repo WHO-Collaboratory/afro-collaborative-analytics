@@ -97,37 +97,22 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./setup.html"> 
 <span class="menu-text">Setup</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-intro-to-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Intro to R</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-intro-to-r">    
-        <li>
-    <a class="dropdown-item" href="./intro_R_1.html">
- <span class="dropdown-text">Session 1</span></a>
+  <li class="nav-item">
+    <a class="nav-link" href="./intro.html"> 
+<span class="menu-text">Intro to R</span></a>
   </li>  
-        <li>
-    <a class="dropdown-item" href="./intro_R_2.html">
- <span class="dropdown-text">Session 2</span></a>
-  </li>  
-    </ul>
-  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Data</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-data">    
         <li>
-    <a class="dropdown-item" href="./data.html">
- <span class="dropdown-text">Downloading from HIS</span></a>
+    <a class="dropdown-item" href="./data_import.html">
+ <span class="dropdown-text">Importing</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./data_cleaning.html">
- <span class="dropdown-text">Data Cleaning</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./data_download.html">
- <span class="dropdown-text">Download cleaned dataset</span></a>
+    <a class="dropdown-item" href="./data_clean.html">
+ <span class="dropdown-text">Cleaning</span></a>
   </li>  
     </ul>
   </li>
@@ -197,8 +182,8 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#workshop-agenda" id="toc-workshop-agenda" class="nav-link active" data-scroll-target="#workshop-agenda">Workshop Agenda</a></li>
-  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a></li>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a></li>
+  <li><a href="#workflow" id="toc-workflow" class="nav-link" data-scroll-target="#workflow">Workflow</a></li>
+  <li><a href="#task-structure" id="toc-task-structure" class="nav-link" data-scroll-target="#task-structure">Task structure</a></li>
   <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
   </ul>
 </nav>
@@ -247,7 +232,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td>9:30 - 10:30</td>
 <td>60 min</td>
-<td>Complete <a href="./setup.html">Setup</a> and <a href="./data.html">Data</a> sections</td>
+<td>Complete <a href="./setup.html">Setup</a></td>
 </tr>
 <tr class="odd">
 <td>10:30 - 11:00</td>
@@ -257,7 +242,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td>11:00 - 12:00</td>
 <td>60 min</td>
-<td>Complete <a href="./task1.html">Task 1</a>: Generating a basic situation report sections</td>
+<td>Complete first task</td>
 </tr>
 <tr class="odd">
 <td>12:00 - 12:30</td>
@@ -272,7 +257,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td>13:30 - 15:00</td>
 <td>90 min</td>
-<td>Complete first advanced task</td>
+<td>Complete second task</td>
 </tr>
 <tr class="even">
 <td>15:00 - 15:30</td>
@@ -282,14 +267,28 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td>15:30 - 17:00</td>
 <td>90 min</td>
-<td>Complete second advanced task</td>
+<td>Complete third task</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="analysis" class="level3">
-<h3 class="anchored" data-anchor-id="analysis">Analysis</h3>
-<p>The analytical tasks you can choose from are:</p>
+<section id="workflow" class="level3">
+<h3 class="anchored" data-anchor-id="workflow">Workflow</h3>
+<p>Everyone should start by working through the <a href="./setup.html">Setup</a> page to get the correct folder structure set up. Then you can pick one or more of the following options:</p>
+<section id="option-a-intro-to-r" class="level4">
+<h4 class="anchored" data-anchor-id="option-a-intro-to-r">Option A: Intro to R</h4>
+<p>If you are a beginner to R, you can work through the <a href="./intro.html">Intro to R</a> tutorial to learn the basics.</p>
+</section>
+<section id="option-b-data-import-cleaning" class="level4">
+<h4 class="anchored" data-anchor-id="option-b-data-import-cleaning">Option B: Data Import &amp; Cleaning</h4>
+<ul>
+<li>If you are interested in downloading data from sources such as <strong>DHIS2</strong> or <strong>SORMAS</strong>, work through the <a href="./data_import.html">Data Import</a> tutorial.</li>
+<li>If you are interested in <strong>cleaning data</strong>, work through the <a href="./data_clean.html">Data Cleaning</a> tutorial.</li>
+</ul>
+</section>
+<section id="option-c-report-generation-analytics" class="level4">
+<h4 class="anchored" data-anchor-id="option-c-report-generation-analytics">Option C: Report Generation &amp; Analytics</h4>
+<p>There are 9 tutorials that are available to you. Start with the first and then work through others that interest you:</p>
 <ol type="1">
 <li><a href="./task1.html">Generating a basic situation report</a></li>
 <li><a href="./task2.html">Generating interactive maps</a></li>
@@ -301,21 +300,16 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="./task8.html">Forecasting cases and deaths</a></li>
 <li><a href="./task9.html">Simulating disease transmission</a></li>
 </ol>
+</section>
+</section>
+<section id="task-structure" class="level3">
+<h3 class="anchored" data-anchor-id="task-structure">Task structure</h3>
 <p>Each task page includes:</p>
 <ul>
 <li>Links to external tutorials that provide comprehensive learning materials and detailed explanations of the analytical concepts and methods.</li>
 <li>Complete example code that generates all the outputs needed for an example report. The example code works with the provided example datasets</li>
 </ul>
 <p>You can work with your own data throughout the workshop or you can use the example datasets provided. If you don’t have your own dataset or don’t feel comfortable adapting code to your data, you can use the example datasets and example code. This will still allow you to learn the analytical techniques and generate a functional report you can reference later.</p>
-</section>
-<section id="getting-started" class="level3">
-<h3 class="anchored" data-anchor-id="getting-started">Getting Started</h3>
-<ol type="1">
-<li>Visit the <a href="./setup.html">Setup</a> page for installation instructions and required packages</li>
-<li>Download the example datasets from the <a href="./data_download.html">Download cleaned dataset</a> page</li>
-<li>Navigate to the Analysis menu to find the analytical tasks you’re interested in</li>
-<li>Join your group to work through the materials with support from facilitators.</li>
-</ol>
 </section>
 <section id="additional-resources" class="level3">
 <h3 class="anchored" data-anchor-id="additional-resources">Additional Resources</h3>

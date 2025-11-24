@@ -58,7 +58,16 @@ Within your project, create the following subfolders to organize your files:
 1. In RStudio, click the **Files** tab in the bottom-right pane.
 2. Click **New Folder**.
 3. Create a folder called `data/` - for storing your datasets.
-4. Create another folder called `outputs/` - for storing generated reports and figures.
+4. Create a folder called `outputs/` - for storing generated reports and figures.
+4. Create a folder called `scripts/` - for storing your R scripts.
+
+## Download Cleaned Dataset
+
+This is an example dataset resembling a fictional Ebola outbreak that will be used in the various examples throughout the workshop tasks. The dataset is from the [Applied Epi R Handbook](https://www.epirhandbook.com/) and contains a cleaned case linelist with epidemiological data including case demographics, dates, locations, and outcomes.
+
+<a href="data/linelist.rds" download class="btn btn-primary" target="_blank">Download clean linelist</a>
+
+After downloading, place the file in your `data/` folder. The example code in each analysis task is already set up to work with this dataset structure.
 
 ## Setting Up Your Quarto Document
 
@@ -190,7 +199,7 @@ If you prefer, you can download the example sitrep template directly instead of 
 
 Once you have the basics set up:
 
-1. Visit the [Data](data.qmd) section to download the example dataset if you are not using your own data.
+1. Visit the [Data](data_import.qmd) section to download the example dataset if you are not using your own data.
 2. Explore the [Tasks](task1.qmd) menu to find the analytical task(s) you're interested in.
 3. Join your assigned group and start working through the materials with facilitator support.
 

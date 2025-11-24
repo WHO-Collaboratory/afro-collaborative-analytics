@@ -1,5 +1,5 @@
 ---
-title: "Downloading data from health information systems"
+title: "Importing data from DHIS2 & SORMAS"
 ---
 
 ## Overview
@@ -8,13 +8,10 @@ Many epidemiological datasets are stored in health information systems (HIS) suc
 
 ## Learning Objectives
 
-- Import data from DHIS2 via their API using the `readepi` package
-- Import data from SORMAS via their API
+- Import data from DHIS2 and SORMAS via their API using the `readepi` package
 - Read data from databases and other sources
 - Work with different data formats and compressed files
 
 ## Tutorial
 
-For detailed guidance on importing data from health information systems:
-
-- [Read and clean case data tutorial](https://epiverse-trace.github.io/tutorials-early/read-cases.html) - Learn how to import data from DHIS2, SORMAS, and other sources
+[Access the tutotorial here](https://epiverse-trace.github.io/tutorials-early/read-cases.html)

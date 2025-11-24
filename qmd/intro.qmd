@@ -1,5 +1,5 @@
 ---
-title: 'Introduction to R: Session 2'
+title: 'Introduction to R: Session 1'
 date: "`r format.Date(Sys.Date(), format = '%d %B %Y')`"
 author:
   - Alexis Robert
@@ -13,7 +13,7 @@ format:
     number-sections: true
     df-print: paged
 execute:
-  eval: true
+  eval: false
   warning: false
   message: false
 ---
@@ -25,21 +25,333 @@ if (!requireNamespace("pacman", quietly = TRUE)) {
 }
 
 # Install and load required packages
-pacman::p_load(emoji, rio)
+pacman::p_load(emoji)
 ```
 
-# New session, new script!
+# R basics
 
-When you re-open RStudio, the script from Intro to R 1 will be open, and some objects may be saved in your environment. Before anything, let's clear this up so we can define new objects and avoid getting confused with commands from the first session.
+One of the most important uses of any statistical software, including R, is to analyse data that you may have collected yourself or that have been given to you. In this section, We will introduce how to use R to access data that you already have on your computer, and how to store the results of your analysis or save an updated version of the data, on your computer.
 
-`r emoji::emoji("computer")` save and close any previous scripts.
+## R Studio
 
-`r emoji::emoji("computer")` Create a new script that will contain the code for this practical.
+Your R studio session will have four main panels:
 
-`r emoji::emoji("computer")` Start the script with the command `rm(list = ls())` which removes all objects from your environment. Run the command in the console, what changed in your Environment panel?
+1.  **Script** (top-left) - this is where you can write, save and run longer bits of code.
+2.  **Environment** (top-right) - this is where you can see objects that you have created in your current R session.
+3.  **Console** (bottom-left) - this is where you can write and run very short bits of code.
+4.  **Files, plots, etc** (bottom-right) - this is where you can see your files, or where plots will appear.
+
+## Basic R expressions
+
+This section introduces the commands to do simple operations in R, such as arithmetic, or how to make objects.
+
+### Arithmetic operators
+
+These operators are used to carry out mathematical operations, like addition or multiplication:
+
+-   `+`: addition
+-   `-`: subtraction
+-   `*`: multiplication
+-   `/`: division
+-   `^`: exponent
+
+Examples:
 
 ```{r, eval = FALSE}
-rm(list = ls())
+
+46 + 3
+13 / 8
+2^5
+
+```
+
+`r emoji::emoji("computer")` Try using some of these operators in your R Studio console (the bottom-left panel).
+
+### The assignment operator
+
+`r emoji::emoji("star")` The assignment operator in R is `<-` and is used to assign values to named objects.
+
+`r emoji::emoji("star")` If you run every line in the console (bottom left panel), you will not easily see the previous lines of code, that's why we use the script (top left panel).
+
+-   To execute a line of code from your script: place your cursor on the line you want to run and click on `run` (top right of the script panel) OR place your cursor and use the shortcut `CTRL+ENTER` (`CMD+ENTER` on Mac).
+-   To run multiple lines of code, select them with your mouse, and use `CTRL+ENTER` (or click on `run`).
+-   To run the whole script, use `source` (top right of the script panel), or use the shortcut `CTRL+SHIFT+ENTER` (`CMD+SHIFT+ENTER` on Mac)
+
+```{r, eval = FALSE}
+
+x <- 10 # The object called x is assigned the value 10
+x # Print the object x
+
+y <- 10 + 20 # The object called y is assigned the value 10 + 20
+y # Print the object y
+
+z <- "hello" # The object called z is assigned the text "hello"
+z # Print the object z
+
+```
+
+`r emoji::emoji("computer")` Look at your Environment panel (top-right) of your R Studio session, then run the above code in your console. Look in the environment panel again: what has changed?
+
+Note that the names of objects are case sensitive (i.e. `Y` and `y` are distinct names) and must not start with numbers or contain spaces. The best approach is to use meaningful object names and stick to using all lower case; if you need to use spaces, then you can use an underscore (`_`).
+
+-   Examples of good object names: `raw_data`, `clean_data`, `country_names`.
+-   Examples of bad object names: `raw data`, `CLEAN_data`, `dasyg`, `1x`.
+
+`r emoji::emoji("question")` Discuss *why* each of the examples of bad object names are bad.
+
+`r emoji::emoji("computer")` Try making some of your own objects, e.g. assign the value `"2025"` to the object `year`.
+
+### Relational operators
+
+Relational operators are used to compare different values:
+
+-   `<` less than
+-   `>` greater than
+-   `<=` less than or equal to
+-   `>=` greater than or equal to
+-   `==` equal to
+-   `!=` not equal to
+
+Expressions using relational operators will return `TRUE` or `FALSE`.
+
+`r emoji::emoji("computer")` Copy the below code into the console of your R Studio terminal.
+
+```{r, eval = FALSE}
+x <- 3 # Assign the value 3 to the object called x
+y <- 11 # Assign the value 11 to the object called y
+```
+
+Examples of using relational operators:
+
+```{r, eval = FALSE}
+
+# Test: is x less than 4?
+x < 4
+
+# Test: is y greater than or equal to x
+y >= x
+
+# Test: is x equal to 5?
+x == 5
+
+# Test: is y not equal to 22
+y != 22
+
+```
+
+`r emoji::emoji("computer")` Try using some of these operators in your R Studio console, e.g. to test if `2^11` is bigger than `3*729`.
+
+### The `c()` function
+
+The `c()` function is used to combine multiple values into a *vector* or a *list*. For example, multiple numeric values can be combined into a vector:
+
+```{r, eval = FALSE}
+
+c(3, 1, 10.5)
+
+```
+
+Multiple text strings can also be combined:
+
+```{r, eval = FALSE}
+
+c("Welcome", "to", "R", "!")
+
+```
+
+A vector can be assigned to an object, elements of the vector are accessed with brackets `[]`:
+
+```{r, eval = FALSE}
+
+a <- c(5, 4, 10)
+a[1]
+a[2] + 3
+
+```
+
+`r emoji::emoji("question")` What is the value of the third element of `a`?
+
+`r emoji::emoji("computer")` Try running `a + 3`, what results do you get?
+
+If both numbers and text are combined with the `c()` function, then all the numeric values are transformed into text:
+
+```{r, eval = FALSE}
+
+b <- c("AFRO", 4)
+b
+```
+
+`r emoji::emoji("question")` When running `b`, how do you see that the second element was transformed into text?
+
+`r emoji::emoji("question")` What happens if you try adding 2 to the second element of b? Why?
+
+## Inspecting data frames
+
+Datasets are usually stored as data frames, which are objects that can contain several columns (i.e. features) of different types. In this section, we will import a dataframe, and introduce basic functions to inspect the data contained in the dataset.
+
+There are several ways to import data into R, in this session we will import a dataset from a local file. In future sessions, we will explore how to import datasets from online sources or packages.
+
+For this example, we will use a cleaned case linelist dataset that contains epidemiological data from an outbreak. First, we need to load the data using the `readRDS()` function, which reads R data files.
+
+```{r, eval = FALSE}
+# Load the linelist data
+linelist <- readRDS("data/linelist.rds")
+```
+
+The linelist contains case data with multiple variables. We want to only focus on a few columns for this exercise, so we're going to select these columns. You can check the column names of a dataframe by using the function `colnames()`:
+
+```{r, eval = FALSE}
+colnames(linelist)
+```
+
+We only want to select the case ID, administrative region, age, weight, and gender. Therefore, we create a new object, `data_cases`, which contains the columns of interest. We use the brackets to indicate the columns we are interested in.
+
+```{r, eval = FALSE}
+data_cases <- linelist[, c("case_id", "adm1", "age_years", "wt_kg", "gender")]
+```
+
+`data_cases` contains all the rows included in linelist, but only the columns case_id, adm1, age_years, wt_kg, and gender. As previously discussed, we should avoid using upper case characters, spaces, brackets, and parentheses when naming objects, since that leads to errors when we try to access these objects. The column names in our dataset already follow good naming conventions, so we don't need to rename them.
+
+Now we have imported our data, we can look at it in one of two ways:
+
+1.  `r emoji::emoji("computer")` Click on the `data_cases` object in the 'Environment' panel (top-right). A new window will open in front of your script pane showing the data. Have a look!
+2.  `r emoji::emoji("computer")` Run the command `data_cases` in your Rstudio console. The data will print in the console. Alternatively, the command `head(data_cases)` will print the top 6 lines only:
+
+```{r, eval = FALSE}
+head(data_cases)
+```
+
+Notice that there are `NA` values in some columns. These indicate missing values, where no data is available.
+
+You can also get the number of columns and number of rows in the data set with `ncol()` and `nrow()`, respectively:
+
+```{r, eval = FALSE}
+ncol(data_cases)
+```
+
+`r emoji::emoji("computer")` Use `nrow()` to find the number of the rows in the data `data_cases`.
+
+Sometimes we might just be interested in the values of a single column. To extract the values in a single column, we use the `$` operator, e.g. `data_cases$case_id` will return all the values in the column called `case_id`.
+
+`r emoji::emoji("computer")` Run the commands `data_cases$case_id` and `data_cases$wt_kg` in your R console to see what outputs you get (hint: you can use `head(data_cases$case_id)` to only see the first few values).
+
+### Data types
+
+Objects in R are assigned a data type, which tells R how to handle the object.
+
+The simplest data types that you will commonly come across are:
+
+-   *character* i.e. text, e.g. `"f"` or `"London"`
+-   *numeric* and *integer*, e.g. `2L`, `1:10`, `2.1`, `pi`
+-   *date* e.g. `Sys.Date()`
+-   *logical* i.e. `TRUE` or `FALSE`
+
+To check what data type an object is, use the function `class()`.
+
+```{r, eval = FALSE}
+class(data_cases$case_id)
+
+class(data_cases$wt_kg)
+```
+
+`r emoji::emoji("question")` What data type is the column "age_years" in the `data_cases` data? `r emoji::emoji("question")` What data type is the column "gender" in the `data_cases` data?
+
+`r emoji::emoji("computer")` Use the function `table` to compute the number of cases classified as "m" and "f":
+
+```{r, eval = FALSE}
+table(data_cases$gender)
+```
+
+`r emoji::emoji("computer")` Combine the functions `prop.table` and `table` to compute the proportion of cases classified as "m" and "f":
+
+```{r, eval = FALSE}
+prop.table(table(data_cases$gender))
+```
+
+More complex data types can be used to combine multiple bits of data. For instance, objects that contain several elements are called data structures. There are three main types of data structure: - *vectors*: containing one variable per element (created by the function `c()`, like when we created `a` and `b` in the previous section). - *matrices*: containing several variables per element (all variables have the same type). - *data frames*: containing several variables per element (variables can have different types).
+
+`data_cases` contains several variables, of different types (some are characters, others are numeric), it is therefore a data frame. Columns of data frames are vectors:
+
+`r emoji::emoji("question")` What would happen if `data_cases` was a matrix? (hint: try running `head(as.matrix(data_cases))`).
+
+Other data types, such as *factor* and *list*, can be used and are not covered in this practical.
+
+## Basic operations with numeric data
+
+With numeric data, we can calculate different summary statistics, such as the maximum and minimum values, the mean value,and the median value.
+
+### Mean and median
+
+We can calculate the mean value with the function `mean()`.
+
+`r emoji::emoji("computer")` Try running the below command to calculate the mean weight:
+
+```{r, eval = FALSE}
+# Calculate the mean weight
+mean(data_cases$wt_kg)
+```
+
+This will return `NA` - not very helpful! This happens because there are missing values (`NA` values) in `wt_kg` - you can see these by inspecting your data again. If there are any missing values in your data, `mean()` (and many other functions) will simply return `NA`.
+
+To remove these missing (`NA`) values before calculating the mean, we include the argument `na.rm = TRUE`:
+
+```{r, eval = FALSE}
+# Calculate the mean weight
+mean(data_cases$wt_kg, na.rm = TRUE)
+```
+
+`r emoji::emoji("question")` What happens if you change this so that `na.rm = FALSE`?
+
+By default, the value of the argument `na.rm` (standing for NA remove) in `mean()` is set to `FALSE`, so running `mean(data_cases$wt_kg, na.rm = FALSE)` is equivalent to `mean(data_cases$wt_kg)`.
+
+Functions can have many arguments to tackle specific situations (e.g. how to deal with unreported entries). In order to read the description of the expected arguments and outputs of a function, you can use the operator `?`: e.g. `?mean`. It will open a helpfile, which will contain the list of all compatible arguments, and their default value (if any).
+
+`r emoji::emoji("question")` What arguments are compatible with the function `mean` ?
+
+We can calculate other statistics, too. We can calculate the median value with the function `median()`:
+
+```{r, eval = FALSE}
+# Calculate the median weight
+median(data_cases$wt_kg, na.rm = TRUE)
+```
+
+Note that we also have to include the `na.rm = TRUE` argument so that missing (`NA`) values are removed before the median is calculated.
+
+`r emoji::emoji("computer")` Calculate the mean and median age of the cases in `data_cases`. You can remind yourself of the other column names by looking at the data, or checking with the function we introduced earlier.
+
+### Minimum and maximum
+
+We can calculate the minimum and maximum values with the functions `min()` and `max()`, respectively:
+
+```{r, eval = FALSE}
+# Calculate the minimum weight
+min(data_cases$wt_kg, na.rm = TRUE)
+
+# Calculate the maximum weight
+max(data_cases$wt_kg, na.rm = TRUE)
+```
+
+`r emoji::emoji("computer")` Calculate the minimum and maximum age for the cases in `data_cases`.
+
+### Standard deviation and inter-quartile range
+
+We can calculate the standard deviation with `sd()` and the inter-quartile range (IQR) with `IQR()`:
+
+```{r, eval = FALSE}
+# Calculate the standard deviation of weight
+sd(data_cases$wt_kg, na.rm = TRUE)
+
+# Calculate the IQR of weight
+IQR(data_cases$wt_kg, na.rm = TRUE)
+```
+
+`r emoji::emoji("computer")` Calculate the standard deviation and inter-quartile range for one of the other numeric columns in the `data_cases` data.
+
+A quick way to generate summary statistics for all columns in a data frame is to use the function `summary`:
+
+```{r, eval = FALSE}
+# Show the summary of each column in data_cases
+summary(data_cases)
 ```
 
 # R functions
@@ -73,7 +385,7 @@ sum_pow(10, 17)
 
 # R packages
 
-R packages are extensions of the set of base functions contained in R by default. They are mostly developed by the community, and extend what R can do. Packages typically contain functions, but can also contain datasets. In the first session, you installed the R package **palmerpenguins**, which contains two datasets: `penguins` and `penguins_raw`. Some packages contain a few functions that facilitate specific tasks that would be tedious using only base R, while others create new possibilities (like mixing R and other coding languages, or introducing new operators).
+R packages are extensions of the set of base functions contained in R by default. They are mostly developed by the community, and extend what R can do. Packages typically contain functions, but can also contain datasets. Some packages contain a few functions that facilitate specific tasks that would be tedious using only base R, while others create new possibilities (like mixing R and other coding languages, or introducing new operators).
 
 We use the command `install_packages` to download a package on the computer. At that stage, the package is not yet imported in the R session, it just becomes accessible on your computer. To import the package on the current session, we use the function `library`. In this session, we will use the package **rio** to import datasets, let's make sure you are all able to install it.
 
@@ -87,25 +399,13 @@ install.packages("rio")
 library(rio)
 ```
 
-Packages have to be imported (using `library`) every time you open a new R session, but they only need to be installed once. If you run `library(palmerpenguins)`, your R session should import this library without needing to re-install it.
+Packages have to be imported (using `library`) every time you open a new R session, but they only need to be installed once. 
 
 If you're not certain what a package does or contains you can view the package documentation by using `?`, or `help()`.
 
-`r emoji::emoji("computer")` Check the description of the **palmerpenguins** package by running `?palmerpenguins` or `help(palmerpenguins)`.
+`r emoji::emoji("computer")` Check the description of the **rio** package by running `?rio` or `help(rio)`.
 
-# Organising your files and repositories
-
-## Create a repository
-
-In Intro to R 1, we described the data contained a dataset from the **palmerpenguins** package. Usually, we would work with data downloaded from online repositories, or sent to us by collaborators, and generate various outputs in other files (figures, cleaned datasets, results from analysis etc..). Having the datasets, scripts, and outputs scattered across your computer in different folders and files can be confusing, and lead to bugs in your code. Therefore, it is important to create a repository that will contain all the files related to a given project.
-
-`r emoji::emoji("computer")` Start by creating a folder on your computer called `introduction_to_r`, that will contain all the files used and written during this module.
-
-`r emoji::emoji("computer")` In `introduction_to_r`, create a folder `practical_2`, which will contain the files used in this analysis.
-
-`r emoji::emoji("computer")` In `practical_2`, create three repositories: `data`, `scripts`, `output`. The script you are currently writing should be saved in `scripts`, download the two datasets from the Moodle page (`life_expectancy` and `measles_per_year` in `Session 2`) and place them in `data`.
-
-## Working directory
+# Working directory
 
 The working directory is the root folder used by R, and will be the default location where R will start to look for data or saves files. You can find out your current working directory with the function `getwd()`:
 
@@ -123,33 +423,13 @@ getwd()
 
 `r emoji::emoji("question")` Use `getwd()` to find out your working directory. How is it different from the one above? Check whether you have the same working directory as other students.
 
-You would want the working directory to be in the folder `practical_2`, so R can easily access all the scripts, data, and output contained in the folder. If it was in the `script` folder, then it would not be able to access the `data` folder.
+You would want the working directory to be in the folder `sitrep`, so R can easily access all the scripts, data, and output contained in the folder. If it was in the `script` folder, then it would not be able to access the `data` folder. To change the working directory, you can use `setwd()`, a function that takes an argument called `dir`, the path to the new working directory.
 
-To change the working directory, you can use `setwd()`, a function that takes an argument called `dir`, the path to the new working directory.
+If you are not sure where path to the `sitrep` folder is on your computer, you can use the tab `session` (at the top of your screen), then click on `Set Working Directory` and `Choose Directory`. This way, you will be able to browse your computer and locate the folder you created previously.
 
-If you are not sure where path to the `practical_2` folder is on your computer, you can use the tab `session` (at the top of your screen), then click on `Set Working Directory` and `Choose Directory`. This way, you will be able to browse your computer and locate the folder you created previously.
+If you are still not certain where your `sitrep` folder is located, you can use the tab `session` (at the top of your screen), then click on `Set Working Directory` and `To Source File Location`. In your script, you will see the command run by your computer leading to the `script` folder (where you saved your current script in the previous section). Just remove `/script` from the command, and your working directory will be in `sitrep`.
 
-If you are still not certain where your `practical_2` folder is located, you can use the tab `session` (at the top of your screen), then click on `Set Working Directory` and `To Source File Location`. In your script, you will see the command run by your computer leading to the `script` folder (where you saved your current script in the previous section). Just remove `/script` from the command, and your working directory will be in `practical_2`.
-
-`r emoji::emoji("question")` Set your working directory to `practical_2`. Use `getwd()` to check you're in the right working directory. Is your working directory now the same as other students?
-
-## R projects
-
-`r emoji::emoji("star")` A common and easy way to manage your working directory is with **R projects**.
-
-As you saw in the previous section, setting the right working directory in R is tedious, and the path to the working directory depends on your computer: even when it's set to `practical_2`, you don't always have the same path as other students. That is a major issue when collaborating with people: the `setwd()` command at the start of your script may not work on their computer. That's why we use **R projects**.
-
-`r emoji::emoji("computer")` Follow the steps below to set up and open an R project in your R studio session.
-
-Step 1: ![](fig_rproject1.png){width="500"}
-
-Step 2: ![](fig_rproject2.png){width="500"}
-
-Step 3: ![](fig_rproject3.png){width="500"}
-
-The previous steps created a `.Rproj` object, called `practical_2.Rproj`. The project is automatically open when it's created.
-
-Opening a project will automatically set the working directory to the folder where the project is located, no need to use `setwd()` anymore. If you send your scripts and Rproj object to collaborators, they will be able to run the script without having to use or change `setwd()`. Just re-open the script you started working on and continue the practical.
+`r emoji::emoji("question")` Set your working directory to `sitrep`. Use `getwd()` to check you're in the right working directory. Is your working directory now the same as other students?
 
 # Importing and exporting data
 
@@ -191,7 +471,7 @@ export(x = life_expectancy, file = "data/test_data_export.csv")
 
 # Investigating `life_expectancy`
 
-Now that we have imported a new data file, let's explore what data it contains. In the previous practical, Intro to R 1, we used several functions to describe the **palmerpenguin** dataset:
+Now that we have imported a new data file, let's explore what data it contains. In the section abovel, we used several functions to describe the **linelist** dataset:
 
 -   `head()` shows the first 6 rows of the dataframe, use the argument `n` to show more than 6 rows.
 

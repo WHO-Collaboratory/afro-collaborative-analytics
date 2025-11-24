@@ -131,37 +131,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link active" href="./setup.html" aria-current="page"> 
 <span class="menu-text">Setup</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-intro-to-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Intro to R</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-intro-to-r">    
-        <li>
-    <a class="dropdown-item" href="./intro_R_1.html">
- <span class="dropdown-text">Session 1</span></a>
+  <li class="nav-item">
+    <a class="nav-link" href="./intro.html"> 
+<span class="menu-text">Intro to R</span></a>
   </li>  
-        <li>
-    <a class="dropdown-item" href="./intro_R_2.html">
- <span class="dropdown-text">Session 2</span></a>
-  </li>  
-    </ul>
-  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Data</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-data">    
         <li>
-    <a class="dropdown-item" href="./data.html">
- <span class="dropdown-text">Downloading from HIS</span></a>
+    <a class="dropdown-item" href="./data_import.html">
+ <span class="dropdown-text">Importing</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./data_cleaning.html">
- <span class="dropdown-text">Data Cleaning</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./data_download.html">
- <span class="dropdown-text">Download cleaned dataset</span></a>
+    <a class="dropdown-item" href="./data_clean.html">
+ <span class="dropdown-text">Cleaning</span></a>
   </li>  
     </ul>
   </li>
@@ -240,6 +225,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#step-1-create-an-rstudio-r-project" id="toc-step-1-create-an-rstudio-r-project" class="nav-link" data-scroll-target="#step-1-create-an-rstudio-r-project">Step 1: Create an RStudio R Project</a></li>
   <li><a href="#step-2-set-up-your-folder-structure" id="toc-step-2-set-up-your-folder-structure" class="nav-link" data-scroll-target="#step-2-set-up-your-folder-structure">Step 2: Set Up Your Folder Structure</a></li>
   </ul></li>
+  <li><a href="#download-cleaned-dataset" id="toc-download-cleaned-dataset" class="nav-link" data-scroll-target="#download-cleaned-dataset">Download Cleaned Dataset</a></li>
   <li><a href="#setting-up-your-quarto-document" id="toc-setting-up-your-quarto-document" class="nav-link" data-scroll-target="#setting-up-your-quarto-document">Setting Up Your Quarto Document</a>
   <ul class="collapse">
   <li><a href="#step-1-create-a-new-quarto-document" id="toc-step-1-create-a-new-quarto-document" class="nav-link" data-scroll-target="#step-1-create-a-new-quarto-document">Step 1: Create a New Quarto Document</a></li>
@@ -323,9 +309,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>In RStudio, click the <strong>Files</strong> tab in the bottom-right pane.</li>
 <li>Click <strong>New Folder</strong>.</li>
 <li>Create a folder called <code>data/</code> - for storing your datasets.</li>
-<li>Create another folder called <code>outputs/</code> - for storing generated reports and figures.</li>
+<li>Create a folder called <code>outputs/</code> - for storing generated reports and figures.</li>
+<li>Create a folder called <code>scripts/</code> - for storing your R scripts.</li>
 </ol>
 </section>
+</section>
+<section id="download-cleaned-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="download-cleaned-dataset">Download Cleaned Dataset</h2>
+<p>This is an example dataset resembling a fictional Ebola outbreak that will be used in the various examples throughout the workshop tasks. The dataset is from the <a href="https://www.epirhandbook.com/">Applied Epi R Handbook</a> and contains a cleaned case linelist with epidemiological data including case demographics, dates, locations, and outcomes.</p>
+<p><a href="data/linelist.rds" download="" class="btn btn-primary" target="_blank">Download clean linelist</a></p>
+<p>After downloading, place the file in your <code>data/</code> folder. The example code in each analysis task is already set up to work with this dataset structure.</p>
 </section>
 <section id="setting-up-your-quarto-document" class="level2">
 <h2 class="anchored" data-anchor-id="setting-up-your-quarto-document">Setting Up Your Quarto Document</h2>
@@ -440,7 +433,7 @@ library(tidyverse)
 <h2 class="anchored" data-anchor-id="next-steps">Next Steps</h2>
 <p>Once you have the basics set up:</p>
 <ol type="1">
-<li>Visit the <a href="./data.html">Data</a> section to download the example dataset if you are not using your own data.</li>
+<li>Visit the <a href="data.qmd">Data</a> section to download the example dataset if you are not using your own data.</li>
 <li>Explore the <a href="./task1.html">Tasks</a> menu to find the analytical task(s) you’re interested in.</li>
 <li>Join your assigned group and start working through the materials with facilitator support.</li>
 </ol>

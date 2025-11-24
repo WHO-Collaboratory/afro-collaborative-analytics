@@ -6,27 +6,38 @@ Welcome to the Collaborative Analytics Workshop! This workshop is designed to he
 
 ### Workshop Agenda
 
-This is a single-day workshop running from 9:00 AM to 5:00 PM. You will be grouped by the datasets you are working on to facilitate collaboration and peer support. Throughout the day, facilitators will be available to provide guidance and answer questions. 
+This is a single-day workshop running from 9:00 AM to 5:00 PM. You will be grouped by the datasets you are working on to facilitate collaboration and peer support. Throughout the day, facilitators will be available to provide guidance and answer questions.
 
 In the first half of the day, you will work on rendering your first automated situation report. In the second half of the day, you will work through one or two more advanced analytical tasks based on your interests and needs. The day will be structured as follows:
 
 | Time | Duration | Activity |
 |----|----|----------|
 | 9:00 - 9:30 | 30 min | Welcome, introduction, divide into groups |
-| 9:30 - 10:30 | 60 min | Complete [Setup](setup.qmd) and [Data](data.qmd) sections |
+| 9:30 - 10:30 | 60 min | Complete [Setup](setup.qmd)
 | 10:30 - 11:00 | 30 min | Morning tea |
-| 11:00 - 12:00 | 60 min | Complete [Task 1](task1.qmd): Generating a basic situation report sections |
+| 11:00 - 12:00 | 60 min | Complete first task |
 | 12:00 - 12:30 | 30 min | Regroup and discuss progress |
 | 12:30 - 13:30 | 60 min | Lunch break |
-| 13:30 - 15:00 | 90 min | Complete first advanced task |
+| 13:30 - 15:00 | 90 min | Complete second task |
 | 15:00 - 15:30 | 30 min | Afternoon break |
-| 15:30 - 17:00 | 90 min | Complete second advanced task |
+| 15:30 - 17:00 | 90 min | Complete third task |
 
 : {.hover}
 
-### Analysis
+### Workflow
 
-The analytical tasks you can choose from are:
+Everyone should start by working through the [Setup](setup.qmd) page to get the correct folder structure set up. Then you can pick one or more of the following options:
+
+#### Option A: Intro to R
+If you are a beginner to R, you can work through the [Intro to R](intro.qmd) tutorial to learn the basics.
+
+#### Option B: Data Import & Cleaning
+- If you are interested in downloading data from sources such as **DHIS2** or **SORMAS**, work through the [Data Import](data_import.qmd) tutorial. 
+- If you are interested in **cleaning data**, work through the [Data Cleaning](data_clean.qmd) tutorial.
+
+#### Option C: Report Generation & Analytics
+
+There are 9 tutorials that are available to you. Start with the first and then work through others that interest you:
 
 1. [Generating a basic situation report](task1.qmd)
 2. [Generating interactive maps](task2.qmd)
@@ -38,19 +49,14 @@ The analytical tasks you can choose from are:
 8. [Forecasting cases and deaths](task8.qmd)
 9. [Simulating disease transmission](task9.qmd)
 
+### Task structure
+
 Each task page includes:
 
 - Links to external tutorials that provide comprehensive learning materials and detailed explanations of the analytical concepts and methods.
 - Complete example code that generates all the outputs needed for an example report. The example code works with the provided example datasets
 
 You can work with your own data throughout the workshop or you can use the example datasets provided. If you don't have your own dataset or don't feel comfortable adapting code to your data, you can use the example datasets and example code. This will still allow you to learn the analytical techniques and generate a functional report you can reference later.
-
-### Getting Started
-
-1. Visit the [Setup](setup.qmd) page for installation instructions and required packages
-2. Download the example datasets from the [Download cleaned dataset](data_download.qmd) page
-3. Navigate to the Analysis menu to find the analytical tasks you're interested in
-4. Join your group to work through the materials with support from facilitators.
 
 ### Additional Resources
 

@@ -15,20 +15,14 @@ website:
         text: Home
       - href: setup.qmd
         text: Setup
-      - text: Intro to R
-        menu:
-          - href: intro_R_1.qmd
-            text: "Session 1"
-          - href: intro_R_2.qmd
-            text: "Session 2"
+      - href: intro.qmd
+        text: Intro to R
       - text: Data
         menu:
-          - href: data.qmd
-            text: "Downloading from HIS"
-          - href: data_cleaning.qmd
-            text: "Data Cleaning"
-          - href: data_download.qmd
-            text: "Download cleaned dataset"
+          - href: data_import.qmd
+            text: "Importing"
+          - href: data_clean.qmd
+            text: "Cleaning"
       - text: Analysis
         menu:
           - href: task1.qmd
