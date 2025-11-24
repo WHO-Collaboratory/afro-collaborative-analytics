@@ -8,11 +8,12 @@ execute:
   message: false
 ---
 
+solution file</a>
 
 ### Visualising available epiparameter distributions
 
- We first explore the available distributions in {epiparameter} that we can 
- use to adjust for delays during an Ebola outbreak.
+We first explore the available distributions in {epiparameter} that we
+can use to adjust for delays during an Ebola outbreak.
 
 ```{r}
 # INSTALL AND LOAD PACKAGES
@@ -27,9 +28,9 @@ epiparameter::epiparameter_db(disease = "ebola") |>
 
 ### Extracting relevant parameters and adjusting for delays
 
-We imported linelist data for the Ebola outbreak, and converted it to incidence.
-Then extracted parameter distributions for the serial interval and incubation
-period for Ebola, chosen from the table above.
+We imported linelist data for the Ebola outbreak, and converted it to
+incidence. Then extracted parameter distributions for the serial
+interval and incubation period for Ebola, chosen from the table above.
 
 ```{r}
 # LOAD DATA
@@ -83,9 +84,9 @@ incubation_period_ebola <-
 
 # reporting delay ---------------------------------------------------------
 reporting_delay <- EpiNow2::LogNormal(
-  mean = 2,
-  sd = 1,
-  max = 10
+  mean = 10,
+  sd = 3,
+  max = 15
 )
 
 # check if the analysis has been run before and run EpiNow2 if not
@@ -107,8 +108,29 @@ if (file.exists(file_name)) {
 
 ```
 
-We then adjust for a reporting delay of 2 days from onset to notification, on average.
+We then adjust for a reporting delay of 10 days from onset to
+notification, on average.
 
 ```{r}
-plot(nowcast_estimates, type = "infections")
+infection_plot <- plot(nowcast_estimates, type = "infections")
+
+weekly_obs <- nowcast_estimates$observations %>%
+  mutate(week= floor_date(date, "week", week_start = 1)) %>%
+  group_by(week) %>%
+  summarise(
+    confirm = mean(confirm, na.rm = TRUE),  # average daily cases that week
+    .groups = "drop"
+  )
+
+infection_plot$layers <- infection_plot$layers[-1]
+
+infection_plot +
+  geom_col(
+    data = weekly_obs,
+    aes(x = week, y = confirm),
+    inherit.aes = FALSE,
+    fill = "#9ca3af",
+    alpha = 0.4,
+    width = 6
+  )
 ```
