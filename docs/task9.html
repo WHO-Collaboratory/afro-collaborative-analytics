@@ -148,14 +148,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Setup</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./data.html"> 
-<span class="menu-text">Data</span></a>
+    <a class="nav-link" href="./intro.html"> 
+<span class="menu-text">Intro to R</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tasks" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Tasks</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Data</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-tasks">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-data">    
+        <li>
+    <a class="dropdown-item" href="./data_import.html">
+ <span class="dropdown-text">Importing</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./data_clean.html">
+ <span class="dropdown-text">Cleaning</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-analysis" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Analysis</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-analysis">    
         <li>
     <a class="dropdown-item" href="./task1.html">
  <span class="dropdown-text">1. Generating a basic situation report</span></a>
@@ -337,8 +352,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reactable</span>(<span class="at">fullWidth =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-c1a9f229238a3694e0b0" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-c1a9f229238a3694e0b0">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Age group":["[0,20)","[20,40)","40+"],"Population":[14799290,16526302,28961159]},"columns":[{"id":"Age group","name":"Age group","type":"character"},{"id":"Population","name":"Population","type":"numeric"}],"inline":true,"dataKey":"bead4e992ce3816167383e416c267a66"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-fa4d624a643766a1c1b8" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-fa4d624a643766a1c1b8">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Age group":["[0,20)","[20,40)","40+"],"Population":[14799290,16526302,28961159]},"columns":[{"id":"Age group","name":"Age group","type":"character"},{"id":"Population","name":"Population","type":"numeric"}],"inline":true,"dataKey":"bead4e992ce3816167383e416c267a66"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>Here we see the contact matrix:</p>
@@ -349,8 +364,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reactable</span>(<span class="at">fullWidth =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-ff1af74aee6dc073b5ff" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-ff1af74aee6dc073b5ff">{"x":{"tag":{"name":"Reactable","attribs":{"data":{".rownames":["[0,20)","[20,40)","40+"],"[0,20)":[7.9,3.1,3.1],"[20,40)":[2.8,4.9,4.6],"40+":[1.6,2.6,5]},"columns":[{"id":".rownames","name":"","type":"character","sortable":false,"filterable":false,"rowHeader":true},{"id":"[0,20)","name":"[0,20)","type":"numeric"},{"id":"[20,40)","name":"[20,40)","type":"numeric"},{"id":"40+","name":"40+","type":"numeric"}],"inline":true,"dataKey":"efbbb5ec66182a2f113fbff37d025c9b"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-dea754f913b8b575e943" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-dea754f913b8b575e943">{"x":{"tag":{"name":"Reactable","attribs":{"data":{".rownames":["[0,20)","[20,40)","40+"],"[0,20)":[7.9,3.1,3.1],"[20,40)":[2.8,4.9,4.6],"40+":[1.6,2.6,5]},"columns":[{"id":".rownames","name":"","type":"character","sortable":false,"filterable":false,"rowHeader":true},{"id":"[0,20)","name":"[0,20)","type":"numeric"},{"id":"[20,40)","name":"[20,40)","type":"numeric"},{"id":"40+","name":"40+","type":"numeric"}],"inline":true,"dataKey":"efbbb5ec66182a2f113fbff37d025c9b"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>And here the initial conditions:</p>
@@ -361,8 +376,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reactable</span>(<span class="at">fullWidth =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-4b6d73d965536aefff4a" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-4b6d73d965536aefff4a">{"x":{"tag":{"name":"Reactable","attribs":{"data":{".rownames":["[0,20)","[20,40)","40+"],"S":[0.999999,1,1],"E":[0,0,0],"I":[1e-06,0,0],"R":[0,0,0],"V":[0,0,0]},"columns":[{"id":".rownames","name":"","type":"character","sortable":false,"filterable":false,"rowHeader":true},{"id":"S","name":"S","type":"numeric"},{"id":"E","name":"E","type":"numeric"},{"id":"I","name":"I","type":"numeric"},{"id":"R","name":"R","type":"numeric"},{"id":"V","name":"V","type":"numeric"}],"inline":true,"dataKey":"656da918e66a9b023c71899090f59778"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-9130a21e67517295f120" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-9130a21e67517295f120">{"x":{"tag":{"name":"Reactable","attribs":{"data":{".rownames":["[0,20)","[20,40)","40+"],"S":[0.999999,1,1],"E":[0,0,0],"I":[1e-06,0,0],"R":[0,0,0],"V":[0,0,0]},"columns":[{"id":".rownames","name":"","type":"character","sortable":false,"filterable":false,"rowHeader":true},{"id":"S","name":"S","type":"numeric"},{"id":"E","name":"E","type":"numeric"},{"id":"I","name":"I","type":"numeric"},{"id":"R","name":"R","type":"numeric"},{"id":"V","name":"V","type":"numeric"}],"inline":true,"dataKey":"656da918e66a9b023c71899090f59778"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>

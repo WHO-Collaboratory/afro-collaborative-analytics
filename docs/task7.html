@@ -148,14 +148,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Setup</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./data.html"> 
-<span class="menu-text">Data</span></a>
+    <a class="nav-link" href="./intro.html"> 
+<span class="menu-text">Intro to R</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tasks" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Tasks</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Data</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-tasks">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-data">    
+        <li>
+    <a class="dropdown-item" href="./data_import.html">
+ <span class="dropdown-text">Importing</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./data_clean.html">
+ <span class="dropdown-text">Cleaning</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-analysis" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Analysis</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-analysis">    
         <li>
     <a class="dropdown-item" href="./task1.html">
  <span class="dropdown-text">1. Generating a basic situation report</span></a>
@@ -291,8 +306,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  reactable<span class="sc">::</span><span class="fu">reactable</span>(<span class="at">defaultPageSize =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-c9c754dacf0ce0cff17b" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-c9c754dacf0ce0cff17b">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"pathogen":["Ebola Virus","Ebola Virus-Zaire Subtype","Ebola Virus-Zaire Subtype","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus"],"epi_name":["offspring distribution","incubation period","onset to death","incubation period","incubation period","incubation period","incubation period","serial interval","serial interval","serial interval","serial interval","hospitalisation to death","hospitalisation to discharge","notification to death","notification to discharge","onset to death","onset to discharge"],"prob_distribution":["nbinom","lnorm","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma"],"author":["Lloyd-Smith et al.","Eichner et al.","The Ebola Outbreak Epidemiology Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team"],"year":[2005,2011,2018,2015,2015,2015,2015,2015,2015,2015,2015,2015,2015,2015,2015,2015,2015],"sample_size":[13,196,14,1798,49,957,792,305,37,147,112,1167,1004,2536,1324,2741,1335]},"columns":[{"id":"pathogen","name":"pathogen","type":"character"},{"id":"epi_name","name":"epi_name","type":"character"},{"id":"prob_distribution","name":"prob_distribution","type":"character"},{"id":"author","name":"author","type":"character"},{"id":"year","name":"year","type":"numeric"},{"id":"sample_size","name":"sample_size","type":"numeric"}],"defaultPageSize":5,"dataKey":"47d49889a7a70b46bf8e67eea9d22a0f"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-fc6048944758548154d0" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-fc6048944758548154d0">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"pathogen":["Ebola Virus","Ebola Virus-Zaire Subtype","Ebola Virus-Zaire Subtype","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus","Ebola Virus"],"epi_name":["offspring distribution","incubation period","onset to death","incubation period","incubation period","incubation period","incubation period","serial interval","serial interval","serial interval","serial interval","hospitalisation to death","hospitalisation to discharge","notification to death","notification to discharge","onset to death","onset to discharge"],"prob_distribution":["nbinom","lnorm","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma","gamma"],"author":["Lloyd-Smith et al.","Eichner et al.","The Ebola Outbreak Epidemiology Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team","WHO Ebola Response Team"],"year":[2005,2011,2018,2015,2015,2015,2015,2015,2015,2015,2015,2015,2015,2015,2015,2015,2015],"sample_size":[13,196,14,1798,49,957,792,305,37,147,112,1167,1004,2536,1324,2741,1335]},"columns":[{"id":"pathogen","name":"pathogen","type":"character"},{"id":"epi_name","name":"epi_name","type":"character"},{"id":"prob_distribution","name":"prob_distribution","type":"character"},{"id":"author","name":"author","type":"character"},{"id":"year","name":"year","type":"numeric"},{"id":"sample_size","name":"sample_size","type":"numeric"}],"defaultPageSize":5,"dataKey":"47d49889a7a70b46bf8e67eea9d22a0f"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -353,9 +368,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="co"># reporting delay ---------------------------------------------------------</span></span>
 <span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>reporting_delay <span class="ot">&lt;-</span> EpiNow2<span class="sc">::</span><span class="fu">LogNormal</span>(</span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> <span class="dv">2</span>,</span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="dv">1</span>,</span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>  <span class="at">max =</span> <span class="dv">10</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> <span class="dv">10</span>,</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="dv">3</span>,</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>  <span class="at">max =</span> <span class="dv">15</span></span>
 <span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="co"># check if the analysis has been run before and run EpiNow2 if not</span></span>
@@ -376,11 +391,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>We then adjust for a reporting delay of 2 days from onset to notification, on average.</p>
+<p>We then adjust for a reporting delay of 10 days from onset to notification, on average.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nowcast_estimates, <span class="at">type =</span> <span class="st">"infections"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>infection_plot <span class="ot">&lt;-</span> <span class="fu">plot</span>(nowcast_estimates, <span class="at">type =</span> <span class="st">"infections"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>weekly_obs <span class="ot">&lt;-</span> nowcast_estimates<span class="sc">$</span>observations <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">week=</span> <span class="fu">floor_date</span>(date, <span class="st">"week"</span>, <span class="at">week_start =</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(week) <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">confirm =</span> <span class="fu">mean</span>(confirm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),  <span class="co"># average daily cases that week</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>infection_plot<span class="sc">$</span>layers <span class="ot">&lt;-</span> infection_plot<span class="sc">$</span>layers[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>infection_plot <span class="sc">+</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> weekly_obs,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> week, <span class="at">y =</span> confirm),</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"#9ca3af"</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.4</span>,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="dv">6</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
