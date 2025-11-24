@@ -37,8 +37,9 @@ If you are a beginner to R, you can work through the [Intro to R](intro.qmd) tut
 
 #### Option C: Report Generation & Analytics
 
-There are 9 tutorials that are available to you. Start with the first and then work through others that interest you:
+There are 10 tutorials that are available to you. Start with the first and then work through others that interest you:
 
+0. [Introduction to Quarto](task0.qmd)
 1. [Generating a basic situation report](task1.qmd)
 2. [Generating interactive maps](task2.qmd)
 3. [Visualising transmission chains](task3.qmd)

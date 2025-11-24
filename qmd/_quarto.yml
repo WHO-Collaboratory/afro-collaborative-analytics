@@ -25,6 +25,8 @@ website:
             text: "Cleaning"
       - text: Analysis
         menu:
+          - href: task0.qmd
+            text: "0. Introduction to Quarto"
           - href: task1.qmd
             text: "1. Generating a basic situation report"
           - href: task2.qmd
