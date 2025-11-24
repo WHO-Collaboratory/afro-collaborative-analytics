@@ -5,43 +5,53 @@ format:
     code-fold: true
 execute:
   warning: false
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
 ## Overview
 
-This task walks you through nowcasting epidemiological data. 
-You will learn to correct for epidemiological and reporting delays so you can 
-estimate current case counts even when the data are incomplete. 
-Along the way, you will learn how to work with the delay distributions provided 
-by {epiparameter}—discretising continuous distributions, turning parameters 
-into {EpiNow2} inputs, and using those distribution functions to guide decisions
-like setting appropriate quarantine lengths.
+This task walks you through nowcasting epidemiological data. You will
+learn to correct for epidemiological and reporting delays so you can
+estimate current case counts even when the data are incomplete. Along
+the way, you will learn how to work with the delay distributions
+provided by {epiparameter}—discretising continuous distributions,
+turning parameters into {EpiNow2} inputs, and using those distribution
+functions to guide decisions like setting appropriate quarantine
+lengths.
 
 ## Learning Objectives
 
-- Understand reporting delays and their impact
-- Apply nowcasting methods to epidemiological data
-- Adjust for underreporting and delays
-- Generate real-time estimates of current incidence
+-   Understand reporting delays and their impact
+-   Apply nowcasting methods to epidemiological data
+-   Adjust for underreporting and delays
+-   Generate real-time estimates of current incidence
 
 ## Tutorial
 
-[Access the tutorial here](https://epiverse-trace.github.io/tutorials-middle/delays-functions.html)
+[Access the tutorial
+here](https://epiverse-trace.github.io/tutorials-middle/delays-functions.html)
 
 ## Downloading Nowcast Estimates
 
-**Note:** Running EpiNow2 can be computationally expensive and may take several minutes to complete. If you want to skip this step, you can download the pre-computed estimates file and place it in your `outputs/` folder:
+**Note:** Running EpiNow2 can be computationally expensive and may take
+several minutes to complete. If you want to skip this step, you can
+download the pre-computed estimates file and place it in your `outputs/`
+folder:
 
-<a href="outputs/nowcast_estimates.rds" download class="btn btn-primary" target="_blank">Download nowcast estimates</a>
+<a href="outputs/nowcast_estimates.rds" download class="btn btn-primary" target="_blank">Download
+nowcast estimates</a>
 
 ## Example Report
 
-<a href="data/solutions/task7_solution.qmd" download class="btn btn-primary" target="_blank">Download solution file</a>
+<a href="data/solutions/task7_solution.qmd" download class="btn btn-primary" target="_blank">Download
+solution file</a>
 
 ### Visualising available epiparameter distributions
 
- We first explore the available distributions in {epiparameter} that we can 
- use to adjust for delays during an Ebola outbreak.
+We first explore the available distributions in {epiparameter} that we
+can use to adjust for delays during an Ebola outbreak.
 
 ```{r}
 # INSTALL AND LOAD PACKAGES
@@ -56,9 +66,9 @@ epiparameter::epiparameter_db(disease = "ebola") |>
 
 ### Extracting relevant parameters and adjusting for delays
 
-We imported linelist data for the Ebola outbreak, and converted it to incidence.
-Then extracted parameter distributions for the serial interval and incubation
-period for Ebola, chosen from the table above.
+We imported linelist data for the Ebola outbreak, and converted it to
+incidence. Then extracted parameter distributions for the serial
+interval and incubation period for Ebola, chosen from the table above.
 
 ```{r}
 # LOAD DATA
@@ -112,9 +122,9 @@ incubation_period_ebola <-
 
 # reporting delay ---------------------------------------------------------
 reporting_delay <- EpiNow2::LogNormal(
-  mean = 2,
-  sd = 1,
-  max = 10
+  mean = 10,
+  sd = 3,
+  max = 15
 )
 
 # check if the analysis has been run before and run EpiNow2 if not
@@ -136,8 +146,29 @@ if (file.exists(file_name)) {
 
 ```
 
-We then adjust for a reporting delay of 2 days from onset to notification, on average.
+We then adjust for a reporting delay of 10 days from onset to
+notification, on average.
 
 ```{r}
-plot(nowcast_estimates, type = "infections")
+infection_plot <- plot(nowcast_estimates, type = "infections")
+
+weekly_obs <- nowcast_estimates$observations %>%
+  mutate(week= floor_date(date, "week", week_start = 1)) %>%
+  group_by(week) %>%
+  summarise(
+    confirm = mean(confirm, na.rm = TRUE),  # average daily cases that week
+    .groups = "drop"
+  )
+
+infection_plot$layers <- infection_plot$layers[-1]
+
+infection_plot +
+  geom_col(
+    data = weekly_obs,
+    aes(x = week, y = confirm),
+    inherit.aes = FALSE,
+    fill = "#9ca3af",
+    alpha = 0.4,
+    width = 6
+  )
 ```
