@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Task 9: Simulating disease transmission</title>
+<title>Task 9: Forecasting cases and deaths</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -101,22 +101,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
-
-<script src="site_libs/react-18.2.0/react.min.js"></script>
-
-<script src="site_libs/react-18.2.0/react-dom.min.js"></script>
-
-<script src="site_libs/reactwidget-2.0.0/react-tools.js"></script>
-
-<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
-
-<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-
-<link href="site_libs/reactable-0.4.4/reactable.css" rel="stylesheet">
-
-<script src="site_libs/reactable-binding-0.4.4/reactable.js"></script>
-
 
 
 <link rel="stylesheet" href="styles.css">
@@ -173,39 +157,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="dropdown-menu" aria-labelledby="nav-menu-analysis">    
         <li>
     <a class="dropdown-item" href="./task1.html">
- <span class="dropdown-text">1. Generating a basic situation report</span></a>
+ <span class="dropdown-text">1. Setting up an automated report</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task2.html">
- <span class="dropdown-text">2. Generating interactive maps</span></a>
+ <span class="dropdown-text">2. Generating a basic situation report</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task3.html">
- <span class="dropdown-text">3. Visualising transmission chains</span></a>
+ <span class="dropdown-text">3. Generating interactive maps</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task4.html">
- <span class="dropdown-text">4. Getting epidemiological parameters</span></a>
+ <span class="dropdown-text">4. Visualising transmission chains</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task5.html">
- <span class="dropdown-text">5. Estimating disease severity</span></a>
+ <span class="dropdown-text">5. Getting epidemiological parameters</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task6.html">
- <span class="dropdown-text">6. Estimating the reproduction number</span></a>
+ <span class="dropdown-text">6. Estimating disease severity</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task7.html">
- <span class="dropdown-text">7. Nowcasting epidemiological data</span></a>
+ <span class="dropdown-text">7. Estimating the reproduction number</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task8.html">
- <span class="dropdown-text">8. Forecasting cases and deaths</span></a>
+ <span class="dropdown-text">8. Nowcasting epidemiological data</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task9.html">
- <span class="dropdown-text">9. Simulating disease transmission</span></a>
+ <span class="dropdown-text">9. Forecasting cases and deaths</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./task10.html">
+ <span class="dropdown-text">10. Simulating disease transmission</span></a>
   </li>  
     </ul>
   </li>
@@ -234,10 +222,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
   <li><a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial">Tutorial</a></li>
+  <li><a href="#downloading-forecast-estimates" id="toc-downloading-forecast-estimates" class="nav-link" data-scroll-target="#downloading-forecast-estimates">Downloading Forecast Estimates</a></li>
   <li><a href="#example-report" id="toc-example-report" class="nav-link" data-scroll-target="#example-report">Example Report</a>
   <ul class="collapse">
-  <li><a href="#define-population-demographics-and-initial-population-conditions" id="toc-define-population-demographics-and-initial-population-conditions" class="nav-link" data-scroll-target="#define-population-demographics-and-initial-population-conditions">Define population demographics and initial population conditions</a></li>
-  <li><a href="#simulating-transmission" id="toc-simulating-transmission" class="nav-link" data-scroll-target="#simulating-transmission">Simulating transmission</a></li>
+  <li><a href="#forecasting-incidence-with-incomplete-observations" id="toc-forecasting-incidence-with-incomplete-observations" class="nav-link" data-scroll-target="#forecasting-incidence-with-incomplete-observations">Forecasting incidence with incomplete observations</a></li>
+  <li><a href="#forecasting-secondary-observations" id="toc-forecasting-secondary-observations" class="nav-link" data-scroll-target="#forecasting-secondary-observations">Forecasting secondary observations</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -247,7 +236,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Task 9: Simulating disease transmission</h1>
+<h1 class="title">Task 9: Forecasting cases and deaths</h1>
 </div>
 
 
@@ -266,193 +255,176 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>This task covers simulating disease spread using mathematical models. You will learn how to generate disease trajectories, set up model parameters, and account for uncertainty in model simulations.</p>
+<p>This task covers forecasting cases and deaths. You will learn how to build forecasting models and generate predictions of future disease incidence, by accounting for incomplete observations using Bayesian methods in {EpiNow2}. Covers short-term projections assuming a constant value for the reproduction number based on its latest estimate, handling incomplete observations, and forecasting secondary outcomes based on primary observations.</p>
 </section>
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
 <ul>
-<li>Load and use model structures from the epidemics package</li>
-<li>Load social contact matrices with socialmixr</li>
-<li>Generate disease spread model simulations</li>
-<li>Generate multiple model simulations and visualize uncertainty</li>
+<li>Build forecasting models for epidemiological data</li>
+<li>Generate short-term forecasts</li>
+<li>Quantify forecast uncertainty</li>
+<li>Forecast secondary observations</li>
 </ul>
 </section>
 <section id="tutorial" class="level2">
 <h2 class="anchored" data-anchor-id="tutorial">Tutorial</h2>
-<p><a href="https://epiverse-trace.github.io/tutorials-late/simulating-transmission.html">Access the tutorial here</a></p>
+<p><a href="https://epiverse-trace.github.io/tutorials-middle/create-forecast.html">Access the tutorial here</a></p>
+</section>
+<section id="downloading-forecast-estimates" class="level2">
+<h2 class="anchored" data-anchor-id="downloading-forecast-estimates">Downloading Forecast Estimates</h2>
+<p><strong>Note:</strong> Running EpiNow2 can be computationally expensive and may take several minutes to complete. If you want to skip this step, you can download the pre-computed estimates file and place it in your <code>outputs/</code> folder:</p>
+<p><a href="outputs/forecast_estimates.rds" download="" class="btn btn-primary" target="_blank">Download nowcast estimates</a></p>
 </section>
 <section id="example-report" class="level2">
 <h2 class="anchored" data-anchor-id="example-report">Example Report</h2>
 <p><a href="data/solutions/task9_solution.qmd" download="" class="btn btn-primary" target="_blank">Download solution file</a></p>
+<section id="forecasting-incidence-with-incomplete-observations" class="level3">
+<h3 class="anchored" data-anchor-id="forecasting-incidence-with-incomplete-observations">Forecasting incidence with incomplete observations</h3>
+<p>We first used {EpiNow2} to forecast incidence of Ebola, accounting for under-reporting of outbreak cases. We estimate that only 40% of actual cases were reported during surveillance activities.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INSTALL AND LOAD PACKAGES</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Install epidemics from GitHub</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load_gh</span>(<span class="st">"epiverse-trace/epidemics"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required packages</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, epidemics, socialmixr, reactable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<section id="define-population-demographics-and-initial-population-conditions" class="level3">
-<h3 class="anchored" data-anchor-id="define-population-demographics-and-initial-population-conditions">Define population demographics and initial population conditions</h3>
-<p>We first extract a social contact matrix from {socialmixr} for the United Kingdom. A single individual from the youngest age category (under 20 years old) was infected and introduced the disease in a population of 1 million, which were initially fully susceptible to the infection.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining social contact matrix</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>contact_data <span class="ot">&lt;-</span> socialmixr<span class="sc">::</span><span class="fu">contact_matrix</span>(</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey =</span> socialmixr<span class="sc">::</span>polymod,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">countries =</span> <span class="st">"United Kingdom"</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">age.limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">20</span>, <span class="dv">40</span>),</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">symmetric =</span> <span class="cn">TRUE</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># prepare contact matrix</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>contact_matrix <span class="ot">&lt;-</span> <span class="fu">t</span>(contact_data<span class="sc">$</span>matrix)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Define population's initial conditions</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>initial_i <span class="ot">&lt;-</span> <span class="fl">1e-6</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>initial_conditions_inf <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">S =</span> <span class="dv">1</span> <span class="sc">-</span> initial_i, <span class="at">E =</span> <span class="dv">0</span>, <span class="at">I =</span> initial_i, <span class="at">R =</span> <span class="dv">0</span>, <span class="at">V =</span> <span class="dv">0</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>initial_conditions_free <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">S =</span> <span class="dv">1</span>, <span class="at">E =</span> <span class="dv">0</span>, <span class="at">I =</span> <span class="dv">0</span>, <span class="at">R =</span> <span class="dv">0</span>, <span class="at">V =</span> <span class="dv">0</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># combine the initial conditions</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>initial_conditions <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  initial_conditions_inf, <span class="co"># age group 1</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  initial_conditions_free, <span class="co"># age group 2</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  initial_conditions_free <span class="co"># age group 3</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># use contact matrix to assign age group names</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(initial_conditions) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(contact_matrix)</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Create demography vector</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>demography_vector <span class="ot">&lt;-</span> contact_data<span class="sc">$</span>demography<span class="sc">$</span>population</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(demography_vector) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(contact_matrix)</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Create population object for {epidemics}</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>uk_population <span class="ot">&lt;-</span> <span class="fu">population</span>(</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"UK"</span>,</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">contact_matrix =</span> contact_matrix,</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">demography_vector =</span> demography_vector,</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">initial_conditions =</span> initial_conditions</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<p>Here we see the demography:</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">enframe</span>(uk_population<span class="sc">$</span>demography_vector, <span class="st">"Age group"</span>, <span class="st">"Population"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reactable</span>(<span class="at">fullWidth =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-fa4d624a643766a1c1b8" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-fa4d624a643766a1c1b8">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Age group":["[0,20)","[20,40)","40+"],"Population":[14799290,16526302,28961159]},"columns":[{"id":"Age group","name":"Age group","type":"character"},{"id":"Population","name":"Population","type":"numeric"}],"inline":true,"dataKey":"bead4e992ce3816167383e416c267a66"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-<p>Here we see the contact matrix:</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(uk_population<span class="sc">$</span>contact_matrix, <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reactable</span>(<span class="at">fullWidth =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-dea754f913b8b575e943" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-dea754f913b8b575e943">{"x":{"tag":{"name":"Reactable","attribs":{"data":{".rownames":["[0,20)","[20,40)","40+"],"[0,20)":[7.9,3.1,3.1],"[20,40)":[2.8,4.9,4.6],"40+":[1.6,2.6,5]},"columns":[{"id":".rownames","name":"","type":"character","sortable":false,"filterable":false,"rowHeader":true},{"id":"[0,20)","name":"[0,20)","type":"numeric"},{"id":"[20,40)","name":"[20,40)","type":"numeric"},{"id":"40+","name":"40+","type":"numeric"}],"inline":true,"dataKey":"efbbb5ec66182a2f113fbff37d025c9b"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-<p>And here the initial conditions:</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>uk_population<span class="sc">$</span>initial_conditions <span class="sc">|&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reactable</span>(<span class="at">fullWidth =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-9130a21e67517295f120" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-9130a21e67517295f120">{"x":{"tag":{"name":"Reactable","attribs":{"data":{".rownames":["[0,20)","[20,40)","40+"],"S":[0.999999,1,1],"E":[0,0,0],"I":[1e-06,0,0],"R":[0,0,0],"V":[0,0,0]},"columns":[{"id":".rownames","name":"","type":"character","sortable":false,"filterable":false,"rowHeader":true},{"id":"S","name":"S","type":"numeric"},{"id":"E","name":"E","type":"numeric"},{"id":"I","name":"I","type":"numeric"},{"id":"R","name":"R","type":"numeric"},{"id":"V","name":"V","type":"numeric"}],"inline":true,"dataKey":"656da918e66a9b023c71899090f59778"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-</section>
-<section id="simulating-transmission" class="level3">
-<h3 class="anchored" data-anchor-id="simulating-transmission">Simulating transmission</h3>
-<p>We fitted an SEIR to model the transmission of an infectious disease with a basic reproduction number of 1.5, an infectious period of 7 days, and a pre-infectious period of 3 days.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining model parameters</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># time periods</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>preinfectious_period <span class="ot">&lt;-</span> <span class="fl">3.0</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>infectious_period <span class="ot">&lt;-</span> <span class="fl">7.0</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># specify the mean and standard deviation of R0</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>r_estimate_mean <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>r_estimate_sd <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate 100 R samples</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>r_samples <span class="ot">&lt;-</span> withr<span class="sc">::</span><span class="fu">with_seed</span>(</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="dv">100</span>, <span class="at">mean =</span> r_estimate_mean, <span class="at">sd =</span> r_estimate_sd</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># rates</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>infectiousness_rate <span class="ot">&lt;-</span> <span class="fl">1.0</span> <span class="sc">/</span> preinfectious_period</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>recovery_rate <span class="ot">&lt;-</span> <span class="fl">1.0</span> <span class="sc">/</span> infectious_period</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> r_samples <span class="sc">/</span> infectious_period</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co"># running {epidemic} default model</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> <span class="fu">model_default</span>(</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">population =</span> uk_population,</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">transmission_rate =</span> beta,</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">infectiousness_rate =</span> infectiousness_rate,</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">recovery_rate =</span> recovery_rate,</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">time_end =</span> <span class="dv">600</span>, <span class="at">increment =</span> <span class="dv">1</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualising output</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>output <span class="sc">%&gt;%</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">r_value =</span> r_samples) <span class="sc">%&gt;%</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(data) <span class="sc">%&gt;%</span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(compartment <span class="sc">==</span> <span class="st">"infectious"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(time, value, <span class="at">color =</span> r_value, <span class="at">group =</span> param_set),</span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="dv">3</span></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_fermenter</span>(</span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="st">"RdBu"</span>,</span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"R"</span></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> scales<span class="sc">::</span>comma</span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(</span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">vars</span>(demography_group)</span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Simulation time (days)"</span>,</span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Individuals"</span></span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, EpiNow2, incidence2, reactable, rio)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># LOAD DATA</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Import linelist data and convert to incidence</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>ebola_incidence <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/linelist.rds"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  incidence2<span class="sc">::</span><span class="fu">incidence</span>(</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_index =</span> <span class="st">"date_onset"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">count_values_to =</span> <span class="st">"confirm"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_names_to =</span> <span class="st">"date"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">complete_dates =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>count_variable)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining generation time and Rt priors</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Generation time</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>generation_time_fixed <span class="ot">&lt;-</span> EpiNow2<span class="sc">::</span><span class="fu">LogNormal</span>(</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> <span class="dv">4</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="dv">2</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">max =</span> <span class="dv">15</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># define Rt prior distribution</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>rt_prior <span class="ot">&lt;-</span> EpiNow2<span class="sc">::</span><span class="fu">rt_opts</span>(<span class="at">prior =</span> EpiNow2<span class="sc">::</span><span class="fu">LogNormal</span>(<span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="dv">2</span>))</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Define observation model with 40% of cases being reported</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>obs_scale <span class="ot">&lt;-</span> EpiNow2<span class="sc">::</span><span class="fu">Normal</span>(<span class="at">mean =</span> <span class="fl">0.4</span>, <span class="at">sd =</span> <span class="fl">0.01</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the analysis has been run before and run EpiNow2 if not</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>file_name <span class="ot">&lt;-</span> <span class="st">"outputs/forecast_estimates.rds"</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">file.exists</span>(file_name)) {</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  forecast_estimates <span class="ot">&lt;-</span> <span class="fu">import</span>(file_name)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># forecasting with epinow ---------------------------------------------------</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  withr<span class="sc">::</span><span class="fu">local_options</span>(base<span class="sc">::</span><span class="fu">list</span>(<span class="at">mc.cores =</span> <span class="dv">4</span>))</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>  forecast_estimates <span class="ot">&lt;-</span> EpiNow2<span class="sc">::</span><span class="fu">epinow</span>(</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> ebola_incidence,</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">generation_time =</span> EpiNow2<span class="sc">::</span><span class="fu">generation_time_opts</span>(generation_time_fixed),</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">rt =</span> rt_prior,</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add observation model</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">obs =</span> EpiNow2<span class="sc">::</span><span class="fu">obs_opts</span>(<span class="at">scale =</span> obs_scale),</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Forecast window</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">forecast =</span> <span class="fu">forecast_opts</span>(<span class="at">horizon =</span> <span class="dv">15</span>),</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">stan =</span> EpiNow2<span class="sc">::</span><span class="fu">stan_opts</span>(<span class="at">samples =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">2</span>)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">export</span>(forecast_estimates, file_name)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>forecast_estimates<span class="sc">$</span>plots<span class="sc">$</span>infections</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="task9_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="task9_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>The figure above shows the total number or cumulative amount of individuals in the infectious compartment at each time, across the 100 simulations run for different basic reproduction number values.</p>
+</section>
+<section id="forecasting-secondary-observations" class="level3">
+<h3 class="anchored" data-anchor-id="forecasting-secondary-observations">Forecasting secondary observations</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select early stages of the outbreak and convert data to EpiNow2 input, with</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># date, primary, and secondary columns</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>ebola_cases_deaths <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/linelist.rds"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create date_death column: use date_outcome for entries where outcome == "Death"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date_death =</span> <span class="fu">if_else</span>(outcome <span class="sc">==</span> <span class="st">"Death"</span>, date_outcome, <span class="fu">as.Date</span>(<span class="cn">NA</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  incidence2<span class="sc">::</span><span class="fu">incidence</span>(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_index =</span> <span class="fu">c</span>(<span class="st">"date_onset"</span>, <span class="st">"date_death"</span>),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_names_to =</span> <span class="st">"date"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">complete_dates =</span> <span class="cn">TRUE</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> count_variable, <span class="at">values_from =</span> count) <span class="sc">|&gt;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">primary =</span> date_onset, <span class="at">secondary =</span> date_death)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># onset to death delay ---------------------------------------------------------</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>onset_death_ebola <span class="ot">&lt;-</span> epiparameter<span class="sc">::</span><span class="fu">epiparameter_db</span>(</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">disease =</span> <span class="st">"ebola"</span>,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">epi_name =</span> <span class="st">"onset to death"</span>,</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">single_epiparameter =</span> <span class="cn">TRUE</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>onset_death_ebola_discrete <span class="ot">&lt;-</span> epiparameter<span class="sc">::</span><span class="fu">discretise</span>(onset_death_ebola)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>od_ebola_EN2 <span class="ot">&lt;-</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  EpiNow2<span class="sc">::</span><span class="fu">Gamma</span>(</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> onset_death_ebola<span class="sc">$</span>summary_stats<span class="sc">$</span>mean,</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> onset_death_ebola<span class="sc">$</span>summary_stats<span class="sc">$</span>sd,</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="fu">quantile</span>(onset_death_ebola, <span class="at">p =</span> <span class="fl">0.99</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Establish relationship between cases and deaths</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>data_od_estimation <span class="ot">&lt;-</span> ebola_cases_deaths <span class="sc">|&gt;</span> <span class="fu">slice</span>(<span class="dv">20</span><span class="sc">:</span><span class="dv">150</span>)</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>estimate_cases_to_deaths <span class="ot">&lt;-</span> EpiNow2<span class="sc">::</span><span class="fu">estimate_secondary</span>(</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> data_od_estimation,</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">secondary =</span> EpiNow2<span class="sc">::</span><span class="fu">secondary_opts</span>(<span class="at">type =</span> <span class="st">"incidence"</span>),</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">delays =</span> EpiNow2<span class="sc">::</span><span class="fu">delay_opts</span>(od_ebola_EN2)</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>We then forecasted the number of deaths that would arise from reported Ebola cases in the early stages of the outbreak that started in 2014.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(estimate_cases_to_deaths, <span class="at">primary =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="task9_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Forecast from day 151 to day 300 (not included in model fit)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename primary to value (required by forecast_secondary)</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>cases_to_forecast <span class="ot">&lt;-</span> ebola_cases_deaths <span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">151</span><span class="sc">:</span><span class="dv">300</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(date, primary) <span class="sc">|&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">value =</span> primary)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Forecast secondary cases</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>deaths_forecast <span class="ot">&lt;-</span> EpiNow2<span class="sc">::</span><span class="fu">forecast_secondary</span>(</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">estimate =</span> estimate_cases_to_deaths,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">primary =</span> cases_to_forecast</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(deaths_forecast)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="task9_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Task 9: Simulating disease transmission</title>
+<title>Task 10: Simulating disease transmission</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -67,6 +101,22 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+
+<script src="site_libs/react-18.2.0/react.min.js"></script>
+
+<script src="site_libs/react-18.2.0/react-dom.min.js"></script>
+
+<script src="site_libs/reactwidget-2.0.0/react-tools.js"></script>
+
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<link href="site_libs/reactable-0.4.4/reactable.css" rel="stylesheet">
+
+<script src="site_libs/reactable-binding-0.4.4/reactable.js"></script>
+
 
 
 <link rel="stylesheet" href="styles.css">
@@ -98,49 +148,68 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Setup</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./data.html"> 
-<span class="menu-text">Data</span></a>
+    <a class="nav-link" href="./intro.html"> 
+<span class="menu-text">Intro to R</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tasks" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Tasks</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Data</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-tasks">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-data">    
+        <li>
+    <a class="dropdown-item" href="./data_import.html">
+ <span class="dropdown-text">Importing</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./data_clean.html">
+ <span class="dropdown-text">Cleaning</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-analysis" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Analysis</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-analysis">    
+        <li>
+    <a class="dropdown-item" href="./task1.html">
+ <span class="dropdown-text">1. Setting up an automated report</span></a>
+  </li>  
         <li>
     <a class="dropdown-item" href="./task2.html">
- <span class="dropdown-text">1. Generating automated situation reports</span></a>
+ <span class="dropdown-text">2. Generating a basic situation report</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task3.html">
- <span class="dropdown-text">2. Generating interactive maps</span></a>
+ <span class="dropdown-text">3. Generating interactive maps</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task4.html">
- <span class="dropdown-text">3. Visualising transmission chains</span></a>
+ <span class="dropdown-text">4. Visualising transmission chains</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task5.html">
- <span class="dropdown-text">4. Getting epidemiological parameters</span></a>
+ <span class="dropdown-text">5. Getting epidemiological parameters</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task6.html">
- <span class="dropdown-text">5. Estimating the reproduction number</span></a>
+ <span class="dropdown-text">6. Estimating disease severity</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task7.html">
- <span class="dropdown-text">6. Nowcasting epidemiological data</span></a>
+ <span class="dropdown-text">7. Estimating the reproduction number</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task8.html">
- <span class="dropdown-text">7. Forecasting cases and deaths</span></a>
+ <span class="dropdown-text">8. Nowcasting epidemiological data</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task9.html">
- <span class="dropdown-text">8. Estimating disease severity</span></a>
+ <span class="dropdown-text">9. Forecasting cases and deaths</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./task10.html">
- <span class="dropdown-text">9. Simulating disease transmission</span></a>
+ <span class="dropdown-text">10. Simulating disease transmission</span></a>
   </li>  
     </ul>
   </li>
@@ -169,7 +238,11 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
   <li><a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial">Tutorial</a></li>
-  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
+  <li><a href="#example-report" id="toc-example-report" class="nav-link" data-scroll-target="#example-report">Example Report</a>
+  <ul class="collapse">
+  <li><a href="#define-population-demographics-and-initial-population-conditions" id="toc-define-population-demographics-and-initial-population-conditions" class="nav-link" data-scroll-target="#define-population-demographics-and-initial-population-conditions">Define population demographics and initial population conditions</a></li>
+  <li><a href="#simulating-transmission" id="toc-simulating-transmission" class="nav-link" data-scroll-target="#simulating-transmission">Simulating transmission</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -178,7 +251,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Task 9: Simulating disease transmission</h1>
+<h1 class="title">Task 10: Simulating disease transmission</h1>
 </div>
 
 
@@ -212,21 +285,181 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="tutorial">Tutorial</h2>
 <p><a href="https://epiverse-trace.github.io/tutorials-late/simulating-transmission.html">Access the tutorial here</a></p>
 </section>
-<section id="additional-resources" class="level2">
-<h2 class="anchored" data-anchor-id="additional-resources">Additional Resources</h2>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">R Handbook</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Package Documentation</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>Relevant chapters from the Epidemiologist R Handbook.</p>
+<section id="example-report" class="level2">
+<h2 class="anchored" data-anchor-id="example-report">Example Report</h2>
+<p><a href="data/solutions/task10_solution.qmd" download="" class="btn btn-primary" target="_blank">Download solution file</a></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INSTALL AND LOAD PACKAGES</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Install epidemics from GitHub</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load_gh</span>(<span class="st">"epiverse-trace/epidemics"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required packages</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, epidemics, socialmixr, reactable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p>Package vignettes and documentation for relevant R packages.</p>
+<section id="define-population-demographics-and-initial-population-conditions" class="level3">
+<h3 class="anchored" data-anchor-id="define-population-demographics-and-initial-population-conditions">Define population demographics and initial population conditions</h3>
+<p>We first extract a social contact matrix from {socialmixr} for the United Kingdom. A single individual from the youngest age category (under 20 years old) was infected and introduced the disease in a population of 1 million, which were initially fully susceptible to the infection.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining social contact matrix</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>contact_data <span class="ot">&lt;-</span> socialmixr<span class="sc">::</span><span class="fu">contact_matrix</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey =</span> socialmixr<span class="sc">::</span>polymod,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">countries =</span> <span class="st">"United Kingdom"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">age.limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">20</span>, <span class="dv">40</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">symmetric =</span> <span class="cn">TRUE</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># prepare contact matrix</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>contact_matrix <span class="ot">&lt;-</span> <span class="fu">t</span>(contact_data<span class="sc">$</span>matrix)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Define population's initial conditions</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>initial_i <span class="ot">&lt;-</span> <span class="fl">1e-6</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>initial_conditions_inf <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">S =</span> <span class="dv">1</span> <span class="sc">-</span> initial_i, <span class="at">E =</span> <span class="dv">0</span>, <span class="at">I =</span> initial_i, <span class="at">R =</span> <span class="dv">0</span>, <span class="at">V =</span> <span class="dv">0</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>initial_conditions_free <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">S =</span> <span class="dv">1</span>, <span class="at">E =</span> <span class="dv">0</span>, <span class="at">I =</span> <span class="dv">0</span>, <span class="at">R =</span> <span class="dv">0</span>, <span class="at">V =</span> <span class="dv">0</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># combine the initial conditions</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>initial_conditions <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  initial_conditions_inf, <span class="co"># age group 1</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  initial_conditions_free, <span class="co"># age group 2</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  initial_conditions_free <span class="co"># age group 3</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># use contact matrix to assign age group names</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(initial_conditions) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(contact_matrix)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Create demography vector</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>demography_vector <span class="ot">&lt;-</span> contact_data<span class="sc">$</span>demography<span class="sc">$</span>population</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(demography_vector) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(contact_matrix)</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Create population object for {epidemics}</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>uk_population <span class="ot">&lt;-</span> <span class="fu">population</span>(</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"UK"</span>,</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">contact_matrix =</span> contact_matrix,</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">demography_vector =</span> demography_vector,</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">initial_conditions =</span> initial_conditions</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Here we see the demography:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">enframe</span>(uk_population<span class="sc">$</span>demography_vector, <span class="st">"Age group"</span>, <span class="st">"Population"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reactable</span>(<span class="at">fullWidth =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="reactable html-widget html-fill-item" id="htmlwidget-4900be9480844b3e367c" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-4900be9480844b3e367c">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Age group":["[0,20)","[20,40)","40+"],"Population":[14799290,16526302,28961159]},"columns":[{"id":"Age group","name":"Age group","type":"character"},{"id":"Population","name":"Population","type":"numeric"}],"inline":true,"dataKey":"bead4e992ce3816167383e416c267a66"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>Here we see the contact matrix:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(uk_population<span class="sc">$</span>contact_matrix, <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reactable</span>(<span class="at">fullWidth =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="reactable html-widget html-fill-item" id="htmlwidget-2cf929d0c15abc53baf0" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-2cf929d0c15abc53baf0">{"x":{"tag":{"name":"Reactable","attribs":{"data":{".rownames":["[0,20)","[20,40)","40+"],"[0,20)":[7.9,3.1,3.1],"[20,40)":[2.8,4.9,4.6],"40+":[1.6,2.6,5]},"columns":[{"id":".rownames","name":"","type":"character","sortable":false,"filterable":false,"rowHeader":true},{"id":"[0,20)","name":"[0,20)","type":"numeric"},{"id":"[20,40)","name":"[20,40)","type":"numeric"},{"id":"40+","name":"40+","type":"numeric"}],"inline":true,"dataKey":"efbbb5ec66182a2f113fbff37d025c9b"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>And here the initial conditions:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>uk_population<span class="sc">$</span>initial_conditions <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reactable</span>(<span class="at">fullWidth =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="reactable html-widget html-fill-item" id="htmlwidget-1eec994f2506a79923a9" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-1eec994f2506a79923a9">{"x":{"tag":{"name":"Reactable","attribs":{"data":{".rownames":["[0,20)","[20,40)","40+"],"S":[0.999999,1,1],"E":[0,0,0],"I":[1e-06,0,0],"R":[0,0,0],"V":[0,0,0]},"columns":[{"id":".rownames","name":"","type":"character","sortable":false,"filterable":false,"rowHeader":true},{"id":"S","name":"S","type":"numeric"},{"id":"E","name":"E","type":"numeric"},{"id":"I","name":"I","type":"numeric"},{"id":"R","name":"R","type":"numeric"},{"id":"V","name":"V","type":"numeric"}],"inline":true,"dataKey":"656da918e66a9b023c71899090f59778"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="simulating-transmission" class="level3">
+<h3 class="anchored" data-anchor-id="simulating-transmission">Simulating transmission</h3>
+<p>We fitted an SEIR to model the transmission of an infectious disease with a basic reproduction number of 1.5, an infectious period of 7 days, and a pre-infectious period of 3 days.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining model parameters</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># time periods</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>preinfectious_period <span class="ot">&lt;-</span> <span class="fl">3.0</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>infectious_period <span class="ot">&lt;-</span> <span class="fl">7.0</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># specify the mean and standard deviation of R0</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>r_estimate_mean <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>r_estimate_sd <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate 100 R samples</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>r_samples <span class="ot">&lt;-</span> withr<span class="sc">::</span><span class="fu">with_seed</span>(</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="dv">100</span>, <span class="at">mean =</span> r_estimate_mean, <span class="at">sd =</span> r_estimate_sd</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># rates</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>infectiousness_rate <span class="ot">&lt;-</span> <span class="fl">1.0</span> <span class="sc">/</span> preinfectious_period</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>recovery_rate <span class="ot">&lt;-</span> <span class="fl">1.0</span> <span class="sc">/</span> infectious_period</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> r_samples <span class="sc">/</span> infectious_period</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co"># running {epidemic} default model</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> <span class="fu">model_default</span>(</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">population =</span> uk_population,</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">transmission_rate =</span> beta,</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">infectiousness_rate =</span> infectiousness_rate,</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">recovery_rate =</span> recovery_rate,</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">time_end =</span> <span class="dv">600</span>, <span class="at">increment =</span> <span class="dv">1</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualising output</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>output <span class="sc">%&gt;%</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">r_value =</span> r_samples) <span class="sc">%&gt;%</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(data) <span class="sc">%&gt;%</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(compartment <span class="sc">==</span> <span class="st">"infectious"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(time, value, <span class="at">color =</span> r_value, <span class="at">group =</span> param_set),</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="dv">3</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_fermenter</span>(</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="st">"RdBu"</span>,</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"R"</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> scales<span class="sc">::</span>comma</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">vars</span>(demography_group)</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Simulation time (days)"</span>,</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Individuals"</span></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="task10_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
 </div>
+<p>The figure above shows the total number or cumulative amount of individuals in the infectious compartment at each time, across the 100 simulations run for different basic reproduction number values.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -334,6 +567,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         if (link.dataset.originalHref !== undefined) {
           link.href = link.dataset.originalHref;
         }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
       }
     }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {

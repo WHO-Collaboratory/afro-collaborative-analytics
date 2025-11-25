@@ -9,7 +9,7 @@ Website files are located in the `qmd/` directory:
 - `qmd/index.qmd` - Landing page introducing the hackathon
 - `qmd/setup.qmd` - Setup instructions for R, RStudio, and project structure
 - `qmd/data.qmd` - Data download page
-- `qmd/task1.qmd` through `qmd/task9.qmd` - Individual pages for each analytical task
+- `qmd/task1.qmd` through `qmd/task10.qmd` - Individual pages for each analytical task
 - `qmd/_quarto.yml` - Quarto website configuration
 - `qmd/styles.css` - Custom CSS for styling
 - `qmd/data/` - Data files including:
@@ -17,7 +17,7 @@ Website files are located in the `qmd/` directory:
   - `gis/` - GIS shapefile data
   - `solutions/` - Solution files for download (excluded from rendering)
     - `sitrep.qmd` - Example situation report template
-    - `task1_solution.qmd` through `task4_solution.qmd` - Solution files for tasks
+    - `task2_solution.qmd` through `task10_solution.qmd` - Solution files for tasks
 - `scripts/generate_solutions.R` - Script to extract "Example Report" sections from task files and generate solution files
 
 ## Building the Website
@@ -62,7 +62,7 @@ To generate solution files from task files, run the `generate_solutions.R` scrip
 source("scripts/generate_solutions.R")
 ```
 
-This script extracts the "Example Report" sections from `task2.qmd` through `task9.qmd` and creates corresponding solution files in `qmd/data/solutions/`. The solution files are configured with `echo: false` so code is hidden when rendered, making them suitable as reference solutions for participants.
+This script extracts the "Example Report" sections from `task3.qmd` through `task10.qmd` and creates corresponding solution files in `qmd/data/solutions/`. The solution files are configured with `echo: false` so code is hidden when rendered, making them suitable as reference solutions for participants.
 
 ## Deployment
 

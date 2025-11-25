@@ -1,5 +1,5 @@
 ---
-title: "Task 5: Estimating disease severity"
+title: "Task 5: Getting epidemiological parameters"
 format:
   html:
     code-fold: true
@@ -9,140 +9,62 @@ execute:
 
 ## Overview
 
-This task focuses on estimating disease severity. You will learn how to calculate and interpret key severity metrics such as case fatality ratio and infection fatality ratio.
+This task focuses on obtaining epidemiological parameters from your data or the literature. You will learn how to extract, estimate, and use key epidemiological parameters in your analyses.
 
 ## Learning Objectives
 
-- Calculate case fatality ratio (CFR)
-- Estimate infection fatality ratio (IFR)
-- Adjust for time-to-death and censoring
-- Compare severity across populations and time periods
+- Extract epidemiological parameters from data
+- Search and retrieve parameters from literature
+- Estimate parameters using available data
+- Incorporate parameters into analytical models
 
 ## Tutorial
 
-[Access the tutorial here](https://epiverse-trace.github.io/tutorials-middle/severity-static.html)
+[Access the tutorial here](https://epiverse-trace.github.io/tutorials-middle/delays-access.html)
 
 ## Example Report
 
 <a href="data/solutions/task5_solution.qmd" download class="btn btn-primary" target="_blank">Download solution file</a>
 
-# Visualising incidence and death data
-
-We estimate disease severity during an outbreak of Ebola in 2014.
-Firstly, we visualise case incidence and deaths across the entire available data from the outbreak (2014-2015).
-
+### Ebola serial interval
+The serial interval for Ebola was extracted from the `epiparameter` package, identifying the following source:
 
 ```{r}
+#| results: asis
+
 # INSTALL AND LOAD PACKAGES
-pacman::p_load(tidyverse, cfr, epiparameter, reactable)
 
-# LOAD DATA
-ebola_cases_deaths <- readRDS("data/linelist.rds") %>%
-  # Create date_death column: use date_outcome for entries where outcome == "Death"
-  mutate(date_death = if_else(outcome == "Death", date_outcome, as.Date(NA))) %>%
-  incidence2::incidence(
-    date_index = c("date_onset", "date_death"),
-    date_names_to = "date",
-    complete_dates = TRUE
-  )
+# Load required packages
+pacman::p_load(epiparameter, tidyverse, EpiNow2, reactable)
 
-plot(ebola_cases_deaths)
+# Creating epiparameter objects by accessing the {epiparameter} library
+ebola_serial_int <- epiparameter::epiparameter_db(
+  disease = "ebola",
+  epi_name = "serial",
+  subset = sample_size > 10,
+  author = "WHO Ebola Response Team",
+  single_epiparameter = TRUE
+)
 
+ebola_serial_int$citation
 ```
-
-## Estimating Case Fatality Risk (CFR) in real-time
-
-To estimate the static CFR at a specific time-point during the outbreak, we subset the data to include the initial 150 days of the outbreak only. Then we estimate both the naive and the delay-adjusted CFR.
 
 ```{r}
-# Prepare data for {cfr} package
-ebola_data_cfr <- ebola_cases_deaths %>%
-  pivot_wider(names_from = count_variable, values_from = count) %>%
-  rename(cases = date_onset, deaths = date_death)
+# Extract summary statistics and parameters
+pars <- epiparameter::get_parameters(ebola_serial_int) # distribution parameters
+serial_mean <- ebola_serial_int$summary_stats$mean
+serial_sd <- ebola_serial_int$summary_stats$sd
 
-ebola_rt <- ebola_data_cfr %>%
-  slice(1:150)
-
-# Naive CFR
-cfr_naive <- cfr::cfr_static(data = ebola_rt)
-
-# Delay-adjusted CFR
-# Getting distribution from {epiparameter}
-onset_to_death_ebola <-
-  epiparameter::epiparameter_db(
-    disease = "Ebola",
-    epi_name = "onset_to_death",
-    single_epiparameter = TRUE
-  )
-
-cfr_adjusted <- cfr::cfr_static(data = ebola_rt, delay_density = function(x) density(onset_to_death_ebola, x))
-
-# Create table with CFR estimates and confidence intervals
-# Create table with CFR estimates and confidence intervals
-cfr_table <- tibble(
-  Method = c("Naive CFR", "Adjusted CFR"),
-  Estimate = c(
-    round(cfr_naive$severity_estimate, 2),
-    round(cfr_adjusted$severity_estimate, 2)
-  ),
-  `Lower CI` = c(
-    round(cfr_naive$severity_low, 2),
-    round(cfr_adjusted$severity_low, 2)
-  ),
-  `Upper CI` = c(
-    round(cfr_naive$severity_high, 2),
-    round(cfr_adjusted$severity_high, 2)
-  )
+# Calculate 95th percentile of serial interval
+serial_interval_95th <- qgamma(
+  0.95,
+  shape = pars["shape"],
+  scale = pars["scale"]
 )
-
-reactable(
-  cfr_table,
-  columns = list(
-    Method = colDef(name = "Method"),
-    Estimate = colDef(name = "Estimate")
-  ),
-  fullWidth = FALSE
-)
-
 ```
-The naive CFR underestimates the case fatality risk by 7%.
 
-# Estimating CFR over the course of an outbreak
-
-We then estimate the case fatality risk at each time-point of the Ebola outbreak, including all available data.
+This estimate has a mean of `r round(serial_mean, 1)` days and standard deviation of `r round(serial_sd, 1)` days, meaning that 95% of cases have a serial interval of less than `r round(serial_interval_95th, 0)` days. The probability density function of the serial interval is given below:
 
 ```{r}
-# Calculate the rolling daily naive CFR
-rolling_cfr_naive <- cfr::cfr_rolling(data = ebola_data_cfr)
-
-# Calculate the rolling daily delay-adjusted CFR
-rolling_cfr_adjusted <- cfr::cfr_rolling(
-  data = ebola_data_cfr,
-  delay_density = function(x) density(onset_to_death_ebola, x)
-)
-
-# bind by rows both output data frames
-dplyr::bind_rows(
-  list(
-    naive = rolling_cfr_naive,
-    adjusted = rolling_cfr_adjusted
-  ),
-  .id = "method"
-) %>%
-  # visualise both adjusted and unadjusted rolling estimates
-  ggplot() +
-  geom_ribbon(
-    aes(
-      date,
-      ymin = severity_low,
-      ymax = severity_high,
-      fill = method
-    ),
-    alpha = 0.2, show.legend = FALSE
-  ) +
-  geom_line(
-    aes(date, severity_estimate, colour = method)
-  ) +
-  theme_bw()
+plot(ebola_serial_int) # as a plot of the PDF
 ```
-The unadjusted, naive CFR underestimates the CFR significantly at the beginning of the outbreak, and approaches the delay-adjusted CFR values as the epidemic passes its peak and data on deaths becomes available.

@@ -25,26 +25,26 @@ website:
             text: "Cleaning"
       - text: Analysis
         menu:
-          - href: task0.qmd
-            text: "0. Introduction to Quarto"
           - href: task1.qmd
-            text: "1. Generating a basic situation report"
+            text: "1. Setting up an automated report"
           - href: task2.qmd
-            text: "2. Generating interactive maps"
+            text: "2. Basic descriptive analyses"
           - href: task3.qmd
-            text: "3. Visualising transmission chains"
+            text: "3. Generating interactive maps"
           - href: task4.qmd
-            text: "4. Getting epidemiological parameters"
+            text: "4. Visualising transmission chains"
           - href: task5.qmd
-            text: "5. Estimating disease severity"
+            text: "5. Getting epidemiological parameters"
           - href: task6.qmd
-            text: "6. Estimating the reproduction number"
+            text: "6. Estimating disease severity"
           - href: task7.qmd
-            text: "7. Nowcasting epidemiological data"
+            text: "7. Estimating the reproduction number"
           - href: task8.qmd
-            text: "8. Forecasting cases and deaths"
+            text: "8. Nowcasting epidemiological data"
           - href: task9.qmd
-            text: "9. Simulating disease transmission"
+            text: "9. Forecasting cases and deaths"
+          - href: task10.qmd
+            text: "10. Simulating disease transmission"
     right:
       - href: https://collaboratory.who.int/forum/c/afro-ca-cop/
         text: '<img src="/img/collaboratory_logo.png" height="24px" style="vertical-align: middle; margin-right: 0.25em;">'

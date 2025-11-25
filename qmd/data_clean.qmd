@@ -14,15 +14,13 @@ Data cleaning is a crucial step in any epidemiological analysis. Before you can 
 - Standardize data formats
 - Prepare data for epidemiological analysis
 
-## Tutorial
-
-For comprehensive guidance on data cleaning workflows:
-
-- [Clean case data tutorial](https://epiverse-trace.github.io/tutorials-early/clean-data.html) - Learn how to clean, validate, and prepare epidemiological data
-- [Applied Epi R Handbook data cleaning tutorial](https://www.epirhandbook.com/en/new_pages/cleaning.html) - Step-by-step instructions for cleaning the raw case linelist
-
 ## Example Dataset
 
-If you're working with the example dataset for this workshop, you can download the raw case linelist (an Excel spreadsheet with messy data) to practice data cleaning:
+First download the messy linelist to practice data cleaning and place it in the `data/` folder.
 
 <a href="https://github.com/appliedepi/epirhandbook_eng/raw/master/data/case_linelists/linelist_raw.xlsx" download class="btn btn-primary" target="_blank">Download raw linelist</a>
+
+## Tutorial
+
+Then move on to the tutorial: [access here](https://www.epirhandbook.com/en/new_pages/cleaning.html)
+

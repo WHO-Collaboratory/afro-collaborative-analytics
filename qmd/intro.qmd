@@ -1,6 +1,5 @@
 ---
-title: 'Introduction to R: Session 1'
-date: "`r format.Date(Sys.Date(), format = '%d %B %Y')`"
+title: 'Introduction to R'
 author:
   - Alexis Robert
   - Sophie Meakin
@@ -435,18 +434,24 @@ If you are still not certain where your `sitrep` folder is located, you can use 
 
 ## Importing data with **rio**
 
-We can import (i.e. 'read in') and export (i.e. save) data in common formats (e.g. .csv, .xlsx, .txt) with the **rio** package. In this section, we are going to import some data on life expectancy at birth and health expenditure per capita in USD for countries in 2015. This data is from Our World in Data: [ourworldindata.org/life-expectancy-vs-health-expenditure](https://ourworldindata.org/grapher/life-expectancy-vs-health-expenditure).
+We can import (i.e. 'read in') and export (i.e. save) data in common formats (e.g. .csv, .xlsx, .txt) with the **rio** package. In this section, we are going to import some data on life expectancy at birth and health expenditure per capita in USD for countries in 2015. This data is from [Our World in Data](https://ourworldindata.org/grapher/life-expectancy-vs-health-expenditure) and we will be downloaded directly from the website using the URL provided by their data API:
 
 `r emoji::emoji("star")` We import a data file (e.g. .csv) using the `import()` function from the **rio** library.
 
-`r emoji::emoji("computer")` Download the file `life_expectancy.csv` from Moodle, and place it in your Data folder.
+`r emoji::emoji("computer")` Copy and paste the code below. This code imports the data `life_expectancy.csv` from the website and assigns it to an object called `life_expectancy`:
 
-`r emoji::emoji("computer")` Copy and paste the code below. This code imports the data `life_expectancy.csv` from the folder `data`, and assigns it to an object called `life_expectancy`:
+```{r, eval = TRUE}
+life_expectancy <- rio::import(
+  file = "https://ourworldindata.org/grapher/life-expectancy-vs-health-expenditure.csv?v=1&csvType=full&useColumnShortNames=true"
+)
+```
 
-```{r, eval = FALSE}
+Inspect the data using the `head()` function:
 
-life_expectancy <- import(file = "data/life_expectancy.csv")
-
+```{r}
+#| echo: false
+#| eval: true
+reactable::reactable(head(life_expectancy))
 ```
 
 Let's look more closely at how `import()` works.

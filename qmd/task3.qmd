@@ -1,130 +1,140 @@
 ---
-title: "Task 3: Visualising transmission chains"
+title: "Task 3: Generating interactive maps"
 format:
   html:
     code-fold: true
 execute:
   warning: false
+  message: false
 ---
 
 ## Overview
 
-This task covers visualizing transmission chains using epicontacts. You will learn how to analyze and visualize contact networks and transmission pathways.
+This task focuses on creating interactive maps for visualizing spatial aspects of epidemiological data. You will learn how to work with spatial data, create maps using GIS tools in R, and visualize disease patterns geographically.
 
 ## Learning Objectives
 
-- Work with contact network data
-- Visualize transmission chains using epicontacts
-- Analyze contact patterns
-- Identify transmission clusters
+- Work with spatial data formats (shapefiles, coordinates)
+- Create interactive maps using GIS tools in R
+- Visualize disease patterns and hotspots geographically
+- Perform basic spatial analysis
 
 ## Tutorial
 
-[Access the tutorial here](https://www.epirhandbook.com/en/new_pages/transmission_chains.html)
+[Access the tutorial here](https://www.epirhandbook.com/en/new_pages/gis.html)
+
+## Download GIS Data
+
+For this task, you will need the GIS shapefile data to create the maps. The shapefile contains administrative boundaries for Sierra Leone.
+
+1. Download the GIS data zip file using the button below.
+2. **Unzip the file** and extract its contents to your `data/gis/` folder.
+3. The extracted files should include `sle_adm3.shp` and other related shapefile components in the `data/gis/` directory.
+
+[Download GIS data (zip)](https://github.com/WHO-Collaboratory/afro-collaborative-analytics/raw/refs/heads/main/qmd/data/gis.zip){.btn .btn-primary target="_blank"}
 
 ## Example Report
 
 <a href="data/solutions/task3_solution.qmd" download class="btn btn-primary" target="_blank">Download solution file</a>
 
+### Geographic distribution of cases
+
 ```{r}
-
 # INSTALL AND LOAD PACKAGES
-
-# install development version of epicontacts
-pacman::p_install_gh("reconhub/epicontacts@timeline")
 
 # Load required packages
 pacman::p_load(
-  rio, # File import
-  here, # File locator
-  tidyverse, # Data management + ggplot2 graphics
-  remotes, # Package installation from github
-  epicontacts, # Transmission chain analysis
-  reactable # Interactive tables
+  tidyverse, # basic data manipulation
+  sf, # handling shapefiles
+  here, # handing file paths
+  leaflet, # mapping
+  leaflet.extras, # additional leaflet features including heatmaps
+  htmltools, # handlers for html objects
+  janitor # name cleaning
 )
 
 
 # LOAD DATA
-# Import the cleaned linelist data
-linelist <- readRDS("data/linelist.rds")
 
+# load shapefiles and keep relevant areas
+shp <- sf::read_sf("data/gis/sle_adm3.shp") |>
+  # standardize column names
+  janitor::clean_names()
 
-# SETTING UP EPICONTACTS
+# import the cleaned linelist data
+linelist <- rio::import("data/linelist.rds")
 
-## generate contacts
-contacts <- linelist |>
-  transmute(
-    infector = infector,
-    case_id = case_id,
-    source = source
+# convert to aggregate format
+agg <- linelist |>
+  # count the number of cases per adm3
+  summarise(n = n(), .by = adm3) |>
+  # add the shape files of the adm3 zones
+  inner_join(shp, by = c(adm3 = "adm3_en")) |>
+  # convert back to shapefile
+  st_as_sf()
+
+```
+
+Total incidence to date was mapped by chiefdom.
+
+```{r}
+# define colour palette
+pal <- colorNumeric(palette = "YlOrRd", domain = agg$n)
+
+# generate choropleth map (polygons only)
+leaflet(agg) |>
+  # use CartoDB for background
+  addProviderTiles("CartoDB.Positron") |>
+  # add adm3 shaded by number of cases
+  addPolygons(
+    fillColor = ~ pal(n),
+    color = "white",
+    weight = 1,
+    fillOpacity = 0.7,
+    # define labels
+    label = ~ map(
+      paste0("<b>", adm3, "</b><br>", n, " cases"),
+      htmltools::HTML
+    ),
+    labelOptions = labelOptions(direction = "auto"),
+    highlightOptions = highlightOptions(
+      weight = 3,
+      color = "black",
+      bringToFront = FALSE
+    )
   ) |>
-  drop_na(infector)
-
-# generate epicontacts object
-epic <- make_epicontacts(
-  linelist = linelist,
-  contacts = contacts,
-  id = "case_id",
-  from = "infector",
-  to = "case_id",
-  directed = TRUE
-)
-```
-
-### Funeral infections
-
-We first investigated funeral infections that occured during the year of 2014. Hover individual cases to get more detailed information.
-
-```{r}
-# filter by nosocomial infection between april and july
-funeral <- subset(
-  epic,
-  node_attribute = list(
-    date_infection = as.Date(c("2014-01-01", "2014-12-31"))
-  ),
-  edge_attribute = list(source = "funeral")
-) |>
-  thin(what = "contacts") |>
-  thin(what = "linelist")
-
-# plot and set the selector to hospital
-plot(
-  funeral,
-  label = FALSE,
-  node_color = "gender",
-  selector = "adm3",
-  height = 400,
-  width = 600
-)
-```
-
-### Infection clusters
-
-```{r}
-# add cluster information
-clusters <- get_clusters(epic)
-largest_cluster <- which.max(clusters$linelist$cluster_size)
-largest_size <- clusters$linelist$cluster_size[largest_cluster]
-largest <- subset(epic, cluster_id = clusters$linelist$id[largest_cluster])
+  # add legend
+  addLegend(
+    pal = pal,
+    values = ~n,
+    title = "Case count",
+    opacity = 0.7,
+    position = "bottomright"
+  )
 
 ```
 
-The largest transmission cluster consisted of `r largest_size` cases and is depicted on a timeline below.
+Spatial clustering of cases was then investigated at a higher spatial resolution using a heatmap.
 
 ```{r}
+# Prepare linelist data for heatmap
+# Filter cases with valid coordinates
+linelist_coords <- linelist |>
+  filter(!is.na(lon), !is.na(lat))
 
-# plot
-plot(
-  largest,
-  node_color = "gender",
-  selector = "hospital",
-  x_axis = "date_infection",
-  date_labels = "%d %b %Y",
-  label = FALSE,
-  height = 400,
-  width = 600,
-  node_size = 8,
-  arrow_size = 0.25,
-  network_shape = "rectangle"
-)
+# Generate heatmap from individual cases
+leaflet(linelist_coords) |>
+  # use CartoDB for background
+  addProviderTiles("CartoDB.Positron") |>
+  # add heatmap layer
+  addHeatmap(
+    lng = ~lon,
+    lat = ~lat,
+    intensity = 0.5,
+    blur = 5,
+    max = 0.05,
+    radius = 7,
+    gradient = c("blue", "cyan", "yellow", "red")
+  )
+
 ```

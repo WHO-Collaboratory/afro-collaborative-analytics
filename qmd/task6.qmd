@@ -1,5 +1,5 @@
 ---
-title: "Task 6: Estimating the reproduction number"
+title: "Task 6: Estimating disease severity"
 format:
   html:
     code-fold: true
@@ -9,150 +9,140 @@ execute:
 
 ## Overview
 
-This task covers estimating the basic and effective reproduction number (R0 and Rt), as well as other relevant metrics to quantify transmissibility such as the growth rate. You will learn methods for calculating these key epidemiological metrics from outbreak data, by accounting for reporting delays and uncertainty.
+This task focuses on estimating disease severity. You will learn how to calculate and interpret key severity metrics such as case fatality ratio and infection fatality ratio.
 
 ## Learning Objectives
 
-- Understand the difference between R0 and Rt
-- Estimate reproduction numbers from case data
-- Use appropriate methods for different data types
-- Visualize and interpret reproduction number estimates
+- Calculate case fatality ratio (CFR)
+- Estimate infection fatality ratio (IFR)
+- Adjust for time-to-death and censoring
+- Compare severity across populations and time periods
 
 ## Tutorial
 
-[Access the tutorial here](https://epiverse-trace.github.io/tutorials-middle/quantify-transmissibility.html)
-
-
-## Downloading Rt Estimates
-
-**Note:** Running EpiNow2 can be computationally expensive and may take several minutes to complete. If you want to skip this step, you can download the pre-computed estimates file and place it in your `outputs/` folder:
-
-<a href="outputs/rt_estimates.rds" download class="btn btn-primary" target="_blank">Download Rt estimates</a>
+[Access the tutorial here](https://epiverse-trace.github.io/tutorials-middle/severity-static.html)
 
 ## Example Report
 
 <a href="data/solutions/task6_solution.qmd" download class="btn btn-primary" target="_blank">Download solution file</a>
 
-### Converting linelist to incidence
+# Visualising incidence and death data
 
-We first import linelist data for an Ebola outbreak that started in April 2014, convert it to incidence, and visualise the epidemic curve.
+We estimate disease severity during an outbreak of Ebola in 2014.
+Firstly, we visualise case incidence and deaths across the entire available data from the outbreak (2014-2015).
+
 
 ```{r}
 # INSTALL AND LOAD PACKAGES
-pacman::p_load(tidyverse, EpiNow2, incidence2, rio, reactable)
+pacman::p_load(tidyverse, cfr, epiparameter, reactable)
 
 # LOAD DATA
-# Import the cleaned linelist data
-linelist <- readRDS("data/linelist.rds")
-
-# Convert linelist to incidence and format data for EpiNow2
-incidence <- linelist |>
+ebola_cases_deaths <- readRDS("data/linelist.rds") %>%
+  # Create date_death column: use date_outcome for entries where outcome == "Death"
+  mutate(date_death = if_else(outcome == "Death", date_outcome, as.Date(NA))) %>%
   incidence2::incidence(
-    date_index = "date_onset",
-    count_values_to = "confirm",
+    date_index = c("date_onset", "date_death"),
     date_names_to = "date",
     complete_dates = TRUE
-  ) |>
-  # Keep the first 90 dates
-  dplyr::slice_head(n = 190)
+  )
 
-# Plotting incidence curve
-plot(incidence) +
-  labs(x = "Date", y = "Cases")
+plot(ebola_cases_deaths)
+
 ```
 
-### Estimating Rt
+## Estimating Case Fatality Risk (CFR) in real-time
 
-We used {EpiNow2} to estimate the time-varying reproduction number (Rt) for 
-the Ebola outbreak, accounting for reporting delays. We first defined the parameters.
+To estimate the static CFR at a specific time-point during the outbreak, we subset the data to include the initial 150 days of the outbreak only. Then we estimate both the naive and the delay-adjusted CFR.
 
 ```{r}
-# define parameters
-pars <- tibble(
-  par = c("Incubation Period", "Reporting Delay", "Generation Time"),
-  dist = c("Gamma", "LogNormal", "LogNormal"),
-  mean = c(4, 2, 3),
-  sd = c(2, 1, 2.5),
-  max = c(20, 10, 15)
-)
+# Prepare data for {cfr} package
+ebola_data_cfr <- ebola_cases_deaths %>%
+  pivot_wider(names_from = count_variable, values_from = count) %>%
+  rename(cases = date_onset, deaths = date_death)
 
-# Creating distribution objects for the incubation period, reporting delay, and
-# generation time
-incubation_period_fixed <- EpiNow2::Gamma(
-  mean = pars$mean[1],
-  sd = pars$sd[1],
-  max = pars$max[1]
-)
+ebola_rt <- ebola_data_cfr %>%
+  slice(1:150)
 
-reporting_delay_fixed <- EpiNow2::LogNormal(
-  mean = pars$mean[2],
-  sd = pars$sd[2],
-  max = pars$max[2]
-)
+# Naive CFR
+cfr_naive <- cfr::cfr_static(data = ebola_rt)
 
-generation_time_fixed <- EpiNow2::LogNormal(
-  mean = pars$mean[3],
-  sd = pars$sd[3],
-  max = pars$max[3]
-)
+# Delay-adjusted CFR
+# Getting distribution from {epiparameter}
+onset_to_death_ebola <-
+  epiparameter::epiparameter_db(
+    disease = "Ebola",
+    epi_name = "onset_to_death",
+    single_epiparameter = TRUE
+  )
 
-# define Rt prior distribution
-rt_prior <- EpiNow2::rt_opts(
-  prior = EpiNow2::LogNormal(mean = 1.5, sd = 0.2)
-)
+cfr_adjusted <- cfr::cfr_static(data = ebola_rt, delay_density = function(x) density(onset_to_death_ebola, x))
 
-# print table
-reactable(
-  pars,
-  columns = list(
-    par = colDef(name = "Parameter"),
-    dist = colDef(name = "Distribution"),
-    mean = colDef(name = "Mean"),
-    sd = colDef(name = "Standard Deviation"),
-    max = colDef(name = "Maximum")
+# Create table with CFR estimates and confidence intervals
+# Create table with CFR estimates and confidence intervals
+cfr_table <- tibble(
+  Method = c("Naive CFR", "Adjusted CFR"),
+  Estimate = c(
+    round(cfr_naive$severity_estimate, 2),
+    round(cfr_adjusted$severity_estimate, 2)
+  ),
+  `Lower CI` = c(
+    round(cfr_naive$severity_low, 2),
+    round(cfr_adjusted$severity_low, 2)
+  ),
+  `Upper CI` = c(
+    round(cfr_naive$severity_high, 2),
+    round(cfr_adjusted$severity_high, 2)
   )
 )
-```
 
-The estimated time-varying reproduction number is visualised below.
+reactable(
+  cfr_table,
+  columns = list(
+    Method = colDef(name = "Method"),
+    Estimate = colDef(name = "Estimate")
+  ),
+  fullWidth = FALSE
+)
+
+```
+The naive CFR underestimates the case fatality risk by 7%.
+
+# Estimating CFR over the course of an outbreak
+
+We then estimate the case fatality risk at each time-point of the Ebola outbreak, including all available data.
 
 ```{r}
-# check if the analysis has been run before and run EpiNow2 if not
-file_name <- "outputs/rt_estimates.rds"
-if (file.exists(file_name)) {
-  rt_estimates <- import(file_name)
-} else {
-  # define cores
-  withr::local_options(base::list(mc.cores = 4))
-  ## generate estimates
-  rt_estimates <- EpiNow2::epinow(
-    # # Drop column for {EpiNow2} input format
-    data = select(incidence, -count_variable),
-    # delays
-    generation_time = EpiNow2::generation_time_opts(generation_time_fixed),
-    delays = EpiNow2::delay_opts(
-      incubation_period_fixed + reporting_delay_fixed
+# Calculate the rolling daily naive CFR
+rolling_cfr_naive <- cfr::cfr_rolling(data = ebola_data_cfr)
+
+# Calculate the rolling daily delay-adjusted CFR
+rolling_cfr_adjusted <- cfr::cfr_rolling(
+  data = ebola_data_cfr,
+  delay_density = function(x) density(onset_to_death_ebola, x)
+)
+
+# bind by rows both output data frames
+dplyr::bind_rows(
+  list(
+    naive = rolling_cfr_naive,
+    adjusted = rolling_cfr_adjusted
+  ),
+  .id = "method"
+) %>%
+  # visualise both adjusted and unadjusted rolling estimates
+  ggplot() +
+  geom_ribbon(
+    aes(
+      date,
+      ymin = severity_low,
+      ymax = severity_high,
+      fill = method
     ),
-    # prior
-    rt = rt_prior,
-    stan = EpiNow2::stan_opts(samples = 1000, chains = 3)
-  )
-  export(rt_estimates, file_name)
-}
-
-# plot reproduction number
-rt_estimates$plots$R
+    alpha = 0.2, show.legend = FALSE
+  ) +
+  geom_line(
+    aes(date, severity_estimate, colour = method)
+  ) +
+  theme_bw()
 ```
-
-Key summary statistics are provided below:
-
-```{r}
-# generate an interactive table
-reactable(
-  summary(rt_estimates),
-  columns = list(
-    measure = colDef(name = "Measure"),
-    estimate = colDef(name = "Estimate")
-  )
-)
-```
+The unadjusted, naive CFR underestimates the CFR significantly at the beginning of the outbreak, and approaches the delay-adjusted CFR values as the epidemic passes its peak and data on deaths becomes available.

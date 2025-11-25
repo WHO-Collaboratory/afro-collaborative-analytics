@@ -1,174 +1,158 @@
 ---
-title: "Task 7: Nowcasting epidemiological data"
+title: "Task 7: Estimating the reproduction number"
 format:
   html:
     code-fold: true
 execute:
   warning: false
-editor: 
-  markdown: 
-    wrap: 72
 ---
 
 ## Overview
 
-This task walks you through nowcasting epidemiological data. You will
-learn to correct for epidemiological and reporting delays so you can
-estimate current case counts even when the data are incomplete. Along
-the way, you will learn how to work with the delay distributions
-provided by {epiparameter}—discretising continuous distributions,
-turning parameters into {EpiNow2} inputs, and using those distribution
-functions to guide decisions like setting appropriate quarantine
-lengths.
+This task covers estimating the basic and effective reproduction number (R0 and Rt), as well as other relevant metrics to quantify transmissibility such as the growth rate. You will learn methods for calculating these key epidemiological metrics from outbreak data, by accounting for reporting delays and uncertainty.
 
 ## Learning Objectives
 
--   Understand reporting delays and their impact
--   Apply nowcasting methods to epidemiological data
--   Adjust for underreporting and delays
--   Generate real-time estimates of current incidence
+- Understand the difference between R0 and Rt
+- Estimate reproduction numbers from case data
+- Use appropriate methods for different data types
+- Visualize and interpret reproduction number estimates
 
 ## Tutorial
 
-[Access the tutorial
-here](https://epiverse-trace.github.io/tutorials-middle/delays-functions.html)
+[Access the tutorial here](https://epiverse-trace.github.io/tutorials-middle/quantify-transmissibility.html)
 
-## Downloading Nowcast Estimates
 
-**Note:** Running EpiNow2 can be computationally expensive and may take
-several minutes to complete. If you want to skip this step, you can
-download the pre-computed estimates file and place it in your `outputs/`
-folder:
+## Downloading Rt Estimates
 
-<a href="outputs/nowcast_estimates.rds" download class="btn btn-primary" target="_blank">Download
-nowcast estimates</a>
+**Note:** Running EpiNow2 can be computationally expensive and may take several minutes to complete. If you want to skip this step, you can download the pre-computed estimates file and place it in your `outputs/` folder:
+
+<a href="outputs/rt_estimates.rds" download class="btn btn-primary" target="_blank">Download Rt estimates</a>
 
 ## Example Report
 
-<a href="data/solutions/task7_solution.qmd" download class="btn btn-primary" target="_blank">Download
-solution file</a>
+<a href="data/solutions/task7_solution.qmd" download class="btn btn-primary" target="_blank">Download solution file</a>
 
-### Visualising available epiparameter distributions
+### Converting linelist to incidence
 
-We first explore the available distributions in {epiparameter} that we
-can use to adjust for delays during an Ebola outbreak.
+We first import linelist data for an Ebola outbreak that started in April 2014, convert it to incidence, and visualise the epidemic curve.
 
 ```{r}
 # INSTALL AND LOAD PACKAGES
-pacman::p_load(tidyverse, EpiNow2, incidence2, reactable, rio)
+pacman::p_load(tidyverse, EpiNow2, incidence2, rio, reactable)
 
-# List distributions
-epiparameter::epiparameter_db(disease = "ebola") |>
-  epiparameter::parameter_tbl() |>
-  select(-disease) |>
-  reactable::reactable(defaultPageSize = 5)
-```
-
-### Extracting relevant parameters and adjusting for delays
-
-We imported linelist data for the Ebola outbreak, and converted it to
-incidence. Then extracted parameter distributions for the serial
-interval and incubation period for Ebola, chosen from the table above.
-
-```{r}
 # LOAD DATA
-# Import linelist data and convert to incidence
-ebola_incidence <- readRDS("data/linelist.rds") |>
+# Import the cleaned linelist data
+linelist <- readRDS("data/linelist.rds")
+
+# Convert linelist to incidence and format data for EpiNow2
+incidence <- linelist |>
   incidence2::incidence(
     date_index = "date_onset",
     count_values_to = "confirm",
     date_names_to = "date",
     complete_dates = TRUE
   ) |>
-  dplyr::select(-count_variable)
+  # Keep the first 90 dates
+  dplyr::slice_head(n = 190)
 
-# serial interval ---------------------------------------------------------
-
-# subset one distribution for the SI
-ebola_serial <- epiparameter::epiparameter_db(
-  disease = "ebola",
-  epi_name = "serial",
-  single_epiparameter = TRUE
-)
-
-# adapt SI epiparameter object to EpiNow2
-ebola_serial_discrete <- epiparameter::discretise(ebola_serial)
-
-serial_interval_ebola <-
-  EpiNow2::Gamma(
-    mean = ebola_serial$summary_stats$mean,
-    sd = ebola_serial$summary_stats$sd,
-    max = quantile(ebola_serial_discrete, p = 0.99)
-  )
-
-# incubation period ---------------------------------------------------------
-
-# subset one distribution for ebola incubation period
-ebola_incubation <- epiparameter::epiparameter_db(
-  disease = "ebola",
-  epi_name = "incubation",
-  single_epiparameter = TRUE
-)
-
-# adapt IP epiparameter object to EpiNow2
-ebola_incubation_discrete <- epiparameter::discretise(ebola_incubation)
-
-incubation_period_ebola <-
-  EpiNow2::Gamma(
-    mean = ebola_incubation$summary_stats$mean,
-    sd = ebola_incubation$summary_stats$sd,
-    max = quantile(ebola_serial_discrete, p = 0.99)
-  )
-
-# reporting delay ---------------------------------------------------------
-reporting_delay <- EpiNow2::LogNormal(
-  mean = 10,
-  sd = 3,
-  max = 15
-)
-
-# check if the analysis has been run before and run EpiNow2 if not
-file_name <- "outputs/nowcast_estimates.rds"
-if (file.exists(file_name)) {
-  nowcast_estimates <- import(file_name)
-} else {
-  # nowcasting with epinow ---------------------------------------------------
-  withr::local_options(base::list(mc.cores = 4))
-  nowcast_estimates <- EpiNow2::estimate_infections(
-    data = ebola_incidence,
-    generation_time = EpiNow2::generation_time_opts(serial_interval_ebola),
-    delays = EpiNow2::delay_opts(incubation_period_ebola + reporting_delay),
-    forecast = NULL,
-    stan = EpiNow2::stan_opts(samples = 500, chains = 2)
-  )
-  export(nowcast_estimates, file_name)
-}
-
+# Plotting incidence curve
+plot(incidence) +
+  labs(x = "Date", y = "Cases")
 ```
 
-We then adjust for a reporting delay of 10 days from onset to
-notification, on average.
+### Estimating Rt
+
+We used {EpiNow2} to estimate the time-varying reproduction number (Rt) for 
+the Ebola outbreak, accounting for reporting delays. We first defined the parameters.
 
 ```{r}
-infection_plot <- plot(nowcast_estimates, type = "infections")
+# define parameters
+pars <- tibble(
+  par = c("Incubation Period", "Reporting Delay", "Generation Time"),
+  dist = c("Gamma", "LogNormal", "LogNormal"),
+  mean = c(4, 2, 3),
+  sd = c(2, 1, 2.5),
+  max = c(20, 10, 15)
+)
 
-weekly_obs <- nowcast_estimates$observations %>%
-  mutate(week= floor_date(date, "week", week_start = 1)) %>%
-  group_by(week) %>%
-  summarise(
-    confirm = mean(confirm, na.rm = TRUE),  # average daily cases that week
-    .groups = "drop"
+# Creating distribution objects for the incubation period, reporting delay, and
+# generation time
+incubation_period_fixed <- EpiNow2::Gamma(
+  mean = pars$mean[1],
+  sd = pars$sd[1],
+  max = pars$max[1]
+)
+
+reporting_delay_fixed <- EpiNow2::LogNormal(
+  mean = pars$mean[2],
+  sd = pars$sd[2],
+  max = pars$max[2]
+)
+
+generation_time_fixed <- EpiNow2::LogNormal(
+  mean = pars$mean[3],
+  sd = pars$sd[3],
+  max = pars$max[3]
+)
+
+# define Rt prior distribution
+rt_prior <- EpiNow2::rt_opts(
+  prior = EpiNow2::LogNormal(mean = 1.5, sd = 0.2)
+)
+
+# print table
+reactable(
+  pars,
+  columns = list(
+    par = colDef(name = "Parameter"),
+    dist = colDef(name = "Distribution"),
+    mean = colDef(name = "Mean"),
+    sd = colDef(name = "Standard Deviation"),
+    max = colDef(name = "Maximum")
   )
+)
+```
 
-infection_plot$layers <- infection_plot$layers[-1]
+The estimated time-varying reproduction number is visualised below.
 
-infection_plot +
-  geom_col(
-    data = weekly_obs,
-    aes(x = week, y = confirm),
-    inherit.aes = FALSE,
-    fill = "#9ca3af",
-    alpha = 0.4,
-    width = 6
+```{r}
+# check if the analysis has been run before and run EpiNow2 if not
+file_name <- "outputs/rt_estimates.rds"
+if (file.exists(file_name)) {
+  rt_estimates <- import(file_name)
+} else {
+  # define cores
+  withr::local_options(base::list(mc.cores = 4))
+  ## generate estimates
+  rt_estimates <- EpiNow2::epinow(
+    # # Drop column for {EpiNow2} input format
+    data = select(incidence, -count_variable),
+    # delays
+    generation_time = EpiNow2::generation_time_opts(generation_time_fixed),
+    delays = EpiNow2::delay_opts(
+      incubation_period_fixed + reporting_delay_fixed
+    ),
+    # prior
+    rt = rt_prior,
+    stan = EpiNow2::stan_opts(samples = 1000, chains = 3)
   )
+  export(rt_estimates, file_name)
+}
+
+# plot reproduction number
+rt_estimates$plots$R
+```
+
+Key summary statistics are provided below:
+
+```{r}
+# generate an interactive table
+reactable(
+  summary(rt_estimates),
+  columns = list(
+    measure = colDef(name = "Measure"),
+    estimate = colDef(name = "Estimate")
+  )
+)
 ```

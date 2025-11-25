@@ -9,145 +9,124 @@ execute:
 ---
 
 
+### Forecasting incidence with incomplete observations
+
+We first used {EpiNow2} to forecast incidence of Ebola, accounting for
+under-reporting of outbreak cases. We estimate that only 40% of actual cases 
+were reported during surveillance activities.
+
 ```{r}
 # INSTALL AND LOAD PACKAGES
+pacman::p_load(tidyverse, EpiNow2, incidence2, reactable, rio)
 
-# Install epidemics from GitHub
-pacman::p_load_gh("epiverse-trace/epidemics")
+# LOAD DATA
+# Import linelist data and convert to incidence
+ebola_incidence <- readRDS("data/linelist.rds") |>
+  incidence2::incidence(
+    date_index = "date_onset",
+    count_values_to = "confirm",
+    date_names_to = "date",
+    complete_dates = TRUE
+  ) |>
+  dplyr::select(-count_variable)
 
-# Load required packages
-pacman::p_load(tidyverse, epidemics, socialmixr, reactable)
-```
-
-### Define population demographics and initial population conditions
-
-We first extract a social contact matrix from {socialmixr} for the United Kingdom. 
-A single individual from the youngest age category (under 20 years old) was infected and introduced the disease in a population of 1 million, which were initially fully susceptible to the infection.
-
-
-```{r}
-# Defining social contact matrix
-contact_data <- socialmixr::contact_matrix(
-  survey = socialmixr::polymod,
-  countries = "United Kingdom",
-  age.limits = c(0, 20, 40),
-  symmetric = TRUE
-)
-# prepare contact matrix
-contact_matrix <- t(contact_data$matrix)
-
-# Define population's initial conditions
-initial_i <- 1e-6
-initial_conditions_inf <- c(
-  S = 1 - initial_i, E = 0, I = initial_i, R = 0, V = 0
-)
-initial_conditions_free <- c(
-  S = 1, E = 0, I = 0, R = 0, V = 0
+# Defining generation time and Rt priors
+# Generation time
+generation_time_fixed <- EpiNow2::LogNormal(
+  mean = 4,
+  sd = 2,
+  max = 15
 )
 
-# combine the initial conditions
-initial_conditions <- rbind(
-  initial_conditions_inf, # age group 1
-  initial_conditions_free, # age group 2
-  initial_conditions_free # age group 3
-)
+# define Rt prior distribution
+rt_prior <- EpiNow2::rt_opts(prior = EpiNow2::LogNormal(mean = 2, sd = 2))
 
-# use contact matrix to assign age group names
-rownames(initial_conditions) <- rownames(contact_matrix)
+# Define observation model with 40% of cases being reported
+obs_scale <- EpiNow2::Normal(mean = 0.4, sd = 0.01)
 
-# Create demography vector
-demography_vector <- contact_data$demography$population
-names(demography_vector) <- rownames(contact_matrix)
-
-# Create population object for {epidemics}
-uk_population <- population(
-  name = "UK",
-  contact_matrix = contact_matrix,
-  demography_vector = demography_vector,
-  initial_conditions = initial_conditions
-)
-```
-
-Here we see the demography:
-```{r}
-enframe(uk_population$demography_vector, "Age group", "Population") |>
-  reactable(fullWidth = FALSE)
-```
-
-Here we see the contact matrix:
-```{r}
-round(uk_population$contact_matrix, 1) |>
-  reactable(fullWidth = FALSE)
-```
-
-And here the initial conditions:
-```{r}
-uk_population$initial_conditions |>
-  reactable(fullWidth = FALSE)
-```
-
-
-### Simulating transmission
-
-We fitted an SEIR to model the transmission of an infectious disease with a basic reproduction number of 1.5, an infectious period of 7 days, and a pre-infectious period of 3 days.
-
-```{r}
-# Defining model parameters
-# time periods
-preinfectious_period <- 3.0
-infectious_period <- 7.0
-
-# specify the mean and standard deviation of R0
-r_estimate_mean <- 1.5
-r_estimate_sd <- 0.05
-
-# Generate 100 R samples
-r_samples <- withr::with_seed(
-  seed = 1,
-  rnorm(
-    n = 100, mean = r_estimate_mean, sd = r_estimate_sd
+# Check if the analysis has been run before and run EpiNow2 if not
+file_name <- "outputs/forecast_estimates.rds"
+if (file.exists(file_name)) {
+  forecast_estimates <- import(file_name)
+} else {
+  # forecasting with epinow ---------------------------------------------------
+  withr::local_options(base::list(mc.cores = 4))
+  forecast_estimates <- EpiNow2::epinow(
+    data = ebola_incidence,
+    generation_time = EpiNow2::generation_time_opts(generation_time_fixed),
+    rt = rt_prior,
+    # Add observation model
+    obs = EpiNow2::obs_opts(scale = obs_scale),
+    # Forecast window
+    forecast = forecast_opts(horizon = 15),
+    stan = EpiNow2::stan_opts(samples = 500, chains = 2)
   )
-)
+  export(forecast_estimates, file_name)
+}
 
-# rates
-infectiousness_rate <- 1.0 / preinfectious_period
-recovery_rate <- 1.0 / infectious_period
-beta <- r_samples / infectious_period
-
-# running {epidemic} default model
-output <- model_default(
-  population = uk_population,
-  transmission_rate = beta,
-  infectiousness_rate = infectiousness_rate,
-  recovery_rate = recovery_rate,
-  time_end = 600, increment = 1
-)
-
-# Visualising output
-output %>%
-  mutate(r_value = r_samples) %>%
-  unnest(data) %>%
-  filter(compartment == "infectious") %>%
-  ggplot() +
-  geom_line(
-    aes(time, value, color = r_value, group = param_set),
-    alpha = 3
-  ) +
-  scale_color_fermenter(
-    palette = "RdBu",
-    name = "R"
-  ) +
-  scale_y_continuous(
-    labels = scales::comma
-  ) +
-  facet_grid(
-    cols = vars(demography_group)
-  ) +
-  theme_bw() +
-  labs(
-    x = "Simulation time (days)",
-    y = "Individuals"
-  )
+forecast_estimates$plots$infections
 ```
 
-The figure above shows the total number or cumulative amount of individuals in the infectious compartment at each time, across the 100 simulations run for different basic reproduction number values.
+### Forecasting secondary observations
+
+```{r}
+#| output: false
+# Select early stages of the outbreak and convert data to EpiNow2 input, with
+# date, primary, and secondary columns
+
+ebola_cases_deaths <- readRDS("data/linelist.rds") |>
+  # Create date_death column: use date_outcome for entries where outcome == "Death"
+  mutate(date_death = if_else(outcome == "Death", date_outcome, as.Date(NA))) |>
+  incidence2::incidence(
+    date_index = c("date_onset", "date_death"),
+    date_names_to = "date",
+    complete_dates = TRUE
+  ) |>
+  pivot_wider(names_from = count_variable, values_from = count) |>
+  rename(primary = date_onset, secondary = date_death)
+
+# onset to death delay ---------------------------------------------------------
+onset_death_ebola <- epiparameter::epiparameter_db(
+  disease = "ebola",
+  epi_name = "onset to death",
+  single_epiparameter = TRUE
+)
+
+onset_death_ebola_discrete <- epiparameter::discretise(onset_death_ebola)
+
+od_ebola_EN2 <-
+  EpiNow2::Gamma(
+    mean = onset_death_ebola$summary_stats$mean,
+    sd = onset_death_ebola$summary_stats$sd,
+    max = quantile(onset_death_ebola, p = 0.99)
+  )
+
+# Establish relationship between cases and deaths
+data_od_estimation <- ebola_cases_deaths |> slice(20:150)
+estimate_cases_to_deaths <- EpiNow2::estimate_secondary(
+  data = data_od_estimation,
+  secondary = EpiNow2::secondary_opts(type = "incidence"),
+  delays = EpiNow2::delay_opts(od_ebola_EN2)
+)
+```
+
+We then forecasted the number of deaths that would arise from reported Ebola cases in the early stages of the outbreak that started in 2014.
+
+```{r}
+plot(estimate_cases_to_deaths, primary = TRUE)
+
+# Forecast from day 151 to day 300 (not included in model fit)
+# Rename primary to value (required by forecast_secondary)
+cases_to_forecast <- ebola_cases_deaths |>
+  slice(151:300) |>
+  select(date, primary) |>
+  rename(value = primary)
+
+# Forecast secondary cases
+deaths_forecast <- EpiNow2::forecast_secondary(
+  estimate = estimate_cases_to_deaths,
+  primary = cases_to_forecast
+)
+
+plot(deaths_forecast)
+```

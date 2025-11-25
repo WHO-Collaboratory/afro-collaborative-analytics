@@ -1,5 +1,5 @@
 ---
-title: "Task 4: Getting epidemiological parameters"
+title: "Task 4: Visualising transmission chains"
 format:
   html:
     code-fold: true
@@ -9,62 +9,122 @@ execute:
 
 ## Overview
 
-This task focuses on obtaining epidemiological parameters from your data or the literature. You will learn how to extract, estimate, and use key epidemiological parameters in your analyses.
+This task covers visualizing transmission chains using epicontacts. You will learn how to analyze and visualize contact networks and transmission pathways.
 
 ## Learning Objectives
 
-- Extract epidemiological parameters from data
-- Search and retrieve parameters from literature
-- Estimate parameters using available data
-- Incorporate parameters into analytical models
+- Work with contact network data
+- Visualize transmission chains using epicontacts
+- Analyze contact patterns
+- Identify transmission clusters
 
 ## Tutorial
 
-[Access the tutorial here](https://epiverse-trace.github.io/tutorials-middle/delays-access.html)
+[Access the tutorial here](https://www.epirhandbook.com/en/new_pages/transmission_chains.html)
 
 ## Example Report
 
 <a href="data/solutions/task4_solution.qmd" download class="btn btn-primary" target="_blank">Download solution file</a>
 
-### Ebola serial interval
-The serial interval for Ebola was extracted from the `epiparameter` package, identifying the following source:
-
 ```{r}
-#| results: asis
 
 # INSTALL AND LOAD PACKAGES
 
+# install development version of epicontacts
+pacman::p_install_gh("reconhub/epicontacts@timeline")
+
 # Load required packages
-pacman::p_load(epiparameter, tidyverse, EpiNow2, reactable)
-
-# Creating epiparameter objects by accessing the {epiparameter} library
-ebola_serial_int <- epiparameter::epiparameter_db(
-  disease = "ebola",
-  epi_name = "serial",
-  subset = sample_size > 10,
-  author = "WHO Ebola Response Team",
-  single_epiparameter = TRUE
+pacman::p_load(
+  rio, # File import
+  here, # File locator
+  tidyverse, # Data management + ggplot2 graphics
+  remotes, # Package installation from github
+  epicontacts, # Transmission chain analysis
+  reactable # Interactive tables
 )
 
-ebola_serial_int$citation
-```
 
-```{r}
-# Extract summary statistics and parameters
-pars <- epiparameter::get_parameters(ebola_serial_int) # distribution parameters
-serial_mean <- ebola_serial_int$summary_stats$mean
-serial_sd <- ebola_serial_int$summary_stats$sd
+# LOAD DATA
+# Import the cleaned linelist data
+linelist <- readRDS("data/linelist.rds")
 
-# Calculate 95th percentile of serial interval
-serial_interval_95th <- qgamma(
-  0.95,
-  shape = pars["shape"],
-  scale = pars["scale"]
+
+# SETTING UP EPICONTACTS
+
+## generate contacts
+contacts <- linelist |>
+  transmute(
+    infector = infector,
+    case_id = case_id,
+    source = source
+  ) |>
+  drop_na(infector)
+
+# generate epicontacts object
+epic <- make_epicontacts(
+  linelist = linelist,
+  contacts = contacts,
+  id = "case_id",
+  from = "infector",
+  to = "case_id",
+  directed = TRUE
 )
 ```
 
-This estimate has a mean of `r round(serial_mean, 1)` days and standard deviation of `r round(serial_sd, 1)` days, meaning that 95% of cases have a serial interval of less than `r round(serial_interval_95th, 0)` days. The probability density function of the serial interval is given below:
+### Funeral infections
+
+We first investigated funeral infections that occured during the year of 2014. Hover individual cases to get more detailed information.
 
 ```{r}
-plot(ebola_serial_int) # as a plot of the PDF
+# filter by nosocomial infection between april and july
+funeral <- subset(
+  epic,
+  node_attribute = list(
+    date_infection = as.Date(c("2014-01-01", "2014-12-31"))
+  ),
+  edge_attribute = list(source = "funeral")
+) |>
+  thin(what = "contacts") |>
+  thin(what = "linelist")
+
+# plot and set the selector to hospital
+plot(
+  funeral,
+  label = FALSE,
+  node_color = "gender",
+  selector = "adm3",
+  height = 400,
+  width = 600
+)
+```
+
+### Infection clusters
+
+```{r}
+# add cluster information
+clusters <- get_clusters(epic)
+largest_cluster <- which.max(clusters$linelist$cluster_size)
+largest_size <- clusters$linelist$cluster_size[largest_cluster]
+largest <- subset(epic, cluster_id = clusters$linelist$id[largest_cluster])
+
+```
+
+The largest transmission cluster consisted of `r largest_size` cases and is depicted on a timeline below.
+
+```{r}
+
+# plot
+plot(
+  largest,
+  node_color = "gender",
+  selector = "hospital",
+  x_axis = "date_infection",
+  date_labels = "%d %b %Y",
+  label = FALSE,
+  height = 400,
+  width = 600,
+  node_size = 8,
+  arrow_size = 0.25,
+  network_shape = "rectangle"
+)
 ```

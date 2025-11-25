@@ -1,5 +1,5 @@
 ---
-title: "Task 2: Generating interactive maps"
+title: "Task 2: Basic descriptive analyses"
 format:
   html:
     code-fold: true
@@ -10,130 +10,198 @@ execute:
 
 ## Overview
 
-This task focuses on creating interactive maps for visualizing spatial aspects of epidemiological data. You will learn how to work with spatial data, create maps using GIS tools in R, and visualize disease patterns geographically.
+This task covers basic descriptive analyses for epidemiological data. You will learn how to generate summary statistics, create incidence curves, visualize demographic patterns, and build foundational components of an epidemiological situation report.
 
 ## Learning Objectives
 
-- Work with spatial data formats (shapefiles, coordinates)
-- Create interactive maps using GIS tools in R
-- Visualize disease patterns and hotspots geographically
-- Perform basic spatial analysis
+- Create automated report generation workflows
+- Incorporate dynamic figures and tables
+- Use Quarto for report generation
+- Build a basic epidemiological report with incidence curves and summary statistics
+- Visualize demographic patterns using age-sex pyramids
 
 ## Tutorial
 
-[Access the tutorial here](https://www.epirhandbook.com/en/new_pages/gis.html)
+For detailed guidance on creating and customizing visualizations:
 
-## Download GIS Data
-
-For this task, you will need the GIS shapefile data to create the maps. The shapefile contains administrative boundaries for Sierra Leone.
-
-1. Download the GIS data zip file using the button below.
-2. **Unzip the file** and extract its contents to your `data/gis/` folder.
-3. The extracted files should include `sle_adm3.shp` and other related shapefile components in the `data/gis/` directory.
-
-[Download GIS data (zip)](https://github.com/WHO-Collaboratory/afro-collaborative-analytics/raw/refs/heads/main/qmd/data/gis.zip){.btn .btn-primary target="_blank"}
+- [Epidemic Curves tutorial](https://www.epirhandbook.com/en/new_pages/epicurves.html) - Learn how to create and customize incidence curves
+- [Demographic Pyramids tutorial](https://www.epirhandbook.com/en/new_pages/age_pyramid.html) - Learn how to create age-sex pyramids
 
 ## Example Report
 
 <a href="data/solutions/task2_solution.qmd" download class="btn btn-primary" target="_blank">Download solution file</a>
-
-### Geographic distribution of cases
 
 ```{r}
 # INSTALL AND LOAD PACKAGES
 
 # Load required packages
 pacman::p_load(
-  tidyverse, # basic data manipulation
-  sf, # handling shapefiles
-  here, # handing file paths
-  leaflet, # mapping
-  leaflet.extras, # additional leaflet features including heatmaps
-  htmltools # handlers for html objects
+  tidyverse, # For data manipulation and visualization
+  reactable, # For interactive tables
+  lubridate, # For date handling
+  apyramid # For age-sex pyramids
 )
 
 
 # LOAD DATA
 
-# load shapefiles and keep relevant areas
-shp <- sf::read_sf("data/gis/sle_adm3.shp") |>
-  # standardize column names
-  janitor::clean_names()
+# Import the cleaned linelist data from your local data folder
+linelist <- readRDS("data/linelist.rds")
 
-# import the cleaned linelist data
-linelist <- rio::import("data/linelist.rds")
 
-# convert to aggregate format
-agg <- linelist |>
-  # count the number of cases per adm3
-  summarise(n = n(), .by = adm3) |>
-  # add the shape files of the adm3 zones
-  inner_join(shp, by = c(adm3 = "adm3_en")) |>
-  # convert back to shapefile
-  st_as_sf()
+# SUMMARY STATISTICS
 
-```
+# Calculate first case month and peak month
+first_case <- which.min(linelist$date_onset)
+first_case_location <- paste0(linelist$adm3[first_case], ", ", linelist$adm2[first_case])
+first_case_month <- format(linelist$date_onset[first_case], "%B %Y")
 
-Total incidence to date was mapped by chiefdom.
+# Calculate month with most cases
+monthly_cases <- linelist |>
+  filter(!is.na(date_onset)) |>
+  mutate(month = floor_date(date_onset, unit = "month")) |>
+  count(month) |>
+  arrange(desc(n))
 
-```{r}
-# define colour palette
-pal <- colorNumeric(palette = "YlOrRd", domain = agg$n)
+# Extract monthly information
+peak_month <- format(monthly_cases$month[1], "%B %Y")
+peak_cases <- monthly_cases$n[1]
 
-# generate choropleth map (polygons only)
-leaflet(agg) |>
-  # use CartoDB for background
-  addProviderTiles("CartoDB.Positron") |>
-  # add adm3 shaded by number of cases
-  addPolygons(
-    fillColor = ~ pal(n),
-    color = "white",
-    weight = 1,
-    fillOpacity = 0.7,
-    # define labels
-    label = ~ map(
-      paste0("<b>", adm3, "</b><br>", n, " cases"),
-      htmltools::HTML
-    ),
-    labelOptions = labelOptions(direction = "auto"),
-    highlightOptions = highlightOptions(
-      weight = 3,
-      color = "black",
-      bringToFront = FALSE
-    )
+# Create summary table by adm3
+adm3_summary <- linelist |>
+  summarise(
+    total_cases = n(),
+    deaths = sum(outcome == "Death", na.rm = TRUE),
+    .by = adm3
   ) |>
-  # add legend
-  addLegend(
-    pal = pal,
-    values = ~n,
-    title = "Case count",
-    opacity = 0.7,
-    position = "bottomright"
-  )
+  arrange(desc(total_cases))
 
 ```
 
-Spatial clustering of cases was then investigated at a higher spatial resolution using a heatmap.
+### Overview
+
+The first case was reported in `r first_case_location` on `r first_case_month`. Case numbers increased to a maximum of `r peak_cases` cases in `r peak_month` before declining.
 
 ```{r}
-# Prepare linelist data for heatmap
-# Filter cases with valid coordinates
-linelist_coords <- linelist |>
-  filter(!is.na(lon), !is.na(lat))
+# CREATE INCIDENCE CURVE
 
-# Generate heatmap from individual cases
-leaflet(linelist_coords) |>
-  # use CartoDB for background
-  addProviderTiles("CartoDB.Positron") |>
-  # add heatmap layer
-  addHeatmap(
-    lng = ~lon,
-    lat = ~lat,
-    intensity = 0.5,
-    blur = 5,
-    max = 0.05,
-    radius = 7,
-    gradient = c("blue", "cyan", "yellow", "red")
+# Create incidence curve
+incidence_curve <- linelist |>
+  ggplot(aes(x = date_onset, fill = adm3)) +
+  geom_histogram(binwidth = 7) +
+  scale_fill_viridis_d(
+    guide = guide_legend(reverse = FALSE),
+    na.value = "grey"
+  ) +
+  labs(
+    x = "Date of Onset",
+    y = "Number of Cases",
+    fill = "Chiefdom"
+  ) +
+  theme_minimal()
+
+# Display the plot
+incidence_curve
+
+```
+
+Summary statistics of case and deaths by chiefdom are provided below.
+
+```{r}
+
+# Create interactive table
+reactable(
+  adm3_summary,
+  columns = list(
+    adm3 = colDef(name = "Chiefdom"),
+    total_cases = colDef(name = "Total Cases"),
+    deaths = colDef(name = "Deaths")
+  ),
+  defaultPageSize = nrow(adm3_summary)
+)
+```
+
+
+### Age and Sex Distribution
+
+The age and sex distribution of cases was visualized to identify demographic patterns in the outbreak.
+
+```{r}
+# CREATE AGE-SEX PYRAMID
+
+# Create age-sex pyramid using apyramid package
+age_pyramid <- apyramid::age_pyramid(
+  data = linelist,
+  age_group = "age_cat",
+  split_by = "gender",
+  show_midpoint = FALSE
+) +
+  labs(
+    title = NULL,
+    x = "Age Group",
+    y = "Number of Cases",
+    fill = "Gender"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom"
   )
+
+# Display the plot
+age_pyramid
+
+```
+
+### Disease Severity
+
+```{r}
+
+# Calculate CFR (excluding NA outcomes)
+cfr <- linelist |>
+  filter(!is.na(outcome)) |>
+  summarise(
+    total_cases = n(),
+    deaths = sum(outcome == "Death", na.rm = TRUE),
+    recovered = sum(outcome == "Recover", na.rm = TRUE),
+    unknown = sum(is.na(outcome)),
+    cfr = round((deaths / (deaths + recovered)) * 100, 0)
+  )
+
+missing_outcome <- scales::percent(mean(is.na(linelist$outcome)))
+
+```
+
+The crude case fatality ratio (CFR) was estimated at `r cfr$cfr`%, though the outcome was unknown for `r missing_outcome` of cases. CFR estimates were also generated by health facility to identify potential facilities with significantly worse outcomes.
+
+```{r}
+
+# Create summary table by hospital
+hospital_summary <- linelist |>
+  # group missing and other hospitals
+  mutate(
+    hospital = modify_if(hospital, ~ .x %in% c("Other", "Missing"), ~"Other/Missing")
+  ) |>
+  summarise(
+    total_cases = n(),
+    deaths = sum(outcome == "Death", na.rm = TRUE),
+    recovered = sum(outcome == "Recover", na.rm = TRUE),
+    unknown = sum(is.na(outcome)),
+    cfr = round((deaths / (deaths + recovered)) * 100, 0),
+    .by = hospital
+  )
+
+# Create interactive table
+reactable(
+  hospital_summary,
+  columns = list(
+    hospital = colDef(name = "Hospital"),
+    total_cases = colDef(name = "Total Cases"),
+    deaths = colDef(name = "Deaths"),
+    recovered = colDef(name = "Recovered"),
+    unknown = colDef(name = "Unknown"),
+    cfr = colDef(name = "CFR (%)")
+  ),
+  defaultPageSize = nrow(hospital_summary)
+)
 
 ```

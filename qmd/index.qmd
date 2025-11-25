@@ -37,20 +37,18 @@ If you are a beginner to R, you can work through the [Intro to R](intro.qmd) tut
 
 #### Option C: Report Generation & Analytics
 
-There are 10 tutorials that are available to you. Start with the first and then work through others that interest you:
+If you are automated in **automated report generation** and **analytics**,  there are 10 tutorials that are available to you. Start with the first and then work through others that interest you:
 
-0. [Introduction to Quarto](task0.qmd)
-1. [Generating a basic situation report](task1.qmd)
-2. [Generating interactive maps](task2.qmd)
-3. [Visualising transmission chains](task3.qmd)
-4. [Getting epidemiological parameters](task4.qmd)
-5. [Estimating disease severity](task5.qmd)
-6. [Estimating the reproduction number](task6.qmd)
-7. [Nowcasting epidemiological data](task7.qmd)
-8. [Forecasting cases and deaths](task8.qmd)
-9. [Simulating disease transmission](task9.qmd)
-
-### Task structure
+1. [Setting up an automated report](task1.qmd)
+2. [Basic descriptive analyses](task2.qmd)
+3. [Generating interactive maps](task3.qmd)
+4. [Visualising transmission chains](task4.qmd)
+5. [Getting epidemiological parameters](task5.qmd)
+6. [Estimating disease severity](task6.qmd)
+7. [Estimating the reproduction number](task7.qmd)
+8. [Nowcasting epidemiological data](task8.qmd)
+9. [Forecasting cases and deaths](task9.qmd)
+10. [Simulating disease transmission](task10.qmd)
 
 Each task page includes:
 

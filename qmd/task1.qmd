@@ -1,5 +1,5 @@
 ---
-title: "Task 1: Generating a basic situation report"
+title: "Task 1: Setting up an automated report"
 format:
   html:
     code-fold: true
@@ -10,198 +10,130 @@ execute:
 
 ## Overview
 
-This task covers generating a basic situation report with dynamic figures and tables. You will learn how to create reproducible reports that can be easily updated as new data becomes available.
+This task introduces Quarto, a document type for generating automated reports (and websites and presentations) that interface with R. You will learn how to create reproducible reports that can be easily updated as new data becomes available, enabling efficient and consistent epidemiological reporting workflows.
 
-## Learning Objectives
+## Setting Up Your Quarto Document
 
-- Create automated report generation workflows
-- Incorporate dynamic figures and tables
-- Use Quarto for report generation
-- Build a basic epidemiological report with incidence curves and summary statistics
-- Visualize demographic patterns using age-sex pyramids
+Now let's create a basic Quarto document that you'll use for your epidemiological reports.
 
-## Tutorial
+### Step 1: Create a New Quarto Document
 
-For detailed guidance on creating and customizing visualizations:
+1. In RStudio, go to **File → New File → Quarto Document**.
+2. Choose **HTML** as the output format.
+3. Give your document a title (e.g., "Epidemiological Situation Report").
+4. Click **Create**.
+5. **Save the document** in your project folder (e.g., `sitrep.qmd`).
 
-- [Epidemic Curves tutorial](https://www.epirhandbook.com/en/new_pages/epicurves.html) - Learn how to create and customize incidence curves
-- [Demographic Pyramids tutorial](https://www.epirhandbook.com/en/new_pages/age_pyramid.html) - Learn how to create age-sex pyramids
+#### Understanding Visual and Source Editing Modes
 
-## Example Report
+When you open your Quarto document, you'll notice two editing mode buttons in the top-left corner of the editor: **Visual** and **Source**.
 
-<a href="data/solutions/task1_solution.qmd" download class="btn btn-primary" target="_blank">Download solution file</a>
+- **Visual mode**: Provides a "What You See Is What You Get" editing experience, similar to a word processor. You can format text using buttons and menus, and see a preview of how your document will look.
+
+- **Source mode**: Shows the raw Markdown and code syntax. You work directly with the text, code chunks, and formatting syntax (like `##` for headings, `**bold**` for bold text, etc.).
+
+**For the rest of this tutorial and the task tutorials, we'll assume you're using Source mode.** This allows you to directly copy and paste code chunks and content from the tutorials into your document. You can switch between modes at any time using the buttons in the top-left corner - just click **Source** to switch to source mode.
+
+### Step 2: Set Up the YAML Header and Report Structure
+
+At the top of your Quarto document, you'll see a **YAML header** (the section between the `---` lines). The YAML header contains metadata about your document, such as the title and output format. It tells Quarto how to render your document.
+
+Ensure your YAML header looks like this:
+
+```yaml
+---
+title: "Epidemiological Situation Report"
+format: html
+editor: visual
+---
+```
+
+Below the YAML header, create a basic report structure with sections. In Quarto (and Markdown), you use `##` to create section headings (level 2 headings). Each `##` creates a new major section in your report. You can use `###` for subsections, `####` for sub-subsections, and so on.
+
+Add this basic outline to your document:
+
+```markdown
+## Overview
+
+This section will provide an introduction and overview of the situation report.
+
+## Epidemiological Trends
+
+This section will describe epidemiological trends.
+
+## Severity
+
+This section will conduct a severity analysis.
+
+## Conclusions
+
+This section will summarize findings and next steps.
+```
+
+#### Understanding Code Chunks
+
+A **code chunk** is a section in your Quarto document where you write and execute R code. Code chunks are enclosed between three backticks (`` ``` ``) followed by `{r}` and closed with three more backticks.
+
+To create a code chunk:
+
+1. Type three backticks followed by `{r}` on a new line: ` ```{r} `
+2. Press Enter to start a new line
+3. Write your R code
+4. Type three backticks on a new line to close the chunk: ` ``` `
+
+Here's what a code chunk looks like:
+
+<pre><code>```{r}
+# Your R code goes here
+library(tidyverse)
+```</code></pre>
+
+You can also insert a code chunk in RStudio by:
+
+- Clicking the **Insert** button (green plus icon with a "C") in the toolbar, or
+- Using the keyboard shortcut: `Ctrl+Alt+I` (Windows/Linux) or `Cmd+Option+I` (Mac)
+
+Code chunks allow you to run R code, create plots, generate tables, and perform data analysis. The results (outputs, plots, tables) will appear in your rendered HTML report.
+
+### Step 3: Install and Load Basic Packages
+
+In the first code chunk of your document, install and load the basic packages needed for report generation. We'll use **pacman**, a package management tool for R that simplifies installing and loading packages. Pacman automatically installs packages if they're not already installed, then loads them - making it much easier to manage dependencies.
 
 ```{r}
-# INSTALL AND LOAD PACKAGES
+#| echo: true
+#| eval: true
 
-# Load required packages
+# Install pacman if needed
+if (!requireNamespace("pacman", quietly = TRUE)) {
+  install.packages("pacman")
+}
+
+# Install and load required packages using pacman
 pacman::p_load(
-  tidyverse, # For data manipulation and visualization
-  reactable, # For interactive tables
-  lubridate, # For date handling
-  apyramid # For age-sex pyramids
-)
-
-
-# LOAD DATA
-
-# Import the cleaned linelist data from your local data folder
-linelist <- readRDS("data/linelist.rds")
-
-
-# SUMMARY STATISTICS
-
-# Calculate first case month and peak month
-first_case <- which.min(linelist$date_onset)
-first_case_location <- paste0(linelist$adm3[first_case], ", ", linelist$adm2[first_case])
-first_case_month <- format(linelist$date_onset[first_case], "%B %Y")
-
-# Calculate month with most cases
-monthly_cases <- linelist |>
-  filter(!is.na(date_onset)) |>
-  mutate(month = floor_date(date_onset, unit = "month")) |>
-  count(month) |>
-  arrange(desc(n))
-
-# Extract monthly information
-peak_month <- format(monthly_cases$month[1], "%B %Y")
-peak_cases <- monthly_cases$n[1]
-
-# Create summary table by adm3
-adm3_summary <- linelist |>
-  summarise(
-    total_cases = n(),
-    deaths = sum(outcome == "Death", na.rm = TRUE),
-    .by = adm3
-  ) |>
-  arrange(desc(total_cases))
-
-```
-
-### Overview
-
-The first case was reported in `r first_case_location` on `r first_case_month`. Case numbers increased to a maximum of `r peak_cases` cases in `r peak_month` before declining.
-
-```{r}
-# CREATE INCIDENCE CURVE
-
-# Create incidence curve
-incidence_curve <- linelist |>
-  ggplot(aes(x = date_onset, fill = adm3)) +
-  geom_histogram(binwidth = 7) +
-  scale_fill_viridis_d(
-    guide = guide_legend(reverse = FALSE),
-    na.value = "grey"
-  ) +
-  labs(
-    x = "Date of Onset",
-    y = "Number of Cases",
-    fill = "Chiefdom"
-  ) +
-  theme_minimal()
-
-# Display the plot
-incidence_curve
-
-```
-
-Summary statistics of case and deaths by chiefdom are provided below.
-
-```{r}
-
-# Create interactive table
-reactable(
-  adm3_summary,
-  columns = list(
-    adm3 = colDef(name = "Chiefdom"),
-    total_cases = colDef(name = "Total Cases"),
-    deaths = colDef(name = "Deaths")
-  ),
-  defaultPageSize = nrow(adm3_summary)
+  tidyverse,  # For data manipulation and visualization
+  rio,        # For importing data
+  reactable   # For interactive tables
 )
 ```
 
+**Note:** We'll add more packages as needed when you work through specific tasks. Additional packages will be installed as you progress through the tutorials.
 
-### Age and Sex Distribution
+### Step 4: Render Your Report
 
-The age and sex distribution of cases was visualized to identify demographic patterns in the outbreak.
+Now let's test that everything is working by rendering your report:
 
-```{r}
-# CREATE AGE-SEX PYRAMID
+1. Click the **Render** button in RStudio (or press `Ctrl+Shift+K` / `Cmd+Shift+K`).
+2. Quarto will process your document and generate an HTML file.
+3. The HTML report will open automatically in your browser.
 
-# Create age-sex pyramid using apyramid package
-age_pyramid <- apyramid::age_pyramid(
-  data = linelist,
-  age_group = "age_cat",
-  split_by = "gender",
-  show_midpoint = FALSE
-) +
-  labs(
-    title = NULL,
-    x = "Age Group",
-    y = "Number of Cases",
-    fill = "Gender"
-  ) +
-  theme_minimal() +
-  theme(
-    legend.position = "bottom"
-  )
+You should now see a basic HTML report with your title and section headings. This confirms that your Quarto setup is working correctly!
 
-# Display the plot
-age_pyramid
+If you prefer, you can download the example sitrep template directly instead of creating it yourself:
 
-```
+<a href="data/solutions/sitrep.qmd" download class="btn btn-primary" target="_blank">Download solution file</a>
 
-### Disease Severity
+## Additional Resources
 
-```{r}
+- **[Quarto Tutorial](https://quarto.org/docs/get-started/hello/rstudio.html)**: An overview of the basics, including rendering, authoring, YAML headers, code chunks and markdown text.
 
-# Calculate CFR (excluding NA outcomes)
-cfr <- linelist |>
-  filter(!is.na(outcome)) |>
-  summarise(
-    total_cases = n(),
-    deaths = sum(outcome == "Death", na.rm = TRUE),
-    recovered = sum(outcome == "Recover", na.rm = TRUE),
-    unknown = sum(is.na(outcome)),
-    cfr = round((deaths / (deaths + recovered)) * 100, 0)
-  )
-
-missing_outcome <- scales::percent(mean(is.na(linelist$outcome)))
-
-```
-
-The crude case fatality ratio (CFR) was estimated at `r cfr$cfr`%, though the outcome was unknown for `r missing_outcome` of cases. CFR estimates were also generated by health facility to identify potential facilities with significantly worse outcomes.
-
-```{r}
-
-# Create summary table by hospital
-hospital_summary <- linelist |>
-  # group missing and other hospitals
-  mutate(
-    hospital = modify_if(hospital, ~ .x %in% c("Other", "Missing"), ~"Other/Missing")
-  ) |>
-  summarise(
-    total_cases = n(),
-    deaths = sum(outcome == "Death", na.rm = TRUE),
-    recovered = sum(outcome == "Recover", na.rm = TRUE),
-    unknown = sum(is.na(outcome)),
-    cfr = round((deaths / (deaths + recovered)) * 100, 0),
-    .by = hospital
-  )
-
-# Create interactive table
-reactable(
-  hospital_summary,
-  columns = list(
-    hospital = colDef(name = "Hospital"),
-    total_cases = colDef(name = "Total Cases"),
-    deaths = colDef(name = "Deaths"),
-    recovered = colDef(name = "Recovered"),
-    unknown = colDef(name = "Unknown"),
-    cfr = colDef(name = "CFR (%)")
-  ),
-  defaultPageSize = nrow(hospital_summary)
-)
-
-```
+- **[Quarto Guide](https://quarto.org/docs/guide/)**: A comprehensive guide covering all aspects of Quarto, including authoring, computations, tools, documents, presentations, dashboards, websites and more.
