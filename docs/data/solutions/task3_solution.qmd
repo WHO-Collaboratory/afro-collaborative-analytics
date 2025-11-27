@@ -21,7 +21,8 @@ pacman::p_load(
   here, # handing file paths
   leaflet, # mapping
   leaflet.extras, # additional leaflet features including heatmaps
-  htmltools # handlers for html objects
+  htmltools, # handlers for html objects
+  janitor # name cleaning
 )
 
 
@@ -43,7 +44,6 @@ agg <- linelist |>
   inner_join(shp, by = c(adm3 = "adm3_en")) |>
   # convert back to shapefile
   st_as_sf()
-
 ```
 
 Total incidence to date was mapped by chiefdom.
