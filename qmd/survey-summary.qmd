@@ -1,0 +1,222 @@
+---
+title: "Survey Summary: Pipeline and Tool Feedback"
+date: "2025-11-27"
+format: html
+---
+
+**Date:** November 27, 2025\
+**Number of Responses:** 9
+
+------------------------------------------------------------------------
+
+## 1. Do you find these pipelines useful? Why/why not?
+
+**Summary:** All respondents (100%) found the pipelines useful.
+
+### Key Themes
+
+-   **Efficiency and Simplification**: Multiple respondents highlighted that the pipelines simplify development of analytical outputs and streamline everyday tasks. One participant noted they "simplify everyday tasks and improve efficiency."
+-   **Workflow Insights**: Participants appreciated gaining insight into their workflow and identifying bottlenecks that make their jobs difficult and lengthy.
+-   **Strategic Approach**: The training helped respondents develop a more strategic approach to data, analytics, and outputs.
+-   **Comprehensive Coverage**: Several respondents mentioned that the pipelines contain "most of the key analytical tasks" they need and enable them to complete work in fewer steps.
+-   **Practical Application**: One respondent specifically noted that these tools have "a direct effect on my everyday work back in my country."
+
+### Representative Quotes
+
+-   "Very useful. It gives more insight into workflow"
+-   "Very useful. They simplify development of analytical outputs"
+-   "Yes, because they are a direct effect on my everyday work back in my country"
+-   "Yes very useful. The clarity in explaining has opened my eyes to strategically approach data, analytics and outputs"
+-   "Yes. Makes navigation easy"
+
+------------------------------------------------------------------------
+
+## 2. Would you use these tools in your future work? If so, which one(s)?
+
+**Summary:** All respondents indicated they would use these tools in their future work.
+
+### Usage Intentions
+
+-   **All Tools**: The majority of respondents (6 out of 9) indicated they would use "all" of the tools.
+-   **Specific Tools Mentioned**:
+    -   **Spatial Maps**: For visualizing disease spread over time
+    -   **Epi Curves**: To show trends of cases over time
+    -   **Automated Scripts**: For timely updates and regular reporting
+    -   **Quarto**: Specifically mentioned for automating situation reports (SITREPs)
+    -   **R Packages**: General interest in exploring R packages more frequently
+
+### Specific Use Cases
+
+-   One participant plans to use Quarto to automate situation reports for disease-specific technical working groups in Nigeria, helping improve consistency in reporting.
+-   Another participant intends to use R skills immediately to produce health products such as SITREPs and EPI bulletins.
+
+### Representative Quotes
+
+-   "Yes, all" (multiple respondents)
+-   "I will explore the R packages more often"
+-   "Yes. I will use Spatial Maps to tell the spread of disease over time. Epi curves to show the trend of cases over time. The automated scripts for timely update."
+-   "Yes, all of them"
+-   "I will definitely use Quarto to automate our situation reports"
+
+------------------------------------------------------------------------
+
+## 3. What would stop you from using these tools in the future?
+
+**Summary:** Barriers identified ranged from personal skill limitations to institutional and technical constraints.
+
+### Personal Barriers
+
+-   **Limited Skills/Confidence**: Several respondents mentioned limited skills as a barrier but expressed intent to continue practicing until confident. One noted: "Limited skills but I intend to continue practicing until I get to a point that I'm confident enough to use these tools."
+-   **Time Constraints**: Time limitations were mentioned as a challenge for training engagement.
+
+### Technical Barriers
+
+-   **Hardware and Software Access**: Availability of gadgets like laptops and software permissions were identified as potential barriers.
+-   **Data Integration Challenges**: One respondent mentioned difficulties with linkages to in-country data management systems, noting "we were unable to extract data but we logged in."
+
+### Institutional Barriers
+
+-   **Workload**: Heavy workload was cited as a potential obstacle.
+-   **Lack of Technical Support**: Absence of technical personnel to consult when solving issues was mentioned.
+-   **Institutional Buy-in**: One respondent noted that at the institutional level, factors like "institutional buy-in, adequate capacity and utility of outputs generated" would be crucial, along with ongoing remote support.
+
+### Positive Responses
+
+-   Three respondents indicated they did not foresee any barriers: "I do not foresee \[anything stopping me\]," "Not one that I know of at the moment," and "Personally, nothing comes to mind."
+
+### Representative Quotes
+
+-   "Availability of gadget like laptop and software permissions"
+-   "Workload, no technical person to consult to solve issues"
+-   "Limited skills but I intend to continue practicing until I get to a point that I'm confident enough to use these tools"
+-   "I don't foresee anything at the moment, but I expect the tools to evolve over time"
+
+------------------------------------------------------------------------
+
+## 4. Are there any improvements to these tools you would like to see implemented?
+
+**Summary:** Suggestions for improvements were relatively limited, with most respondents expressing satisfaction.
+
+### Suggested Improvements
+
+-   **Data Integration**: Linkages with in-country data management systems to enable direct data extraction.
+-   **Customization**: Allow modification of outputs to reflect institutional branding in generated reports.
+-   **Continuous Evolution**: Respondents expressed expectation that tools should evolve over time to meet changing data analytics requirements.
+
+### Satisfaction Expressed
+
+-   Three respondents indicated they were satisfied with the current state of the tools: "I am satisfied at the moment," "So far nothing \[needs improvement\]," and "None \[improvements needed\]."
+-   Several respondents noted they had just been introduced to the tools and would identify improvements after more interactions and applications.
+
+### Representative Quotes
+
+-   "The linkages with the in-country data management systems, we were unable to extract data but we logged in. It would be nice if the link would be done."
+-   "I will love to see if the tools can allow us modify the output to reflect institutional branding in the generated reports."
+-   "I expect the tools to evolve over time to merge any changing data analytics requirements in the future"
+-   "So far nothing \[needs improvement\]"
+-   "None \[at the moment\]"
+
+------------------------------------------------------------------------
+
+## 5. Are there any gaps in the outbreak analytics ecosystem?
+
+**Summary:** Some gaps were identified, particularly related to specific analytical capabilities and human resources.
+
+### Identified Gaps
+
+-   **Specific Analytical Methods**:
+    -   Transmission chain analysis
+    -   R estimation (reproduction number estimation)
+-   **Human Resources and Expertise**:
+    -   Lack of expertise in data analytics
+    -   Shortage of biostatisticians
+    -   Need for more modelling expertise
+-   **Integrated Systems**: One respondent mentioned a gap in systems that bring "both surveillance, response and logistical information on the same platform."
+-   **Training Content**: One respondent noted that "The Intro to R Module, Data analysis section need to be revised to capture current formatting of the tools."
+
+### Positive Responses
+
+-   Two respondents indicated they did not observe any gaps: "No gaps so far" and "None that i can think of now."
+-   One respondent acknowledged gaps exist but noted that "process of continuous improvement can help in addressing that one gap at a time."
+
+### Representative Quotes
+
+-   "Yes in my country, specifically transmission chain analysis, R estimation. Additionally we lack expertise in data analytics, bio-statisticians and modelling"
+-   "I couldn't pick up any, quite comprehensive but maybe we can talk further on the systems that bring both surveillance, response and logistical information on the same platform"
+-   "No gaps so far"
+-   "None that i can think of now"
+
+------------------------------------------------------------------------
+
+## 6. Any other comments/feedback
+
+**Summary:** Overall positive feedback with several constructive suggestions for training enhancement.
+
+### Training Feedback
+
+**Positive Aspects:**
+
+-   Excellent training quality with well-seasoned teachers
+-   Well-organized event
+-   Enlightening and fantastic experience
+
+**Areas for Enhancement:**
+
+-   **Extended Training Duration**: Multiple requests for longer training periods to allow more interactive sessions and practice time
+-   **More R Fundamentals**: Request for training to cover more R fundamentals
+-   **Interactive Sessions**: Need for more interactive sessions with lecturers and more hands-on practice
+-   **Time Constraints**: Training excellence was challenged by time constraints
+
+### Follow-up and Support
+
+-   **Contact Information**: Request for email and WhatsApp contacts for future engagement and assistance
+-   **Refresher Training**: Suggestions for refresher training sessions
+-   **Country-Level Training**: Request for country-level training support when requested
+-   **Remote Support**: Recognition of the importance of ongoing remote support
+
+### Content Updates
+
+-   One respondent noted that "The Intro to R Module, Data analysis section need to be revised to capture current formatting of the tools. Carmen has taken some notes of this."
+
+### Appreciation
+
+-   Multiple expressions of gratitude: "Very well organized event, thanks for the opportunity," "Its a fantastic experience with well seasoned teachers," and "It has been a very enlightening session."
+
+### Representative Quotes
+
+-   "Its a fantastic experience with well seasoned teachers"
+-   "I wish the training would cover more R fundamentals"
+-   "Need if of more training g with longer period to have an interactive sessions with the lectures and practice more"
+-   "Please share your contacts (email and WhatsApp number) for future engagement when your assistance is required. Also, consider doing refresher training or support country level training when requested"
+-   "I just think that we need more time to practice and explore. It has been a very enlightening session."
+-   "Very well organized event, thanks for the opportunity."
+
+------------------------------------------------------------------------
+
+## Overall Summary
+
+### Key Strengths Identified
+
+1.  **High Utility**: 100% of respondents found the pipelines useful.
+2.  **Strong Adoption Intent**: All respondents plan to use the tools in their future work.
+3.  **Positive Training Experience**: Training was well-received with appreciation for quality instructors.
+4.  **Comprehensive Coverage**: Tools address key analytical needs.
+
+### Main Barriers
+
+1.  **Skills and Confidence**: Need for continued practice and skill-building.
+2.  **Technical Infrastructure**: Hardware, software, and data integration challenges.
+3.  **Institutional Factors**: Workload, buy-in, and technical support availability.
+
+### Recommendations
+
+1.  **Extended Training**: Provide longer, more interactive training sessions with additional R fundamentals.
+2.  **Data Integration**: Improve linkages with in-country data management systems.
+3.  **Customization Options**: Allow institutional branding in generated reports.
+4.  **Ongoing Support**: Establish channels for continued remote support and refresher training.
+5.  **Content Updates**: Revise Intro to R Module to reflect current tool formatting.
+
+### Future Engagement
+
+-   Respondents expressed strong interest in continued engagement, refresher training, and country-level training support.
+-   Establishment of communication channels (email/WhatsApp) was requested for future assistance.
